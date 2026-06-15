@@ -1,3 +1,5 @@
+> Đây là template tham khảo để điền nội dung bug. Còn template trên GitHub Issues nằm ở `.github/ISSUE_TEMPLATE/bug-report.md`.
+
 # [BUG][Module] Short Description
 
 ## Found by Test Case

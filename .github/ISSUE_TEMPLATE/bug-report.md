@@ -1,5 +1,6 @@
 ---
 name: Bug Report
+description: Report a bug found during testing
 title: "[BUG][Module]: "
 labels: ["type: bug", "status: new"]
 ---
