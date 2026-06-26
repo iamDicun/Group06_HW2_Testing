@@ -93,7 +93,7 @@ Group06_HW2_Testing/
 
 ## GitHub Issue Labels
 
-Tạo các labels sau trên GitHub repo để quản lý bug:
+> Chạy script `scripts/create-labels.ps1` sau khi cài `gh` CLI để tạo 1 lần hết tất cả label.
 
 | Prefix | Labels |
 |--------|--------|
@@ -101,7 +101,9 @@ Tạo các labels sau trên GitHub repo để quản lý bug:
 | **Severity** | `severity: blocker`, `severity: critical`, `severity: major`, `severity: minor`, `severity: trivial` |
 | **Priority** | `priority: P0`, `priority: P1`, `priority: P2`, `priority: P3` |
 | **Status** | `status: new`, `status: triaged`, `status: in progress`, `status: ready for retest`, `status: verified` |
-| **Module** | `module: login`, `module: cart`, `module: checkout`, `module: admin`, `module: api` |
+| **Module** | `module: register`, `module: login`, `module: forgot-pw`, `module: profile`, `module: product-search`, `module: product-detail`, `module: cart`, `module: checkout`, `module: coupon`, `module: order-state`, `module: order-history`, `module: access-control`, `module: dashboard`, `module: category-mgmt`, `module: product-mgmt`, `module: product-import`, `module: coupon-mgmt`, `module: order-mgmt`, `module: user-mgmt`, `module: mobile` |
+| **Technique** | `technique: EP`, `technique: BVA` |
+| **Result** | `result: pass`, `result: fail`, `result: blocked`, `found-by: test-case` |
 
 ---
 
