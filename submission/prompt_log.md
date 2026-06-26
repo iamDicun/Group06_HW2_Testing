@@ -57,3 +57,34 @@ Tôi đã tạo xong tài liệu **Test Plan** duy nhất theo yêu cầu tại 
   - Thiết kế bảng chuyển đổi trạng thái (**State Transition**) cho vòng đời đơn hàng.
   - Thiết kế bảng quyết định (**Decision Table**) cho phân quyền xóa người dùng của Admin.
 - **Rủi ro & Kế hoạch dự phòng**: Đề xuất 4 rủi ro kỹ thuật liên quan (kết nối LAN của Mobile, race condition khi cập nhật trạng thái đơn hàng, rò rỉ password qua API, và SQLite bị khóa ghi) cùng giải pháp xử lý cụ thể.
+
+---
+## Session | Agent: Gemini 3.5 Flash | Assignment: HW02 - Domain Testing | 2026-06-27 01:18 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR4, theo đúng domain testing
+
+**[Assistant]**
+Tôi đã thực hiện phân tích miền (Domain Testing Analysis) cho tính năng **FR-04: Quản lý hồ sơ cá nhân** dựa trên tài liệu đặc tả và kế hoạch kiểm thử (Test Plan) sẵn có.
+
+Tài liệu phân tích đã được tạo tại đường dẫn:
+[TA-EShop-Khoa-FR04-v1.0.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-analysis/TA-EShop-Khoa-FR04-v1.0.md)
+
+### Tóm tắt nội dung phân tích miền đã thực hiện:
+1. **Đối tượng phân tích (Input variables):**
+   - `name` (Họ tên)
+   - `phone` (Số điện thoại)
+   - `shipping_address` (Địa chỉ giao hàng mặc định)
+   - `email` (Ràng buộc bất biến)
+   - `role` (Ràng buộc bảo mật chống leo thang đặc quyền)
+   - `Authorization` header (Xác thực đầu vào của API)
+
+2. **Quy chuẩn kỹ thuật kiểm thử miền (Domain Testing):**
+   - **Phân hoạch tương đương (Equivalence Partitioning):** Xác định rõ các lớp hợp lệ (Valid partitions) và không hợp lệ (Invalid partitions - null, rỗng, sai kiểu dữ liệu, chứa thẻ script mã độc).
+   - **Phân tích giá trị biên (Boundary Value Analysis):** Áp dụng quy tắc phân tích biên 2 điểm (`on` và `off`) đối với các thuộc tính độ dài (ví dụ: số điện thoại 10-11 chữ số, họ tên 1-255 ký tự, địa chỉ 1-500 ký tự).
+   - **Bảng phân tích miền (Domain Tables):** Xây dựng cấu trúc bảng chuẩn theo yêu cầu nghiệp vụ và kỹ thuật cho từng biến.
+   - **Giải thích bổ sung bằng tiếng Việt:** Tóm tắt số lớp tương đương, các giá trị biên quan trọng cần lưu ý khi thiết kế test case, và các giả định miền giá trị.
+
