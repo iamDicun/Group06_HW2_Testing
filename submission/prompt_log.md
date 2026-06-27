@@ -237,3 +237,25 @@ Các tệp được lưu trữ tại thư mục: [tests/test-cases/FR-04-Profile
    - [TC-PROFILE-029.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-04-Profile/TC-PROFILE-029.md): Kiểm tra co giãn giao diện (KeyboardAvoidingView) khi mở bàn phím ảo trên Mobile App (EP)
 
 Anh/chị vui lòng kiểm tra lại cấu trúc và nội dung các file test case đã tạo. Nếu cần tôi hỗ trợ xuất báo cáo kiểm toán AI (AI Audit Report) hoặc tạo tiếp test case cho các chức năng khác, xin vui lòng phản hồi.
+
+---
+## Session | Agent: Gemini 3.5 Flash | Assignment: HW02 - Domain Testing | 2026-06-27 16:01 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+đọc TA của tính năng FR10 và tạo test case chuẩn domain testing
+
+**[Assistant]**
+Da tao 31 test case cho feature "Trạng thái Đơn hàng (FR-10)"
+  - Positive (happy path): 10 TC
+  - Negative / Edge case:  18 TC
+  - Boundary Value:        3 TC
+Thu muc: tests/test-cases/FR-10-OrderState/
+
+Bạn có muốn:
+- Thêm / bớt test case nào không?
+- Xuất thêm định dạng khác (Excel, Gherkin)?
+- Tạo test case cho feature khác không?
+
