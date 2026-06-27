@@ -1,3 +1,5 @@
+**LƯU Ý**: Nếu dùng tiếng việt phải dùng tiếng việt có dấu.
+
 # TC-[MODULE]-[NUMBER]: [Short Description]
 
 ## Requirement ID

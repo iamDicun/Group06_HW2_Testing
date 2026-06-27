@@ -13,3 +13,4 @@ I use AI tools for the following tasks,
 | 5 | Gemini 3.5 Flash | 2026-06-27 01:44 | HW02 - Domain Testing | Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR4 nhưng cho mobile, theo đúng domain testing | Đã tạo tài liệu Phân tích miền (TA-EShop-Khoa-FR04-MOBILE-v1.0.md) phân tích chi tiết các lớp tương đương và giá trị biên của số điện thoại, địa chỉ, IP LAN, trạng thái mạng, và layout bàn phím ảo cho FR-04 trên Mobile. | VALID | |
 
 
+| 6 | Gemini 3.5 Flash | 2026-06-27 15:37 | HW02 - Domain Testing | đọc TA của tính năng FR4 và tạo test case chuẩn domain testing, số lượng | Đã tạo 29 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04. | ___ | |
