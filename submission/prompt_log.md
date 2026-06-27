@@ -258,4 +258,48 @@ Bạn có muốn:
 - Thêm / bớt test case nào không?
 - Xuất thêm định dạng khác (Excel, Gherkin)?
 - Tạo test case cho feature khác không?
+---
+## Session | Agent: Gemini 3.5 Flash | Assignment: HW02 - Domain Testing | 2026-06-27 16:11 (UTC+7)
+---
 
+### Turn 1
+
+**[User]**
+đọc TA của tính năng FR19 và tạo test case chuẩn domain testing
+
+**[Assistant]**
+Da tao 22 test case cho feature "Quản lý Người dùng (FR-19)"
+  - Positive (happy path): 2 TC
+  - Negative / Edge case:  18 TC
+  - Boundary Value:        2 TC
+Thu muc: tests/test-cases/FR-19-UserMgmt/
+
+Danh sach cac file da tao:
+- [_index.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/_index.md)
+- [TC-USERMGMT-001.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-001.md)
+- [TC-USERMGMT-002.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-002.md)
+- [TC-USERMGMT-003.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-003.md)
+- [TC-USERMGMT-004.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-004.md)
+- [TC-USERMGMT-005.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-005.md)
+- [TC-USERMGMT-006.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-006.md)
+- [TC-USERMGMT-007.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-007.md)
+- [TC-USERMGMT-008.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-008.md)
+- [TC-USERMGMT-009.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-009.md)
+- [TC-USERMGMT-010.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-010.md)
+- [TC-USERMGMT-011.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-011.md)
+- [TC-USERMGMT-012.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-012.md)
+- [TC-USERMGMT-013.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-013.md)
+- [TC-USERMGMT-014.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-014.md)
+- [TC-USERMGMT-015.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-015.md)
+- [TC-USERMGMT-016.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-016.md)
+- [TC-USERMGMT-017.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-017.md)
+- [TC-USERMGMT-018.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-018.md)
+- [TC-USERMGMT-019.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-019.md)
+- [TC-USERMGMT-020.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-020.md)
+- [TC-USERMGMT-021.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-021.md)
+- [TC-USERMGMT-022.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/FR-19-UserMgmt/TC-USERMGMT-022.md)
+
+Ban co muon:
+- Them / bot test case nao khong?
+- Xuat them dinh dang khac (Excel, Gherkin)?
+- Tao test case cho feature khac khong?
