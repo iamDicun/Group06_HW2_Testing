@@ -30,13 +30,13 @@ High
 - Hiển thị thông báo: "Số điện thoại phải bắt đầu bằng số 0".
 
 ## Actual Result (filled after execution)
-
+Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-MOBILE-001
 
 ## Notes
 - Kiểm thử phân hoạch không hợp lệ về định dạng chữ số bắt đầu.

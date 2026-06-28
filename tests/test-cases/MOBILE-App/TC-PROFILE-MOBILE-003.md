@@ -32,13 +32,13 @@ High
 - Hiển thị thông báo lỗi: "Số điện thoại phải từ 10 đến 11 chữ số".
 
 ## Actual Result (filled after execution)
-
+Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-MOBILE-001
 
 ## Notes
 - Đây là biên ngoài dưới (9 chữ số).

@@ -31,13 +31,13 @@ Medium
 - Không gửi yêu cầu cập nhật không hợp lệ lên API Server.
 
 ## Actual Result (filled after execution)
-
+Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-MOBILE-001
 
 ## Notes
 - Ngăn chặn việc bypass bàn phím số bằng tính năng dán từ clipboard.

@@ -24,14 +24,14 @@ Standard: ISTQB Foundation Level
 
 | TC ID | Short Description | Test Type | Technique | Priority | Status |
 |-------|------------------|-----------|-----------|----------|--------|
-| TC-PROFILE-MOBILE-001 | Cập nhật hồ sơ với Số điện thoại hợp lệ 10 chữ số | Positive | Boundary Value Analysis | High | Not Run |
-| TC-PROFILE-MOBILE-002 | Cập nhật hồ sơ với Số điện thoại hợp lệ 11 chữ số | Positive | Boundary Value Analysis | High | Not Run |
-| TC-PROFILE-MOBILE-003 | Cập nhật hồ sơ với Số điện thoại quá ngắn 9 chữ số | Negative | Boundary Value Analysis | High | Not Run |
-| TC-PROFILE-MOBILE-004 | Chặn nhập số điện thoại vượt quá 11 chữ số ở Client | Negative | Boundary Value Analysis | High | Not Run |
-| TC-PROFILE-MOBILE-005 | Cập nhật hồ sơ với Số điện thoại không bắt đầu bằng số 0 | Negative | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-MOBILE-006 | Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-PROFILE-MOBILE-007 | Cập nhật hồ sơ với Số điện thoại để trống | Negative | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-MOBILE-008 | Lỗi kết nối API khi cấu hình thiếu giao thức (http://) hoặc thiếu Port | Negative | Equivalence Partitioning | Medium | Not Run |
+| TC-PROFILE-MOBILE-001 | Cập nhật hồ sơ với Số điện thoại hợp lệ 10 chữ số | Positive | Boundary Value Analysis | High | BLOCKED |
+| TC-PROFILE-MOBILE-002 | Cập nhật hồ sơ với Số điện thoại hợp lệ 11 chữ số | Positive | Boundary Value Analysis | High | BLOCKED |
+| TC-PROFILE-MOBILE-003 | Cập nhật hồ sơ với Số điện thoại quá ngắn 9 chữ số | Negative | Boundary Value Analysis | High | BLOCKED |
+| TC-PROFILE-MOBILE-004 | Chặn nhập số điện thoại vượt quá 11 chữ số ở Client | Negative | Boundary Value Analysis | High | BLOCKED |
+| TC-PROFILE-MOBILE-005 | Cập nhật hồ sơ với Số điện thoại không bắt đầu bằng số 0 | Negative | Equivalence Partitioning | High | BLOCKED |
+| TC-PROFILE-MOBILE-006 | Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard | Negative | Equivalence Partitioning | Medium | BLOCKED |
+| TC-PROFILE-MOBILE-007 | Cập nhật hồ sơ với Số điện thoại để trống | Negative | Equivalence Partitioning | High | BLOCKED |
+| TC-PROFILE-MOBILE-008 | Lỗi kết nối API khi cấu hình thiếu giao thức (http://) hoặc thiếu Port | Negative | Equivalence Partitioning | Medium | BLOCKED |
 
 ---
 

@@ -32,13 +32,13 @@ High
 - Dữ liệu Số điện thoại mới được cập nhật chính xác trong CSDL.
 
 ## Actual Result (filled after execution)
-
+Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-MOBILE-001
 
 ## Notes
 - Đây là biên dưới hợp lệ (10 chữ số).
