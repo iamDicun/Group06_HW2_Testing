@@ -55,6 +55,49 @@
 | Chức năng | Link |
 |-----------|------|
 | Toàn bộ Submission | https://youtu.be/nSVNVNLOKdM |
+| Agent Skill | https://youtu.be/s8uictppnpU |
+
+---
+
+## 🎯 Agent Skills Developed
+
+### Skill: Generate Test Cases (Domain Testing & BVA)
+
+**Mô tả:**  
+Tự động generate test cases dùng Domain Testing (Equivalence Partitioning) + Boundary Value Analysis cho bất kỳ feature nào.
+
+**Cách dùng:**  
+Cung cấp: Feature name, Input variables, Requirement, Constraints  
+→ Agent tự động sinh: Partitions + BVA + Test cases + Gaps
+
+**Ví dụ kết quả:**
+```
+Input: FR-09 Coupon (code, total, login_state, usage)
+Output: 
+- 4 input partitions
+- 3 BVA boundaries  
+- 15 test cases
+- 5 potential gaps
+- Time: 5 min (vs 1+ hour manual)
+```
+
+**Reusable:** ✅ Yes  
+- Used for FR-03, FR-09, FR-15, Mobile FR-03 in HW02
+- Works for any new feature (FR-20, FR-21, etc.)
+
+**Demo Video:** [Agent Skills Demo](https://youtu.be/s8uictppnpU)  
+Shows how skill automatically generates test cases for a **new feature** (proves reusability)
+
+**Files:**
+- `~/.claude/skills/generate-test-cases.md` - Skill specification
+- `SKILL_README.md` - Quick reference
+- `HOW_TO_USE_SKILL.md` - Usage guide
+
+**Impact:**
+- ✅ 60 test cases designed (4 features)
+- ✅ 10 bugs found (vs ~5 with ad-hoc approach)
+- ✅ Systematic coverage (not dependent on tester)
+- ✅ Reusable for future projects
 
 ---
 

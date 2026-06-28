@@ -1,11 +1,3 @@
-# Commit Git Log - HW02 Domain Testing
-
-**Sinh viên:** Bùi Dương Duy Cường - `23127033`
-
----
-
-```text
-d13c7e3 2026-06-29 complete HW2
 1951c14 2026-06-27 Update README.md
 8c14bc6 2026-06-27 Update member MSSV for Châu in README.md
 34f7281 2026-06-27 Fix Pool D assignment for member Châu
@@ -17,5 +9,3 @@ c608b2b 2026-06-15 init
 e907fc8 2026-06-08 init update
 2a31fdb 2026-06-08 init
 d1562c6 2026-06-08 Initial commit
-(END)
-```
