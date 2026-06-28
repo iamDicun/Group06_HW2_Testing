@@ -777,8 +777,8 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
-| M7 | `0` lần (lần đầu đăng nhập) | **Valid** | Chưa có lần sai nào |
-| M8 | `1` `2` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
+| M8 | `0` lần (lần đầu đăng nhập) | **Valid** | Chưa có lần sai nào |
+| M9 | `1` `2` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
 | M10 | `≥ 3` lần sai liên tiếp | **Valid** | Kích hoạt khóa tài khoản |
 
 ### 2.2 Miền giá trị cho Output
@@ -796,15 +796,15 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | O2.1 | Chuyển về màn hình Home | **Valid** | Đăng nhập thành công |
-| O2.2 | Vẫn ở màn hình Login | **Invalid** | Đăng nhập thất bại |
+| O2.2 | Vẫn ở màn hình Login | **Valid** | Đăng nhập thất bại |
 
 #### Output O3 - Validation
 
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
-| O3.1 | "Vui lòng nhập email" | **Invalid** | Bỏ trống email |
-| O3.2 | "Email không hợp lệ" | **Invalid** | Sai định dạng email |
-| O3.3 | "Vui lòng nhập mật khẩu" | **Invalid** | Bỏ trống password |
+| O3.1 | "Vui lòng nhập email" | **Valid** | Bỏ trống email |
+| O3.2 | "Email không hợp lệ" | **Valid** | Sai định dạng email |
+| O3.3 | "Vui lòng nhập mật khẩu" | **Valid** | Bỏ trống password |
 
 ---
 
@@ -812,90 +812,84 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 | Miền | Giá trị đại diện | Chọn lý do |
 |------|-----------------|------------|
-| M1 | `""` | Đại diện giá trị rỗng duy nhất |
+| M1 | `""` | Đại diện giá trị rỗng của email |
 | M2 | `"abc"` | Đại diện chuỗi không có `@` |
 | M3 | `"abc@"` | Đại diện có `@` nhưng sai định dạng |
 | M4 | `"user@email.com"` | Đại diện email đúng định dạng |
-| M5 | `""` | Đại diện giá trị rỗng duy nhất |
-| M6 | `"pass123"` | Đại diện password bất kỳ |
-| M7 | `0` | Đại diện chưa sai lần nào |
-| M8 | `1` | Đại diện sai 1 lần |
-| M9 | `2` | Đại diện sai 2 lần |
+| M5 | `""` | Đại diện giá trị rỗng của password|
+| M6 | `"pass123"` | Đại diện password sai |
+| M7 | `"User 123"` | Đại diện password đúng |
+| M8 | `0` | Đại diện chưa sai lần nào |
+| M9 | `1` | Đại diện sai nhưng chưa khóa tài khoản |
 | M10 | `3` | Đại diện ngưỡng kích hoạt khóa |
 | O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | Đại diện thông báo lỗi chung |
 | O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | Đại diện thông báo khóa |
+| O1.3 | Không hiển thị thông báo lỗi | Đại diện đăng nhập thành công |
 | O2.1 | Chuyển màn hình Home | Đại diện thành công |
+| O2.2 | Vẫn ở màn hình Login | Đại diện đăng nhập thất bại |
 | O3.1 | "Vui lòng nhập email" | Đại diện lỗi bỏ trống email |
 | O3.2 | "Email không hợp lệ" | Đại diện lỗi sai format |
+| O3.3 | "Vui lòng nhập password" | Đại diện lỗi bỏ trống password |
 
 ---
 
-## 4. Xác định Test Cases (mỗi miền → mỗi test case)
+## 4. Xác định Test Cases
 
 | TC | Miền | Input | Expected Output |
 |----|------|-------|-----------------|
-| TC01 | M1 | Email=`""`, Password=`"pass123"`, tap Sign In | Validation: "Vui lòng nhập email" |
-| TC02 | M2 | Email=`"abc"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
-| TC03 | M3 | Email=`"abc@"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
-| TC04 | M4 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | Chuyển màn hình về Home |
-| TC05 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
-| TC06 | M6 | Email=`"user@email.com"`, Password=`"wrong"`, tap Sign In | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
-| TC07 | M7 | Đăng nhập lần đầu với sai password | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
-| TC08 | M8 | Đăng nhập sai lần 1, rồi sai lần 2 | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
-| TC09 | M9 | Đăng nhập sai 2 lần, rồi sai lần 3 | "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
-| TC10 | M10 | Đăng nhập sai ≥ 3 lần → thử đăng nhập đúng | "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
-| TC11 | O1.1 | Đăng nhập sai (chưa khóa) | Hiển thị "Đăng nhập thất bại..." |
-| TC12 | O1.2 | Đăng nhập sai ≥ 3 lần | Hiển thị "Tài khoản đã bị khóa..." |
-| TC13 | O2.1 | Đăng nhập đúng (email + password hợp lệ) | Chuyển màn hình về Home |
-| TC14 | O2.2 | Đăng nhập sai | Vẫn ở màn hình Login |
-| TC15 | O3.1 | Bỏ trống Email | "Vui lòng nhập email" |
-| TC16 | O3.2 | Email không có `@` | "Email không hợp lệ" |
+| TC-Mobile-01 | M1 | Email=`""`, Password=`"User 123"`, tap Sign In | Validation: "Vui lòng nhập email" |
+| TC-Mobile-02 | M2 | Email=`"abc"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+| TC-Mobile-03 | M3 | Email=`"abc@"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+| TC-Mobile-04 | M4 | Email=`"user@email.com"`, Password=`"User 123"`, tap Sign In | Chuyển màn hình về Home |
+| TC-Mobile-05 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
+| TC-Mobile-06 | M6 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| TC-Mobile-07 | M7 | Email=`"user@email.com"`, Password=`"User 123"`, tap Sign In | Chuyển màn hình về Home |
+| TC-Mobile-08 | M8 | Đăng nhập lần đầu không sai password | Chuyển màn hình về Home |
+| TC-Mobile-09 | M9 | Đăng nhập sai lần 1| "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| TC-Mobile-10 | M10 | Đăng nhập sai ≥ 3 lần| "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+| TC-Mobile-11 | O1.1 | Đăng nhập sai (chưa khóa) | Hiển thị "Đăng nhập thất bại..." |
+| TC-Mobile-12 | O1.2 | Đăng nhập sai ≥ 3 lần | Hiển thị "Tài khoản đã bị khóa..." |
+| TC-Mobile-13 | O1.3 | Đăng nhập đúng (email + password hợp lệ) | Chuyển màn hình về Home, không thông báo lỗi gì |
+| TC-Mobile-14 | O2.1 | Đăng nhập đúng (email + password hợp lệ) | Chuyển màn hình về Home |
+| TC-Mobile-15 | O2.2 | Đăng nhập sai | Vẫn ở màn hình Login |
+| TC-Mobile-16 | O3.1 | Bỏ trống Email | "Vui lòng nhập email" |
+| TC-Mobile-17 | O3.2 | Email không có `@` | "Email không hợp lệ" |
+| TC-Mobile-18 | O3.3 | Bỏ trống Password | "Vui lòng nhập password" |
 
 ---
 
-## 5. Rút gọn Test Cases (loại bỏ trùng loại)
+## 5. Rút gọn Test Cases
 
-### Kết quả rút gọn: **8 Test Cases**
+### Kết quả rút gọn: **7 Test Cases**
 
 | STT | TC ID | Miền | Input | Expected Output |
 |-----|-------|------|-------|-----------------|
-| 1 | TC01 | M1 | Email=`""`, Password=`"pass123"`, tap Sign In | Validation: "Vui lòng nhập email" |
-| 2 | TC02 | M2 | Email=`"abc"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
-| 3 | TC03 | M4 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | Chuyển màn hình về Home |
-| 4 | TC04 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
-| 5 | TC05 | M7 | Email=`"user@email.com"`, Password sai, tap Sign In lần 1 | Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
-| 6 | TC06 | M8 | Đăng nhập sai lần 2 liên tiếp | Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
-| 7 | TC07 | M9 | Đăng nhập sai lần 3 liên tiếp | Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
-| 8 | TC08 | M10 | Sau 30 giây hết khóa → đăng nhập đúng | Chuyển màn hình về Home |
+|1| TC-Mobile-01 | M1 | Email=`""`, Password=`"User 123"`, tap Sign In | Validation: "Vui lòng nhập email" |
+|2| TC-Mobile-02 | M2 | Email=`"abc"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+|3| TC-Mobile-03 | M3 | Email=`"abc@"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+|4| TC-Mobile-04 | M4 | Email=`"user@email.com"`, Password=`"User 123"`, tap Sign In | Chuyển màn hình về Home |
+|5| TC-Mobile-05 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
+|6| TC-Mobile-06 | M6 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+|7| TC-Mobile-10 | M10 | Đăng nhập sai ≥ 3 lần| "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
 
 ---
+## BOUNDARY ANALYSIS
 
-**Ngày tạo báo cáo:** 27/06/2026
-**Nguồn tham khảo:** FR-02 - Đăng nhập & Khóa tài khoản (Mobile)
-**Platform:** Mobile App
-# BÁO CÁO BOUNDARY ANALYSIS
-## FR-02: Đăng nhập & Khóa tài khoản (Mobile)
-
----
-
-## BƯỚC 1: Xác định Input/Output có dữ liệu số hoặc biên
+## Bước 1: Xác định Input/Output có dữ liệu số hoặc biên
 
 | STT | Input/Output | Kiểu dữ liệu | Miền giá trị | Biên |
 |-----|--------------|---------------|--------------|------|
-| 1 | **login_attempts** (số lần đăng nhập sai) | Số nguyên | 0, 1, 2, 3, ... | **2 → 3** (ngưỡng khóa) |
-| 2 | **Thời gian khóa** (locked_until) | Thời gian (ms) | 30000 ms (30s) | **29s, 30s, 31s** |
-| 3 | **Email** | String | Rỗng / Không rỗng | **"" vs "a"** |
-| 4 | **Password** | String | Rỗng / Không rỗng | **"" vs "a"** |
+| 1 | Số lần đăng nhập sai | Số nguyên | >=0 | **3** (ngưỡng khóa) |
+| 2 | **Thời gian khóa**| Thời gian (s) | 30s | **30s** |
 
 ---
 
-## BƯỚC 2: Xác định giá trị xung quanh biên
+## Bước 2: Xác định giá trị xung quanh biên
 
-### Biên 1: login_attempts (Ngưỡng khóa tài khoản)
+### Biên 1: Ngưỡng khóa tài khoản
 
 | Giá trị | Vị trí | Trạng thái | Ghi chú |
 |---------|--------|------------|---------|
-| **1** | Dưới biên | Chưa khóa | Còn 2 lần thử nữa |
 | **2** | Dưới biên | Chưa khóa | Còn 1 lần thử nữa |
 | **3** | Tại biên | **Bị khóa** | Đúng ngưỡng FR-02 |
 | **4** | Trên biên | Bị khóa | Vượt ngưỡng |
@@ -908,235 +902,125 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | **30 giây** | Tại biên | Vừa hết khóa | Đúng FR-02 |
 | **31 giây** | Trên biên | Đã hết khóa | Hết hạn |
 
-### Biên 3: Email (Rỗng / Không rỗng)
-
-| Giá trị | Vị trí | Trạng thái | Ghi chú |
-|---------|--------|------------|---------|
-| **""** (rỗng) | Tại biên | Invalid | Validation chặn |
-| **"a"** (1 ký tự) | Trên biên | Valid (không rỗng) | Chưa kiểm tra format |
-
-### Biên 4: Password (Rỗng / Không rỗng)
-
-| Giá trị | Vị trí | Trạng thái | Ghi chú |
-|---------|--------|------------|---------|
-| **""** (rỗng) | Tại biên | Invalid | Validation chặn |
-| **"a"** (1 ký tự) | Trên biên | Valid (không rỗng) | Được chấp nhận |
-
 ---
 
-## BƯỚC 3: Viết Test Cases
+## Bước 3: Viết Test Cases
 
-### TC01 - Biên login_attempts: 2 lần sai → lần thứ 3 sai (2 → 3)
+### TC-Mobile-07 - 3 lần đăng nhập sai
 
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-001 |
+| **Test Case ID** | TC-Mobile-07 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
 | **Objective** | Kiểm tra tài khoản bị khóa chính xác khi đạt ngưỡng 3 lần sai |
-| **Technique** | Boundary Value Analysis - Tại biên |
+| **Technique** | Boundary Value Analysis|
 | **Priority** | High |
-| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, `login_attempts = 2`<br>- Tài khoản chưa bị khóa |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, đã đăng nhập sai 2 lần <br>- Tài khoản chưa bị khóa |
 | **Test Data** | Email: `user@email.com`, Password: `wrong` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 2 lần liên tiếp (login_attempts = 2)<br>3. Đăng nhập lần 3 với password sai<br>4. Quan sát giao diện |
-| **Expected Result** | - Lần 3: Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- HTTP Status: 403 |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 2 lần liên tiếp <br>3. Đăng nhập lần 3 với password sai<br>4. Quan sát giao diện |
+| **Expected Result** | - Lần 3: Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."|
 
 ---
 
-### TC02 - Biên login_attempts: 1 lần sai → lần thứ 2 sai (1 → 2, chưa khóa)
+### TC-Mobile-08 - 2 lần đăng nhập sai
 
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-002 |
+| **Test Case ID** | TC-Mobile-08 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra tài khoản CHƯA bị khóa khi dưới ngưỡng 3 |
-| **Technique** | Boundary Value Analysis - Dưới biên |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản chưa bị khóa khi dưới ngưỡng 3 |
+| **Technique** | Boundary Value Analysis|
 | **Priority** | High |
-| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, `login_attempts = 1`<br>- Tài khoản chưa bị khóa |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, đã đăng nhập sai 1 lần <br>- Tài khoản chưa bị khóa |
 | **Test Data** | Email: `user@email.com`, Password: `wrong` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 1 lần (login_attempts = 1)<br>3. Đăng nhập lần 2 với password sai<br>4. Quan sát giao diện |
-| **Expected Result** | - Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại."<br>- Tài khoản CHƯA bị khóa<br>- login_attempts = 2 |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 1 lần <br>3. Đăng nhập lần 2 với password sai<br>4. Quan sát giao diện |
+| **Expected Result** | - Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại."<br>- Tài khoản CHƯA bị khóa
 
 ---
 
-### TC03 - Biên login_attempts: 3 lần sai → lần thứ 4 sai (3 → 4, vẫn khóa)
+### TC-Mobile-09 - 4 lần đăng nhập sai
 
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-003 |
+| **Test Case ID** | TC-Mobile-09 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
 | **Objective** | Kiểm tra tài khoản vẫn bị khóa khi đã vượt ngưỡng |
-| **Technique** | Boundary Value Analysis - Trên biên |
+| **Technique** | Boundary Value Analysis|
 | **Priority** | High |
-| **Preconditions** | - Mở app Mobile<br>- Tài khoản đang bị khóa (`locked_until` > thời điểm hiện tại) |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản đang bị khóa|
 | **Test Data** | Email: `user@email.com`, Password: `wrong` |
 | **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần để kích hoạt khóa<br>3. Đăng nhập lần nữa khi đang khóa<br>4. Quan sát giao diện |
-| **Expected Result** | - Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- HTTP Status: 403 |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
+| **Expected Result** | - Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."|
 ---
 
-### TC04 - Biên thời gian khóa: 29 giây (dưới biên, vẫn khóa)
-
+### TC-Mobile-11  - Thời gian khóa: 29 giây
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-004 |
+| **Test Case ID** | TC-Mobile-11 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra tài khoản vẫn bị khóa tại 29 giây (dưới biên 30s) |
-| **Technique** | Boundary Value Analysis - Dưới biên |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản vẫn bị khóa tại 29 giây|
+| **Technique** | Boundary Value Analysis
 | **Priority** | High |
 | **Preconditions** | - Mở app Mobile<br>- Tài khoản vừa bị khóa (cách đây 29 giây) |
-| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Data** | Email: `user@email.com`, Password: `User 123` (đúng) |
 | **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi 29 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
 | **Expected Result** | - Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- Dù nhập đúng vẫn không đăng nhập được |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
 
 ---
 
-### TC05 - Biên thời gian khóa: 30 giây (tại biên, vừa hết khóa)
+### TC-Mobile-12  - Thời gian khóa: 30 giây
 
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-005 |
+| **Test Case ID** | TC-Mobile-12 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
 | **Objective** | Kiểm tra tài khoản vừa hết khóa tại đúng 30 giây |
-| **Technique** | Boundary Value Analysis - Tại biên |
+| **Technique** | Boundary Value Analysis|
 | **Priority** | High |
 | **Preconditions** | - Mở app Mobile<br>- Tài khoản bị khóa cách đây đúng 30 giây |
-| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Data** | Email: `user@email.com`, Password: `User 123` (đúng) |
 | **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi đúng 30 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
-| **Expected Result** | - Đăng nhập thành công<br>- Chuyển màn hình về Home<br>- login_attempts được reset về 0 |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
+| **Expected Result** | - Đăng nhập thành công<br>- Chuyển màn hình về Home|
 ---
 
-### TC06 - Biên thời gian khóa: 31 giây (trên biên, đã hết khóa)
+### TC-Mobile-13 - Thời gian khóa: 31 giây
 
 | Field | Nội dung |
 |-------|----------|
-| **Test Case ID** | TC-BA-M-006 |
+| **Test Case ID** | TC-Mobile-13 |
 | **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Feature** | Đăng nhập & Khóa tài khoản (Mobile) |
 | **Objective** | Kiểm tra tài khoản đã hết khóa sau 31 giây |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | Medium |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
 | **Preconditions** | - Mở app Mobile<br>- Tài khoản bị khóa cách đây 31 giây |
-| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Data** | Email: `user@email.com`, Password: `User 123` (đúng) |
 | **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi 31 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
 | **Expected Result** | - Đăng nhập thành công<br>- Chuyển màn hình về Home |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
 
 ---
 
-### TC07 - Biên Email: Rỗng (tại biên)
+## Tổng hợp test cases
+**Có tổng cộng 12 test cases do TC-Mobile-07 trùng với TC-Mobile-10**
+| STT | TC ID | Input/Objective | Expected Output |
+|-----|-------|-------|-----------------|
+|1| TC-Mobile-01 | Email=`""`, Password=`"User 123"`, tap Sign In | Validation: "Vui lòng nhập email" |
+|2| TC-Mobile-02 |Email=`"abc"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+|3| TC-Mobile-03 |Email=`"abc@"`, Password=`"User 123"`, tap Sign In | Validation: "Email không hợp lệ" |
+|4| TC-Mobile-04 |Email=`"user@email.com"`, Password=`"User 123"`, tap Sign In | Chuyển màn hình về Home |
+|5| TC-Mobile-05 |Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
+|6| TC-Mobile-06 |Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+|7| TC-Mobile-10 |Đăng nhập sai 3 lần| "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+|8| TC-Mobile-8 | Đăng nhập sai 2 lần liên tiếp| "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+|9| TC-Mobile-9 | Đăng nhập sai 4 lần liên tiếp| "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+|10| TC-Mobile-11 |Thời gian khóa: 29 giây| "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+|11| TC-Mobile-12 |Thời gian khóa: 30 giây| Chuyển trang sang trang chủ |
+|12| TC-Mobile-13 |Thời gian khóa: 31 giây| Chuyển trang sang trang chủ|
 
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-M-007 |
-| **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra validation khi Email bỏ trống |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | High |
-| **Preconditions** | - Mở app Mobile |
-| **Test Data** | Email: `""`, Password: `pass123` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Không nhập gì vào trường Email<br>3. Nhập `pass123` vào trường Password<br>4. Tap Sign In |
-| **Expected Result** | - Validation: "Vui lòng nhập email"<br>- Form không submit |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC08 - Biên Email: 1 ký tự (trên biên, không rỗng)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-M-008 |
-| **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra email 1 ký tự được chấp nhận (không rỗng) |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | Medium |
-| **Preconditions** | - Mở app Mobile |
-| **Test Data** | Email: `a`, Password: `pass123` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `a` vào trường Email<br>3. Nhập `pass123` vào trường Password<br>4. Tap Sign In |
-| **Expected Result** | - Form submit được (vì không rỗng)<br>- Server trả về lỗi "Invalid email or password" |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC09 - Biên Password: Rỗng (tại biên)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-M-009 |
-| **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra validation khi Password bỏ trống |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | High |
-| **Preconditions** | - Mở app Mobile |
-| **Test Data** | Email: `user@email.com`, Password: `""` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `user@email.com` vào trường Email<br>3. Không nhập gì vào trường Password<br>4. Tap Sign In |
-| **Expected Result** | - Validation: "Vui lòng nhập mật khẩu"<br>- Form không submit |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC10 - Biên Password: 1 ký tự (trên biên, không rỗng)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-M-010 |
-| **Requirement ID** | FR-02 |
-| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
-| **Objective** | Kiểm tra password 1 ký tự được chấp nhận (không rỗng) |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | Medium |
-| **Preconditions** | - Mở app Mobile |
-| **Test Data** | Email: `user@email.com`, Password: `a` |
-| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `user@email.com` vào trường Email<br>3. Nhập `a` vào trường Password<br>4. Tap Sign In |
-| **Expected Result** | - Form submit được (vì không rỗng)<br>- Server trả về lỗi "Invalid email or password" |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-## Tổng hợp Bugs từ Boundary Analysis
-
-| Bug ID | Biên | Mô tả | FR-02 yêu cầu |
-|--------|------|-------|----------------|
-| **BUG-001** | login_attempts | Cần kiểm tra backend có cộng đúng +1 hay không | Tăng đúng 1 đơn vị |
-| **BUG-002** | Thời gian khóa | Cần kiểm tra backend set đúng 30s hay không | Khóa 30 giây |
-| **BUG-003** | Email/Password | Cần kiểm tra validation message trên Mobile | Thông báo lỗi phù hợp |
-
----
-
-**Ngày tạo báo cáo:** 27/06/2026
-**Nguồn tham khảo:** FR-02 - Đăng nhập & Khóa tài khoản (Mobile)
-**Kỹ thuật:** Boundary Value Analysis
-**Platform:** Mobile App
+## AI gap analysis
+Do chức năng giống nhau chỉ khác Mobile và web nên AI cho ra kết quả tương tự FR-02 phiên bản test giao diện website. AI vẫn có các lỗi y hệt khi cho ra test cases của giao diện website, nguyên nhân có thể do AI nhận được chức năng giống nhau nên sao chép lại giống hệt test cases của website và không nhận ra các lỗi sai ở những test cases đó và có thể do câu prompt trước đó hỏi "test website với mobile có giống nhau không".
