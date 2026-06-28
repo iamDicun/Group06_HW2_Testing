@@ -11,4 +11,4 @@ I use AI tools for the following tasks,
 | 6 | Gemini 3.5 Flash | 2026-06-27 15:37 | HW02 - Domain Testing | đọc TA của tính năng FR4 và tạo test case chuẩn domain testing, số lượng | Đã tạo 29 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04. | ___ | |
 | 7 | Gemini 3.5 Flash | 2026-06-27 16:01 | HW02 - Domain Testing | đọc TA của tính năng FR10 và tạo test case chuẩn domain testing | Đã tạo 31 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-10. | ___ | |
 | 8 | Gemini 3.5 Flash | 2026-06-27 16:11 | HW02 - Domain Testing | đọc TA của tính năng FR19 và tạo test case chuẩn domain testing | Đã tạo 22 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-19. | ___ | |
-
+| 9 | Gemini 3.5 Flash (High) | 2026-06-27 16:40 | HW02 - Domain Testing | đọc TA của tính năng FR4 cho mobile và tạo test case chuẩn domain testing | Đã tạo 20 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04 trên Mobile. | ___ | |

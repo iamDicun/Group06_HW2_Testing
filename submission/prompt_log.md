@@ -303,3 +303,43 @@ Ban co muon:
 - Them / bot test case nao khong?
 - Xuat them dinh dang khac (Excel, Gherkin)?
 - Tao test case cho feature khac khong?
+
+---
+## Session | Agent: Gemini 3.5 Flash (High) | Assignment: HW02 - Domain Testing | 2026-06-27 16:40 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+đọc TA của tính năng FR4 cho mobile và tạo test case chuẩn domain testing
+
+**[Assistant]**
+Tôi đã hoàn thành việc đọc tài liệu Phân tích kiểm thử (TA) cho tính năng **FR-04: Hồ sơ cá nhân trên Mobile App** (`TA-EShop-Khoa-FR04-PROFILE-MOBILE-v1.0.md`) và thiết kế bộ test case chuẩn kiểm thử miền (Domain Testing) theo tiêu chuẩn ISTQB.
+
+### Chi tiết các tệp tin đã tạo
+Tôi đã lưu các test case và file chỉ mục tương ứng vào thư mục: [MOBILE-App](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App)
+
+1. **File chỉ mục**: [_index.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/_index.md) - Bảng tổng hợp toàn bộ 20 test cases bao gồm mã ID, mô tả ngắn, phân loại test type, kỹ thuật áp dụng, mức độ ưu tiên và trạng thái.
+2. **20 file test case riêng biệt**:
+   - [TC-MOBILE-001.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-001.md) & [TC-MOBILE-002.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-002.md): Kiểm thử cấu hình bàn phím số/chữ cho trường Số điện thoại (`phone_input_type`).
+   - [TC-MOBILE-003.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-003.md) đến [TC-MOBILE-009.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-009.md): Kiểm thử các phân hoạch hợp lệ (10/11 chữ số) và không hợp lệ (quá ngắn, quá dài bị chặn bởi client `maxLength`, không bắt đầu bằng số 0, paste chữ từ clipboard, để trống) đối với trường Số điện thoại (`phone_value_client`).
+   - [TC-MOBILE-010.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-010.md): Kiểm thử TextInput Địa chỉ hỗ trợ nhiều dòng (`address_input_multiline`).
+   - [TC-MOBILE-011.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-011.md) đến [TC-MOBILE-015.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-015.md): Kiểm thử các cấu hình kết nối mạng của API Backend (LAN cùng subnet, URL Ngrok, Localhost IP thất bại trên thiết bị thật, IP khác subnet, thiếu protocol/port) (`base_url_lan`).
+   - [TC-MOBILE-016.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-016.md) đến [TC-MOBILE-018.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-018.md): Kiểm thử các trạng thái kết nối mạng (Trực tuyến, Ngoại tuyến Offline Mode, Mạng chập chờn timeout biên 10 giây) (`network_connectivity_state`).
+   - [TC-MOBILE-019.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-019.md) & [TC-MOBILE-020.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-cases/MOBILE-App/TC-MOBILE-020.md): Kiểm thử giao diện responsive co giãn thích ứng khi mở bàn phím ảo (`keyboard_viewport_adjust`).
+
+### Tóm tắt số lượng test case
+- **Positive (Happy path)**: 8 test cases
+- **Negative / Edge case**: 12 test cases
+- **Boundary Value**: 5 test cases
+
+---
+
+Dưới đây là thông tin dòng log để bạn có thể thêm vào bảng trong file [ai_audit.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/submission/ai_audit.md):
+
+```markdown
+| 9 | Gemini 3.5 Flash (High) | 2026-06-27 16:37 | HW02 - Domain Testing | đọc TA của tính năng FR4 cho mobile và tạo test case chuẩn domain testing | Đã tạo 20 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04 trên Mobile. | ___ | |
+```
+
+Bạn hãy kiểm tra các file đã được sinh ra và cho tôi biết nếu cần điều chỉnh hay bổ sung thêm kịch bản nào khác.
+
