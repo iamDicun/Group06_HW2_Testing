@@ -605,21 +605,18 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 ## 1. Xác định Input và Output
 
-### 1.1 Input (trên giao diện Admin Category)
+### 1.1 Input
 
 | STT | Input | Kiểu | Mô tả |
 |-----|-------|------|-------|
 | I1 | **Tên danh mục** | Text field | Nhập tên danh mục mới |
-| I2 | **Nút "Thêm mới"** | Button | Bấm để thêm danh mục |
-| I3 | **Nút "Xóa"** | Button | Bấm để xóa danh mục |
 
-### 1.2 Output (trên giao diện Admin Category)
+### 1.2 Output
 
 | STT | Output | Kiểu | Mô tả |
 |-----|--------|------|-------|
 | O1 | **Bảng danh sách danh mục** | Table | Hiển thị ID, Tên danh mục |
-| O2 | **Thông báo thành công** | Text | Hiển thị khi thêm/xóa thành công |
-| O3 | **Thông báo lỗi** | Alert | Hiển thị khi thao tác thất bại |
+| O2 | **Thông báo** | Text | Hiển thị sau khi thêm/xóa|
 
 ---
 
@@ -635,23 +632,8 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | M2 | Khoảng trắng chỉ (`"   "`) | **Invalid** | Chỉ chứa space, thực tế rỗng |
 | M3 | Chuỗi bất kỳ (vd: `"Điện thoại"`, `"Quần áo"`) | **Valid** | Tên hợp lệ |
 | M4 | Ký tự đặc biệt (vd: `"@#$%"`) | **Valid** | Chưa bị cấm theo FR-14 |
-| M5 | Tên trùng với danh mục đã có | **Invalid** | Trùng lặp (nếu có validation) |
+| M5 | Tên trùng với danh mục đã có | **Invalid** | Trùng lặp|
 | M6 | Chuỗi rất dài (vd: 255+ ký tự) | **Invalid** | Vượt quá độ dài cho phép |
-
-#### Input I2 - Nút "Thêm mới"
-
-| Miền | Giá trị | Type | Ghi chú |
-|------|---------|------|---------|
-| M7 | Bấm khi tên rỗng | **Invalid** | Không được thêm |
-| M8 | Bấm khi tên hợp lệ | **Valid** | Thêm thành công |
-
-#### Input I3 - Nút "Xóa"
-
-| Miền | Giá trị | Type | Ghi chú |
-|------|---------|------|---------|
-| M9 | Bấm Xóa trên danh mục không có SP liên kết | **Valid** | Xóa thành công |
-| M10 | Bấm Xóa trên danh mục có SP liên kết | **Invalid** | Cần xử lý đặc biệt |
-| M11 | Bấm Xóa trên danh mục không tồn tại (ID sai) | **Invalid** | Báo lỗi |
 
 ### 2.2 Miền giá trị cho Output
 
@@ -660,21 +642,16 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | O1.1 | Hiển thị danh sách với ID và Tên | **Valid** | Dữ liệu đúng |
-| O1.2 | Bảng trống (không có danh mục nào) | **Valid** | Chưa có dữ liệu |
+| O1.2 | Bảng trống| **Valid** | Chưa có dữ liệu |
 
-#### Output O2 - Kết quả thêm danh mục
-
-| Miền | Giá trị | Type | Ghi chú |
-|------|---------|------|---------|
-| O2.1 | Danh mục mới xuất hiện trong bảng | **Valid** | Thêm thành công |
-| O2.2 | Báo lỗi khi thêm thất bại | **Invalid** | Thêm thất bại |
-
-#### Output O3 - Kết quả xóa danh mục
+#### Output O2 - Thông báo sau khi thêm/xóa danh mục
 
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
-| O3.1 | Danh mục biến mất khỏi bảng | **Valid** | Xóa thành công |
-| O3.2 | Báo lỗi khi xóa thất bại | **Invalid** | Xóa thất bại |
+| O2.1 | Thông báo thêm thành công | **Valid** | Thêm thành công |
+| O2.2 | Báo lỗi khi thêm thất bại | **Valid** | Thêm thất bại |
+| O2.3 | Thông báo xóa thành công | **Valid** | Xóa thành công |
+| O2.4 | Báo lỗi khi xóa thất bại | **Valid** | Xóa thất bại |
 
 ---
 
@@ -688,33 +665,30 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | M4 | `"@#$%"` | Đại diện ký tự đặc biệt |
 | M5 | `"Điện thoại"` (trùng) | Đại diện trùng tên |
 | M6 | Chuỗi 300 ký tự | Đại diện quá dài |
-| M7 | Bấm Thêm mới khi rỗng | Đại diện thao tác invalid |
-| M8 | Bấm Thêm mới khi hợp lệ | Đại diện thao tác valid |
-| M9 | Xóa danh mục không có SP | Đại diện xóa an toàn |
-| M10 | Xóa danh mục có SP | Đại diện xóa có liên kết |
-| M11 | Xóa ID không tồn tại | Đại diện xóa vô hiệu |
 | O1.1 | Bảng hiển thị danh mục | Đại diện có dữ liệu |
 | O1.2 | Bảng trống | Đại diện không có dữ liệu |
-| O2.1 | Danh mục mới trong bảng | Đại diện thêm thành công |
-| O3.1 | Danh mục biến mất | Đại diện xóa thành công |
-
+| O2.1 | Thông báo thêm thành công | Đại diện thêm thành công |
+| O2.2 | Báo lỗi khi thêm thất bại| Đại diện thêm thất bại |
+| O2.3 | Thông báo xóa thành công | Đại diện xóa thành công |
+| O2.4 | Báo lỗi khi xóa thất bại | Đại diện xóa thất bại |
 ---
 
 ## 4. Xác định Test Cases (mỗi miền → mỗi test case)
 
 | TC | Miền | Input | Expected Output |
 |----|------|-------|-----------------|
-| TC01 | M1 | Nhập tên `""` → bấm "Thêm mới" | Báo lỗi "Tên danh mục không được để trống" |
-| TC02 | M2 | Nhập tên `"   "` → bấm "Thêm mới" | Báo lỗi hoặc coi như rỗng |
-| TC03 | M3 | Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thêm thành công, xuất hiện trong bảng |
-| TC04 | M4 | Nhập tên `"@#$%"` → bấm "Thêm mới" | Thêm thành công (FR-14 không cấm) |
-| TC05 | M5 | Nhập tên trùng `"Điện thoại"` → bấm "Thêm mới" | Báo lỗi trùng tên hoặc thêm thành công (tùy policy) |
-| TC06 | M6 | Nhập tên 300 ký tự → bấm "Thêm mới" | Báo lỗi độ dài |
-| TC07 | M9 | Bấm "Xóa" trên danh mục không có SP | Xóa thành công, biến mất khỏi bảng |
-| TC08 | M10 | Bấm "Xóa" trên danh mục có SP liên kết | Báo lỗi hoặc cảnh báo |
-| TC09 | M11 | Gọi API xóa danh mục ID không tồn tại | Báo lỗi "Category not found" |
-| TC10 | O1.1 | Đăng nhập Admin → xem danh mục | Bảng hiển thị ID và Tên danh mục |
-| TC11 | O1.2 | Xem danh mục khi chưa có danh mục nào | Bảng trống hoặc thông báo "Chưa có danh mục" |
+| TC-QLDM-01 | M1 | Nhập tên `""` → bấm "Thêm mới" | Báo lỗi "Tên danh mục không được để trống" |
+| TC-QLDM-02 | M2 | Nhập tên `"   "` → bấm "Thêm mới" | Báo lỗi hoặc coi như rỗng |
+| TC-QLDM-03 | M3 | Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thêm thành công, xuất hiện trong bảng |
+| TC-QLDM-04 | M4 | Nhập tên `"@#$%"` → bấm "Thêm mới" | Thêm thành công (FR-14 không cấm) |
+| TC-QLDM-05 | M5 | Nhập tên trùng `"Điện thoại"` → bấm "Thêm mới" | Báo lỗi trùng tên hoặc thêm thành công (tùy policy) |
+| TC-QLDM-06 | M6 | Nhập tên 300 ký tự → bấm "Thêm mới" | Báo lỗi độ dài |
+| TC-QLDM-07 | O1.1 | Đăng nhập Admin → xem danh mục | Bảng hiển thị ID và Tên danh mục |
+| TC-QLDM-08 | O1.2 | Xem danh mục khi chưa có danh mục nào | Bảng trống hoặc thông báo "Chưa có danh mục" |
+| TC-QLDM-09 | O2.1 |Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thông báo thêm thành công |
+| TC-QLDM-10 | O2.2 | Nhập tên `"   "` → bấm "Thêm mới" | Báo lỗi  |
+| TC-QLDM-11 | O2.3 | Xóa 1 danh mục | Thông báo xóa thành công |
+| TC-QLDM-12 | O2.4 | Xóa 1 danh mục không thể xóa hoặc bị lỗi đường truyền | Thông báo xóa thất bại |
 
 ---
 
@@ -724,266 +698,40 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 | TC | Miền | Input | Expected Output | Quyết định |
 |----|------|-------|-----------------|------------|
-| TC01 | M1 | Tên rỗng → Thêm mới | Báo lỗi | **Giữ** |
-| TC02 | M2 | Tên `"   "` → Thêm mới | Báo lỗi | **Bỏ** (trùng TC01 - cùng invalid rỗng) |
-| TC03 | M3 | Tên `"Điện thoại"` → Thêm mới | Thêm thành công | **Giữ** |
-| TC04 | M4 | Tên `"@#$%"` → Thêm mới | Thêm thành công | **Bỏ** (trùng TC03 - cùng valid name) |
-| TC05 | M5 | Tên trùng → Thêm mới | Báo lỗi/trùng | **Bỏ** (FR-14 không quy định về trùng) |
-| TC06 | M6 | Tên 300 ký tự → Thêm mới | Báo lỗi độ dài | **Bỏ** (FR-14 không quy định giới hạn độ dài) |
-| TC07 | M9 | Xóa danh mục không có SP | Xóa thành công | **Giữ** |
-| TC08 | M10 | Xóa danh mục có SP | Báo lỗi/cảnh báo | **Giữ** |
-| TC09 | M11 | Xóa ID không tồn tại | Báo lỗi | **Bỏ** (trùng TC08 - cùng xóa invalid) |
-| TC10 | O1.1 | Xem danh mục | Bảng hiển thị | **Giữ** |
-| TC11 | O1.2 | Danh mục trống | Bảng trống | **Bỏ** (trùng TC10 - cùng output xem) |
+| TC-QLDM-01 | M1 | Tên rỗng → Thêm mới | Báo lỗi | **Giữ** |
+| TC-QLDM-02 | M2 | Tên `"   "` → Thêm mới | Báo lỗi | **Bỏ** (trùng TC01 - cùng invalid rỗng) |
+| TC-QLDM-03 | M3 | Tên `"Điện thoại"` → Thêm mới | Thêm thành công | **Giữ** |
+| TC-QLDM-04 | M4 | Tên `"@#$%"` → Thêm mới | Thêm thành công | **Bỏ** (trùng TC03 - cùng valid name) |
+| TC-QLDM-05 | M5 | Tên trùng → Thêm mới | Báo lỗi/trùng | **Bỏ** (FR-14 không quy định về trùng) |
+| TC-QLDM-06 | M6 | Tên 300 ký tự → Thêm mới | Báo lỗi độ dài | **Bỏ** (FR-14 không quy định giới hạn độ dài) |
+| TC-QLDM-07 | O1.1 | Xem danh mục | Bảng hiển thị | **Giữ** |
+| TC-QLDM-08 | O1.2 | Danh mục trống | Bảng trống | **Bỏ** (trùng TC07 - cùng output xem) |
+| TC-QLDM-09 | O2.1 |Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thông báo thêm thành công | **Bỏ** (trùng TC03 - cùng valid name) |
+| TC-QLDM-10 | O2.2 | Nhập tên `"   "` → bấm "Thêm mới" | Báo lỗi  |**Bỏ** (trùng TC01 - cùng invalid rỗng) |
+| TC-QLDM-11 | O2.3 | Xóa 1 danh mục | Thông báo xóa thành công | **Giữ** |
+| TC-QLDM-12 | O2.4 | Xóa 1 danh mục không thể xóa hoặc bị lỗi đường truyền | Thông báo xóa thất bại | **Giữ** |
+
 
 ### Kết quả rút gọn: **5 Test Cases**
 
 | STT | TC ID | Miền | Input | Expected Output |
 |-----|-------|------|-------|-----------------|
-| 1 | TC01 | M1 | Nhập tên `""` → bấm "Thêm mới" | Báo lỗi "Tên danh mục không được để trống" |
-| 2 | TC02 | M3 | Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thêm thành công, danh mục xuất hiện trong bảng |
-| 3 | TC03 | M9 | Bấm "Xóa" trên danh mục không có sản phẩm | Xóa thành công, danh mục biến mất khỏi bảng |
-| 4 | TC04 | M10 | Bấm "Xóa" trên danh mục có sản phẩm liên kết | Báo lỗi hoặc cảnh báo, danh mục KHÔNG bị xóa |
-| 5 | TC05 | O1.1 | Đăng nhập Admin → xem danh mục | Bảng hiển thị ID và Tên danh mục đầy đủ |
+|1| TC-QLDM-01 | M1 | Tên rỗng → Thêm mới | Báo lỗi |
+|2| TC-QLDM-03 | M3 | Tên `"Điện thoại"` → Thêm mới | Thêm thành công |
+|3| TC-QLDM-07 | O1.1 | Xem danh mục | Bảng hiển thị |
+|4| TC-QLDM-11 | O2.3 | Xóa 1 danh mục | Thông báo xóa thành công |
+|5| TC-QLDM-12 | O2.4 | Xóa 1 danh mục không thể xóa hoặc bị lỗi đường truyền | Thông báo xóa thất bại |
 
 ---
 
-## Bugs tìm thấy từ Code Review
+## BOUNDARY ANALYSIS
+**Không có input/output có thể áp dụng BVA để test nên với chức năng này không áp dụng phương pháp BVA**
 
-| Bug ID | File | Dòng | Mô tả | FR-14 yêu cầu |
-|--------|------|------|-------|----------------|
-| **BUG-001** | `server.js` | 251 | Backend `POST /api/categories` KHÔNG validate `name` rỗng | "Tên danh mục là bắt buộc, không được để trống" |
-| **BUG-002** | `App.jsx` | 298-304 | Input tên danh mục KHÔNG có `required` attribute | Cần validate phía client |
-| **BUG-003** | `App.jsx` | 325 | Không có xác nhận trước khi xóa danh mục | Nên có confirmation dialog |
-
----
-
-**Ngày tạo báo cáo:** 27/06/2026
-**Nguồn tham khảo:** FR-14 - Quản lý Danh mục (Category CRUD)
-
-# BÁO CÁO BOUNDARY ANALYSIS
-## FR-14: Quản lý Danh mục (Category CRUD)
-
----
-
-## BƯỚC 1: Xác định Input/Output có dữ liệu số hoặc biên
-
-| STT | Input/Output | Kiểu dữ liệu | Miền giá trị | Biên |
-|-----|--------------|---------------|--------------|------|
-| 1 | **name** (tên danh mục) | String | Rỗng / Không rỗng | **"" vs "a"** |
-| 2 | **category.id** (ID danh mục) | Số nguyên | 1, 2, 3, ... / 0, -1 | **0 → 1** (không tồn tại → tồn tại) |
-| 3 | **categories.length** (số lượng DM) | Số nguyên | 0, 1, 2, ... | **0 → 1** (trống → có dữ liệu) |
-
----
-
-## BƯỚC 2: Xác định giá trị xung quanh biên
-
-### Biên 1: Category name (Rỗng / Không rỗng)
-
-| Giá trị | Vị trí | Trạng thái | Ghi chú |
-|---------|--------|------------|---------|
-| **""** (rỗng) | Tại biên | Invalid | FR-14: "Tên danh mục là bắt buộc" |
-| **"   "** (chỉ space) | Tại biên | Invalid | Thực tế rỗng |
-| **"a"** (1 ký tự) | Trên biên | Valid | Tên hợp lệ tối thiểu |
-
-### Biên 2: Category ID (Tồn tại / Không tồn tại)
-
-| Giá trị | Vị trí | Trạng thái | Ghi chú |
-|---------|--------|------------|---------|
-| **0** | Dưới biên | Không tồn tại | ID bắt đầu từ 1 |
-| **1** | Tại biên | Tồn tại | ID đầu tiên |
-| **999999** | Trên biên | Không tồn tại | ID quá lớn |
-
-### Biên 3: categories.length (Số lượng DM)
-
-| Giá trị | Vị trí | Trạng thái | Ghi chú |
-|---------|--------|------------|---------|
-| **0** | Tại biên | Bảng trống | Chưa có DM nào |
-| **1** | Trên biên | Bảng có 1 DM | Có dữ liệu |
-
----
-
-## BƯỚC 3: Viết Test Cases
-
-### TC01 - Biên name: Rỗng (tại biên)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-001 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra không thêm được danh mục khi tên rỗng |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | High |
-| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
-| **Test Data** | Name: `""` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Để trống trường tên danh mục<br>4. Bấm "Thêm mới" |
-| **Expected Result** | - Báo lỗi "Tên danh mục không được để trống"<br>- Danh mục KHÔNG được thêm vào DB |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | **BUG-001**: Backend không validate name rỗng |
-
----
-
-### TC02 - Biên name: Chỉ có space (tại biên)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-002 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra không thêm được danh mục khi tên chỉ có space |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | High |
-| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
-| **Test Data** | Name: `"   "` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Nhập `"   "` (3 space) vào trường tên<br>4. Bấm "Thêm mới" |
-| **Expected Result** | - Báo lỗi hoặc coi như rỗng<br>- Danh mục KHÔNG được thêm vào DB |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC03 - Biên name: 1 ký tự (trên biên)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-003 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra thêm được danh mục khi tên 1 ký tự |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | High |
-| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
-| **Test Data** | Name: `"A"` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Nhập `"A"` vào trường tên<br>4. Bấm "Thêm mới" |
-| **Expected Result** | - Thêm thành công<br>- Danh mục "A" xuất hiện trong bảng |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC04 - Biên ID: 0 (không tồn tại)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-004 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra xóa danh mục ID = 0 (không tồn tại) |
-| **Technique** | Boundary Value Analysis - Dưới biên |
-| **Priority** | Medium |
-| **Preconditions** | - Đăng nhập Admin |
-| **Test Data** | Category ID: `0` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Gọi API `DELETE /api/categories/0`<br>3. Quan sát phản hồi |
-| **Expected Result** | - Báo lỗi hoặc không tìm thấy<br>- Không có gì thay đổi trong DB |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC05 - Biên ID: 1 (tồn tại, ID đầu tiên)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-005 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra xóa danh mục ID = 1 (tồn tại) |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | Medium |
-| **Preconditions** | - Đăng nhập Admin<br>- Danh mục ID = 1 tồn tại |
-| **Test Data** | Category ID: `1` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Xem danh sách danh mục<br>3. Bấm "Xóa" trên danh mục ID = 1<br>4. Quan sát danh sách |
-| **Expected Result** | - Xóa thành công<br>- Danh mục ID = 1 biến mất khỏi bảng |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC06 - Biên ID: 999999 (không tồn tại)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-006 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra xóa danh mục ID = 999999 (không tồn tại) |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | Medium |
-| **Preconditions** | - Đăng nhập Admin |
-| **Test Data** | Category ID: `999999` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Gọi API `DELETE /api/categories/999999`<br>3. Quan sát phản hồi |
-| **Expected Result** | - Báo lỗi hoặc không tìm thấy<br>- Không có gì thay đổi trong DB |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC07 - Biên categories.length: 0 (bảng trống)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-007 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra hiển thị khi chưa có danh mục nào |
-| **Technique** | Boundary Value Analysis - Tại biên |
-| **Priority** | Low |
-| **Preconditions** | - Đăng nhập Admin<br>- Chưa có danh mục nào trong DB |
-| **Test Data** | Categories: `[]` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Quan sát bảng danh sách |
-| **Expected Result** | - Bảng hiển thị rỗng (0 dòng dữ liệu)<br> Hoặc thông báo "Chưa có danh mục" |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-### TC08 - Biên categories.length: 1 (bảng có 1 DM)
-
-| Field | Nội dung |
-|-------|----------|
-| **Test Case ID** | TC-BA-014-008 |
-| **Requirement ID** | FR-14 |
-| **Feature** | Boundary Analysis - Quản lý Danh mục |
-| **Objective** | Kiểm tra hiển thị khi có 1 danh mục |
-| **Technique** | Boundary Value Analysis - Trên biên |
-| **Priority** | Low |
-| **Preconditions** | - Đăng nhập Admin<br>- Có 1 danh mục trong DB |
-| **Test Data** | Categories: `[{id: 1, name: "Điện thoại"}]` |
-| **Test Steps** | 1. Đăng nhập Admin<br>2. Thêm 1 danh mục<br>3. Vào trang Quản lý Danh mục<br>4. Quan sát bảng danh sách |
-| **Expected Result** | - Bảng hiển thị 1 dòng<br>- Hiển thị ID và Tên danh mục |
-| **Actual Result** | (Chưa thực hiện) |
-| **Status** | Not Run |
-| **Notes** | |
-
----
-
-## Tổng hợp Bugs từ Boundary Analysis
-
-| Bug ID | Biên | Mô tả | FR-14 yêu cầu |
-|--------|------|-------|----------------|
-| **BUG-001** | name | Backend không validate name rỗng khi POST | "Tên danh mục là bắt buộc, không được để trống" |
-| **BUG-002** | name | Input không có `required` attribute | Cần validate phía client |
-| **BUG-003** | ID | Không có confirmation dialog trước khi xóa | Nên có xác nhận |
-
----
-
-**Ngày tạo báo cáo:** 27/06/2026
-**Nguồn tham khảo:** FR-14 - Quản lý Danh mục (Category CRUD)
-**Kỹ thuật:** Boundary Value Analysis
+## AI gap analysis
+Ở phần BVA, theo em không thể dùng BVA để viết test cases nhưng AI vẫn list ra được loạt test cases, tuy nhiên nhưng test cases không thể thực hiện qua giao diện, AI bắt đầu bịa thông tin. Nguyên nhân có thể do AI cố làm theo yêu cầu của prompt là BVA mà không xem xét liệu với input/output của chức năng có thực hiện BVA được hay không, có thể do prompt thiếu sót không chỉ dẫn kĩ thế nào là biên và nhắc nhở AI nếu không áp dụng được thì bỏ qua loại test này.
 
 # Chức năng Mobile: Đăng nhập & Khóa tài khoản (FR-02)
-# BÁO CÁO DOMAIN TESTING
-## FR-02: Đăng nhập & Khóa tài khoản (Mobile)
-
----
+## DOMAIN TESTING
 
 ## 1. Xác định Input và Output
 
@@ -993,9 +741,8 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 |-----|-------|------|-------|
 | I1 | **Email** | Text field | Trường nhập địa chỉ email |
 | I2 | **Password** | Text field | Trường nhập mật khẩu |
-| I3 | **Nút "Sign In"** | Button | Nút bấm gửi form đăng nhập |
 
-### 1.2 Output (trên app Mobile)
+### 1.2 Output
 
 | STT | Output | Kiểu | Mô tả |
 |-----|--------|------|-------|
@@ -1005,7 +752,7 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 ---
 
-## 2. Xác định tất cả miền giá trị (Valid & Invalid)
+## 2. Xác định tất cả miền giá trị
 
 ### 2.1 Miền giá trị cho Input
 
@@ -1023,15 +770,15 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | M5 | `""` (bỏ trống) | **Invalid** | Trường không được bỏ trống |
-| M6 | Chuỗi bất kỳ (vd: `pass123`) | **Valid** | Password hợp lệ |
+| M6 | Password sai so với username (vd: `pass123`) | **Valid** | Password sai |
+| M7 | Password đúng so với username (vd: `User 123`) | **Valid** | Password đúng |
 
 #### Input I3 - Số lần đăng nhập sai liên tiếp
 
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | M7 | `0` lần (lần đầu đăng nhập) | **Valid** | Chưa có lần sai nào |
-| M8 | `1` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
-| M9 | `2` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
+| M8 | `1` `2` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
 | M10 | `≥ 3` lần sai liên tiếp | **Valid** | Kích hoạt khóa tài khoản |
 
 ### 2.2 Miền giá trị cho Output
@@ -1040,8 +787,8 @@ AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đ�
 
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
-| O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | **Invalid** | Đăng nhập sai, chưa khóa |
-| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | **Invalid** | Đăng nhập sai ≥ 3 lần |
+| O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | **Valid** | Đăng nhập sai, chưa khóa |
+| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | **Valid** | Đăng nhập sai ≥ 3 lần |
 | O1.3 | Không hiển thị thông báo lỗi | **Valid** | Đăng nhập thành công |
 
 #### Output O2 - Chuyển màn hình
