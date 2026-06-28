@@ -58,7 +58,7 @@
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | **Valid** | Đăng nhập sai, chưa khóa |
-| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | **Invalid** | Đăng nhập sai ≥ 3 lần |
+| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | **Valid** | Đăng nhập sai ≥ 3 lần |
 | O1.3 | Không hiển thị thông báo lỗi | **Valid** | Đăng nhập thành công |
 
 #### Output O2 - Chuyển trang
@@ -66,7 +66,7 @@
 | Miền | Giá trị | Type | Ghi chú |
 |------|---------|------|---------|
 | O2.1 | Chuyển về trang chủ | **Valid** | Đăng nhập thành công |
-| O2.2 | Vẫn ở trang đăng nhập | **Invalid** | Đăng nhập thất bại |
+| O2.2 | Vẫn ở trang đăng nhập | **Valid** | Đăng nhập thất bại |
 
 #### Output O3 - HTML5 Validation
 
@@ -318,5 +318,1078 @@
 ## AI gap analysis
 - Ở phần Domain Testing, AI bị miss test cases của trường hợp password đúng và password sai, AI chỉ ghi chung 1 trường hợp duy nhất là password hợp lệ, password không rỗng. Ngoài ra, với Domain Testing, trường hợp nhập mật khẩu sai nhưng chưa khóa (1 lần sai, 2 lần sai liên tiếp) nên được gộp thành 1 test case chung do output của 2 input này giống nhau suy ra chỉ cần test case cho 1 giá trị đại diện. Em nghĩ sự thiếu sót test cases này của AI do AI không phân biệt miền giá trị của password thành đúng, sai, và rỗng mà chỉ tập trung vào miền rỗng và miền có giá trị. Do Domain Testing là kiểu test tùy vào độ cẩn thận khi chia miền giá trị của người test ngay cả người thật cũng có thể chia miền giá trị khác nhau và bị thiếu nên AI thiếu điều kiện password đúng và sai, em nghĩ do độ phức tạp về tính chất của Domain Testing 
 - Ở phần Boundary Analysis, AI liệt kê email và password có biên nhưng theo em, 2 input này không thể test bằng BVA. Với lỗi này, em nghĩ do prompt của em chưa nêu rõ BVA có thể dùng để test với loại Input nào.
+# Chức năng: Thanh toán (FR-08)
+## DOMAIN TESTING
 
-## Bug Reporting
+## 1. Xác định Input và Output
+
+### 1.1 Input
+
+| STT | Input | Kiểu | Mô tả |
+|-----|-------|------|-------|
+| I1 |  **Trạng thái đăng nhập** | State | Trạng thái đăng nhập |
+| I2 | **Sản phẩm** | State | Danh sách sản phẩm|
+| I3 | **Tổng tiền thanh toán** | Increment/Decrement buttons | Nhập tổng số tiền thanh toán |
+
+### 1.2 Output
+
+| STT | Output | Kiểu | Mô tả |
+|-----|--------|------|-------|
+| O1 | **Thông báo** | Text | Thông báo đã thành công hay lỗi|
+| O2 | **Giỏ hàng trống** | State | Cart được xóa sau thanh toán thành công |
+
+---
+
+## 2. Xác định tất cả miền giá trị (Valid & Invalid)
+
+### 2.1 Miền giá trị cho Input
+
+#### Input I1 - Trạng thái đăng nhập
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M1 | Chưa đăng nhập | **Invalid** | Không được phép checkout |
+| M2 | Đã đăng nhập | **Valid** | Được phép checkout |
+
+#### Input I2 - Sản phẩm
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M3 | Giỏ hàng trống| **Invalid** | Không có sản phẩm để thanh toán |
+| M4 | Giỏ hàng có 1 sản phẩm | **Valid** | Đơn hàng 1 sản phẩm |
+| M5 | Giỏ hàng có nhiều sản phẩm (≥ 2) | **Valid** | Đơn hàng nhiều sản phẩm |
+
+#### Input I3 - Tổng tiền thanh toán
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M6 | Tổng tiền giá trị gốc | **Valid** | Giá trị đúng |
+| M7 | Tổng tiền user chỉnh sửa| **Invalid** | FR-08 không cho phép chỉnh sửa |
+
+### 2.2 Miền giá trị cho Output
+
+#### Output O1 - Thông báo
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O1.1 | "Thanh toán thành công!"| **Valid** | Thành công |
+| O1.2 | Alert "Lỗi khi thanh toán..." | **Valid** | Thất bại |
+| O1.3 | Alert "Bạn cần đăng nhập để thanh toán!" | **Valid** | Chưa đăng nhập |
+
+#### Output O2 - Giỏ hàng sau thanh toán
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O2.1 | Sản phẩm xóa khỏi giỏ hàng| **Valid** | Đúng FR-08 |
+
+---
+
+## 3. Xác định giá trị đại diện từng miền
+
+| Miền | Giá trị đại diện | Chọn lý do |
+|------|-----------------|------------|
+| M1 | Chưa đăng nhập | Đại diện trạng thái chưa xác thực |
+| M2 | Đã đăng nhập | Đại diện trạng thái đã xác thực |
+| M3 | Cart rỗng| Đại diện giỏ hàng trống |
+| M4 | Cart 1 sản phẩm: chọn 1 sản phẩm Iphone 15 ProMax| Đại diện đơn hàng đơn giản |
+| M5 | Cart 2+ sản phẩm: Iphone 15 ProMax và MacBook Pro M3| Đại diện đơn hàng phức tạp |
+| M6 | 75000000 | Đại diện giá trị đúng |
+| M7 | 75000001 | Đại diện giá trị bị chỉnh sửa |
+| O1.1 | "Thanh toán thành công!" | Đại diện thành công |
+| O1.2 | "Lỗi khi thanh toán..." | Đại diện thất bại |
+| O1.3 | "Bạn cần đăng nhập để thanh toán!" | Đại diện chưa đăng nhập |
+| O2.1 | Giỏ hàng rỗng sau khi checkout | Đại diện cart trống |
+
+---
+
+## 4. Xác định Test Cases
+
+| TC | Miền | Input | Expected Output |
+|----|------|-------|-----------------|
+| TC-Checkout-01 | M1 | Chưa đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Alert "Bạn cần đăng nhập để thanh toán!"|
+| TC-Checkout-02 | M2 | Đã đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Chuyển sang trang thanh toán|
+| TC-Checkout-03 | M3 | Đăng nhập → giỏ hàng trống | Hiển thị "Giỏ hàng của bạn đang trống" |
+| TC-Checkout-04 | M4 | Đăng nhập → giỏ hàng 1 sản phẩm → checkout | Hiển thị sản phẩm, tổng tiền đúng |
+| TC-Checkout-05 | M5 | Đăng nhập → giỏ hàng 2+ sản phẩm → checkout | Hiển thị đầy đủ tất cả sản phẩm, tổng đúng |
+| TC-Checkout-06 | M6 | Tổng tiền hiển thị đúng bằng tổng tiền hàng | Cho phép thanh toán |
+| TC-Checkout-07 | M7 | User sửa tổng tiền trên input → bấm "Xác Nhận Thanh Toán" | Backend từ chối, không tạo đơn hàng (hoặc tính lại đúng) |
+| TC-Checkout-08 | O1.1 | Checkout thành công | Hiển thị "Thanh toán thành công!" |
+| TC-Checkout-09 | O1.2 | Checkout thất bại | Alert "Lỗi khi thanh toán..." |
+| TC-Checkout-10 | O1.3 | Checkout khi chưa đăng nhập | Alert "Bạn phải đăng nhập..." |
+| TC-Checkout-11 | O2.1 | Sau checkout thành công | Sản phẩm trong giỏ hàng bị xóa |
+
+
+---
+
+## 5. Rút gọn Test Cases (loại bỏ trùng loại)
+
+### Phân tích trùng lặp
+
+| TC | Miền | Input | Expected Output | Quyết định |
+|----|------|-------|-----------------|------------|
+| TC-Checkout-01 | M1 | Chưa đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Alert "Bạn cần đăng nhập để thanh toán!"|**Giữ**|
+| TC-Checkout-02 | M2 | Đã đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Chuyển sang trang thanh toán|**Giữ**|
+| TC-Checkout-03 | M3 | Đăng nhập → giỏ hàng trống | Hiển thị "Giỏ hàng của bạn đang trống" |**Giữ**|
+| TC-Checkout-04 | M4 | Đăng nhập → giỏ hàng 1 sản phẩm → checkout | Hiển thị sản phẩm, tổng tiền đúng |**Giữ**|
+| TC-Checkout-05 | M5 | Đăng nhập → giỏ hàng 2+ sản phẩm → checkout | Hiển thị đầy đủ tất cả sản phẩm, tổng đúng |**Giữ**|
+| TC-Checkout-06 | M6 | Tổng tiền hiển thị đúng bằng tổng tiền hàng | Cho phép thanh toán |**Giữ**|
+| TC-Checkout-07 | M7 | User sửa tổng tiền trên input → bấm "Xác Nhận Thanh Toán" | Backend từ chối, không tạo đơn hàng (hoặc tính lại đúng) |**Giữ**|
+| TC-Checkout-08 | O1.1 | Checkout thành công | Hiển thị "Thanh toán thành công!" |**Giữ**|
+| TC-Checkout-09 | O1.2 | Checkout thất bại | Alert "Lỗi khi thanh toán..." |**Giữ**|
+| TC-Checkout-10 | O1.3 | Checkout khi chưa đăng nhập | Alert "Bạn phải đăng nhập..." |**Bỏ** do trùng với TC-Checkout-01|
+| TC-Checkout-11 | O2.1 | Sau checkout thành công | Sản phẩm trong giỏ hàng bị xóa |**Giữ**|
+
+### Kết quả rút gọn: **10 Test Cases**
+
+| STT | TC ID | Miền | Input | Expected Output |
+|-----|-------|------|-------|-----------------|
+| 1 | TC-Checkout-01 | M1 | Chưa đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Alert "Bạn cần đăng nhập để thanh toán!"|
+| 2 | TC-Checkout-02 | M2 | Đã đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Chuyển sang trang thanh toán|
+| 3 | TC-Checkout-03 | M3 | Đăng nhập → giỏ hàng trống | Hiển thị "Giỏ hàng của bạn đang trống" |
+| 4 | TC-Checkout-04 | M4 | Đăng nhập → giỏ hàng 1 sản phẩm → checkout | Hiển thị sản phẩm, tổng tiền đúng |
+| 5 | TC-Checkout-05 | M5 | Đăng nhập → giỏ hàng 2+ sản phẩm → checkout | Hiển thị đầy đủ tất cả sản phẩm, tổng đúng |
+| 6 | TC-Checkout-06 | M6 | Tổng tiền hiển thị đúng bằng tổng tiền hàng | Cho phép thanh toán |
+| 7 | TC-Checkout-07 | M7 | User sửa tổng tiền trên input → bấm "Xác Nhận Thanh Toán" | Backend từ chối, không tạo đơn hàng (hoặc tính lại đúng) |
+| 8 | TC-Checkout-08 | O1.1 | Checkout thành công | Hiển thị "Thanh toán thành công!" |
+| 9 | TC-Checkout-09 | O1.2 | Checkout thất bại | Alert "Lỗi khi thanh toán..." |
+| 10 | TC-Checkout-11 | O2.1 | Sau checkout thành công | Sản phẩm trong giỏ hàng bị xóa |
+
+---
+## BÁO CÁO BOUNDARY ANALYSIS
+
+## Bước 1: Xác định Input/Output
+
+| STT | Input/Output | Kiểu dữ liệu | Miền giá trị | Biên |
+|-----|--------------|---------------|--------------|------|
+| 1 | Số SP trong giỏ | Số nguyên | > 0 | 1 |
+| 2 | Tổng tiền giỏ | Số thực | > 0 | Giá trị tổng của các sản phẩm|
+---
+
+## BƯỚC 2: Xác định giá trị xung quanh biên
+
+### Biên 1: Số SP trong giỏ
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **0** | Dưới biên | Giỏ trống | Không checkout được |
+| **1** | Tại biên | Giỏ có 1 SP | Checkout được |
+| **2** | Trên biên | Giỏ có 2 SP | Checkout được |
+
+### Biên 2: Tổng tiền
+
+| Giá trị | Vị trí | Ví dụ | Ghi chú |
+|---------|--------|------------|---------|
+| **Tổng tiền - 1** | Dưới biên | Tổng = 74999999 | Không checkout được, báo lỗi |
+| **Tổng tiền** | Tại biên | Tổng = 75000000 | Checkout được |
+| **Tổng tiền + 1** | Trên biên | Tổng = 75000001 | Không checkout được, báo lỗi |
+
+## BƯỚC 3: Viết Test Cases
+
+### TC-Checkout-10 - 0 SP (giỏ trống)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-10 |
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Kiểm tra không checkout được khi giỏ hàng trống |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ hàng trống |
+| **Test Data** | Giỏ hàng trống |
+| **Test Steps** | 1. Đăng nhập<br>2. Truy cập `/checkout` trực tiếp qua URL<br>3. Quan sát giao diện |
+| **Expected Result** | - Không hiển thị form thanh toán<br>- Hoặc hiển thị "Giỏ hàng trống" |
+---
+
+### TC-Checkout-12 - 1 SP (giỏ có 1 SP)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-12 |
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Kiểm tra checkout hoạt động với 1 SP trong giỏ |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ hàng có 1 SP |
+| **Test Data** | Giỏ hàng có Iphone 15 ProMax|
+| **Test Steps** | 1. Đăng nhập<br>2. Thêm 1 SP vào giỏ<br>3. Bấm "Tiến hành thanh toán"<br>4. Quan sát giao diện Checkout |
+| **Expected Result** | - Hiển thị tên SP, số lượng, thành tiền<br>- Tổng tiền|
+---
+
+### TC-Checkout-13 - 2 SP (giỏ có 2 SP)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-13 |
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Kiểm tra checkout hoạt động với 2 SP trong giỏ |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ hàng có 2 SP |
+| **Test Data** | Giỏ hàng có Iphone 15 ProMax, Macbook|
+| **Test Steps** | 1. Đăng nhập<br>2. Thêm 2 SP vào giỏ<br>3. Bấm "Tiến hành thanh toán"<br>4. Quan sát giao diện Checkout |
+| **Expected Result** | - Hiển thị tên SP, số lượng, thành tiền<br>- Tổng tiền|
+---
+
+### TC-Checkout-14 - Tổng tiền đươc điều chỉnh thành tổng tiền - 1
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-14 |
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Kiểm tra checkout với tổng tiền = tổng tiền - 1 |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ có tổng tiền |
+| **Test Data** | Thay đổi tổng tiền = tổng tiền - 1|
+| **Test Steps** | 1. Đăng nhập<br>2. Thêm SP price vào giỏ<br>3. Bấm "Tiến hành thanh toán"<br>4. Bấm giảm Tổng tiền <br>5. Bấm "Xác Nhận Thanh Toán"|
+| **Expected Result** | - Thanh toán không thành công, không cho phép thanh toán hoặc tự chỉnh số tiền tổng thanh toán thành đúng|
+
+---
+
+
+### TC-Checkout-15 - Tổng tiền đúng
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-15|
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Tổng tiền đúng|
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ hàng có SP |
+| **Test Data** | Tổng tiền đúng|
+| **Test Steps** | 1. Đăng nhập<br>2. Thêm SP vào giỏ<br>3. Bấm "Tiến hành thanh toán"<br>4. Kiểm tra tổng tiền hiển thị đúng <br>5. Bấm "Xác Nhận Thanh Toán"|
+
+### TC-Checkout-16 - Tổng tiền chỉnh sửa lớn hơn thực tế
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-Checkout-16 |
+| **Requirement ID** | FR-08 |
+| **Feature** | Thanh toán |
+| **Objective** | Kiểm tra user sửa tổng tiền lớn hơn thực tế |
+| **Technique** | Boundary Value Analysis|
+| **Priority** | High |
+| **Preconditions** | - Đã đăng nhập<br>- Giỏ hàng có SP|
+| **Test Data** | Tổng tiền chỉnh sửa lớn hơn thực tế|
+| **Test Steps** | 1. Đăng nhập<br>2. Thêm SP vào giỏ (cartTotal = 100000)<br>3. Sửa tổng tiền thành tổng tiền + 1 trên input<br>4. Bấm "Xác Nhận Thanh Toán".|
+| **Expected Result** | Thanh toán không thành công hoặc thanh toán thành công nhưng tiền chỉ trừ đúng giá trị thực tế|
+---
+
+## Tổng hợp test cases
+**Do TC-Checkout-10, TC-Checkout-12, TC-Checkout-13, TC-Checkout-14, TC-Checkout-15, TC-Checkout-16 bị trùng với TC-Checkout-03, TC-Checkout-04, TC-Checkout-05, TC-Checkout-07, TC-Checkout-06 nên loại bỏ 6 test cases, còn lại 10 test cases**
+
+| STT | TC ID | Miền | Input | Expected Output |
+|-----|-------|------|-------|-----------------|
+| 1 | TC-Checkout-01 | M1 | Chưa đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Alert "Bạn cần đăng nhập để thanh toán!"|
+| 2 | TC-Checkout-02 | M2 | Đã đăng nhập → bấm "Tiến hành thanh toán" ở Cart | Chuyển sang trang thanh toán|
+| 3 | TC-Checkout-03 | M3 | Đăng nhập → giỏ hàng trống | Hiển thị "Giỏ hàng của bạn đang trống" |
+| 4 | TC-Checkout-04 | M4 | Đăng nhập → giỏ hàng 1 sản phẩm → checkout | Hiển thị sản phẩm, tổng tiền đúng |
+| 5 | TC-Checkout-05 | M5 | Đăng nhập → giỏ hàng 2+ sản phẩm → checkout | Hiển thị đầy đủ tất cả sản phẩm, tổng đúng |
+| 6 | TC-Checkout-06 | M6 | Tổng tiền hiển thị đúng bằng tổng tiền hàng | Cho phép thanh toán |
+| 7 | TC-Checkout-07 | M7 | User sửa tổng tiền trên input → bấm "Xác Nhận Thanh Toán" | Backend từ chối, không tạo đơn hàng (hoặc tính lại đúng) |
+| 8 | TC-Checkout-08 | O1.1 | Checkout thành công | Hiển thị "Thanh toán thành công!" |
+| 9 | TC-Checkout-09 | O1.2 | Checkout thất bại | Alert "Lỗi khi thanh toán..." |
+| 10 | TC-Checkout-11 | O2.1 | Sau checkout thành công | Sản phẩm trong giỏ hàng bị xóa |
+---
+## AI gap analysis
+AI có dấu hiệu đưa ra thông tin không chính xác, ở cả phần đều đưa ra các Input, Output sai, khó hiểu, cần phải lọc để loại bỏ. Nguyên nhân có thể do model AI không loại bỏ những input, test cases đã nêu mà cứ lặp đi lặp lại, cộng với độ khó của chức năng Checkout (gồm nhiều bước phải kiểm thử) nên gây ra sự tự bịa thông tin của AI. Ngoài ra, có thể do chưa nêu rõ biên là như nào nên có sự nhập nhằng khi AI đưa ra các test cases bằng BVA.
+
+# Chức năng: Quản lý Danh mục (FR-14)
+## BÁO CÁO DOMAIN TESTING
+
+## 1. Xác định Input và Output
+
+### 1.1 Input (trên giao diện Admin Category)
+
+| STT | Input | Kiểu | Mô tả |
+|-----|-------|------|-------|
+| I1 | **Tên danh mục** | Text field | Nhập tên danh mục mới |
+| I2 | **Nút "Thêm mới"** | Button | Bấm để thêm danh mục |
+| I3 | **Nút "Xóa"** | Button | Bấm để xóa danh mục |
+
+### 1.2 Output (trên giao diện Admin Category)
+
+| STT | Output | Kiểu | Mô tả |
+|-----|--------|------|-------|
+| O1 | **Bảng danh sách danh mục** | Table | Hiển thị ID, Tên danh mục |
+| O2 | **Thông báo thành công** | Text | Hiển thị khi thêm/xóa thành công |
+| O3 | **Thông báo lỗi** | Alert | Hiển thị khi thao tác thất bại |
+
+---
+
+## 2. Xác định tất cả miền giá trị (Valid & Invalid)
+
+### 2.1 Miền giá trị cho Input
+
+#### Input I1 - Tên danh mục
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M1 | `""` (bỏ trống) | **Invalid** | FR-14: "Tên danh mục là bắt buộc, không được để trống" |
+| M2 | Khoảng trắng chỉ (`"   "`) | **Invalid** | Chỉ chứa space, thực tế rỗng |
+| M3 | Chuỗi bất kỳ (vd: `"Điện thoại"`, `"Quần áo"`) | **Valid** | Tên hợp lệ |
+| M4 | Ký tự đặc biệt (vd: `"@#$%"`) | **Valid** | Chưa bị cấm theo FR-14 |
+| M5 | Tên trùng với danh mục đã có | **Invalid** | Trùng lặp (nếu có validation) |
+| M6 | Chuỗi rất dài (vd: 255+ ký tự) | **Invalid** | Vượt quá độ dài cho phép |
+
+#### Input I2 - Nút "Thêm mới"
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M7 | Bấm khi tên rỗng | **Invalid** | Không được thêm |
+| M8 | Bấm khi tên hợp lệ | **Valid** | Thêm thành công |
+
+#### Input I3 - Nút "Xóa"
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M9 | Bấm Xóa trên danh mục không có SP liên kết | **Valid** | Xóa thành công |
+| M10 | Bấm Xóa trên danh mục có SP liên kết | **Invalid** | Cần xử lý đặc biệt |
+| M11 | Bấm Xóa trên danh mục không tồn tại (ID sai) | **Invalid** | Báo lỗi |
+
+### 2.2 Miền giá trị cho Output
+
+#### Output O1 - Bảng danh sách
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O1.1 | Hiển thị danh sách với ID và Tên | **Valid** | Dữ liệu đúng |
+| O1.2 | Bảng trống (không có danh mục nào) | **Valid** | Chưa có dữ liệu |
+
+#### Output O2 - Kết quả thêm danh mục
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O2.1 | Danh mục mới xuất hiện trong bảng | **Valid** | Thêm thành công |
+| O2.2 | Báo lỗi khi thêm thất bại | **Invalid** | Thêm thất bại |
+
+#### Output O3 - Kết quả xóa danh mục
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O3.1 | Danh mục biến mất khỏi bảng | **Valid** | Xóa thành công |
+| O3.2 | Báo lỗi khi xóa thất bại | **Invalid** | Xóa thất bại |
+
+---
+
+## 3. Xác định giá trị đại diện từng miền
+
+| Miền | Giá trị đại diện | Chọn lý do |
+|------|-----------------|------------|
+| M1 | `""` | Đại diện rỗng duy nhất |
+| M2 | `"   "` | Đại diện chỉ có space |
+| M3 | `"Điện thoại"` | Đại diện tên hợp lệ |
+| M4 | `"@#$%"` | Đại diện ký tự đặc biệt |
+| M5 | `"Điện thoại"` (trùng) | Đại diện trùng tên |
+| M6 | Chuỗi 300 ký tự | Đại diện quá dài |
+| M7 | Bấm Thêm mới khi rỗng | Đại diện thao tác invalid |
+| M8 | Bấm Thêm mới khi hợp lệ | Đại diện thao tác valid |
+| M9 | Xóa danh mục không có SP | Đại diện xóa an toàn |
+| M10 | Xóa danh mục có SP | Đại diện xóa có liên kết |
+| M11 | Xóa ID không tồn tại | Đại diện xóa vô hiệu |
+| O1.1 | Bảng hiển thị danh mục | Đại diện có dữ liệu |
+| O1.2 | Bảng trống | Đại diện không có dữ liệu |
+| O2.1 | Danh mục mới trong bảng | Đại diện thêm thành công |
+| O3.1 | Danh mục biến mất | Đại diện xóa thành công |
+
+---
+
+## 4. Xác định Test Cases (mỗi miền → mỗi test case)
+
+| TC | Miền | Input | Expected Output |
+|----|------|-------|-----------------|
+| TC01 | M1 | Nhập tên `""` → bấm "Thêm mới" | Báo lỗi "Tên danh mục không được để trống" |
+| TC02 | M2 | Nhập tên `"   "` → bấm "Thêm mới" | Báo lỗi hoặc coi như rỗng |
+| TC03 | M3 | Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thêm thành công, xuất hiện trong bảng |
+| TC04 | M4 | Nhập tên `"@#$%"` → bấm "Thêm mới" | Thêm thành công (FR-14 không cấm) |
+| TC05 | M5 | Nhập tên trùng `"Điện thoại"` → bấm "Thêm mới" | Báo lỗi trùng tên hoặc thêm thành công (tùy policy) |
+| TC06 | M6 | Nhập tên 300 ký tự → bấm "Thêm mới" | Báo lỗi độ dài |
+| TC07 | M9 | Bấm "Xóa" trên danh mục không có SP | Xóa thành công, biến mất khỏi bảng |
+| TC08 | M10 | Bấm "Xóa" trên danh mục có SP liên kết | Báo lỗi hoặc cảnh báo |
+| TC09 | M11 | Gọi API xóa danh mục ID không tồn tại | Báo lỗi "Category not found" |
+| TC10 | O1.1 | Đăng nhập Admin → xem danh mục | Bảng hiển thị ID và Tên danh mục |
+| TC11 | O1.2 | Xem danh mục khi chưa có danh mục nào | Bảng trống hoặc thông báo "Chưa có danh mục" |
+
+---
+
+## 5. Rút gọn Test Cases (loại bỏ trùng loại)
+
+### Phân tích trùng lặp
+
+| TC | Miền | Input | Expected Output | Quyết định |
+|----|------|-------|-----------------|------------|
+| TC01 | M1 | Tên rỗng → Thêm mới | Báo lỗi | **Giữ** |
+| TC02 | M2 | Tên `"   "` → Thêm mới | Báo lỗi | **Bỏ** (trùng TC01 - cùng invalid rỗng) |
+| TC03 | M3 | Tên `"Điện thoại"` → Thêm mới | Thêm thành công | **Giữ** |
+| TC04 | M4 | Tên `"@#$%"` → Thêm mới | Thêm thành công | **Bỏ** (trùng TC03 - cùng valid name) |
+| TC05 | M5 | Tên trùng → Thêm mới | Báo lỗi/trùng | **Bỏ** (FR-14 không quy định về trùng) |
+| TC06 | M6 | Tên 300 ký tự → Thêm mới | Báo lỗi độ dài | **Bỏ** (FR-14 không quy định giới hạn độ dài) |
+| TC07 | M9 | Xóa danh mục không có SP | Xóa thành công | **Giữ** |
+| TC08 | M10 | Xóa danh mục có SP | Báo lỗi/cảnh báo | **Giữ** |
+| TC09 | M11 | Xóa ID không tồn tại | Báo lỗi | **Bỏ** (trùng TC08 - cùng xóa invalid) |
+| TC10 | O1.1 | Xem danh mục | Bảng hiển thị | **Giữ** |
+| TC11 | O1.2 | Danh mục trống | Bảng trống | **Bỏ** (trùng TC10 - cùng output xem) |
+
+### Kết quả rút gọn: **5 Test Cases**
+
+| STT | TC ID | Miền | Input | Expected Output |
+|-----|-------|------|-------|-----------------|
+| 1 | TC01 | M1 | Nhập tên `""` → bấm "Thêm mới" | Báo lỗi "Tên danh mục không được để trống" |
+| 2 | TC02 | M3 | Nhập tên `"Điện thoại"` → bấm "Thêm mới" | Thêm thành công, danh mục xuất hiện trong bảng |
+| 3 | TC03 | M9 | Bấm "Xóa" trên danh mục không có sản phẩm | Xóa thành công, danh mục biến mất khỏi bảng |
+| 4 | TC04 | M10 | Bấm "Xóa" trên danh mục có sản phẩm liên kết | Báo lỗi hoặc cảnh báo, danh mục KHÔNG bị xóa |
+| 5 | TC05 | O1.1 | Đăng nhập Admin → xem danh mục | Bảng hiển thị ID và Tên danh mục đầy đủ |
+
+---
+
+## Bugs tìm thấy từ Code Review
+
+| Bug ID | File | Dòng | Mô tả | FR-14 yêu cầu |
+|--------|------|------|-------|----------------|
+| **BUG-001** | `server.js` | 251 | Backend `POST /api/categories` KHÔNG validate `name` rỗng | "Tên danh mục là bắt buộc, không được để trống" |
+| **BUG-002** | `App.jsx` | 298-304 | Input tên danh mục KHÔNG có `required` attribute | Cần validate phía client |
+| **BUG-003** | `App.jsx` | 325 | Không có xác nhận trước khi xóa danh mục | Nên có confirmation dialog |
+
+---
+
+**Ngày tạo báo cáo:** 27/06/2026
+**Nguồn tham khảo:** FR-14 - Quản lý Danh mục (Category CRUD)
+
+# BÁO CÁO BOUNDARY ANALYSIS
+## FR-14: Quản lý Danh mục (Category CRUD)
+
+---
+
+## BƯỚC 1: Xác định Input/Output có dữ liệu số hoặc biên
+
+| STT | Input/Output | Kiểu dữ liệu | Miền giá trị | Biên |
+|-----|--------------|---------------|--------------|------|
+| 1 | **name** (tên danh mục) | String | Rỗng / Không rỗng | **"" vs "a"** |
+| 2 | **category.id** (ID danh mục) | Số nguyên | 1, 2, 3, ... / 0, -1 | **0 → 1** (không tồn tại → tồn tại) |
+| 3 | **categories.length** (số lượng DM) | Số nguyên | 0, 1, 2, ... | **0 → 1** (trống → có dữ liệu) |
+
+---
+
+## BƯỚC 2: Xác định giá trị xung quanh biên
+
+### Biên 1: Category name (Rỗng / Không rỗng)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **""** (rỗng) | Tại biên | Invalid | FR-14: "Tên danh mục là bắt buộc" |
+| **"   "** (chỉ space) | Tại biên | Invalid | Thực tế rỗng |
+| **"a"** (1 ký tự) | Trên biên | Valid | Tên hợp lệ tối thiểu |
+
+### Biên 2: Category ID (Tồn tại / Không tồn tại)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **0** | Dưới biên | Không tồn tại | ID bắt đầu từ 1 |
+| **1** | Tại biên | Tồn tại | ID đầu tiên |
+| **999999** | Trên biên | Không tồn tại | ID quá lớn |
+
+### Biên 3: categories.length (Số lượng DM)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **0** | Tại biên | Bảng trống | Chưa có DM nào |
+| **1** | Trên biên | Bảng có 1 DM | Có dữ liệu |
+
+---
+
+## BƯỚC 3: Viết Test Cases
+
+### TC01 - Biên name: Rỗng (tại biên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-001 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra không thêm được danh mục khi tên rỗng |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
+| **Test Data** | Name: `""` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Để trống trường tên danh mục<br>4. Bấm "Thêm mới" |
+| **Expected Result** | - Báo lỗi "Tên danh mục không được để trống"<br>- Danh mục KHÔNG được thêm vào DB |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | **BUG-001**: Backend không validate name rỗng |
+
+---
+
+### TC02 - Biên name: Chỉ có space (tại biên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-002 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra không thêm được danh mục khi tên chỉ có space |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
+| **Test Data** | Name: `"   "` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Nhập `"   "` (3 space) vào trường tên<br>4. Bấm "Thêm mới" |
+| **Expected Result** | - Báo lỗi hoặc coi như rỗng<br>- Danh mục KHÔNG được thêm vào DB |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC03 - Biên name: 1 ký tự (trên biên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-003 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra thêm được danh mục khi tên 1 ký tự |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | High |
+| **Preconditions** | - Đăng nhập Admin<br>- Truy cập trang Quản lý Danh mục |
+| **Test Data** | Name: `"A"` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Nhập `"A"` vào trường tên<br>4. Bấm "Thêm mới" |
+| **Expected Result** | - Thêm thành công<br>- Danh mục "A" xuất hiện trong bảng |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC04 - Biên ID: 0 (không tồn tại)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-004 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra xóa danh mục ID = 0 (không tồn tại) |
+| **Technique** | Boundary Value Analysis - Dưới biên |
+| **Priority** | Medium |
+| **Preconditions** | - Đăng nhập Admin |
+| **Test Data** | Category ID: `0` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Gọi API `DELETE /api/categories/0`<br>3. Quan sát phản hồi |
+| **Expected Result** | - Báo lỗi hoặc không tìm thấy<br>- Không có gì thay đổi trong DB |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC05 - Biên ID: 1 (tồn tại, ID đầu tiên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-005 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra xóa danh mục ID = 1 (tồn tại) |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | Medium |
+| **Preconditions** | - Đăng nhập Admin<br>- Danh mục ID = 1 tồn tại |
+| **Test Data** | Category ID: `1` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Xem danh sách danh mục<br>3. Bấm "Xóa" trên danh mục ID = 1<br>4. Quan sát danh sách |
+| **Expected Result** | - Xóa thành công<br>- Danh mục ID = 1 biến mất khỏi bảng |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC06 - Biên ID: 999999 (không tồn tại)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-006 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra xóa danh mục ID = 999999 (không tồn tại) |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | Medium |
+| **Preconditions** | - Đăng nhập Admin |
+| **Test Data** | Category ID: `999999` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Gọi API `DELETE /api/categories/999999`<br>3. Quan sát phản hồi |
+| **Expected Result** | - Báo lỗi hoặc không tìm thấy<br>- Không có gì thay đổi trong DB |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC07 - Biên categories.length: 0 (bảng trống)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-007 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra hiển thị khi chưa có danh mục nào |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | Low |
+| **Preconditions** | - Đăng nhập Admin<br>- Chưa có danh mục nào trong DB |
+| **Test Data** | Categories: `[]` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Vào trang Quản lý Danh mục<br>3. Quan sát bảng danh sách |
+| **Expected Result** | - Bảng hiển thị rỗng (0 dòng dữ liệu)<br> Hoặc thông báo "Chưa có danh mục" |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC08 - Biên categories.length: 1 (bảng có 1 DM)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-014-008 |
+| **Requirement ID** | FR-14 |
+| **Feature** | Boundary Analysis - Quản lý Danh mục |
+| **Objective** | Kiểm tra hiển thị khi có 1 danh mục |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | Low |
+| **Preconditions** | - Đăng nhập Admin<br>- Có 1 danh mục trong DB |
+| **Test Data** | Categories: `[{id: 1, name: "Điện thoại"}]` |
+| **Test Steps** | 1. Đăng nhập Admin<br>2. Thêm 1 danh mục<br>3. Vào trang Quản lý Danh mục<br>4. Quan sát bảng danh sách |
+| **Expected Result** | - Bảng hiển thị 1 dòng<br>- Hiển thị ID và Tên danh mục |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+## Tổng hợp Bugs từ Boundary Analysis
+
+| Bug ID | Biên | Mô tả | FR-14 yêu cầu |
+|--------|------|-------|----------------|
+| **BUG-001** | name | Backend không validate name rỗng khi POST | "Tên danh mục là bắt buộc, không được để trống" |
+| **BUG-002** | name | Input không có `required` attribute | Cần validate phía client |
+| **BUG-003** | ID | Không có confirmation dialog trước khi xóa | Nên có xác nhận |
+
+---
+
+**Ngày tạo báo cáo:** 27/06/2026
+**Nguồn tham khảo:** FR-14 - Quản lý Danh mục (Category CRUD)
+**Kỹ thuật:** Boundary Value Analysis
+
+# Chức năng Mobile: Đăng nhập & Khóa tài khoản (FR-02)
+# BÁO CÁO DOMAIN TESTING
+## FR-02: Đăng nhập & Khóa tài khoản (Mobile)
+
+---
+
+## 1. Xác định Input và Output
+
+### 1.1 Input (trên app Mobile)
+
+| STT | Input | Kiểu | Mô tả |
+|-----|-------|------|-------|
+| I1 | **Email** | Text field | Trường nhập địa chỉ email |
+| I2 | **Password** | Text field | Trường nhập mật khẩu |
+| I3 | **Nút "Sign In"** | Button | Nút bấm gửi form đăng nhập |
+
+### 1.2 Output (trên app Mobile)
+
+| STT | Output | Kiểu | Mô tả |
+|-----|--------|------|-------|
+| O1 | **Thông báo lỗi** | Toast/Alert | Hiển thị khi đăng nhập sai hoặc tài khoản bị khóa |
+| O2 | **Chuyển màn hình** | Navigation | Chuyển về trang chủ khi đăng nhập thành công |
+| O3 | **Validation message** | Text/Dialog | Thông báo khi input bỏ trống hoặc sai định dạng |
+
+---
+
+## 2. Xác định tất cả miền giá trị (Valid & Invalid)
+
+### 2.1 Miền giá trị cho Input
+
+#### Input I1 - Email
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M1 | `""` (bỏ trống) | **Invalid** | Trường không được bỏ trống |
+| M2 | Chuỗi không có `@` (vd: `abc`) | **Invalid** | Sai định dạng email |
+| M3 | Có `@` nhưng sai định dạng (vd: `abc@`) | **Invalid** | Sai định dạng email |
+| M4 | Đúng định dạng email (vd: `user@email.com`) | **Valid** | Email hợp lệ |
+
+#### Input I2 - Password
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M5 | `""` (bỏ trống) | **Invalid** | Trường không được bỏ trống |
+| M6 | Chuỗi bất kỳ (vd: `pass123`) | **Valid** | Password hợp lệ |
+
+#### Input I3 - Số lần đăng nhập sai liên tiếp
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| M7 | `0` lần (lần đầu đăng nhập) | **Valid** | Chưa có lần sai nào |
+| M8 | `1` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
+| M9 | `2` lần sai liên tiếp | **Valid** | Chưa đủ điều kiện khóa |
+| M10 | `≥ 3` lần sai liên tiếp | **Valid** | Kích hoạt khóa tài khoản |
+
+### 2.2 Miền giá trị cho Output
+
+#### Output O1 - Thông báo trên app
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | **Invalid** | Đăng nhập sai, chưa khóa |
+| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | **Invalid** | Đăng nhập sai ≥ 3 lần |
+| O1.3 | Không hiển thị thông báo lỗi | **Valid** | Đăng nhập thành công |
+
+#### Output O2 - Chuyển màn hình
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O2.1 | Chuyển về màn hình Home | **Valid** | Đăng nhập thành công |
+| O2.2 | Vẫn ở màn hình Login | **Invalid** | Đăng nhập thất bại |
+
+#### Output O3 - Validation
+
+| Miền | Giá trị | Type | Ghi chú |
+|------|---------|------|---------|
+| O3.1 | "Vui lòng nhập email" | **Invalid** | Bỏ trống email |
+| O3.2 | "Email không hợp lệ" | **Invalid** | Sai định dạng email |
+| O3.3 | "Vui lòng nhập mật khẩu" | **Invalid** | Bỏ trống password |
+
+---
+
+## 3. Xác định giá trị đại diện từng miền
+
+| Miền | Giá trị đại diện | Chọn lý do |
+|------|-----------------|------------|
+| M1 | `""` | Đại diện giá trị rỗng duy nhất |
+| M2 | `"abc"` | Đại diện chuỗi không có `@` |
+| M3 | `"abc@"` | Đại diện có `@` nhưng sai định dạng |
+| M4 | `"user@email.com"` | Đại diện email đúng định dạng |
+| M5 | `""` | Đại diện giá trị rỗng duy nhất |
+| M6 | `"pass123"` | Đại diện password bất kỳ |
+| M7 | `0` | Đại diện chưa sai lần nào |
+| M8 | `1` | Đại diện sai 1 lần |
+| M9 | `2` | Đại diện sai 2 lần |
+| M10 | `3` | Đại diện ngưỡng kích hoạt khóa |
+| O1.1 | `"Đăng nhập thất bại. Vui lòng kiểm tra lại."` | Đại diện thông báo lỗi chung |
+| O1.2 | `"Tài khoản đã bị khóa. Vui lòng thử lại sau."` | Đại diện thông báo khóa |
+| O2.1 | Chuyển màn hình Home | Đại diện thành công |
+| O3.1 | "Vui lòng nhập email" | Đại diện lỗi bỏ trống email |
+| O3.2 | "Email không hợp lệ" | Đại diện lỗi sai format |
+
+---
+
+## 4. Xác định Test Cases (mỗi miền → mỗi test case)
+
+| TC | Miền | Input | Expected Output |
+|----|------|-------|-----------------|
+| TC01 | M1 | Email=`""`, Password=`"pass123"`, tap Sign In | Validation: "Vui lòng nhập email" |
+| TC02 | M2 | Email=`"abc"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
+| TC03 | M3 | Email=`"abc@"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
+| TC04 | M4 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | Chuyển màn hình về Home |
+| TC05 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
+| TC06 | M6 | Email=`"user@email.com"`, Password=`"wrong"`, tap Sign In | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| TC07 | M7 | Đăng nhập lần đầu với sai password | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| TC08 | M8 | Đăng nhập sai lần 1, rồi sai lần 2 | "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| TC09 | M9 | Đăng nhập sai 2 lần, rồi sai lần 3 | "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+| TC10 | M10 | Đăng nhập sai ≥ 3 lần → thử đăng nhập đúng | "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+| TC11 | O1.1 | Đăng nhập sai (chưa khóa) | Hiển thị "Đăng nhập thất bại..." |
+| TC12 | O1.2 | Đăng nhập sai ≥ 3 lần | Hiển thị "Tài khoản đã bị khóa..." |
+| TC13 | O2.1 | Đăng nhập đúng (email + password hợp lệ) | Chuyển màn hình về Home |
+| TC14 | O2.2 | Đăng nhập sai | Vẫn ở màn hình Login |
+| TC15 | O3.1 | Bỏ trống Email | "Vui lòng nhập email" |
+| TC16 | O3.2 | Email không có `@` | "Email không hợp lệ" |
+
+---
+
+## 5. Rút gọn Test Cases (loại bỏ trùng loại)
+
+### Kết quả rút gọn: **8 Test Cases**
+
+| STT | TC ID | Miền | Input | Expected Output |
+|-----|-------|------|-------|-----------------|
+| 1 | TC01 | M1 | Email=`""`, Password=`"pass123"`, tap Sign In | Validation: "Vui lòng nhập email" |
+| 2 | TC02 | M2 | Email=`"abc"`, Password=`"pass123"`, tap Sign In | Validation: "Email không hợp lệ" |
+| 3 | TC03 | M4 | Email=`"user@email.com"`, Password=`"pass123"`, tap Sign In | Chuyển màn hình về Home |
+| 4 | TC04 | M5 | Email=`"user@email.com"`, Password=`""`, tap Sign In | Validation: "Vui lòng nhập mật khẩu" |
+| 5 | TC05 | M7 | Email=`"user@email.com"`, Password sai, tap Sign In lần 1 | Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| 6 | TC06 | M8 | Đăng nhập sai lần 2 liên tiếp | Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại." |
+| 7 | TC07 | M9 | Đăng nhập sai lần 3 liên tiếp | Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau." |
+| 8 | TC08 | M10 | Sau 30 giây hết khóa → đăng nhập đúng | Chuyển màn hình về Home |
+
+---
+
+**Ngày tạo báo cáo:** 27/06/2026
+**Nguồn tham khảo:** FR-02 - Đăng nhập & Khóa tài khoản (Mobile)
+**Platform:** Mobile App
+# BÁO CÁO BOUNDARY ANALYSIS
+## FR-02: Đăng nhập & Khóa tài khoản (Mobile)
+
+---
+
+## BƯỚC 1: Xác định Input/Output có dữ liệu số hoặc biên
+
+| STT | Input/Output | Kiểu dữ liệu | Miền giá trị | Biên |
+|-----|--------------|---------------|--------------|------|
+| 1 | **login_attempts** (số lần đăng nhập sai) | Số nguyên | 0, 1, 2, 3, ... | **2 → 3** (ngưỡng khóa) |
+| 2 | **Thời gian khóa** (locked_until) | Thời gian (ms) | 30000 ms (30s) | **29s, 30s, 31s** |
+| 3 | **Email** | String | Rỗng / Không rỗng | **"" vs "a"** |
+| 4 | **Password** | String | Rỗng / Không rỗng | **"" vs "a"** |
+
+---
+
+## BƯỚC 2: Xác định giá trị xung quanh biên
+
+### Biên 1: login_attempts (Ngưỡng khóa tài khoản)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **1** | Dưới biên | Chưa khóa | Còn 2 lần thử nữa |
+| **2** | Dưới biên | Chưa khóa | Còn 1 lần thử nữa |
+| **3** | Tại biên | **Bị khóa** | Đúng ngưỡng FR-02 |
+| **4** | Trên biên | Bị khóa | Vượt ngưỡng |
+
+### Biên 2: Thời gian khóa (30 giây)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **29 giây** | Dưới biên | Vẫn bị khóa | Chưa hết hạn |
+| **30 giây** | Tại biên | Vừa hết khóa | Đúng FR-02 |
+| **31 giây** | Trên biên | Đã hết khóa | Hết hạn |
+
+### Biên 3: Email (Rỗng / Không rỗng)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **""** (rỗng) | Tại biên | Invalid | Validation chặn |
+| **"a"** (1 ký tự) | Trên biên | Valid (không rỗng) | Chưa kiểm tra format |
+
+### Biên 4: Password (Rỗng / Không rỗng)
+
+| Giá trị | Vị trí | Trạng thái | Ghi chú |
+|---------|--------|------------|---------|
+| **""** (rỗng) | Tại biên | Invalid | Validation chặn |
+| **"a"** (1 ký tự) | Trên biên | Valid (không rỗng) | Được chấp nhận |
+
+---
+
+## BƯỚC 3: Viết Test Cases
+
+### TC01 - Biên login_attempts: 2 lần sai → lần thứ 3 sai (2 → 3)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-001 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản bị khóa chính xác khi đạt ngưỡng 3 lần sai |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, `login_attempts = 2`<br>- Tài khoản chưa bị khóa |
+| **Test Data** | Email: `user@email.com`, Password: `wrong` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 2 lần liên tiếp (login_attempts = 2)<br>3. Đăng nhập lần 3 với password sai<br>4. Quan sát giao diện |
+| **Expected Result** | - Lần 3: Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- HTTP Status: 403 |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC02 - Biên login_attempts: 1 lần sai → lần thứ 2 sai (1 → 2, chưa khóa)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-002 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản CHƯA bị khóa khi dưới ngưỡng 3 |
+| **Technique** | Boundary Value Analysis - Dưới biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản tồn tại, `login_attempts = 1`<br>- Tài khoản chưa bị khóa |
+| **Test Data** | Email: `user@email.com`, Password: `wrong` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai 1 lần (login_attempts = 1)<br>3. Đăng nhập lần 2 với password sai<br>4. Quan sát giao diện |
+| **Expected Result** | - Hiển thị "Đăng nhập thất bại. Vui lòng kiểm tra lại."<br>- Tài khoản CHƯA bị khóa<br>- login_attempts = 2 |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC03 - Biên login_attempts: 3 lần sai → lần thứ 4 sai (3 → 4, vẫn khóa)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-003 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản vẫn bị khóa khi đã vượt ngưỡng |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản đang bị khóa (`locked_until` > thời điểm hiện tại) |
+| **Test Data** | Email: `user@email.com`, Password: `wrong` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần để kích hoạt khóa<br>3. Đăng nhập lần nữa khi đang khóa<br>4. Quan sát giao diện |
+| **Expected Result** | - Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- HTTP Status: 403 |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC04 - Biên thời gian khóa: 29 giây (dưới biên, vẫn khóa)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-004 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản vẫn bị khóa tại 29 giây (dưới biên 30s) |
+| **Technique** | Boundary Value Analysis - Dưới biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản vừa bị khóa (cách đây 29 giây) |
+| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi 29 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
+| **Expected Result** | - Hiển thị "Tài khoản đã bị khóa. Vui lòng thử lại sau."<br>- Dù nhập đúng vẫn không đăng nhập được |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC05 - Biên thời gian khóa: 30 giây (tại biên, vừa hết khóa)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-005 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản vừa hết khóa tại đúng 30 giây |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản bị khóa cách đây đúng 30 giây |
+| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi đúng 30 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
+| **Expected Result** | - Đăng nhập thành công<br>- Chuyển màn hình về Home<br>- login_attempts được reset về 0 |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC06 - Biên thời gian khóa: 31 giây (trên biên, đã hết khóa)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-006 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra tài khoản đã hết khóa sau 31 giây |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | Medium |
+| **Preconditions** | - Mở app Mobile<br>- Tài khoản bị khóa cách đây 31 giây |
+| **Test Data** | Email: `user@email.com`, Password: `pass123` (đúng) |
+| **Test Steps** | 1. Mở app Mobile<br>2. Đăng nhập sai >= 3 lần → tài khoản bị khóa<br>3. Đợi 31 giây<br>4. Đăng nhập với password đúng<br>5. Quan sát giao diện |
+| **Expected Result** | - Đăng nhập thành công<br>- Chuyển màn hình về Home |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC07 - Biên Email: Rỗng (tại biên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-007 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra validation khi Email bỏ trống |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile |
+| **Test Data** | Email: `""`, Password: `pass123` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Không nhập gì vào trường Email<br>3. Nhập `pass123` vào trường Password<br>4. Tap Sign In |
+| **Expected Result** | - Validation: "Vui lòng nhập email"<br>- Form không submit |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC08 - Biên Email: 1 ký tự (trên biên, không rỗng)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-008 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra email 1 ký tự được chấp nhận (không rỗng) |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | Medium |
+| **Preconditions** | - Mở app Mobile |
+| **Test Data** | Email: `a`, Password: `pass123` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `a` vào trường Email<br>3. Nhập `pass123` vào trường Password<br>4. Tap Sign In |
+| **Expected Result** | - Form submit được (vì không rỗng)<br>- Server trả về lỗi "Invalid email or password" |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC09 - Biên Password: Rỗng (tại biên)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-009 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra validation khi Password bỏ trống |
+| **Technique** | Boundary Value Analysis - Tại biên |
+| **Priority** | High |
+| **Preconditions** | - Mở app Mobile |
+| **Test Data** | Email: `user@email.com`, Password: `""` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `user@email.com` vào trường Email<br>3. Không nhập gì vào trường Password<br>4. Tap Sign In |
+| **Expected Result** | - Validation: "Vui lòng nhập mật khẩu"<br>- Form không submit |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+### TC10 - Biên Password: 1 ký tự (trên biên, không rỗng)
+
+| Field | Nội dung |
+|-------|----------|
+| **Test Case ID** | TC-BA-M-010 |
+| **Requirement ID** | FR-02 |
+| **Feature** | Boundary Analysis - Đăng nhập & Khóa tài khoản (Mobile) |
+| **Objective** | Kiểm tra password 1 ký tự được chấp nhận (không rỗng) |
+| **Technique** | Boundary Value Analysis - Trên biên |
+| **Priority** | Medium |
+| **Preconditions** | - Mở app Mobile |
+| **Test Data** | Email: `user@email.com`, Password: `a` |
+| **Test Steps** | 1. Mở app Mobile<br>2. Nhập `user@email.com` vào trường Email<br>3. Nhập `a` vào trường Password<br>4. Tap Sign In |
+| **Expected Result** | - Form submit được (vì không rỗng)<br>- Server trả về lỗi "Invalid email or password" |
+| **Actual Result** | (Chưa thực hiện) |
+| **Status** | Not Run |
+| **Notes** | |
+
+---
+
+## Tổng hợp Bugs từ Boundary Analysis
+
+| Bug ID | Biên | Mô tả | FR-02 yêu cầu |
+|--------|------|-------|----------------|
+| **BUG-001** | login_attempts | Cần kiểm tra backend có cộng đúng +1 hay không | Tăng đúng 1 đơn vị |
+| **BUG-002** | Thời gian khóa | Cần kiểm tra backend set đúng 30s hay không | Khóa 30 giây |
+| **BUG-003** | Email/Password | Cần kiểm tra validation message trên Mobile | Thông báo lỗi phù hợp |
+
+---
+
+**Ngày tạo báo cáo:** 27/06/2026
+**Nguồn tham khảo:** FR-02 - Đăng nhập & Khóa tài khoản (Mobile)
+**Kỹ thuật:** Boundary Value Analysis
+**Platform:** Mobile App
