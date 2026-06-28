@@ -215,3 +215,5 @@ Thêm danh mục rỗng
 
 ### Evidence
 ![BUG_07](BUG_07.png)
+
+**Link github: https://github.com/iamDicun/Group06_HW2_Testing.git**
