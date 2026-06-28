@@ -1,4 +1,4 @@
-# TC-MOBILE-014: Kết nối API gặp lỗi timeout khi cấu hình IP khác dải mạng LAN
+# TC-PROFILE-MOBILE-014: Kết nối API gặp lỗi timeout khi cấu hình IP khác dải mạng LAN
 
 ## Requirement ID
 FR-04

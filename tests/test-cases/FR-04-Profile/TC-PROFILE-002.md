@@ -29,10 +29,10 @@ High
 - Hiển thị thông báo lỗi yêu cầu nhập Họ Tên tại trường Họ Tên hoặc dưới dạng alert.
 
 ## Actual Result (filled after execution)
-
+- Hiển thị thông báo lỗi yêu cầu nhập Họ Tên tại trường Họ Tên hoặc dưới dạng alert.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

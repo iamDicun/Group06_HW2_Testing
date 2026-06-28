@@ -1,4 +1,4 @@
-# TC-MOBILE-015: Lỗi kết nối API khi cấu hình thiếu giao thức (http://) hoặc thiếu Port
+# TC-PROFILE-MOBILE-015: Lỗi kết nối API khi cấu hình thiếu giao thức (http://) hoặc thiếu Port
 
 ## Requirement ID
 FR-04

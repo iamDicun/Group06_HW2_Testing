@@ -29,10 +29,10 @@ High
 - Hiển thị thông báo lỗi yêu cầu số điện thoại phải bắt đầu bằng số 0.
 
 ## Actual Result (filled after execution)
-
+- Hệ thống cho phép lưu số điện thoại: 1912345678 và báo "Cập nhật thành công"
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
 None

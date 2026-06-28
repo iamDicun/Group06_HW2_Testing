@@ -1,4 +1,4 @@
-# TC-MOBILE-002: Ngăn chặn cấu hình bàn phím chữ mặc định cho Số điện thoại
+# TC-PROFILE-MOBILE-002: Ngăn chặn cấu hình bàn phím chữ mặc định cho Số điện thoại
 
 ## Requirement ID
 FR-04

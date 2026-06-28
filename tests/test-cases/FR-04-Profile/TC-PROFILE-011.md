@@ -29,10 +29,10 @@ High
 - Hiển thị thông báo lỗi yêu cầu số điện thoại chỉ được chứa ký tự số.
 
 ## Actual Result (filled after execution)
-
+- Không cho cập nhật và báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

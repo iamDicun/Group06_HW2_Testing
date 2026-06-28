@@ -1,4 +1,4 @@
-# TC-MOBILE-007: Cập nhật hồ sơ với Số điện thoại không bắt đầu bằng số 0
+# TC-PROFILE-MOBILE-007: Cập nhật hồ sơ với Số điện thoại không bắt đầu bằng số 0
 
 ## Requirement ID
 FR-04

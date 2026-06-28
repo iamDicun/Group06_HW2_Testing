@@ -1,4 +1,4 @@
-# TC-MOBILE-019: Tự động co giãn màn hình (KeyboardAvoidingView) khi mở bàn phím ảo
+# TC-PROFILE-MOBILE-019: Tự động co giãn màn hình (KeyboardAvoidingView) khi mở bàn phím ảo
 
 ## Requirement ID
 FR-04

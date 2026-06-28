@@ -1,4 +1,4 @@
-# TC-MOBILE-001: Kích hoạt bàn phím số khi nhập Số điện thoại
+# TC-PROFILE-MOBILE-001: Kích hoạt bàn phím số khi nhập Số điện thoại
 
 ## Requirement ID
 FR-04

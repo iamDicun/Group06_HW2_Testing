@@ -34,13 +34,13 @@ High
 - Thông tin mới hiển thị chính xác trên màn hình.
 
 ## Actual Result (filled after execution)
-
+- Không cho cập nhật và báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-PROFILE-001
 
 ## Notes
 - Đây là test case đường hợp lệ (happy path) cho tính năng cập nhật profile.

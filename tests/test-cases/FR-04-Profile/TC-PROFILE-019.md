@@ -29,10 +29,10 @@ High
 - Trả về mã lỗi HTTP 401 Unauthorized.
 
 ## Actual Result (filled after execution)
-
+- API trả về "Unauthorized" (401).
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

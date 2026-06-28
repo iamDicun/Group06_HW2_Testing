@@ -32,10 +32,10 @@ High
 
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-001
 
 ## Notes
 - Kiểm thử bảo mật (XSS) lồng ghép trong kiểm thử miền.

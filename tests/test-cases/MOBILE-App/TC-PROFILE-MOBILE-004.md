@@ -1,4 +1,4 @@
-# TC-MOBILE-003: Cập nhật hồ sơ với Số điện thoại hợp lệ 10 chữ số
+# TC-PROFILE-MOBILE-004: Cập nhật hồ sơ với Số điện thoại hợp lệ 11 chữ số
 
 ## Requirement ID
 FR-04
@@ -19,10 +19,10 @@ High
 ## Test Data
 | Field | Value |
 |---|---|
-| Số điện thoại | "0912345678" (Độ dài = 10) |
+| Số điện thoại | "01234567890" (Độ dài = 11) |
 
 ## Test Steps
-1. Nhập Số điện thoại "0912345678" vào ô nhập Số điện thoại.
+1. Nhập Số điện thoại "01234567890" vào ô nhập Số điện thoại.
 2. Nhấn nút "Lưu thay đổi".
 3. Kiểm tra thông báo hiển thị trên ứng dụng và thông tin trong CSDL.
 
@@ -41,4 +41,4 @@ Not Run
 None
 
 ## Notes
-- Đây là biên dưới hợp lệ (10 chữ số).
+- Đây là biên trên hợp lệ (11 chữ số).

@@ -1,4 +1,4 @@
-# TC-MOBILE-005: Cập nhật hồ sơ với Số điện thoại quá ngắn 9 chữ số
+# TC-PROFILE-MOBILE-005: Cập nhật hồ sơ với Số điện thoại quá ngắn 9 chữ số
 
 ## Requirement ID
 FR-04

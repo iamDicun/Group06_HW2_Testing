@@ -1,4 +1,4 @@
-# TC-MOBILE-009: Cập nhật hồ sơ với Số điện thoại để trống
+# TC-PROFILE-MOBILE-009: Cập nhật hồ sơ với Số điện thoại để trống
 
 ## Requirement ID
 FR-04

@@ -1,4 +1,4 @@
-# Test Cases Index — Profile Management (FR-04 & Mobile Profile)
+# Test Cases Index — Profile Management (FR-04 Web/API)
 
 Date: 2026-06-27
 Spec Version: v1.0
@@ -11,11 +11,11 @@ Standard: ISTQB Foundation Level
 
 | Item | Value |
 |------|-------|
-| Scope | Web/API & Mobile Profile Management Testing (Domain Testing) |
-| Total Test Cases | 29 |
-| Positive | 10 |
-| Negative | 19 |
-| Boundary | 12 |
+| Scope | Web/API Profile Management Testing (Domain Testing) |
+| Total Test Cases | 20 |
+| Positive | 5 |
+| Negative | 15 |
+| Boundary | 10 |
 | Related Requirements | FR-04 |
 
 ---
@@ -44,20 +44,10 @@ Standard: ISTQB Foundation Level
 | TC-PROFILE-018 | Cố tình thay đổi vai trò (role) lên admin trong payload gửi lên API | Negative | Equivalence Partitioning | High | Not Run |
 | TC-PROFILE-019 | Truy cập API cập nhật profile không có Authorization header | Negative | Equivalence Partitioning | High | Not Run |
 | TC-PROFILE-020 | Truy cập API cập nhật profile với Authorization token không hợp lệ | Negative | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-021 | Kiểm tra cấu hình bàn phím số (phone-pad) cho trường Số điện thoại trên Mobile App | UX | Equivalence Partitioning | Medium | Not Run |
-| TC-PROFILE-022 | Kiểm tra chặn nhập quá 11 ký tự số điện thoại tại Client Mobile App | UX | Boundary Value Analysis | Medium | Not Run |
-| TC-PROFILE-023 | Kiểm tra validate Số điện thoại chứa chữ cái khi paste từ clipboard trên Mobile App | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-PROFILE-024 | Kiểm tra TextInput Địa chỉ hỗ trợ nhập nhiều dòng (multiline) trên Mobile App | UX | Equivalence Partitioning | Low | Not Run |
-| TC-PROFILE-025 | Kết nối API thành công qua dải mạng LAN cùng subnet hoặc URL Ngrok | Positive | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-026 | Kết nối API thất bại khi dùng Localhost IP trên thiết bị di động thật | Negative | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-027 | Cập nhật hồ sơ khi thiết bị ở trạng thái ngoại tuyến (Offline mode) | Negative | Equivalence Partitioning | High | Not Run |
-| TC-PROFILE-028 | Xử lý timeout 10 giây khi kết nối mạng chập chờn trên Mobile App | Negative | Boundary Value Analysis | Medium | Not Run |
-| TC-PROFILE-029 | Kiểm tra co giãn giao diện (KeyboardAvoidingView) khi mở bàn phím ảo trên Mobile App | UX | Equivalence Partitioning | Medium | Not Run |
 
 ---
 
 ## Notes & Risks
 
-- **Môi trường kết nối di động**: Đảm bảo thiết bị di động thật và máy chủ backend chạy trên PC đang kết nối chung một mạng Wi-Fi (cùng subnet) để kiểm tra các test case mạng LAN.
-- **Tính năng chặn kí tự**: Bàn phím ảo loại numeric/phone-pad chặn việc nhập chữ, nhưng việc sao chép/dán (paste) từ clipboard vẫn có thể đưa kí tự lạ vào, cần kiểm thử kĩ case này.
-- **Keyboard Viewport**: Kiểm thử trên cả iOS và Android do cơ chế xử lý Viewport khi bàn phím mở trên 2 nền tảng khác nhau.
+- **Phạm vi kiểm thử**: Tập trung kiểm thử các biên dữ liệu cho Họ Tên, Số điện thoại và Địa chỉ giao hàng trên giao diện Web và API.
+- **Bảo mật**: Kiểm thử việc gửi payload trực tiếp lên API nhằm chặn việc leo thang đặc quyền hoặc thay đổi email trái phép.

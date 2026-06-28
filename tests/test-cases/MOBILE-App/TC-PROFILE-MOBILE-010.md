@@ -1,4 +1,4 @@
-# TC-MOBILE-010: Nhập địa chỉ nhiều dòng (multiline) và cuộn xem địa chỉ dài
+# TC-PROFILE-MOBILE-010: Nhập địa chỉ nhiều dòng (multiline) và cuộn xem địa chỉ dài
 
 ## Requirement ID
 FR-04

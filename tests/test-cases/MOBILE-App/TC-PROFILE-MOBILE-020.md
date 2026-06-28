@@ -1,4 +1,4 @@
-# TC-MOBILE-020: Ngăn chặn bàn phím ảo che khuất các ô nhập liệu và nút Lưu
+# TC-PROFILE-MOBILE-020: Ngăn chặn bàn phím ảo che khuất các ô nhập liệu và nút Lưu
 
 ## Requirement ID
 FR-04

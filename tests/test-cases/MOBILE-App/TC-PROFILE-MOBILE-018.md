@@ -1,4 +1,4 @@
-# TC-MOBILE-018: Hủy request và báo lỗi khi phản hồi từ server trễ vượt quá biên 10 giây
+# TC-PROFILE-MOBILE-018: Hủy request và báo lỗi khi phản hồi từ server trễ vượt quá biên 10 giây
 
 ## Requirement ID
 FR-04

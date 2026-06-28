@@ -30,10 +30,10 @@ High
 - Trả về mã lỗi HTTP 401 Unauthorized.
 
 ## Actual Result (filled after execution)
-
+- API trả về "Forbidden" (403).
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

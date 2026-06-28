@@ -29,10 +29,11 @@ High
 - Hiển thị thông báo lỗi yêu cầu nhập Số điện thoại.
 
 ## Actual Result (filled after execution)
-
+- Hệ thống chặn không cho lưu.
+- Hiển thị thông báo lỗi "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

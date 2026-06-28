@@ -32,10 +32,10 @@ Medium
 
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-001
 
 ## Notes
 - Kiểm thử giá trị biên trên hợp lệ (độ dài = 255).

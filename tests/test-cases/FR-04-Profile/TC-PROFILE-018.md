@@ -31,10 +31,10 @@ High
 - API trả về mã lỗi HTTP 400 Bad Request / 403 Forbidden hoặc bỏ qua trường role (vai trò vẫn giữ nguyên là "user").
 
 ## Actual Result (filled after execution)
-
+- API trả về "Profile Updated" và bỏ qua trường role
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

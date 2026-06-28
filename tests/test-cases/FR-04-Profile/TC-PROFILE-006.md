@@ -29,13 +29,13 @@ High
 - Hiển thị thông báo cập nhật hồ sơ thành công.
 
 ## Actual Result (filled after execution)
-
+- Không cho cập nhật và báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-PROFILE-001
 
 ## Notes
 - Biên dưới hợp lệ cho số điện thoại (10 chữ số).

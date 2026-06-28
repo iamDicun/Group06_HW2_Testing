@@ -1,4 +1,4 @@
-# TC-MOBILE-006: Chặn nhập số điện thoại vượt quá 11 chữ số ở Client
+# TC-PROFILE-MOBILE-006: Chặn nhập số điện thoại vượt quá 11 chữ số ở Client
 
 ## Requirement ID
 FR-04

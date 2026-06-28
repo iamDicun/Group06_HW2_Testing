@@ -1,4 +1,4 @@
-# TC-PROFILE-021: Kiểm tra cấu hình bàn phím số (phone-pad) cho trường Số điện thoại trên Mobile App (Domain Testing)
+# TC-PROFILE-017: Cố tình thay đổi SDT không hợp lệ trong payload gửi lên API
 
 ## Requirement ID
 FR-04
@@ -7,35 +7,38 @@ FR-04
 Quản lý hồ sơ cá nhân
 
 ## Module / Test Type / Technique
-Profile / UI/UX / Positive / Equivalence Partitioning
+Profile / API Security / Negative / Equivalence Partitioning
 
 ## Priority
-Medium
+High
 
 ## Preconditions
-- Thiết bị di động hoặc trình giả lập đang chạy ứng dụng EShop.
-- Người dùng đang ở màn hình Hồ sơ cá nhân trên Mobile App.
+- Người dùng đã đăng nhập và lấy được JWT Token hợp lệ.
+
 
 ## Test Data
 | Field | Value |
 |---|---|
-| Thao tác | Chạm vào ô nhập phone |
+| API Method & Route | PUT /api/users/me |
+| Payload | {"name": "Nguyen Van A", "phone": "1234567890"} |
 
 ## Test Steps
-1. Nhấn chạm vào trường nhập Số điện thoại trên màn hình.
+1. Sử dụng công cụ kiểm thử API (Postman/cURL) để gửi request PUT /api/users/me với JWT token hợp lệ.
+2. Đưa trường "phone": "1234567890" vào payload .
+3. Gửi request.
 
 ## Expected Result
-- Bàn phím ảo hiện lên trên thiết bị là loại bàn phím số chuyên biệt (phone-pad hoặc numeric).
-- Người dùng chỉ có thể nhập số, không có các phím ký tự chữ cái.
+- API từ chối cập nhật số điện thoại.
+- API trả về mã lỗi HTTP 400 Bad Request hoặc bỏ qua trường số điện thoại và chỉ cập nhật name/phone/address.
 
 ## Actual Result (filled after execution)
-
+- API trả về "Profile Updated" và cập nhật số điện thoại.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-PROFILE-003
 
 ## Notes
-- Kiểm thử đặc thù UI trên di động (Keyboard Type configuration).
+- Email là thuộc tính bất biến để đảm bảo tính toàn vẹn hệ thống.

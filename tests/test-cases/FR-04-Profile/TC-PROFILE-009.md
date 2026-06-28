@@ -28,10 +28,10 @@ High
 - Hệ thống chặn không cho lưu hoặc tự động cắt ngắn chuỗi về 11 chữ số (hoặc báo lỗi số điện thoại quá dài).
 
 ## Actual Result (filled after execution)
-
+- Không cho cập nhật và báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

@@ -32,10 +32,10 @@ High
 
 
 ## Status
-Not Run
+BLOCKED
 
 ## Related Bugs
-None
+BUG-PROFILE-001
 
 ## Notes
 - Kiểm thử giá trị biên dưới (độ dài = 0) của Địa chỉ.

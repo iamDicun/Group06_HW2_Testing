@@ -1,4 +1,4 @@
-# TC-MOBILE-008: Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard
+# TC-PROFILE-MOBILE-008: Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard
 
 ## Requirement ID
 FR-04

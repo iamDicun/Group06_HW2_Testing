@@ -1,4 +1,4 @@
-# TC-MOBILE-016: Cập nhật hồ sơ thành công khi kết nối mạng trực tuyến ổn định
+# TC-PROFILE-MOBILE-016: Cập nhật hồ sơ thành công khi kết nối mạng trực tuyến ổn định
 
 ## Requirement ID
 FR-04

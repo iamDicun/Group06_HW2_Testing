@@ -29,13 +29,13 @@ High
 
 ## Expected Result
 - API từ chối cập nhật email.
-- API trả về mã lỗi HTTP 400 Bad Request hoặc bỏ qua trường email và chỉ cập nhật name/phone/address (email vẫn giữ nguyên là "user@example.com").
+- API trả về mã lỗi HTTP 400 Bad Request hoặc bỏ qua trường email và chỉ cập nhật name/phone/address.
 
 ## Actual Result (filled after execution)
-
+- API trả về "Profile Updated" nhưng bỏ qua trường email và chỉ cập nhật name/phone.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None
