@@ -1,4 +1,4 @@
-# TC-PROFILE-MOBILE-006: Chặn nhập số điện thoại vượt quá 11 chữ số ở Client
+# TC-PROFILE-MOBILE-006: Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard
 
 ## Requirement ID
 FR-04
@@ -7,27 +7,28 @@ FR-04
 Quản lý hồ sơ cá nhân (Mobile)
 
 ## Module / Test Type / Technique
-Profile / UI/UX / Boundary Value Analysis
+Profile / Functional / Equivalence Partitioning
 
 ## Priority
-High
+Medium
 
 ## Preconditions
-- Thiết bị di động hoặc trình giả lập đang chạy ứng dụng EShop.
+- Người dùng đã sao chép chuỗi "0912abc345" vào clipboard của thiết bị di động.
 - Người dùng đang ở màn hình Hồ sơ cá nhân.
 
 ## Test Data
 | Field | Value |
 |---|---|
-| Thao tác nhập | Nhập 12 chữ số (ví dụ: "091234567890") |
+| Chuỗi dán | "0912abc345" |
 
 ## Test Steps
-1. Chạm vào ô nhập Số điện thoại.
-2. Cố gắng gõ hoặc dán chuỗi gồm 12 chữ số: "091234567890".
+1. Nhấn giữ vào ô nhập Số điện thoại và chọn "Dán" (Paste) chuỗi "0912abc345".
+2. Nhấn nút "Lưu thay đổi".
+3. Quan sát hành vi hiển thị lỗi của trường nhập liệu.
 
 ## Expected Result
-- Ô nhập Số điện thoại chỉ hiển thị tối đa 11 chữ số ("09123456789").
-- Ký tự thứ 12 không thể hiển thị trong ô nhập (bị TextInput chặn cứng qua thuộc tính maxLength={11}).
+- Hệ thống báo lỗi định dạng Số điện thoại không hợp lệ ngay tại Client (hoặc tự động lọc sạch các ký tự chữ cái `a, b, c` khi paste, chỉ giữ lại số).
+- Không gửi yêu cầu cập nhật không hợp lệ lên API Server.
 
 ## Actual Result (filled after execution)
 
@@ -39,4 +40,4 @@ Not Run
 None
 
 ## Notes
-- Kiểm thử thuộc tính maxLength={11} để chặn cứng biên trên ngay từ Client.
+- Ngăn chặn việc bypass bàn phím số bằng tính năng dán từ clipboard.

@@ -31,9 +31,11 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK.
+- Nhận về danh sách tài khoản thành công.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

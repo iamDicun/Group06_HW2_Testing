@@ -30,12 +30,14 @@ Medium
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 400.
+- Nhận được JSON response: `{"message": "User deleted"}`.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-001
 
 ## Notes
 - Kiểm thử sai kiểu dữ liệu của ID (P5 - Wrong type).

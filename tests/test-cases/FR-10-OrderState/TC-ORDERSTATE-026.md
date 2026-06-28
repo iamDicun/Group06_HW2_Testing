@@ -34,13 +34,15 @@ High
 - Trạng thái đơn hàng ID = 15 trong CSDL chuyển thành "canceled" (Admin bypass quyền sở hữu thành công).
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 404 (nhận được: {"error": "Order not found"}).
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'confirmed'.
+- Điểm không khớp: Admin hủy đơn confirmed của người khác thành công.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-004
 
 ## Notes
 - Quyền đặc quyền của Admin: Cho phép hủy đơn hàng của bất kỳ ai nếu chưa giao.

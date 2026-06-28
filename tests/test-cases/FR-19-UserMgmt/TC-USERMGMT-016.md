@@ -29,12 +29,14 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 403.
+- Danh sách người dùng được trả về đầy đủ cho tài khoản phân quyền thấp.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-004
 
 ## Notes
 - Kiểm thử phân quyền truy cập danh sách người dùng đối với vai trò user (P2 - User Role).

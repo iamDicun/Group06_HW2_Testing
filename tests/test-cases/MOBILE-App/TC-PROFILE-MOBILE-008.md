@@ -1,4 +1,4 @@
-# TC-PROFILE-MOBILE-008: Validate Số điện thoại chứa ký tự chữ cái khi paste từ clipboard
+# TC-PROFILE-MOBILE-008: Lỗi kết nối API khi cấu hình thiếu giao thức (http://) hoặc thiếu Port
 
 ## Requirement ID
 FR-04
@@ -7,28 +7,27 @@ FR-04
 Quản lý hồ sơ cá nhân (Mobile)
 
 ## Module / Test Type / Technique
-Profile / Functional / Equivalence Partitioning
+Profile / Network / Equivalence Partitioning
 
 ## Priority
 Medium
 
 ## Preconditions
-- Người dùng đã sao chép chuỗi "0912abc345" vào clipboard của thiết bị di động.
-- Người dùng đang ở màn hình Hồ sơ cá nhân.
+- Thiết bị di động đang chạy ứng dụng EShop.
 
 ## Test Data
 | Field | Value |
 |---|---|
-| Chuỗi dán | "0912abc345" |
+| base_url | "192.168.1.5" (thiếu http:// và port) |
 
 ## Test Steps
-1. Nhấn giữ vào ô nhập Số điện thoại và chọn "Dán" (Paste) chuỗi "0912abc345".
+1. Cấu hình base_url thiếu giao thức và port.
 2. Nhấn nút "Lưu thay đổi".
-3. Quan sát hành vi hiển thị lỗi của trường nhập liệu.
+3. Quan sát thông báo lỗi.
 
 ## Expected Result
-- Hệ thống báo lỗi định dạng Số điện thoại không hợp lệ ngay tại Client (hoặc tự động lọc sạch các ký tự chữ cái `a, b, c` khi paste, chỉ giữ lại số).
-- Không gửi yêu cầu cập nhật không hợp lệ lên API Server.
+- Ứng dụng phát hiện URL không đúng định dạng ngay lập tức hoặc báo lỗi kết nối thất bại.
+- Ứng dụng không bị crash và hiển thị thông báo: "Cấu hình URL máy chủ không hợp lệ".
 
 ## Actual Result (filled after execution)
 
@@ -40,4 +39,4 @@ Not Run
 None
 
 ## Notes
-- Ngăn chặn việc bypass bàn phím số bằng tính năng dán từ clipboard.
+- Đảm bảo tính toàn vẹn của chuỗi cấu hình URL.

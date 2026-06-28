@@ -30,13 +30,14 @@ High
 - Mã phản hồi HTTP trả về là 401 Unauthorized.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 403 (nhận được: {"error": "Forbidden"}).
+- Điểm không khớp: Token không hợp lệ.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-005
 
 ## Notes
 - Kiểm thử lớp tương đương bảo mật: token hết hạn hoặc sai chữ ký (corrupted).

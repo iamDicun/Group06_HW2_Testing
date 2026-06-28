@@ -12,9 +12,9 @@ Standard: ISTQB Foundation Level
 | Item | Value |
 |------|-------|
 | Scope | API Order State Machine & Cancel Request Testing (Domain Testing) |
-| Total Test Cases | 31 |
+| Total Test Cases | 32 |
 | Positive | 10 |
-| Negative | 21 |
+| Negative | 22 |
 | Boundary | 3 |
 | Related Requirements | FR-10 |
 
@@ -55,6 +55,7 @@ Standard: ISTQB Foundation Level
 | TC-ORDERSTATE-029 | Cập nhật trạng thái đơn hàng với Token sai định dạng (thiếu tiền tố Bearer) | Negative | Equivalence Partitioning | High | PASSED |
 | TC-ORDERSTATE-030 | Cập nhật trạng thái đơn hàng với Token hết hạn hoặc không hợp lệ | Negative | Equivalence Partitioning | High | FAILED |
 | TC-ORDERSTATE-031 | Người dùng thông thường cố gắng truy cập API Admin cập nhật trạng thái đơn hàng | Negative | Equivalence Partitioning | High | FAILED |
+| TC-ORDERSTATE-032 | Quản trị viên tự xóa tài khoản của chính mình thông qua giao diện Web Admin | Negative | Equivalence Partitioning | High | FAILED |
 
 ---
 

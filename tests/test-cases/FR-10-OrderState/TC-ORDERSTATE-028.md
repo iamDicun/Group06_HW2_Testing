@@ -30,10 +30,10 @@ High
 - Mã phản hồi HTTP trả về là 401 Unauthorized.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 401.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

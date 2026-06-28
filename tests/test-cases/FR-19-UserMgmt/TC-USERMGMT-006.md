@@ -31,9 +31,10 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 401 Unauthorized.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

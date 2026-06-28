@@ -31,10 +31,10 @@ High
 - Nội dung phản hồi chứa thông báo lỗi cho biết đơn hàng không tồn tại.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 404.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

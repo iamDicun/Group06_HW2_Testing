@@ -34,13 +34,15 @@ High
 - Phản hồi chứa thông báo lỗi không cho phép hủy đơn hàng đang giao (kể cả Admin).
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 404 (nhận được: {"error": "Order not found"}).
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'shipping'.
+- Điểm không khớp: Admin không được hủy đơn shipping của người khác.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-004
 
 ## Notes
 - Ràng buộc trạng thái: Trạng thái shipping chặn cả Admin hủy đơn tại API hủy chung.

@@ -31,10 +31,12 @@ High
 - Trạng thái đơn hàng trong DB được chuyển thành "delivered" thành công.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 200.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'delivered'.
+- Thông báo phản hồi: 'Order status updated'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

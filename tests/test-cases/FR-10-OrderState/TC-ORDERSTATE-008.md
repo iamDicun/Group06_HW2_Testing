@@ -31,10 +31,11 @@ High
 - Nội dung phản hồi báo lỗi thiếu trường status hoặc status không được null/undefined.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 400.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'pending'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

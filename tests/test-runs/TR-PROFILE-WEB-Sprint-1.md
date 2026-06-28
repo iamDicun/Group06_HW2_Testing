@@ -35,7 +35,7 @@
 |--------|-------|
 | Total Test Cases | 20 |
 | Passed | 8 |
-| Failed | 4 |
-| Blocked | 8 |
+| Failed | 5 |
+| Blocked | 7 |
 | Not Run | 0 |
 | Bugs Found | 3 |

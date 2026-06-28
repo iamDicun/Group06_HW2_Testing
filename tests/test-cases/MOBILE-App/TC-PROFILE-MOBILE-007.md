@@ -1,4 +1,4 @@
-# TC-PROFILE-MOBILE-007: Cập nhật hồ sơ với Số điện thoại không bắt đầu bằng số 0
+# TC-PROFILE-MOBILE-007: Cập nhật hồ sơ với Số điện thoại để trống
 
 ## Requirement ID
 FR-04
@@ -18,16 +18,16 @@ High
 ## Test Data
 | Field | Value |
 |---|---|
-| Số điện thoại | "1912345678" |
+| Số điện thoại | "" |
 
 ## Test Steps
-1. Nhập Số điện thoại "1912345678" vào ô nhập Số điện thoại.
+1. Xóa toàn bộ nội dung trong ô nhập Số điện thoại (để trống).
 2. Nhấn nút "Lưu thay đổi".
-3. Quan sát thông báo lỗi.
+3. Quan sát thông báo lỗi hiển thị.
 
 ## Expected Result
-- Hệ thống báo lỗi ngay tại Client và không gửi request lên Server.
-- Hiển thị thông báo: "Số điện thoại phải bắt đầu bằng số 0".
+- Hệ thống báo lỗi tại Client và không gửi request lên Server.
+- Hiển thị lỗi cảnh báo: "Số điện thoại không được để trống".
 
 ## Actual Result (filled after execution)
 
@@ -39,4 +39,4 @@ Not Run
 None
 
 ## Notes
-- Kiểm thử phân hoạch không hợp lệ về định dạng chữ số bắt đầu.
+- Giả định Số điện thoại là trường bắt buộc (mandatory).

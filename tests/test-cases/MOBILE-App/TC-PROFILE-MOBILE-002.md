@@ -1,4 +1,4 @@
-# TC-PROFILE-MOBILE-002: Ngăn chặn cấu hình bàn phím chữ mặc định cho Số điện thoại
+# TC-PROFILE-MOBILE-002: Cập nhật hồ sơ với Số điện thoại hợp lệ 11 chữ số
 
 ## Requirement ID
 FR-04
@@ -7,27 +7,29 @@ FR-04
 Quản lý hồ sơ cá nhân (Mobile)
 
 ## Module / Test Type / Technique
-Profile / UI/UX / Equivalence Partitioning
+Profile / Functional / Boundary Value Analysis
 
 ## Priority
-Medium
+High
 
 ## Preconditions
-- Thiết bị di động hoặc trình giả lập đang chạy ứng dụng EShop.
-- Người dùng đang ở màn hình Hồ sơ cá nhân trên Mobile App.
+- Người dùng đã đăng nhập thành công vào Mobile App.
+- Người dùng đang ở màn hình Hồ sơ cá nhân.
 
 ## Test Data
 | Field | Value |
 |---|---|
-| Thao tác | Chạm vào trường nhập Số điện thoại |
+| Số điện thoại | "01234567890" (Độ dài = 11) |
 
 ## Test Steps
-1. Nhấp chọn vào trường nhập Số điện thoại.
-2. Kiểm tra xem bàn phím mặc định (default/email-address/ascii-capable) có bị hiển thị hay không.
+1. Nhập Số điện thoại "01234567890" vào ô nhập Số điện thoại.
+2. Nhấn nút "Lưu thay đổi".
+3. Kiểm tra thông báo hiển thị trên ứng dụng và thông tin trong CSDL.
 
 ## Expected Result
-- Bàn phím chữ cái thông thường không được hiển thị.
-- TextInput không sử dụng cấu hình bàn phím mặc định (default).
+- Hệ thống thực hiện cập nhật thành công mà không báo lỗi.
+- Hiển thị thông báo (toast/alert) cập nhật hồ sơ thành công.
+- Dữ liệu Số điện thoại mới được cập nhật chính xác trong CSDL.
 
 ## Actual Result (filled after execution)
 
@@ -39,4 +41,4 @@ Not Run
 None
 
 ## Notes
-- Đảm bảo thuộc tính keyboardType không bị bỏ trống hoặc set sai loại.
+- Đây là biên trên hợp lệ (11 chữ số).

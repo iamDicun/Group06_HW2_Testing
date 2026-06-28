@@ -31,12 +31,13 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 401 (không phân biệt định dạng Token thiếu Bearer).
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-002
 
 ## Notes
 - Kiểm thử sai định dạng token xác thực (P3 - Invalid Format).

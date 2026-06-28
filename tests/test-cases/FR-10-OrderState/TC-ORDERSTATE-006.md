@@ -33,10 +33,11 @@ High
 - Trạng thái của đơn hàng ID = 1 trong cơ sở dữ liệu vẫn giữ nguyên là "pending".
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 400.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'pending'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

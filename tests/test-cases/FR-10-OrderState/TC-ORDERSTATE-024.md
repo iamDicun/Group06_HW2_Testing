@@ -34,13 +34,15 @@ High
 - Phản hồi chứa thông báo lỗi không có quyền hủy đơn hàng của người khác.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 404 (nhận được: {"error": "Order not found"}).
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'pending'.
+- Điểm không khớp: Không cho phép user hủy đơn của người khác.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-003
 
 ## Notes
 - Kiểm thử quyền sở hữu đơn hàng (order_ownership): User không được phép hủy đơn hàng của người khác.

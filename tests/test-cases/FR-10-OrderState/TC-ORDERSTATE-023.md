@@ -34,13 +34,15 @@ High
 - Phản hồi chứa thông báo lỗi không cho phép hủy đơn hàng đang giao.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 200 (nhận được: {"message": "Order canceled successfully"}).
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'canceled'.
+- Điểm không khớp: User không được hủy đơn shipping của chính mình.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-002
 
 ## Notes
 - Kiểm thử biên chặn: User không thể hủy đơn hàng khi đã ở trạng thái shipping.

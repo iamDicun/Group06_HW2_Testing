@@ -32,10 +32,11 @@ High
 - Nội dung phản hồi chứa thông báo lỗi không cho phép chuyển đổi trạng thái nhảy bước từ pending sang shipping.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 400.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'pending'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

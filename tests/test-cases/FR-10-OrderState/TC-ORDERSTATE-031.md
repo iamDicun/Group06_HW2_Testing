@@ -31,13 +31,14 @@ High
 - Mã phản hồi HTTP trả về là 403 Forbidden.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 200 (nhận được: {"message": "Order status updated"}).
+- Điểm không khớp: User bình thường truy cập API Admin.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-006
 
 ## Notes
 - Kiểm thử phân quyền: Người dùng bình thường không được gọi API Admin cập nhật trạng thái.

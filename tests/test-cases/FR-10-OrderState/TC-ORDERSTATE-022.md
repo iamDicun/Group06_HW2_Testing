@@ -34,10 +34,12 @@ High
 - Trạng thái đơn hàng ID = 11 trong CSDL chuyển thành "canceled".
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 200.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'canceled'.
+- Thông báo phản hồi: 'Order canceled successfully'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

@@ -33,10 +33,12 @@ High
 - Trạng thái của đơn hàng ID = 1 trong cơ sở dữ liệu được cập nhật chính xác thành "confirmed".
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 200.
+- Trạng thái đơn hàng trong cơ sở dữ liệu là 'confirmed'.
+- Thông báo phản hồi: 'Order status updated'.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

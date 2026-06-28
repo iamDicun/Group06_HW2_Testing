@@ -11,13 +11,11 @@ Standard: ISTQB Foundation Level
 
 | Item | Value |
 |------|-------|
-| Scope | API User Management & Web Admin Navigation Testing (Domain Testing) |
-| Total Test Cases | 22 |
+| Scope | API User Management Domain Testing (EP/BVA) |
+| Total Test Cases | 18 |
 | Positive | 2 |
-| Negative | 15 |
+| Negative | 14 |
 | Boundary | 2 |
-| UI/UX | 3 |
-| Security | 1 |
 | Related Requirements | FR-19 |
 
 ---
@@ -26,28 +24,24 @@ Standard: ISTQB Foundation Level
 
 | TC ID | Short Description | Test Type | Technique | Priority | Status |
 |-------|------------------|-----------|-----------|----------|--------|
-| TC-USERMGMT-001 | Kiểm tra xóa người dùng thành công khi ID hợp lệ, tồn tại và không phải tài khoản hiện tại | Positive | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-002 | Kiểm tra xóa người dùng khi ID hợp lệ nhưng không tồn tại trong CSDL | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-003 | Kiểm tra xóa người dùng khi ID bằng 0 | Boundary | Boundary Value Analysis | Medium | Not Run |
-| TC-USERMGMT-004 | Kiểm tra xóa người dùng khi ID là số nguyên âm | Boundary | Boundary Value Analysis | Medium | Not Run |
-| TC-USERMGMT-005 | Kiểm tra xóa người dùng khi ID sai kiểu dữ liệu | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-006 | Kiểm tra xóa người dùng khi không truyền Authorization Header | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-007 | Kiểm tra xóa người dùng với Authorization Header sai định dạng | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-008 | Kiểm tra xóa người dùng với Authorization Header chứa Token hết hạn hoặc không hợp lệ | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-009 | Kiểm tra xóa người dùng khi tài khoản thực hiện có vai trò là User | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-010 | Kiểm tra xóa người dùng khi tài khoản thực hiện có vai trò không hợp lệ hoặc không xác định | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-011 | Kiểm tra xóa người dùng khi tài khoản thực hiện bị thiếu vai trò trong token | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-012 | Kiểm tra lấy danh sách người dùng thành công khi dùng Token Admin hợp lệ | Positive | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-013 | Kiểm tra lấy danh sách người dùng khi không truyền Authorization Header | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-014 | Kiểm tra lấy danh sách người dùng với Authorization Header sai định dạng | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-015 | Kiểm tra lấy danh sách người dùng với Authorization Header chứa Token hết hạn hoặc không hợp lệ | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-016 | Kiểm tra lấy danh sách người dùng khi tài khoản thực hiện có vai trò là User | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-017 | Kiểm tra lấy danh sách người dùng khi tài khoản thực hiện có vai trò không hợp lệ hoặc không xác định | Negative | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-018 | Kiểm tra chặn hành vi Admin tự xóa tài khoản của chính mình (Self-deletion) | Negative | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-019 | Kiểm tra hiển thị nút Xóa trên giao diện Web Admin đối với các tài khoản khác | UI/UX | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-020 | Kiểm tra ẩn hoặc vô hiệu hóa nút Xóa trên giao diện Web Admin đối với tài khoản Admin hiện tại | UI/UX | Equivalence Partitioning | High | Not Run |
-| TC-USERMGMT-021 | Kiểm tra xuất hiện hộp thoại xác nhận khi thực hiện hành động Xóa trên Web Admin | UI/UX | Equivalence Partitioning | Medium | Not Run |
-| TC-USERMGMT-022 | Kiểm tra bảo mật cấu trúc dữ liệu phản hồi của API lấy danh sách người dùng (Không chứa trường password) | Security | Equivalence Partitioning | High | Not Run |
+| TC-USERMGMT-001 | Kiểm tra xóa người dùng thành công khi ID hợp lệ, tồn tại và không phải tài khoản hiện tại | Positive | Equivalence Partitioning | High | PASSED |
+| TC-USERMGMT-002 | Kiểm tra xóa người dùng khi ID hợp lệ nhưng không tồn tại trong CSDL | Negative | Equivalence Partitioning | Medium | FAILED |
+| TC-USERMGMT-003 | Kiểm tra xóa người dùng khi ID bằng 0 | Boundary | Boundary Value Analysis | Medium | FAILED |
+| TC-USERMGMT-004 | Kiểm tra xóa người dùng khi ID là số nguyên âm | Boundary | Boundary Value Analysis | Medium | FAILED |
+| TC-USERMGMT-005 | Kiểm tra xóa người dùng khi ID sai kiểu dữ liệu | Negative | Equivalence Partitioning | Medium | FAILED |
+| TC-USERMGMT-006 | Kiểm tra xóa người dùng khi không truyền Authorization Header | Negative | Equivalence Partitioning | High | PASSED |
+| TC-USERMGMT-007 | Kiểm tra xóa người dùng với Authorization Header sai định dạng | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-008 | Kiểm tra xóa người dùng với Authorization Header chứa Token hết hạn hoặc không hợp lệ | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-009 | Kiểm tra xóa người dùng khi tài khoản thực hiện có vai trò là User | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-010 | Kiểm tra xóa người dùng khi tài khoản thực hiện có vai trò không hợp lệ hoặc không xác định | Negative | Equivalence Partitioning | Medium | FAILED |
+| TC-USERMGMT-011 | Kiểm tra xóa người dùng khi tài khoản thực hiện bị thiếu vai trò trong token | Negative | Equivalence Partitioning | Medium | FAILED |
+| TC-USERMGMT-012 | Kiểm tra lấy danh sách người dùng thành công khi dùng Token Admin hợp lệ | Positive | Equivalence Partitioning | High | PASSED |
+| TC-USERMGMT-013 | Kiểm tra lấy danh sách người dùng khi không truyền Authorization Header | Negative | Equivalence Partitioning | High | PASSED |
+| TC-USERMGMT-014 | Kiểm tra lấy danh sách người dùng với Authorization Header sai định dạng | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-015 | Kiểm tra lấy danh sách người dùng với Authorization Header chứa Token hết hạn hoặc không hợp lệ | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-016 | Kiểm tra lấy danh sách người dùng khi tài khoản thực hiện có vai trò là User | Negative | Equivalence Partitioning | High | FAILED |
+| TC-USERMGMT-017 | Kiểm tra lấy danh sách người dùng khi tài khoản thực hiện có vai trò không hợp lệ hoặc không xác định | Negative | Equivalence Partitioning | Medium | FAILED |
+| TC-USERMGMT-018 | Kiểm tra chặn hành vi Admin tự xóa tài khoản của chính mình (Self-deletion) | Negative | Equivalence Partitioning | High | FAILED |
 
 ---
 

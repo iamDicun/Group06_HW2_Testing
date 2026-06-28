@@ -33,9 +33,11 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK.
+- Tài khoản người dùng ID = 2 đã được xác minh bị xóa khỏi CSDL.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

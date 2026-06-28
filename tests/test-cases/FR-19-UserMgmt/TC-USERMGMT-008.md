@@ -31,12 +31,13 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 403 Forbidden thay vì 401 Unauthorized.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-003
 
 ## Notes
 - Kiểm thử token hết hạn hoặc sai chữ ký (P4 - Expired / Corrupted).

@@ -33,12 +33,14 @@ High
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 400.
+- Tài khoản Admin tự xóa bản thân thành công khỏi CSDL.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-005
 
 ## Notes
 - Kiểm thử ràng buộc nghiệp vụ tự xóa tài khoản (P2 - Delete self).

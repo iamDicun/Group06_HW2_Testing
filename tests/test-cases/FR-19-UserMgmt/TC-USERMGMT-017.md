@@ -29,12 +29,14 @@ Medium
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 403.
+- Danh sách người dùng được trả về đầy đủ cho tài khoản phân quyền thấp.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-004
 
 ## Notes
 - Kiểm thử phân quyền với vai trò không xác định đối với API GET (P3 - Invalid/Unknown Role).

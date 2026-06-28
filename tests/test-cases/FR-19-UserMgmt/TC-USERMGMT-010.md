@@ -30,12 +30,14 @@ Medium
 
 ## Actual Result (filled after execution)
 
+- API trả về mã phản hồi HTTP 200 OK thay vì 403.
+- Tài khoản người dùng bị xóa khỏi CSDL thành công bởi token phân quyền thấp.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-USERMGMT-004
 
 ## Notes
 - Kiểm thử vai trò không hợp lệ ngoài hệ thống (P3 - Invalid/Unknown Role).

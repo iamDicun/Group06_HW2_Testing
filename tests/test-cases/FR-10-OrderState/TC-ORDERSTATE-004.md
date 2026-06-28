@@ -30,13 +30,14 @@ High
 - Nội dung phản hồi chứa thông báo lỗi định dạng ID không hợp lệ.
 
 ## Actual Result (filled after execution)
-
+- API trả về mã phản hồi HTTP 404 (nhận được: {"error": "Order not found"}).
+- Điểm không khớp: Mã phản hồi HTTP trả về là 400 Bad Request.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ORDERSTATE-001
 
 ## Notes
 - Kiểm thử giá trị biên số âm (dưới biên hợp lệ) của ID.

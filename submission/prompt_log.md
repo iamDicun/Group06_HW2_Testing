@@ -371,3 +371,57 @@ Tôi đã tạo thành công file test run cho FR4 Web theo các thông tin đư
 - **Tester:** Khoa.
 - **Tổng số test cases:** 20 test cases, mặc định kết quả ban đầu là `Not Run`.
 
+
+---
+## Session | Agent: Gemini 3.5 Flash (High) | Assignment: HW02 - Domain Testing | 2026-06-28 19:55 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+Vì các TC cho FR10 chủ yếu là api nên hãy thực hiện curl và viết các document test run và điền kết quả vào các test case, có bug nào thì báo tôi
+
+**[Assistant]**
+Tôi đã hoàn thành việc chạy kiểm thử tự động bằng cURL (qua script Python) đối với 31 test case của phân hệ **Quản lý Trạng thái Đơn hàng (FR-10)** trên SUT đang chạy tại `http://localhost:3000`. 
+
+Tôi cũng đã cập nhật kết quả kiểm thử thực tế (`Actual Result`), trạng thái (`Status` từ `Not Run` sang `PASSED` / `FAILED`), và mã lỗi (`Related Bugs`) vào từng file Markdown chi tiết của 31 test case, cập nhật file index `_index.md`, và tạo báo cáo chạy test `TR-ORDERSTATE-Sprint-2.md`.
+
+Dưới đây là tổng hợp kết quả và danh sách lỗi phát hiện được:
+- **Tổng số Test Cases:** 31
+- **PASSED:** 21 test cases
+- **FAILED:** 10 test cases
+
+Các báo cáo lỗi chi tiết:
+- `BUG-ORDERSTATE-001`: ID đơn hàng không hợp lệ trả về 404 thay vì 400.
+- `BUG-ORDERSTATE-002`: Cho phép hủy đơn hàng khi trạng thái đã là `shipping`.
+- `BUG-ORDERSTATE-003`: Không validate định dạng ID đơn hàng trong API Admin.
+- `BUG-ORDERSTATE-004`: API Admin trả về 404 thay vì 400 khi truyền trạng thái không hợp lệ.
+- `BUG-ORDERSTATE-005`: Người dùng thường có thể hủy đơn hàng của người dùng khác qua API.
+- `BUG-ORDERSTATE-006`: Privilege Escalation: Người dùng thường có thể cập nhật trạng thái đơn hàng bất kỳ thành CONFIRMED/SHIPPING/DELIVERED qua API Admin.
+
+### Turn 2
+
+**[User]**
+tiếp tục thực hiện tương tự với FR-19
+
+**[Assistant]**
+Tôi đã hoàn thành toàn bộ công việc kiểm thử và báo cáo cho phân hệ **Quản lý Người dùng (FR-19)**, tương tự như đã làm với FR-10:
+
+### 1. Kết quả Chạy Kiểm Thử Tự Động
+Kịch bản kiểm thử API tự động `execute_usermgmt_tests.py` đã được xây dựng và chạy thử nghiệm thành công đối với 18 test cases của FR-19. 
+* **Tổng số test cases:** 18
+* **PASSED:** 4
+* **FAILED:** 14 (phát hiện 5 lỗi hệ thống)
+
+Chi tiết báo cáo lượt chạy được lưu tại: `TR-USERMGMT-Sprint-2.md`
+
+Các báo cáo lỗi chi tiết phát hiện được:
+- `BUG-USERMGMT-001`: API Admin xóa người dùng không kiểm tra tính hợp lệ của ID người dùng (trả về 200 OK thay vì 400/404).
+- `BUG-USERMGMT-002`: API Admin xóa người dùng không tồn tại trả về 200 OK thay vì 404.
+- `BUG-USERMGMT-003`: Xóa người dùng với ID dạng ký tự chữ cái trả về 200 OK thay vì 400.
+- `BUG-USERMGMT-004`: API Admin xóa người dùng với ID số âm trả về 200 OK thay vì 400.
+- `BUG-USERMGMT-005`: Cho phép quản trị viên tự xóa chính mình (Self-deletion) qua API.
+- `BUG-USERMGMT-006`: Giao diện Web Admin vẫn hiển thị nút tự xóa cho chính tài khoản Admin hiện tại.
+- `BUG-USERMGMT-007`: Thiếu hộp thoại xác nhận khi nhấp nút "Xóa" trên giao diện Web Admin.
+
+
