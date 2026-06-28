@@ -1,58 +1,39 @@
-# Traceability Matrix — HW02 Domain Testing
+# Ma Trận Truy Vết - HW02 Domain Testing
 
-| Requirement | Test Case ID | Test Type | Technique | Result | Bug Issue | Status |
-|------------|-------------|-----------|-----------|--------|-----------|--------|
-| FR-01 (Register) | TC-REGISTER-001 | Functional | EP | Not Run | | |
-| FR-01 (Register) | TC-REGISTER-002 | Functional | BVA | Not Run | | |
-| FR-02 (Login) | TC-LOGIN-001 | Functional | EP | Not Run | | |
-| FR-02 (Login) | TC-LOGIN-002 | Functional | BVA | Not Run | | |
-| FR-03 (Forgot Password) | TC-FORGOT_PW-001 | Functional | EP | Not Run | | |
-| FR-03 (Forgot Password) | TC-FORGOT_PW-002 | Functional | BVA | Not Run | | |
-| FR-04 (Profile) | TC-PROFILE-001 | Functional | EP | Not Run | | |
-| FR-04 (Profile) | TC-PROFILE-002 | Functional | BVA | Not Run | | |
-| FR-05 (Product Search) | TC-PROD_SEARCH-001 | Functional | EP | Not Run | | |
-| FR-05 (Product Search) | TC-PROD_SEARCH-002 | Functional | BVA | Not Run | | |
-| FR-06 (Product Detail) | TC-PROD_DETAIL-001 | Functional | EP | Not Run | | |
-| FR-06 (Product Detail) | TC-PROD_DETAIL-002 | Functional | BVA | Not Run | | |
-| FR-07 (Cart) | TC-CART-001 | Functional | EP | Not Run | | |
-| FR-07 (Cart) | TC-CART-002 | Functional | BVA | Not Run | | |
-| FR-08 (Checkout) | TC-CHECKOUT-001 | Functional | EP | Not Run | | |
-| FR-08 (Checkout) | TC-CHECKOUT-002 | Functional | BVA | Not Run | | |
-| FR-09 (Coupon) | TC-COUPON-001 | Functional | EP | Not Run | | |
-| FR-09 (Coupon) | TC-COUPON-002 | Functional | BVA | Not Run | | |
-| FR-10 (Order State) | TC-ORDER_STATE-001 | Functional | EP | Not Run | | |
-| FR-10 (Order State) | TC-ORDER_STATE-002 | Functional | BVA | Not Run | | |
-| FR-11 (Order History) | TC-ORDER_HIST-001 | Functional | EP | Not Run | | |
-| FR-11 (Order History) | TC-ORDER_HIST-002 | Functional | BVA | Not Run | | |
-| FR-12 (Access Control) | TC-ACCESS_CTRL-001 | Functional | EP | Not Run | | |
-| FR-12 (Access Control) | TC-ACCESS_CTRL-002 | Functional | BVA | Not Run | | |
-| FR-13 (Dashboard) | TC-DASHBOARD-001 | Functional | EP | Not Run | | |
-| FR-13 (Dashboard) | TC-DASHBOARD-002 | Functional | BVA | Not Run | | |
-| FR-14 (Category Mgmt) | TC-CATEGORY-001 | Functional | EP | Not Run | | |
-| FR-14 (Category Mgmt) | TC-CATEGORY-002 | Functional | BVA | Not Run | | |
-| FR-15 (Product Mgmt) | TC-PROD_MGMT-001 | Functional | EP | Not Run | | |
-| FR-15 (Product Mgmt) | TC-PROD_MGMT-002 | Functional | BVA | Not Run | | |
-| FR-16 (Product Import) | TC-PROD_IMPORT-001 | Functional | EP | Not Run | | |
-| FR-16 (Product Import) | TC-PROD_IMPORT-002 | Functional | BVA | Not Run | | |
-| FR-17 (Coupon Mgmt) | TC-COUPON_MGMT-001 | Functional | EP | Not Run | | |
-| FR-17 (Coupon Mgmt) | TC-COUPON_MGMT-002 | Functional | BVA | Not Run | | |
-| FR-18 (Order Mgmt) | TC-ORDER_MGMT-001 | Functional | EP | Not Run | | |
-| FR-18 (Order Mgmt) | TC-ORDER_MGMT-002 | Functional | BVA | Not Run | | |
-| FR-19 (User Mgmt) | TC-USER_MGMT-001 | Functional | EP | Not Run | | |
-| FR-19 (User Mgmt) | TC-USER_MGMT-002 | Functional | BVA | Not Run | | |
-| MOBILE (Feature X) | TC-MOBILE-001 | Functional | EP | Not Run | | |
-| MOBILE (Feature X) | TC-MOBILE-002 | Functional | BVA | Not Run | | |
+**Phạm vi:** Chỉ bao gồm các chức năng Cường được phân công.  
+**Hình thức kiểm thử:** Black-box UI testing.  
+**Trạng thái hiện tại:** Đã ghi nhận kết quả manual black-box UI cho phạm vi của Cường.
 
-## Legend
-- **EP** = Equivalence Partitioning (Domain Testing)
-- **BVA** = Boundary Value Analysis
+| Requirement | Khoảng Test Case ID | Kỹ thuật bao phủ | Kết quả | Bug Issue | Trạng thái |
+|-------------|---------------------|------------------|---------|-----------|------------|
+| FR-03 Quên mật khẩu | TC-FORGOT_PW-001..016 | EP + BVA | 6 Pass / 6 Fail / 4 Blocked | BUG-FR03-003, BUG-FR03-004, BUG-FR03-005 | Đã chạy |
+| FR-09 Coupon | TC-COUPON-001..015 | EP + BVA | 8 Pass / 7 Fail | BUG-FR09-001, BUG-FR09-002, BUG-FR09-003 | Đã chạy / reuse defect mở rộng |
+| FR-15 Quản lý sản phẩm | TC-PROD_MGMT-001..018 | EP + BVA | 8 Pass / 8 Fail / 2 Blocked | BUG-FR15-002, BUG-FR15-003, BUG-FR15-004 | Đã chạy |
+| Mobile FR-03 Quên mật khẩu | TC-MOBILE_FORGOT_PW-001..011 | EP + BVA | 5 Pass / 3 Fail / 3 Blocked | BUG-MOBILE-FR03-001 | Đã chạy |
 
-## Summary
-| Metric | Count |
-|--------|-------|
-| Total Test Cases | 0 |
-| Passed | 0 |
-| Failed | 0 |
-| Blocked | 0 |
+## File Chi Tiết
+
+| Chức năng | File test case | Test run |
+|-----------|----------------|----------|
+| FR-03 Quên mật khẩu | `tests/test-cases/FR-03-ForgotPassword/TC-FORGOT_PW-SUITE.md` | `tests/test-runs/cuong-hw02-blackbox-ui-manual.md` |
+| FR-09 Coupon | `tests/test-cases/FR-09-Coupon/TC-COUPON-SUITE.md` | `tests/test-runs/cuong-hw02-blackbox-ui-manual.md` |
+| FR-15 Quản lý sản phẩm | `tests/test-cases/FR-15-ProductMgmt/TC-PROD_MGMT-SUITE.md` | `tests/test-runs/cuong-hw02-blackbox-ui-manual.md` |
+| Mobile FR-03 Quên mật khẩu | `tests/test-cases/MOBILE-App/TC-MOBILE_FORGOT_PW-SUITE.md` | `tests/test-runs/cuong-hw02-blackbox-ui-manual.md` |
+
+## Chú Thích
+
+- **EP** = Equivalence Partitioning / Domain Testing.
+- **BVA** = Boundary Value Analysis.
+- **TBD** = Chưa điền hoặc cần xác minh thêm.
+
+## Tổng Kết
+
+| Chỉ số | Số lượng |
+|--------|----------|
+| Tổng test cases đã thiết kế | 60 |
+| Pass | 27 |
+| Fail | 24 |
+| Blocked | 9 |
 | Not Run | 0 |
-| Bugs Found | 0 |
+| Confirmed bugs | 10 |
+| Candidate bug cần xác minh | 1 |

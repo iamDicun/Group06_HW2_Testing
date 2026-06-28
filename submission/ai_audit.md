@@ -1,17 +1,61 @@
-# AI Audit Report
+# AI Audit - HW02 Domain Testing
 
-**Student:** <MSSV> - <Name>
+**Sinh viên:** Bùi Dương Duy Cường - `23127033`  
+**Bài tập:** HW02 - Domain Testing trên EShop  
+**Danh Mục Sử Dụng AI:** Cat. 4 - AI-Assisted Production  
+**Công Cụ AI:** OpenAI GPT-5.5 thông qua OpenCode
 
-> Nếu KHÔNG dùng AI, ghi: "I do not use any AI help in this exercise."
->
-> Nếu CÓ dùng AI, điền bảng bên dưới cho mỗi lần tương tác.
+Nếu không sử dụng AI, hãy phát biểu chính xác: `Tôi không sử dụng bất kỳ trợ giúp AI nào trong bài tập này.`
+
+Nếu sử dụng AI, hãy thêm một hàng cho mỗi artefact được tạo bởi AI. Lời nhắc và đầu ra phải nguyên văn, không phải paraphrase.
 
 ---
 
-| # | AI Tool | Date & Time | Prompt | AI Output (summary/link) |
-|---|---------|-------------|--------|--------------------------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+## Thông Tin Sinh Viên
+
+| Trường | Giá Trị |
+|-------|-------|
+| Tên sinh viên | Bùi Dương Duy Cường |
+| Mã sinh viên | 23127033 |
+| Lớp / Nhóm | TODO |
+| Mã Bài Tập | HW02-AI |
+| Ngày bài tập | 2026-06-29 |
+| Công cụ AI được sử dụng | OpenAI GPT-5.5 thông qua OpenCode |
+
+---
+
+## Bảng Kiểm Toán
+
+| Artefact | Lời Nhắc + Công Cụ + Thời Gian | Đầu Ra AI | Kết Luận | Lý Do | Sửa Chữa Của Sinh Viên |
+|----------|----------------------|-----------|---------|-----------|-------------|
+| FR-03 Domain Testing draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các phân vùng và test case cho quên mật khẩu. | KHÔNG HOÀN CHỈNH | AI ban đầu tập trung quá nhiều vào bằng chứng nội bộ/API, điều này không được chấp nhận cho kiểm thử black-box UI. | Chuyển đổi thành các case chỉ UI TC-FORGOT_PW-001..012. |
+| FR-03 BVA draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các ranh giới OTP/password. | CÓ HIỆU LỰC sau sửa chữa | BVA áp dụng cho độ dài OTP và độ dài mật khẩu hiển thị qua UI. | Giữ lại các case OTP 5/6/7 và password 7/8. |
+| FR-09 Domain Testing draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các phân vùng điều kiện coupon C1-C5. | KHÔNG HOÀN CHỈNH | AI cần sửa chữa để biểu đạt tất cả các kiểm tra dưới dạng quan sát Checkout UI. | Chuyển đổi thành các case chỉ UI TC-COUPON-001..012. |
+| FR-09 BVA draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các ranh giới số lượng đơn hàng tối thiểu và số lần sử dụng. | CÓ HIỆU LỰC sau sửa chữa | BVA áp dụng trực tiếp cho tổng giỏ hàng hiển thị ở dưới/tại/trên ngưỡng. | Giữ lại các case ngưỡng và UI sử dụng tối đa. |
+| FR-15 Domain Testing draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các phân vùng CRUD cho xác thực, tên, giá, danh mục, hành vi chỉnh sửa/xóa. | KHÔNG HOÀN CHỈNH | AI cần sửa chữa để tránh kết luận ở mức endpoint và chỉ giữ hành vi Admin UI. | Chuyển đổi thành các case chỉ UI TC-PROD_MGMT-001..012. |
+| FR-15 BVA draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các ranh giới độ dài tên và giá. | CÓ HIỆU LỰC sau sửa chữa | BVA áp dụng cho ranh giới hình thức hiển thị: độ dài tên và giá trị. | Giữ lại các case tên 255/256 và giá 0/1. |
+| Mobile FR-03 Domain Testing draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các case quên mật khẩu dành riêng cho di động. | KHÔNG HOÀN CHỈNH | AI cần sửa chữa để coi di động là UI riêng, không phải tương đương web/API. | Chuyển đổi thành các case chỉ UI TC-MOBILE_FORGOT_PW-001..011. |
+| Mobile FR-03 BVA draft | Công Cụ: OpenCode/GPT-5.5. Thời Gian: 2026-06-29. Lời Nhắc: xem `prompt_log.md` hàng 1. | Phác thảo các ranh giới OTP và mật khẩu. | CÓ HIỆU LỰC sau sửa chữa | Độ dài OTP và độ dài mật khẩu tối thiểu có thể quan sát được thông qua black-box. | Giữ lại các case di động OTP 5/6/7 và mật khẩu 7/8. |
+
+---
+
+## Tóm Tắt Độ Chính Xác AI
+
+| Chỉ Số | Số Lượng | Phần Trăm |
+|--------|-------|------------|
+| Tổng artefact được tạo bởi AI đã kiểm toán | 8 | 100% |
+| CÓ HIỆU LỰC | 3 | 37.5% |
+| VÔ HIỆU | 0 | 0% |
+| KHÔNG HOÀN CHỈNH | 5 | 62.5% |
+
+---
+
+## Conclusion - When Should AI Be Used Or Not?
+
+AI was useful for structuring the work: it quickly separated domain partitions, BVA variables, test case files, and report sections for the four selected features. The main correction was methodological: because this homework is black-box UI testing, AI suggestions based on internal behavior must not become final evidence. I converted those ideas into UI-observable test cases and candidate bug drafts. Final conclusions must come from manual UI execution, screenshots, and human review against the requirement specification.
+
+---
+
+## Mandatory Disclosure
+
+This test case/script/dataset/report was initially generated by OpenAI GPT-5.5 through OpenCode; I reviewed and modified the feature partitions, boundary values, test case expected results, and black-box UI evidence requirements; bug confirmation is based only on manual UI execution and screenshots. The detailed AI Audit Report is attached as Appendix A. I confirm I did not use AI to generate any artifact listed in the prohibited category.

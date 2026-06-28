@@ -1,10 +1,27 @@
-# Git Commit Log
+# Nhật Ký Commit Git - HW02 Domain Testing
 
-**Student:** <MSSV> - <Name>
+**Sinh viên:** Bùi Dương Duy Cường - `23127033`
 
+Generated with:
+
+```bash
+git log --oneline --decorate --date=short --pretty=format:"%h %ad %s" -20
 ```
-<Paste your git log here, or attach as screenshot>
 
-Example:
-git log --oneline --all > git_log.txt
+Current working changes are not committed yet. Regenerate this section after the final commit if the assignment requires one commit per testing step.
+
+---
+
+```text
+1951c14 2026-06-27 Update README.md
+8c14bc6 2026-06-27 Update member MSSV for Châu in README.md
+34f7281 2026-06-27 Fix Pool D assignment for member Châu
+a58b681 2026-06-25 label
+1b88cd2 2026-06-15 Feature Assignment
+ddba4b7 2026-06-15 add new bug report
+fecc5a5 2026-06-15 update bug template
+c608b2b 2026-06-15 init
+e907fc8 2026-06-08 init update
+2a31fdb 2026-06-08 init
+d1562c6 2026-06-08 Initial commit
 ```
