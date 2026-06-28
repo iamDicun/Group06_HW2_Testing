@@ -1,4 +1,4 @@
-# TC-PROD_SEARCH-001: Search with multiple partial keywords (EP)
+# TC-PROD_SEARCH-010: Search with multiple partial keywords (EP)
 
 ## Requirement ID
 FR-05

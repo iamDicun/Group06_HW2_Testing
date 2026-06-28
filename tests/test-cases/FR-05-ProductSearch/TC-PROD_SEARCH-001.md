@@ -19,7 +19,8 @@ High
 ## Test Data
 | Field | Boundary | Value |
 |-------|----------|-------|
-| Search | Length 0 (empty) | `` (empty string) |
+| Search | min | `` (empty string) |
+| Search | min+1 | `a` |
 
 ## Test Steps
 For each boundary value above:
@@ -30,7 +31,8 @@ For each boundary value above:
 5. Observe the result
 
 ## Expected Result
-- The page shows all products by default without any errors and filter
+- The page shows all products by default without any errors and filter for empty string
+- The page show 4 products (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2) for filter using `a`
 
 ## Actual Result (filled after execution)
 

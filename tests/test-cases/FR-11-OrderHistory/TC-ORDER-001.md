@@ -19,7 +19,7 @@ High
 ## Test Data
 | Field | Boundary | Value |
 |-------|-------|-------|
-| Total Orders | Minimum valid order | `0` |
+| Total Orders | Valid | `0` |
 
 ## Test Steps
 1. Navigate to the Login page
