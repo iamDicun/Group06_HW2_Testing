@@ -1,0 +1,74 @@
+{
+  "TC-USERMGMT-001": {
+    "status": "PASSED",
+    "detail": "HTTP 200, user 2 deleted: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-002": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 404), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-003": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 400), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-004": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 400), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-005": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 400), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-006": {
+    "status": "PASSED",
+    "detail": "HTTP 401"
+  },
+  "TC-USERMGMT-007": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 401), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-008": {
+    "status": "FAILED",
+    "detail": "HTTP 403 (Expected 401), response: {'error': 'Forbidden'}"
+  },
+  "TC-USERMGMT-009": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 403), user3_exists: False, response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-010": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 403), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-011": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 403), response: {'message': 'User deleted'}"
+  },
+  "TC-USERMGMT-012": {
+    "status": "PASSED",
+    "detail": "HTTP 200, users count: 1"
+  },
+  "TC-USERMGMT-013": {
+    "status": "PASSED",
+    "detail": "HTTP 401"
+  },
+  "TC-USERMGMT-014": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 401), response: [{'id': 1, 'name': 'Admin User', 'email': 'admin@eshop.com', 'role': 'admin', 'login_attempts': 0, 'locked_until': None, 'shipping_address': None}]"
+  },
+  "TC-USERMGMT-015": {
+    "status": "FAILED",
+    "detail": "HTTP 403 (Expected 401), response: {'error': 'Forbidden'}"
+  },
+  "TC-USERMGMT-016": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 403), response: [{'id': 1, 'name': 'Admin User', 'email': 'admin@eshop.com', 'role': 'admin', 'login_attempts': 0, 'locked_until': None, 'shipping_address': None}]"
+  },
+  "TC-USERMGMT-017": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 403), response: [{'id': 1, 'name': 'Admin User', 'email': 'admin@eshop.com', 'role': 'admin', 'login_attempts': 0, 'locked_until': None, 'shipping_address': None}]"
+  },
+  "TC-USERMGMT-018": {
+    "status": "FAILED",
+    "detail": "HTTP 200 (Expected 400), admin_exists: False, response: {'message': 'User deleted'}"
+  }
+}

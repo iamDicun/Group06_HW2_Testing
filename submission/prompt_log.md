@@ -461,3 +461,59 @@ Bảng tóm tắt kết quả kiểm thử cuối cùng trong ma trận truy v�
 | **Blocked** | 14 |
 | **Not Run** | 0 |
 | **Bugs Found** | 15 |
+
+
+---
+## Session | Agent: Gemini 3.5 Flash (High) | Assignment: HW02 - Domain Testing | 2026-06-28 22:25 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+Đọc issue template và tạo issue cho github theo đúng template ở .github/
+
+**[Assistant]**
+Tôi đã đọc mẫu báo cáo lỗi tại `.github/ISSUE_TEMPLATE/bug-report.yml` và thực hiện tạo thành công 15 issue tương ứng với các bug tìm thấy trong các phân hệ kiểm thử của bạn lên kho lưu trữ GitHub bằng GitHub CLI.
+
+### Chi tiết các Issue đã được tạo:
+1. **Phân hệ Trạng thái đơn hàng (FR-10 - Order State):**
+   * **#5**: `[BUG][ORDER-STATE]: API trả về 404 Not Found thay vì 400 Bad Request cho ID đơn hàng không hợp lệ` (BUG-ORDERSTATE-001)
+   * **#6**: `[BUG][ORDER-STATE]: Cho phép người dùng hủy đơn hàng đang ở trạng thái đang giao (shipping)` (BUG-ORDERSTATE-002)
+   * **#7**: `[BUG][ORDER-STATE]: API hủy đơn trả về mã lỗi 404 thay vì 403 khi hủy đơn của người khác` (BUG-ORDERSTATE-003)
+   * **#8**: `[BUG][ORDER-STATE]: Admin không thể hủy đơn của người khác bằng API cancel thông thường của user` (BUG-ORDERSTATE-004)
+   * **#9**: `[BUG][ORDER-STATE]: API trả về 403 Forbidden thay vì 401 Unauthorized khi Token không hợp lệ` (BUG-ORDERSTATE-005)
+   * **#10**: `[BUG][ORDER-STATE]: Lỗi phân quyền nghiêm trọng - Cho phép User thường gọi API Admin đổi trạng thái đơn hàng` (BUG-ORDERSTATE-006)
+
+2. **Phân hệ Quản lý người dùng (FR-19 - User Management):**
+   * **#11**: `[BUG][USER-MGMT]: API Admin xóa người dùng không kiểm tra tính hợp lệ của ID người dùng (trả về 200 OK thay vì 400/404)` (BUG-USERMGMT-001)
+   * **#12**: `[BUG][USER-MGMT]: Middleware xác thực chấp nhận token định dạng không đúng chuẩn (Token <token> thay vì Bearer)` (BUG-USERMGMT-002)
+   * **#13**: `[BUG][USER-MGMT]: API trả về 403 Forbidden thay vì 401 Unauthorized khi Token không hợp lệ hoặc hết hạn` (BUG-USERMGMT-003)
+   * **#14**: `[BUG][USER-MGMT]: Lỗ hổng phân quyền nghiêm trọng - Cho phép User thường lấy danh sách và xóa mọi tài khoản người dùng` (BUG-USERMGMT-004)
+   * **#15**: `[BUG][USER-MGMT]: Cho phép quản trị viên tự xóa chính mình (Self-deletion) qua API` (BUG-USERMGMT-005)
+
+3. **Phân hệ Quản lý hồ sơ cá nhân (FR-04 - Personal Profile):**
+   * **#16**: `[BUG][PROFILE]: Báo sai lỗi SDT dù nhập đúng format` (BUG-PROFILE-001)
+   * **#17**: `[BUG][PROFILE]: Bỏ qua validation SDT khi bắt đầu bằng số khác 0` (BUG-PROFILE-002)
+   * **#18**: `[BUG][PROFILE]: Bỏ qua validation lỗi SDT khi cập nhật qua API` (BUG-PROFILE-003)
+   * **#19**: `[BUG][PROFILE-MOBILE]: Không thể đăng nhập và tải dữ liệu trên ứng dụng di động (Lỗi kết nối)` (BUG-PROFILE-MOBILE-001)
+
+### Quy cách định dạng được áp dụng:
+* **Tiêu đề**: Thiết lập theo chuẩn `[BUG][Tên phân hệ]: Mô tả ngắn`.
+* **Nội dung (Body)**: Chuyển đổi và ánh xạ cấu trúc báo cáo của các file markdown gốc sang các trường hiển thị tương ứng với các thẻ tiêu đề cấp 3 (`### Found by Test Case`, `### Requirement Related`, `### Severity`, `### Priority`, `### Environment`, `### Steps to Reproduce`, `### Expected Result`, `### Actual Result`, `### Evidence`).
+* **Nhãn dán (Labels)**: Gán các nhãn dán tương ứng gồm `type: bug`, `status: new`, nhãn phân hệ (`module: profile`, `module: order-state`, `module: user-mgmt`, `module: mobile`), nhãn độ nghiêm trọng và mức độ ưu tiên theo đúng thiết lập trên GitHub.
+* **Hình ảnh bằng chứng (Evidence)**: Tự động phân tích các liên kết hình ảnh tương đối (nếu có) và thay thế bằng liên kết tuyệt đối trỏ tới raw GitHub trên nhánh `Khoa` để đảm bảo hiển thị trực quan trên giao diện GitHub.
+
+---
+## Session | Agent: Gemini 3.5 Flash (High) | Assignment: HW02 - Domain Testing | 2026-06-28 22:36 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+Thực hiện yêu cầu 1 và yêu cầu 2 trong file Report.md mới và placeholder cho 3 và 4
+
+**[Assistant]**
+Tôi sẽ tạo tệp `submission/Report.md` mới để tích hợp báo cáo Domain Testing (Yêu cầu 1) và Boundary Value Analysis (Yêu cầu 2) cho cả 4 tính năng (FR-04 Web, FR-10 Order State Machine, FR-19 User Management Admin, và Mobile Profile), đồng thời để lại các tiêu đề placeholder cho Yêu cầu 3 (AI Gap Analysis) và Yêu cầu 4 (Bug Reporting).
+
+(Tệp `submission/Report.md` đã được tạo thành công với cấu trúc hoàn chỉnh của báo cáo.)
+
