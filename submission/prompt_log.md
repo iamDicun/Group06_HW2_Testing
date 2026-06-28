@@ -425,3 +425,39 @@ Các báo cáo lỗi chi tiết phát hiện được:
 - `BUG-USERMGMT-007`: Thiếu hộp thoại xác nhận khi nhấp nút "Xóa" trên giao diện Web Admin.
 
 
+---
+## Session | Agent: Gemini 3.5 Flash (High) | Assignment: HW02 - Domain Testing | 2026-06-28 22:13 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+đọc và tổng hợp các kết quả test vào trace matrix, xóa các folder không thuộc tính năng của tôi
+
+**[Assistant]**
+Tôi đã hoàn thành việc tổng hợp kết quả kiểm thử vào ma trận truy vết và dọn dẹp các thư mục không thuộc tính năng của bạn. Dưới đây là tóm tắt các công việc đã thực hiện:
+
+### 1. Dọn dẹp thư mục kiểm thử
+Đã xóa toàn bộ các thư mục test case không thuộc các tính năng được phân công của bạn (Khoa) trong `tests/test-cases/`, chỉ giữ lại:
+- `FR-04-Profile` (Quản lý hồ sơ cá nhân trên Web/API)
+- `FR-10-OrderState` (Trạng thái đơn hàng)
+- `FR-19-UserMgmt` (Quản lý người dùng - Admin)
+- `MOBILE-App` (Quản lý hồ sơ cá nhân trên Mobile)
+
+### 2. Tổng hợp kết quả vào Traceability Matrix
+Tất cả 77 test case thực tế từ các thư mục trên đã được ánh xạ chi tiết vào file [traceability-matrix.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/tests/test-summary/traceability-matrix.md) với các thông tin:
+- **Requirement**: Liên kết tới các tính năng tương ứng.
+- **Test Type / Technique**: Phân loại theo thiết kế (EP/BVA) từ các file test case.
+- **Result & Bug Issue**: Kết quả thực thi từ các file Test Run (`TR-PROFILE-WEB-Sprint-1.md`, `TR-PROFILE-MOBILE-Sprint-1.md`, `TR-ORDERSTATE-Sprint-1.md`, `TR-USERMGMT-Sprint-1.md`) được ánh xạ kèm link tương đối dẫn tới các báo cáo lỗi tương ứng trong `tests/test-reports/`.
+- **Status**: Trạng thái hiện tại của bug (ví dụ: `New` cho các bug chưa giải quyết).
+
+Bảng tóm tắt kết quả kiểm thử cuối cùng trong ma trận truy vết:
+
+| Metric | Count |
+|--------|-------|
+| **Total Test Cases** | 77 |
+| **Passed** | 34 |
+| **Failed** | 29 |
+| **Blocked** | 14 |
+| **Not Run** | 0 |
+| **Bugs Found** | 15 |
