@@ -1,10 +1,10 @@
-# TC-ORDER-005: Cancel order with "Chờ xác nhận" (pending) status (EP)
+# TC-ORDER-005: Verify Newly Placed Order Renders Correctly in Order History (EP)
 
 ## Requirement ID
 FR-11
 
 ## Feature
-Order History — Cancel pending order
+Order History
 
 ## Module / Test Type / Technique
 ORDER / Functional / Equivalence Partitioning
@@ -13,28 +13,25 @@ ORDER / Functional / Equivalence Partitioning
 High
 
 ## Preconditions
-- User is logged in
-- User has at least 1 order with status "pending" ("Chờ xác nhận")
+- User has an active account and is logged into the website
+- User has successfully placed a new order
 
 ## Test Data
 | Field | Value |
-|-------|-------|
-| Order status | `pending` |
-| Order id | (any pending order ID) |
+|-------|-----------------------|
+| Total Amount | `4.000.000 ₫` |
+| Status Badge | `Chờ xử lý` (or Pending) |
 
 ## Test Steps
-1. Log in to the application
-2. Navigate to `/profile`
-3. Locate the pending order in the order history table
-4. Verify the "Hủy đơn" (Cancel) button is visible
-5. Click the "Hủy đơn" button
-6. Confirm the action in the alert dialog
+1. Navigate to the Login page and log in with the test account
+2. Complete a standard checkout flow to create a fresh order with a total of 4.000.000 ₫
+3. Navigate to `/profile` and look at section named "Lịch sử đơn hàng" (Order History)
+4. Locate the topmost row/card in the transaction list
+5. Verify the visible fields: Order ID, Creation Date, Total Price, and Order Status
 
 ## Expected Result
-- The "Hủy đơn" button is visible for the pending order
-- After clicking, an alert shows "Hủy đơn thành công!" (Cancel successful)
-- The order status changes to "Đã hủy" (canceled)
-- The "Hủy đơn" button is no longer visible for the canceled order
+- The newly created order must instantly appear at the top of the history list without requiring a manual page hard-reload
+- The displayed Order ID must match exactly, the total amount must show proper localized currency formatting (`4.000.000 ₫`), and the status badge must clearly render as "Chờ xác nhận" (or Pending) with correct theme colors
 
 ## Actual Result (filled after execution)
 
@@ -46,7 +43,5 @@ Not Run
 None
 
 ## Notes
-- Partition: cancel action on an order with "pending" status
-- Frontend button visibility: shown when `status !== "delivered" && status !== "canceled"` (Profile.jsx:198)
-- Backend: `PUT /api/orders/:id/cancel` sets status to "canceled" (server.js:334)
-- The frontend re-fetches orders after cancel to refresh the list
+- Partition: Valid standard active data partition layout render check
+- UX Check: Verifies that the frontend fetches the fresh relational rows from the database successfully after a complete checkout redirection event

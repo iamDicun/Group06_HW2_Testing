@@ -1,10 +1,10 @@
-# TC-PROD_SEARCH-011: Search with Unicode / Vietnamese characters (EP)
+# TC-PROD_SEARCH-007: Search with Unicode / Vietnamese characters (EP)
 
 ## Requirement ID
 FR-05
 
 ## Feature
-Product Listing & Search
+Product Listing and Search
 
 ## Module / Test Type / Technique
 PROD_SEARCH / Functional / Equivalence Partitioning
@@ -14,7 +14,7 @@ High
 
 ## Preconditions
 - Products are seeded in the database (5 products, including "Bàn phím cơ Keychron Q1")
-- User is on the Home page
+- User is on the Home page with the search bar is visible
 
 ## Test Data
 | Field | Value |
@@ -22,12 +22,14 @@ High
 | Search | `phím` |
 
 ## Test Steps
-1. Navigate to `http://localhost:5173/`
-2. Enter `phím` (Vietnamese characters) into the search input
-3. Click the "Tìm" (Search) button
+1. Navigate to the Home page
+2. Clear the seach input
+3. Enter `phím` (Vietnamese characters) into the search input
+4. Click the "Tìm" (Search) button or press Enter
+5. Observe the result
 
 ## Expected Result
-1 product is displayed: "Bàn phím cơ Keychron Q1". The Vietnamese characters are correctly handled by the SQLite LIKE query.
+1 product is displayed: "Bàn phím cơ Keychron Q1". The Vietnamese characters are correctly handled by the SQLite LIKE query
 
 ## Actual Result (filled after execution)
 

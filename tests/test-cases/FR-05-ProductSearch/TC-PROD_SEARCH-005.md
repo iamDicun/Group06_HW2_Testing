@@ -1,10 +1,10 @@
-# TC-PROD_SEARCH-009: Search with special characters (EP)
+# TC-PROD_SEARCH-005: Search with special characters (EP)
 
 ## Requirement ID
 FR-05
 
 ## Feature
-Product Listing & Search
+Product Listing and Search
 
 ## Module / Test Type / Technique
 PROD_SEARCH / Functional / Equivalence Partitioning
@@ -14,20 +14,22 @@ Medium
 
 ## Preconditions
 - Products are seeded in the database (5 products)
-- User is on the Home page
+- User is on the Home page with the search bar is visible
 
 ## Test Data
 | Field | Value |
 |-------|-------|
-| Search | `<script>alert(1)</script>` |
+| Search | `@#$` |
 
 ## Test Steps
-1. Navigate to `http://localhost:5173/`
-2. Enter `<script>alert(1)</script>` into the search input
-3. Click the "Tìm" (Search) button
+1. Navigate to the Home page
+2. Clear the search input
+3. Enter `@#$` into the search input
+4. Click the "Tìm" (Search) button or press Enter
+5. Observe the result
 
 ## Expected Result
-Empty product list is displayed. The special characters are treated as a literal search string; no product name matches, and no script executes (no stored XSS since the value is only sent to the API and not persisted).
+Empty product list is displayed. The special characters are treated as a literal search string; no product name matches.
 
 ## Actual Result (filled after execution)
 
@@ -39,6 +41,5 @@ Not Run
 None
 
 ## Notes
-- Partition: search input with HTML/script special characters
-- The frontend reflects the search term via `dangerouslySetInnerHTML` (Home.jsx:64), but this is client-side only and the script tag is only in React state, not a stored payload
-- No sanitization or encoding is applied, but no XSS vulnerability is exploitable via search alone
+- Partition: search input with special characters
+- Verifies how system handles plain special characters. It should return an empty product list gracefully without throwing SQL errors

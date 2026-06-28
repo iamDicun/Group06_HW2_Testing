@@ -4,7 +4,7 @@
 FR-05
 
 ## Feature
-Product Listing & Search — Case sensitivity
+Product Listing and Search
 
 ## Module / Test Type / Technique
 PROD_SEARCH / Functional / Equivalence Partitioning
@@ -14,25 +14,25 @@ Medium
 
 ## Preconditions
 - Products are seeded in the database (5 products, including "iPhone 15 Pro Max")
-- User is on the Home page
+- User is on the Home page with the search bar is visible
 
 ## Test Data
 | Field | Case Variation | Value |
 |-------|----------------|-------|
 | Search | All lowercase | `iphone` |
 | Search | All uppercase | `IPHONE` |
-| Search | Mixed case | `iphoNe` |
+| Search | Mixed case | `iPhONe` |
 
 ## Test Steps
-For each case variation above:
-1. Navigate to `http://localhost:5173/`
+For each value in the Test Data table:
+1. Navigate to the Home page
 2. Clear the search input
 3. Enter the case variation value
-4. Click the "Tìm" (Search) button
+4. Click the "Tìm" (Search) button or press Enter
 5. Observe the result
 
 ## Expected Result
-All three case variations (`iphone`, `IPHONE`, `iphoNe`) return exactly 1 product: iPhone 15 Pro Max. The search is case-insensitive.
+All three case variations (`iphone`, `IPHONE`, `iPhONe`) return exactly 1 product: iPhone 15 Pro Max. The search must be case-insensitive.
 
 ## Actual Result (filled after execution)
 

@@ -1,20 +1,20 @@
-# TC-ORDER-002: Order history date formatting and sorting (EP & BVA)
+# TC-ORDER-002: Order history date display and newest-first sorting (EP)
 
 ## Requirement ID
 FR-11
 
 ## Feature
-Order History — Date display and sort order
+Order History
 
 ## Module / Test Type / Technique
-ORDER / Functional / Equivalence Partitioning & Boundary Value Analysis
+ORDER / Functional / Equivalence Partitioning
 
 ## Priority
 Medium
 
 ## Preconditions
-- User is logged in
-- User has at least 2 orders created on different dates (e.g., one today and one yesterday)
+- User has an account with at least two (2) orders created at different times
+- User is logged in and currently on the profile interface
 
 ## Test Data
 | Field | Value |
@@ -23,14 +23,16 @@ Medium
 | Order 2 created_at | `2026-06-26 15:43:06` (today) |
 
 ## Test Steps
-1. Log in to the application
+1. Navigate to the Login page and login with the account
 2. Navigate to `/profile`
 3. Observe the "Lịch sử đơn hàng" (Order History) table
+4. Verify the sorting order of the list
+5. Observe the text format in date column for each order
 
 ## Expected Result
-1. Orders are sorted with the newest first (descending by `ORDER BY id DESC`)
-2. Dates are formatted using the browser locale (e.g., `new Date("2026-06-26 15:43:06").toLocaleDateString()` → e.g., "6/26/2026" for en-US or "26/6/2026" for vi-VN)
-3. The date column displays only the date portion (no time)
+- Orders are sorted with the newest first, followed by the older order created yesterday
+- Dates are formatted using the browser locale
+- Time should also be displayed in the order date column
 
 ## Actual Result (filled after execution)
 
@@ -42,8 +44,6 @@ Not Run
 None
 
 ## Notes
-- EP: date displayed as locale date string
-- EP: sorting by newest first
-- BVA: orders on the same day — the one with higher ID (newer) appears first
-- Backend query: `ORDER BY id DESC` (server.js:314)
-- Frontend: `new Date(o.created_at).toLocaleDateString()` (Profile.jsx:185)
+- Partition: Valid chronological sorting algorithm verification
+- Backend query: `ORDER BY id DESC` (server.js:314), ensuring higher incremental IDs are pushed to the top of the array
+- Frontend: `new Date(o.created_at).toLocaleDateString()` (Profile.jsx:185), handles string rendering to present a human-readable date format on interface

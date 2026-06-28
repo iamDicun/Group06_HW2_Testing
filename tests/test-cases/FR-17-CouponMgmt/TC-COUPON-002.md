@@ -13,22 +13,28 @@ COUPON / Functional / Equivalence Partitioning
 High
 
 ## Preconditions
-- The coupon "EXPIRED" exists in the database with `expired_at = 2020-01-01` (past date)
+- A coupon `EXPIRED` exists in the database with an expiration timestamp set in the past (e.g.,`expired_at = 2020-01-01`)
+- User has an account, is logged in, and has added valid product(s) to the cart
 - User is on the Checkout page
 
 ## Test Data
 | Field | Value |
 |-------|-------|
-| Code | `EXPIRED` |
-| total_amount | 200000 |
+| Coupon Input | `EXPIRED` |
+| Cart total_amount | `30000000 ` |
 
 ## Test Steps
-1. Navigate to the Checkout page
-2. Enter `EXPIRED` into the coupon code input
-3. Click the "Áp dụng" (Apply) button
+1. Navigate to the Login page and log in with the test account
+2. Add product(s) to cart until the total amount displays a valid number
+3. Open the Cart page (`/cart`) and click the "Tiến hành thanh toán" (Proceed to checkout) button
+4. Verify that the system successfully navigates to the Checkout page (`/checkout`)
+5. Locate the Coupon Code input text box and enter `EXPIRED` into the coupon code input
+6. Click the "Áp dụng" (Apply) button
+7. Observe the layout, error messages, and calculation fields displayed on the screen
 
 ## Expected Result
-Error message displayed: "Mã giảm giá đã hết hạn" (Coupon has expired).
+- The coupon is rejected, a friendly error validation message displayed on the screen: "Mã giảm giá đã hết hạn" (Coupon has expired).
+- The final checkout calculation fields must not trigger any discount deductions, the total remains exactly the same as before applying the code
 
 ## Actual Result (filled after execution)
 
@@ -40,6 +46,6 @@ Not Run
 None
 
 ## Notes
-- Partition: coupon code past its expiration date
+- Partition: Invalid outdated system entity data verification
 - The expiry check runs after the minimum order check (server.js:380)
-- The coupon passes min order check (200000 > 100000) but fails the expiry check
+- The coupon passes min order check (3000000 > 100000) but fails the expiry check

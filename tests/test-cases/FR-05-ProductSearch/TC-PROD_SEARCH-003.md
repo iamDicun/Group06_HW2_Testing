@@ -1,10 +1,10 @@
-# TC-PROD_SEARCH-007: Search with trailing spaces (EP)
+# TC-PROD_SEARCH-003: Search with trailing spaces (EP)
 
 ## Requirement ID
 FR-05
 
 ## Feature
-Product Listing & Search
+Product Listing and Search
 
 ## Module / Test Type / Technique
 PROD_SEARCH / Functional / Equivalence Partitioning
@@ -14,20 +14,24 @@ Medium
 
 ## Preconditions
 - Products are seeded in the database (5 products)
-- User is on the Home page
+- User is on the Home page where the search bar is visible
 
 ## Test Data
 | Field | Value |
 |-------|-------|
-| Search | `iPhone ` (trailing space after "iPhone") |
+| Search | `iPhone ` (1 trailing space after "iPhone") |
+| Search | `iPhone  ` (2 trailing spaces after "iPhone") |
 
 ## Test Steps
-1. Navigate to `http://localhost:5173/`
-2. Enter `iPhone` followed by a space into the search input
-3. Click the "Tìm" (Search) button
+For each value in the Test Data table:
+1. Navigate to the Home page
+2. Clear the search input
+3. Enter the value into the search input
+4. Click the "Tìm" (Search) button or press Enter
+5. Observe the result
 
 ## Expected Result
-1 product is displayed (iPhone 15 Pro Max). Unlike leading spaces, trailing spaces are tolerated because the product name starts with "iPhone" followed by a space, so `%iPhone %` still matches.
+1 product is displayed (iPhone 15 Pro Max). The system ignores trailing whitespace(s) before performing the search
 
 ## Actual Result (filled after execution)
 
@@ -40,4 +44,5 @@ None
 
 ## Notes
 - Partition: search input with trailing whitespace
-- SQLite LIKE pattern `%iPhone %` matches because the actual product name is "iPhone 15 Pro Max"
+- Backend does not trim the search query before building the SQL LIKE pattern
+- Trailing spaces act as significant characters in the search

@@ -1,10 +1,10 @@
-# TC-PROD_SEARCH-010: Search with SQL Injection payload (EP)
+# TC-PROD_SEARCH-006: Search with SQL Injection and XSS payload (EP)
 
 ## Requirement ID
 FR-05
 
 ## Feature
-Product Listing & Search
+Product Listing and Search
 
 ## Module / Test Type / Technique
 PROD_SEARCH / Functional / Equivalence Partitioning
@@ -14,20 +14,25 @@ High
 
 ## Preconditions
 - Products are seeded in the database (5 products)
-- User is on the Home page
+- User is on the Home page with the search bar is visible
 
 ## Test Data
-| Field | Value |
+| Field | Value | Type |
 |-------|-------|
-| Search | `' OR '1'='1` |
+| Search | `' OR '1'='1` | SQL Injection Payload |
+| Search | `<script>alert(1)</script>` | XSS Payload |
 
 ## Test Steps
-1. Navigate to `http://localhost:5173/`
-2. Enter `' OR '1'='1` into the search input
-3. Click the "Tìm" (Search) button
+For each specific payload value in the Test Data table:
+1. Navigate to the Home page
+2. Clear the search input
+3. Enter the specific payload into the search input
+4. Click the "Tìm" (Search) button or press Enter
+5. Observe the system behavior and the results displayed on the screen
 
 ## Expected Result
-All 5 products are displayed. The SQL injection payload breaks out of the LIKE string and injects `OR '1'='1'`, making the WHERE clause always true and returning all rows.
+- For SQL Injection Payload: The backend must handle the input strictly as a literal text string. The system should not execute the raw SQL command or bypass the `WHERE` clause logic. In this case, the system must return an empty list
+- For XSS Payload: The system must properly sanitize or HTML-encode the input. It should not execute the Javascript code on the browser. The payload must either be rendered safely as plain test and return empty list as search result
 
 ## Actual Result (filled after execution)
 
@@ -39,7 +44,8 @@ Not Run
 None
 
 ## Notes
-- Partition: search input containing SQL injection payload
-- Backend constructs query via string interpolation (server.js:144): `` `SELECT * FROM products WHERE name LIKE '%${searchQuery}%'` ``
-- This is a **critical security vulnerability** — no input sanitization or parameterized queries
-- Other SQL injection variants (`' OR 1=1--`, `'; DROP TABLE --`) also work
+- Partition: Security testing/ Malicious payload input
+- Partition: Security testing / Malicious payload input.
+- Backend Vulnerability: The backend currently constructs the database query using unsafe string interpolation (`server.js:144`): `` `SELECT * FROM products WHERE name LIKE '%${searchQuery}%'` ``. This represents a critical security vulnerability due to the total lack of parameterized queries.
+- Frontend Vulnerability: The frontend (`Home.jsx:64`) reflects the search term on the interface using `dangerouslySetInnerHTML` without any prior sanitization or encoding. 
+- Security Audit Note: Although this input is handled as client-side React state (making a full Reflected XSS attack harder to exploit standalone without URL parameter binding), using `dangerouslySetInnerHTML` without sanitization is an extremely dangerous coding practice (Bad Practice) that should be refactored.
