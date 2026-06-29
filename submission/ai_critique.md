@@ -1,11 +1,11 @@
 # AI Critique (200–300 words)
 
-**Student:** <MSSV> - <Name>
+**Student:** 23127459 - Huỳnh Vương Thụy Quân
 
 ---
 
-[Write your 200–300 word critique here. Address:]
+During this test design assignment, the automated AI agent demonstrated significant analytical gaps, configuration biases, and critical design structural flaws. First, the AI systematically failed by treating the application's broken runtime states as the "Expected Result" across multiple whitespace robustness partitions. Instead of enforcing standard e-commerce business logic—which dictates that client inputs must be sanitized using trim operations—the AI naively accepted that the database returning zero results was correct. Second, the AI exhibited a heavy negative-testing bias; it focused aggressively on mapping defect behaviors and malicious payloads while completely omitting fundamental valid partitions (Positive Cases), leaving core successful validation paths untested until manual human intervention expanded the suite.
 
-- Where did the AI get something wrong, biased, or incomplete?
-- Why did it fail to catch the issue?
-- What principle have you learned about collaborating with AI during this assignment?
+Furthermore, the AI struggled significantly with structural granularity, alternating between over-clustering and over-segregating test boundaries. This defect was most prominent during Boundary Value Analysis (BVA) mapping. In certain iterations, the AI improperly grouped distinct boundary constraints into a single bloated case, masking isolated failure points. Conversely, it frequently over-partitioned identical numeric or string boundaries into redundant, duplicated test files, creating unnecessary test suite bloat. The AI failed to catch these issues due to context isolation and a rigid compliance bias; it evaluates local text parameters but completely lacks the holistic human intuition required to balance structural granularity, prioritize human-centric UX rules, or evaluate cross-platform integration flaws.
+
+The primary principle learned from this collaborative assignment is that AI is an exceptional efficiency accelerator for boilerplate framework setup, but a highly unreliable authority for critical logical verification. True quality assurance requires an aggressive human-in-the-loop paradigm. An engineer must actively override AI over-segregation, restore functional balance between valid and invalid partitions, and recalibrate boundary definitions based on authentic system constraints.

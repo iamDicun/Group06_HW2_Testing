@@ -39,10 +39,10 @@ High
 - The final checkout calculation fields must not trigger any discount deductions, the total remains exactly the same as before applying the code
 
 ## Actual Result (filled after execution)
-
+- The message: "Bạn đã sử dụng mã này 1 lần (đã đạt giới hạn)" and the total remained exactly the same
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

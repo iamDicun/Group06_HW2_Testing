@@ -38,13 +38,15 @@ Medium
 - Direct API Execution: To ensure maximum data sanitization and robustness across all platforms, the backend system must also succeed. It should internally clean/trim the incoming code string before querying the database, returning an HTTP `200 OK` response status along with the applied discount payload.
 
 ## Actual Result (filled after execution)
+- The message: "Áp dụng thành công!" was displayed but the price was total incorrectly
 - If the lowercase code `save10` is sent directly to the API returns: `{"error":"Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa"}`
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
-None
+- Bug-008: Inconsistent case-sensitivity validation between Frontend and Backend API layout
+- Bug-009: Incorrect discount price calculation logic on Frontend checkout component
 
 ## Notes
 - Partition: coupon code in different case than stored value in database

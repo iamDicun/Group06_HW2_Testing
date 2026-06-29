@@ -34,10 +34,10 @@ For each value in the Test Data table:
 1 product is displayed (iPhone 15 Pro Max). The system ignores trailing whitespace(s) before performing the search
 
 ## Actual Result (filled after execution)
-
+1 product was displayed (iPhone 15 Pro Max). The system ignored trailing whitespace(s) before performing the search
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

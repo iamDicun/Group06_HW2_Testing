@@ -35,10 +35,11 @@ Medium
 - Time should also be displayed in the order date column
 
 ## Actual Result (filled after execution)
-
+- Orders were sorted with the newest first, followed by the older order created yesterday with dates were displayed using the browser locale format
+- The date column didn't display time
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
 None

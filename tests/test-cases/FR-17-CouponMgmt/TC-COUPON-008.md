@@ -36,13 +36,13 @@ High
 - The discount value is calculated correctly (400.000 ₫), and the final total payment dynamically updates from 4.000.000 ₫ down to exactly 3.600.000 ₫.
 
 ## Actual Result (filled after execution)
-
+- A success message "Áp dụng thành công! Giảm 10%" was displayed on the checkout interface, but the discount calculation was incorrect
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
-None
+- Bug-009: Incorrect discount price calculation logic on Frontend checkout component
 
 ## Notes
 - Partition: Valid coupon use check

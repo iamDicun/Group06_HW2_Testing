@@ -37,13 +37,15 @@ For each value in the Test Data table:
 The system should not require the exact full name to return the relevant products
 
 ## Actual Result (filled after execution)
-
+- Searching `pro` or `15` displayed the "iPhone 15 Pro Max"
+- Searching `s24` displayed the "Samsung Galaxy S24 Ultra"
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
-None
+- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
+- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
 
 ## Notes
 - Valid input/ Partial match string (covers alphanumeric, numeric, and text sub-strings)

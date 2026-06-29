@@ -35,9 +35,10 @@ Medium
 - The accented character "í" in the search term is rendered correctly on screen
 
 ## Actual Result (filled after execution)
+A product grid appeared in a single-column layout. One product card was visible: "Bàn phím cơ Keychron Q1" (4,000,000 ₫) showing product image, name, price in "X,XXX,XXX ₫" format, and buttons "Xem chi tiết" and "Thêm vào giỏ". Below the grid the text "Hiển thị 1 sản phẩm" was displayed. The accented character "í" was rendered correctly on screen. No error messages appeared
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS vulnerability detected due to dangerouslySetInnerHTML handling on search response layers

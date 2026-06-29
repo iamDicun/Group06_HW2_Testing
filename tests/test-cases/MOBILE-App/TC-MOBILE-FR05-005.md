@@ -34,9 +34,10 @@ Medium
 - Exactly 1 product card representing the "iPhone 15 Pro Max" is successfully filtered and rendered on the screen. The counter updates to "Hiển thị 1 sản phẩm".
 
 ## Actual Result (filled after execution)
+The product grid area showed an empty state with the message "Không tìm thấy sản phẩm nào." No product cards were rendered. The double space caused the SQL LIKE pattern `%iPhone  Pro%` to not match any product name (product names use single spaces). No error alert or toast message appeared
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

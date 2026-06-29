@@ -39,13 +39,14 @@ Medium
 - Direct API Execution: To ensure maximum data sanitization and robustness across all platforms, the backend system must also succeed. It should internally clean/trim the incoming code string before querying the database, returning an HTTP `200 OK` response status along with the applied discount payload.
 
 ## Actual Result (filled after execution)
-
+- The message: "Áp dụng thành công!" was displayed on the screen but the final total calculation was incorrect
+- The direct API execution returns `{"error":"Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa"}`
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
-None
+- Bug-009: Incorrect discount price calculation logic on Frontend checkout component
 
 ## Notes
 - Partition: coupon code with leading or trailing whitespace

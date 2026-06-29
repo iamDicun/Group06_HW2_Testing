@@ -30,10 +30,10 @@ Low
 All 15 orders are displayed in a single table without any data truncation. There is no limit, page selector, "Load more" button, or scroll pagination.
 
 ## Actual Result (filled after execution)
-
+- All 15 orders were displayed on a single page without truncation or page pagination
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

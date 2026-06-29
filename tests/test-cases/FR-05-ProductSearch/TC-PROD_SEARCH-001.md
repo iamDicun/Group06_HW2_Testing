@@ -32,13 +32,14 @@ For each boundary value above:
 
 ## Expected Result
 - The page shows all products by default without any errors and filter for empty string
-- The page show 4 products (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2) for filter using `a`
+- The page shows 4 products (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2) for filter using `a`
 
 ## Actual Result (filled after execution)
-
+- The page showed all products by default without any errors and filter for empty string
+- The page showed 4 products (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2) for filter using `a`
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

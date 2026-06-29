@@ -37,9 +37,10 @@ For each test data value:
 - Below the grid the text "Hiển thị 1 sản phẩm" is displayed. No error messages appear
 
 ## Actual Result (filled after execution)
+A product grid appeared in a single-column layout. One product card was visible: "iPhone 15 Pro Max" (30,000,000 ₫) showing product image, name, price in "X,XXX,XXX ₫" format, and buttons "Xem chi tiết" and "Thêm vào giỏ". Below the grid the text "Hiển thị 1 sản phẩm" was displayed
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS vulnerability detected due to dangerouslySetInnerHTML handling on search response layers

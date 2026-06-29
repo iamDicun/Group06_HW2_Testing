@@ -34,9 +34,10 @@ High
 - Below the grid the text "Hiển thị 3 sản phẩm" is displayed. No error messages appear
 
 ## Actual Result (filled after execution)
+A product grid appeared in a single-column layout. Three product cards were visible: "iPhone 15 Pro Max" (30,000,000 ₫), "MacBook Pro M3" (45,000,000 ₫), and "Tai nghe AirPods Pro 2" (6,000,000 ₫). Each card showed a product image, name, price in "X,XXX,XXX ₫" format, and buttons "Xem chi tiết" and "Thêm vào giỏ". Below the grid the text "Hiển thị 3 sản phẩm" was displayed. The matched substring "Pro" was highlighted in bold on each product name. No error messages appeared.
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS due to dangerouslySetInnerHTML on search results

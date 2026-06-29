@@ -32,16 +32,17 @@ For each value in the Test Data table:
 5. Observe the result
 
 ## Expected Result
-All three case variations (`iphone`, `IPHONE`, `iPhONe`) return exactly 1 product: iPhone 15 Pro Max. The search must be case-insensitive.
+All three case variations (`iphone`, `IPHONE`, `iPhONe`) return exactly 1 product: iPhone 15 Pro Max. The search must be case-insensitive
 
 ## Actual Result (filled after execution)
-
+All three case variations (`iphone`, `IPHONE`, `iPhONe`) returned exactly 1 product: iPhone 15 Pro Max
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
-None
+- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
+- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
 
 ## Notes
 - SQLite LIKE is case-insensitive for ASCII characters by default

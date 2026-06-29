@@ -34,10 +34,10 @@ For each value in the Test Data table:
 Exactly 1 matching product (iPhone 15 Pro Max) is displayed. The system ignores leading whitespace(s) before performing the search.
 
 ## Actual Result (filled after execution)
-
+Returned no result found the keyword
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
 None

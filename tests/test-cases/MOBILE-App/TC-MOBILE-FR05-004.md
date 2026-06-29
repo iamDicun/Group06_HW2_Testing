@@ -34,9 +34,10 @@ Medium
 - Exactly 1 product card representing the "iPhone 15 Pro Max" must be successfully rendered on the screen. The counter displays "Hiển thị 1 sản phẩm"
 
 ## Actual Result (filled after execution)
+A product grid appeared in a single-column layout. One product card was visible: "iPhone 15 Pro Max" (30,000,000 ₫) showing product image, name, price in "X,XXX,XXX ₫" format, and buttons "Xem chi tiết" and "Thêm vào giỏ". Below the grid the text "Hiển thị 1 sản phẩm" was displayed. The single trailing space was not trimmed — it matched because the product name "iPhone 15 Pro Max" contains "iPhone " (with space before "15"). No error messages appeared
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

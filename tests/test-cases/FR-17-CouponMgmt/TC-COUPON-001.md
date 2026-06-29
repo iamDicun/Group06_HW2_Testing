@@ -38,10 +38,11 @@ High
 - If sending an empty code directly via API, the backend returns: `{"error":"Vui lòng nhập mã giảm giá"}` with HTTP 400.
 
 ## Actual Result (filled after execution)
-
+- The "Áp dụng" button was disabled and not responsed to click
+- The backend returned: `{"error":"Vui lòng nhập mã giảm giá"}` with HTTP 400
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

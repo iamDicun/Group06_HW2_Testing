@@ -31,10 +31,10 @@ Medium
 - The currency unit symbol `₫` must be appended clearly after numeric digits
 
 ## Actual Result (filled after execution)
-
+- The total amount was displayed appropriate thousand separators with currency unit symbol was appended correctly
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

@@ -34,9 +34,10 @@ Medium
 - The single-column mobile product grid (`grid-cols-1`) must update dynamically to render exactly 1 matching item card representing the `iPhone 15 Pro Max`. The bottom counter text must update to: "Hiển thị 1 sản phẩm"
 
 ## Actual Result (filled after execution)
+The product grid area showed an empty state with the message "Không tìm thấy sản phẩm nào." No product cards were rendered. The search term was not trimmed before being sent to the API — the leading spaces caused the SQL LIKE pattern to not match any product name. No error alert or toast message appeared.
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS vulnerability detected due to dangerouslySetInnerHTML handling on search response layers

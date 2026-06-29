@@ -35,9 +35,10 @@ High
 - Below the grid the text "Hiển thị 5 sản phẩm" is displayed. No error messages or validation hints appear on the screen
 
 ## Actual Result (filled after execution)
+A product grid appeared in a single-column layout. All five product cards were visible: "iPhone 15 Pro Max" (30,000,000 ₫), "Samsung Galaxy S24 Ultra" (28,000,000 ₫), "MacBook Pro M3" (45,000,000 ₫), "Tai nghe AirPods Pro 2" (6,000,000 ₫), and "Bàn phím cơ Keychron Q1" (4,000,000 ₫). Each card showed a product image, name, price in "X,XXX,XXX ₫" format, and buttons "Xem chi tiết" and "Thêm vào giỏ". Below the grid the text "Hiển thị 5 sản phẩm" was displayed. No error messages or validation hints appeared.
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS due to dangerouslySetInnerHTML on search results

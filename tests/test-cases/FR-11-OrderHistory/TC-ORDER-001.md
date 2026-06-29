@@ -32,10 +32,10 @@ High
 - The interface must not show any broken tables, or blank white screens left hanging
 
 ## Actual Result (filled after execution)
-
+- The message "Bạn chưa có đơn hàng nào." (You have no orders yet) was displayed. No table or order rows were rendered
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

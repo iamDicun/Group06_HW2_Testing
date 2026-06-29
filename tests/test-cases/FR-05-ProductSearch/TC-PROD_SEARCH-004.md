@@ -32,10 +32,10 @@ Medium
 The system should automatically normalize the search query by collapsing multiple consecutive spaces into a single space (converting "iPhone  Pro" to "iPhone Pro"). And exactly 1 product displayed (iPhone 15 Pro Max)
 
 ## Actual Result (filled after execution)
-
+The system returned no result in the database matched the input keyword
 
 ## Status
-Not Run
+Fail
 
 ## Related Bugs
 None

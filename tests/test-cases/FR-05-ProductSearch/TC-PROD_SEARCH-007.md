@@ -32,13 +32,14 @@ High
 1 product is displayed: "Bàn phím cơ Keychron Q1". The Vietnamese characters are correctly handled by the SQLite LIKE query
 
 ## Actual Result (filled after execution)
-
+- 1 product is displayed: "Bàn phím cơ Keychron Q1". The Vietnamese characters are correctly displayed
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
-None
+- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
+- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
 
 ## Notes
 - Partition: search input with Unicode/Vietnamese characters

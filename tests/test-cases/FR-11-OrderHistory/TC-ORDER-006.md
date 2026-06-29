@@ -33,10 +33,10 @@ High
 - The history list must only display past successfully placed orders. No dummy, zero-id rows, or pending draft orders from the active session should populate this UI grid.
 
 ## Actual Result (filled after execution)
-
+- The history list displayed past successfully placed orders
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

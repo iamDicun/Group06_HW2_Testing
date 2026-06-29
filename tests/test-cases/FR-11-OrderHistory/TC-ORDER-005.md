@@ -34,10 +34,10 @@ High
 - The displayed Order ID must match exactly, the total amount must show proper localized currency formatting (`4.000.000 ₫`), and the status badge must clearly render as "Chờ xác nhận" (or Pending) with correct theme colors
 
 ## Actual Result (filled after execution)
-
+- A new row of order was displayed on top of the history list with correct total amount matched
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

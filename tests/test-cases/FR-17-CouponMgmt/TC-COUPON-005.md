@@ -40,10 +40,12 @@ For each boundary value above:
 - `Above min` (300001): Success — coupon applied
 
 ## Actual Result (filled after execution)
-
+- `Below min` (299999): Error message "Đơn hàng chưa đủ giá trị tối thiểu 300,000 ₫ để áp dụng mã này"
+- `At min` (300000): Error "Đơn hàng chưa đủ giá trị tối thiểu 300,000 ₫ để áp dụng mã này"
+- `Above min` (300001): Success — coupon applied
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

@@ -32,13 +32,14 @@ Medium
 - Since the system only supports rigid database LIKE: The system looks for the literal string in database, since there are none it will return an empty list gracefully without throwing error
 
 ## Actual Result (filled after execution)
-
+- The result returned empty list without errors occured
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
-None
+- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
+- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
 
 ## Notes
 - Partition: Valid input/ multi-keyword non-consecutive partial search

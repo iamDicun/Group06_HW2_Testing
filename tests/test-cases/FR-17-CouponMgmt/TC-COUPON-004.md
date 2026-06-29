@@ -37,10 +37,10 @@ High
 - The final checkout calculation fields must not trigger any discount deductions, the total remains exactly the same as before applying the code
 
 ## Actual Result (filled after execution)
-
+- The message: "Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa" was displayed and the total remained exactly the same
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

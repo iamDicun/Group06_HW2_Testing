@@ -29,13 +29,13 @@ Medium
 5. Observe the result
 
 ## Expected Result
-Empty product list is displayed. The special characters are treated as a literal search string; no product name matches.
+Empty product list is displayed. The special characters are treated as a literal search string; no product name matches
 
 ## Actual Result (filled after execution)
-
+Empty product list was displayed. The special characters were treated as a literal search string; no product name matched
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 None

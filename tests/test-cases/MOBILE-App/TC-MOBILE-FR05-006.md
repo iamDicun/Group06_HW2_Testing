@@ -33,9 +33,10 @@ High
 - No product cards are rendered. No JavaScript dialog (alert box) appears. No error toast or alert message is shown. The page does not redirect or break
 
 ## Actual Result (filled after execution)
+The product grid area showed an empty state with the message "Không tìm thấy sản phẩm nào." No product cards were rendered. No JavaScript dialog (alert box) appeared. The page did not redirect or break. The `<script>` tag was treated as a literal search string by the backend and matched zero products. No error toast or alert message was shown
 
 ## Status
-Not Run
+Pass
 
 ## Related Bugs
 Bug-006 – XSS due to dangerouslySetInnerHTML on search results
