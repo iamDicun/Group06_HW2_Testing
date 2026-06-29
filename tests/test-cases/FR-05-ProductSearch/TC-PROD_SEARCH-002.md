@@ -20,7 +20,7 @@ Medium
 | Field | Value |
 |-------|-------|
 | Search | ` iPhone` (1 leading space before "iPhone") |
-| Search | `  iPhone` (2 leading spaces bẻo "iPhone") |
+| Search | `  iPhone` (2 leading spaces before "iPhone") |
 
 ## Test Steps
 For each value in the Test Data table:
