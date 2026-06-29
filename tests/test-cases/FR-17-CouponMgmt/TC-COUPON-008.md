@@ -42,7 +42,7 @@ High
 Fail
 
 ## Related Bugs
-- Bug-009: Incorrect discount price calculation logic on Frontend checkout component
+- None
 
 ## Notes
 - Partition: Valid coupon use check

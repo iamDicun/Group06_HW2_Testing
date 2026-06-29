@@ -39,7 +39,7 @@ The product grid area showed an empty state with the message "Không tìm thấy
 Pass
 
 ## Related Bugs
-Bug-006 – XSS due to dangerouslySetInnerHTML on search results
+None
 
 ## Notes
 - Partitions: Malicious script injection / Cross-Site Scripting (XSS) payload

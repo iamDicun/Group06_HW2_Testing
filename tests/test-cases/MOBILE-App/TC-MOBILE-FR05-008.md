@@ -41,7 +41,7 @@ A product grid appeared in a single-column layout. One product card was visible:
 Pass
 
 ## Related Bugs
-Bug-006 – XSS vulnerability detected due to dangerouslySetInnerHTML handling on search response layers
+None
 
 ## Notes
 - Partitions: Vietnamese characters

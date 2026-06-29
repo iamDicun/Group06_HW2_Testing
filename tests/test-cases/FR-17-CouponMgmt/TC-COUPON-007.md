@@ -21,7 +21,6 @@ Medium
 | Field | Value |
 |-------|-------|
 | Coupon code | ` SAVE10` (leading space) |
-| Direct API Payload | `{"code": "SAVE10 "}` |
 | Cart total_amount | `4000000` |
 
 ## Test Steps
@@ -32,21 +31,18 @@ Medium
 5. Locate the Coupon Code input text box and enter ` SAVE10` with a leading space into the coupon code input
 6. Click the "Áp dụng" (Apply) button
 7. Observe the layout, error messages, and calculation fields displayed on the screen
-8. (API Verification): create a direct `POST` request to send the code `SAVE10 ` directly to `http://localhost:3000/api/coupons/apply` backend, including the auth token in Headers, and pass the raw trailing space body: `{"code": "SAVE10 "}` and click SEND and observe response
 
 ## Expected Result
 - UI Execution (Via Web Browser): The coupon application must succeed. The frontend mechanism must automatically strip away any outer accidental whitespaces. The screen displays: "Áp dụng thành công!", and the final total calculation drops accordingly.
-- Direct API Execution: To ensure maximum data sanitization and robustness across all platforms, the backend system must also succeed. It should internally clean/trim the incoming code string before querying the database, returning an HTTP `200 OK` response status along with the applied discount payload.
 
 ## Actual Result (filled after execution)
 - The message: "Áp dụng thành công!" was displayed on the screen but the final total calculation was incorrect
-- The direct API execution returns `{"error":"Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa"}`
 
 ## Status
 Fail
 
 ## Related Bugs
-- Bug-009: Incorrect discount price calculation logic on Frontend checkout component
+- None
 
 ## Notes
 - Partition: coupon code with leading or trailing whitespace

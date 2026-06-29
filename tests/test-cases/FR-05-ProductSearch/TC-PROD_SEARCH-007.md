@@ -38,8 +38,7 @@ High
 Pass
 
 ## Related Bugs
-- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
-- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
+None
 
 ## Notes
 - Partition: search input with Unicode/Vietnamese characters

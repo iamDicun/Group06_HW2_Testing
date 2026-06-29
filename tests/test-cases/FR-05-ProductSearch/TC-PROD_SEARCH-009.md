@@ -44,8 +44,7 @@ The system should not require the exact full name to return the relevant product
 Pass
 
 ## Related Bugs
-- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
-- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
+- None
 
 ## Notes
 - Valid input/ Partial match string (covers alphanumeric, numeric, and text sub-strings)

@@ -41,8 +41,7 @@ All three case variations (`iphone`, `IPHONE`, `iPhONe`) returned exactly 1 prod
 Pass
 
 ## Related Bugs
-- Bug-006: Stored/Reflected XSS via dangerouslySetInnerHTML on search views
-- Bug-007: Critical SQL Injection vulnerability due to raw string interpolation
+None
 
 ## Notes
 - SQLite LIKE is case-insensitive for ASCII characters by default
