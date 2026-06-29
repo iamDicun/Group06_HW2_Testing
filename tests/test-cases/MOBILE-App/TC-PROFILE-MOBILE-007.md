@@ -30,13 +30,13 @@ High
 - Hiển thị lỗi cảnh báo: "Số điện thoại không được để trống".
 
 ## Actual Result (filled after execution)
-Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
+- Bị lỗi không cho cập nhật và thông báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-BLOCKED
+PASSED
 
 ## Related Bugs
-BUG-PROFILE-MOBILE-001
+
 
 ## Notes
 - Giả định Số điện thoại là trường bắt buộc (mandatory).

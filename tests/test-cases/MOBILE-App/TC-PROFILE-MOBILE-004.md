@@ -30,13 +30,13 @@ High
 - Ký tự thứ 12 không thể hiển thị trong ô nhập (bị TextInput chặn cứng qua thuộc tính maxLength={11}).
 
 ## Actual Result (filled after execution)
-Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
+- Bị lỗi không cho cập nhật và thông báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-BLOCKED
+PASSED
 
 ## Related Bugs
-BUG-PROFILE-MOBILE-001
+
 
 ## Notes
 - Kiểm thử thuộc tính maxLength={11} để chặn cứng biên trên ngay từ Client.

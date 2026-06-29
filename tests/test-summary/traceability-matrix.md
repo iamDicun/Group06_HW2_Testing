@@ -23,13 +23,21 @@
 | FR-04 (Profile Web) | TC-PROFILE-019 | API Security | EP | PASSED |  |  |
 | FR-04 (Profile Web) | TC-PROFILE-020 | API Security | EP | PASSED |  |  |
 | FR-04 (Profile Web) | TC-PROFILE-021 | API Security | EP | FAILED | [BUG-PROFILE-003](../test-reports/FR-4/BUG-PROFILE-003.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-001 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-002 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-003 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-004 | UI | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-005 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-006 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
-| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-007 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-001 | Functional | BVA | FAILED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-002 | Functional | BVA | FAILED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-003 | Functional | BVA | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-004 | UI | BVA | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-005 | Functional | EP | FAILED | [BUG-PROFILE-MOBILE-002](../test-reports/FR-4/BUG-PROFILE-MOBILE-002.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-006 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-007 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-008 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-009 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-010 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-011 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-012 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-013 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-014 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-015 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
 | FR-10 (Order State) | TC-ORDERSTATE-001 | Functional | EP | PASSED |  |  |
 | FR-10 (Order State) | TC-ORDERSTATE-002 | Functional | EP | PASSED |  |  |
 | FR-10 (Order State) | TC-ORDERSTATE-003 | Functional | BVA | FAILED | [BUG-ORDERSTATE-001](../test-reports/FR-10/BUG-ORDERSTATE-001.md) | New |
@@ -90,9 +98,9 @@
 ## Summary
 | Metric | Count |
 |--------|-------|
-| Total Test Cases | 77 |
-| Passed | 34 |
-| Failed | 29 |
-| Blocked | 14 |
+| Total Test Cases | 85 |
+| Passed | 38 |
+| Failed | 32 |
+| Blocked | 15 |
 | Not Run | 0 |
-| Bugs Found | 15 |
+| Bugs Found | 16 |

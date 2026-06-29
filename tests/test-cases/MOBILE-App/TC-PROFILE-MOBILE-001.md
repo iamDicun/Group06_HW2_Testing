@@ -32,10 +32,10 @@ High
 - Dữ liệu Số điện thoại mới được cập nhật chính xác trong CSDL.
 
 ## Actual Result (filled after execution)
-Bị chặn (Blocked) do không thể đăng nhập hoặc kết nối tới hệ thống trên thiết bị di động (ứng dụng không tải được dữ liệu và báo lỗi kết nối mạng).
+- Bị lỗi không cho cập nhật và thông báo "Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số."
 
 ## Status
-BLOCKED
+FAILED
 
 ## Related Bugs
 BUG-PROFILE-MOBILE-001

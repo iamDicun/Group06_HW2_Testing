@@ -119,19 +119,21 @@ Phân tích các thuộc tính và hành vi đặc thù trên môi trường di 
 
 | Biến / Tham số di động | Phân hoạch (Partition) | Loại phân hoạch (Class Type) | Điều kiện / Hành vi trên Mobile | Ca kiểm thử tương ứng |
 | :--- | :--- | :--- | :--- | :--- |
-| **phone_input_type** (Bàn phím) | P1 — Bàn phím số chuyên biệt | Valid | Prop `keyboardType` là `"phone-pad"` hoặc `"numeric"` | TC-MOBILE-001 |
-| | P2 — Bàn phím mặc định | Invalid | Prop `keyboardType` bị thiếu hoặc là `"default"` | TC-MOBILE-002 |
-| **phone_value_client** (Bypass Clipboard) | P1 — Nhập chữ từ clipboard | Invalid | Copy chuỗi chứa chữ cái (ví dụ: `"0912abc345"`) rồi paste | TC-MOBILE-008 |
-| **address_input_multiline** | P1 — Đa dòng (multiline) | Valid | Prop `multiline={true}`. Cho phép xuống dòng bằng nút Enter | TC-MOBILE-010 |
-| | P2 — Một dòng | Invalid | Prop `multiline` là `false` hoặc thiếu | TC-MOBILE-010 |
-| **base_url_lan** (IP Backend) | P1 — IP LAN cùng subnet | Valid | Thiết bị chung WiFi mạng nội bộ PC (ví dụ: `192.168.1.5:3000`) | TC-MOBILE-011 |
-| | P2 — Localhost IP | Invalid | Thiết bị trỏ tới `localhost` hoặc `127.0.0.1` (báo lỗi kết nối) | TC-MOBILE-013 |
-| | P3 — Tunnel Ngrok URL | Valid | Sử dụng domain Ngrok (ví dụ: `https://xxxx.ngrok-free.app`) | TC-MOBILE-012 |
-| **network_connectivity_state** | P1 — Mạng trực tuyến ổn định | Valid | Gửi request thành công, nhận phản hồi bình thường | TC-MOBILE-016 |
-| | P2 — Mạng ngoại tuyến | Invalid | Báo lỗi ngay lập tức mà không gửi request, hiển thị alert Offline | TC-MOBILE-017 |
-| | P3 — Mạng yếu chập chờn | Invalid | Request chờ phản hồi vượt quá mốc timeout biên | TC-MOBILE-018 |
-| **keyboard_viewport_adjust** | P1 — Co giãn thích ứng | Valid | Viewport tự đẩy lên khi bàn phím ảo mở (KeyboardAvoidingView) | TC-MOBILE-019 |
-| | P2 — Bị che lấp | Invalid | TextInput và nút bấm bị đè khuất, không tương tác được | TC-MOBILE-020 |
+| **phone_value_client** | P1 — Hợp lệ (10 chữ số) | Valid | Nhập đúng 10 chữ số bắt đầu bằng 0 | TC-PROFILE-MOBILE-001 |
+| | P2 — Hợp lệ (11 chữ số) | Valid | Nhập đúng 11 chữ số bắt đầu bằng 0 | TC-PROFILE-MOBILE-002 |
+| | P3 — Quá ngắn (9 chữ số) | Invalid | Nhập 9 chữ số | TC-PROFILE-MOBILE-003 |
+| | P4 — Quá dài (12 chữ số) | Invalid | Cố gắng nhập hoặc dán 12 chữ số | TC-PROFILE-MOBILE-004 |
+| | P5 — Không bắt đầu bằng 0 | Invalid | Số điện thoại bắt đầu bằng số khác 0 | TC-PROFILE-MOBILE-005 |
+| | P6 — Chứa ký tự chữ cái | Invalid | Dán chuỗi chứa chữ cái từ clipboard | TC-PROFILE-MOBILE-006 |
+| | P7 — Để trống | Invalid | Xóa trống trường Số điện thoại | TC-PROFILE-MOBILE-007 |
+| **name_value_client** | P1 — Họ tên để trống | Invalid | Xóa trống trường Họ tên | TC-PROFILE-MOBILE-008 |
+| | P2 — Hợp lệ tối đa (255 ký tự) | Valid | Nhập Họ tên dài đúng 255 ký tự | TC-PROFILE-MOBILE-009 |
+| | P3 — Quá dài (256 ký tự) | Invalid | Nhập Họ tên dài 256 ký tự | TC-PROFILE-MOBILE-010 |
+| | P4 — Chứa XSS script | Invalid | Nhập thẻ script để kiểm tra XSS | TC-PROFILE-MOBILE-011 |
+| **address_value_client** | P1 — Địa chỉ để trống | Invalid | Xóa trống trường Địa chỉ | TC-PROFILE-MOBILE-012 |
+| | P2 — Hợp lệ tối đa (500 ký tự) | Valid | Nhập Địa chỉ dài đúng 500 ký tự | TC-PROFILE-MOBILE-013 |
+| | P3 — Quá dài (501 ký tự) | Invalid | Nhập Địa chỉ dài 501 ký tự | TC-PROFILE-MOBILE-014 |
+| | P4 — Chứa XSS script | Invalid | Nhập thẻ script để kiểm tra XSS | TC-PROFILE-MOBILE-015 |
 
 ---
 
@@ -238,3 +240,140 @@ Dù đã các skill cho từng bước trong quá trình kiểm thử, AI vẫn 
 ## YÊU CẦU 4: BUG REPORTING 
 Đối với các file markdown bug report, vui lòng kiểm tra ở thư mục tests/test-reports
 ![alt text](image.png)
+
+# Traceability Matrix — HW02 Domain Testing
+
+| Requirement | Test Case ID | Test Type | Technique | Result | Bug Issue | Status |
+|------------|-------------|-----------|-----------|--------|-----------|--------|
+| FR-04 (Profile Web) | TC-PROFILE-001 | Functional | EP | FAILED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-002 | Functional | BVA | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-003 | Functional | BVA | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-004 | Functional | BVA | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-005 | Functional | EP | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-006 | Functional | BVA | FAILED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-007 | Functional | BVA | FAILED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-008 | Functional | BVA | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-009 | Functional | BVA | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-010 | Functional | EP | FAILED | [BUG-PROFILE-002](../test-reports/FR-4/BUG-PROFILE-002.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-011 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-012 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-013 | Functional | BVA | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-014 | Functional | BVA | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-015 | Functional | BVA | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-016 | Functional | EP | BLOCKED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-017 | API Security | EP | PASSED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-018 | API Security | EP | PASSED | [BUG-PROFILE-001](../test-reports/FR-4/BUG-PROFILE-001.md) | New |
+| FR-04 (Profile Web) | TC-PROFILE-019 | API Security | EP | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-020 | API Security | EP | PASSED |  |  |
+| FR-04 (Profile Web) | TC-PROFILE-021 | API Security | EP | FAILED | [BUG-PROFILE-003](../test-reports/FR-4/BUG-PROFILE-003.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-001 | Functional | BVA | FAILED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-002 | Functional | BVA | FAILED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-003 | Functional | BVA | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-004 | UI | BVA | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-005 | Functional | EP | FAILED | [BUG-PROFILE-MOBILE-002](../test-reports/FR-4/BUG-PROFILE-MOBILE-002.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-006 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-007 | Functional | EP | PASSED |  |  |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-008 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-009 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-010 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-011 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-012 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-013 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-014 | Functional | BVA | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-04 (Profile Mobile) | TC-PROFILE-MOBILE-015 | Functional | EP | BLOCKED | [BUG-PROFILE-MOBILE-001](../test-reports/FR-4/BUG-PROFILE-MOBILE-001.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-001 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-002 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-003 | Functional | BVA | FAILED | [BUG-ORDERSTATE-001](../test-reports/FR-10/BUG-ORDERSTATE-001.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-004 | Functional | BVA | FAILED | [BUG-ORDERSTATE-001](../test-reports/FR-10/BUG-ORDERSTATE-001.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-005 | Functional | EP | FAILED | [BUG-ORDERSTATE-001](../test-reports/FR-10/BUG-ORDERSTATE-001.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-006 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-007 | Functional | BVA | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-008 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-009 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-010 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-011 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-012 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-013 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-014 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-015 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-016 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-017 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-018 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-019 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-020 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-021 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-022 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-023 | Functional | EP | FAILED | [BUG-ORDERSTATE-002](../test-reports/FR-10/BUG-ORDERSTATE-002.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-024 | Functional | EP | FAILED | [BUG-ORDERSTATE-003](../test-reports/FR-10/BUG-ORDERSTATE-003.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-025 | Functional | EP | FAILED | [BUG-ORDERSTATE-004](../test-reports/FR-10/BUG-ORDERSTATE-004.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-026 | Functional | EP | FAILED | [BUG-ORDERSTATE-004](../test-reports/FR-10/BUG-ORDERSTATE-004.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-027 | Functional | EP | FAILED | [BUG-ORDERSTATE-004](../test-reports/FR-10/BUG-ORDERSTATE-004.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-028 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-029 | Functional | EP | PASSED |  |  |
+| FR-10 (Order State) | TC-ORDERSTATE-030 | Functional | EP | FAILED | [BUG-ORDERSTATE-005](../test-reports/FR-10/BUG-ORDERSTATE-005.md) | New |
+| FR-10 (Order State) | TC-ORDERSTATE-031 | Functional | EP | FAILED | [BUG-ORDERSTATE-006](../test-reports/FR-10/BUG-ORDERSTATE-006.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-001 | Functional | EP | PASSED |  |  |
+| FR-19 (User Mgmt) | TC-USERMGMT-002 | Functional | EP | FAILED | [BUG-USERMGMT-001](../test-reports/FR-19/BUG-USERMGMT-001.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-003 | Functional | BVA | FAILED | [BUG-USERMGMT-001](../test-reports/FR-19/BUG-USERMGMT-001.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-004 | Functional | BVA | FAILED | [BUG-USERMGMT-001](../test-reports/FR-19/BUG-USERMGMT-001.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-005 | Functional | EP | FAILED | [BUG-USERMGMT-001](../test-reports/FR-19/BUG-USERMGMT-001.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-006 | Functional | EP | PASSED |  |  |
+| FR-19 (User Mgmt) | TC-USERMGMT-007 | Functional | EP | FAILED | [BUG-USERMGMT-002](../test-reports/FR-19/BUG-USERMGMT-002.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-008 | Functional | EP | FAILED | [BUG-USERMGMT-003](../test-reports/FR-19/BUG-USERMGMT-003.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-009 | Functional | EP | FAILED | [BUG-USERMGMT-004](../test-reports/FR-19/BUG-USERMGMT-004.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-010 | Functional | EP | FAILED | [BUG-USERMGMT-004](../test-reports/FR-19/BUG-USERMGMT-004.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-011 | Functional | EP | FAILED | [BUG-USERMGMT-004](../test-reports/FR-19/BUG-USERMGMT-004.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-012 | Functional | EP | PASSED |  |  |
+| FR-19 (User Mgmt) | TC-USERMGMT-013 | Functional | EP | PASSED |  |  |
+| FR-19 (User Mgmt) | TC-USERMGMT-014 | Functional | EP | FAILED | [BUG-USERMGMT-002](../test-reports/FR-19/BUG-USERMGMT-002.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-015 | Functional | EP | FAILED | [BUG-USERMGMT-003](../test-reports/FR-19/BUG-USERMGMT-003.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-016 | Functional | EP | FAILED | [BUG-USERMGMT-004](../test-reports/FR-19/BUG-USERMGMT-004.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-017 | Functional | EP | FAILED | [BUG-USERMGMT-004](../test-reports/FR-19/BUG-USERMGMT-004.md) | New |
+| FR-19 (User Mgmt) | TC-USERMGMT-018 | Functional | EP | FAILED | [BUG-USERMGMT-005](../test-reports/FR-19/BUG-USERMGMT-005.md) | New |
+
+
+
+## Summary
+| Metric | Count |
+|--------|-------|
+| Total Test Cases | 85 |
+| Passed | 34 |
+| Failed | 29 |
+| Blocked | 22 |
+| Not Run | 0 |
+| Bugs Found | 15 |
+
+
+# AI Critique
+
+**Student:** 23127391 - Nguyễn Anh Khoa
+
+---
+Mặc dù AI được trang bị nhiều khả năng chuyên biệt nhằm hỗ trợ từng giai đoạn trong quy trình kiểm thử phần mềm, hiệu quả của nó vẫn có sự khác biệt đáng kể giữa các loại tác vụ. Đối với quá trình thiết kế kiểm thử, AI có thể tạo test case với tốc độ nhanh, giúp giảm đáng kể thời gian chuẩn bị. Tuy nhiên, kết quả tạo ra vẫn tồn tại nhiều hạn chế như đặt tên file chưa thống nhất, sinh ra các test case dư thừa hoặc không cần thiết, đồng thời một số test case chưa tuân thủ đầy đủ nguyên tắc của kỹ thuật Domain Testing. Vì vậy, các sản phẩm do AI tạo ra vẫn cần được kiểm tra và chỉnh sửa thủ công trước khi có thể sử dụng trong quá trình kiểm thử thực tế.
+
+Ngược lại, AI thể hiện hiệu quả cao hơn trong các hoạt động liên quan đến kiểm thử API. Công cụ có thể nhanh chóng tạo các script kiểm thử, đồng thời phân tích request, response và các HTTP status code chính xác hơn so với việc thực hiện hoàn toàn bằng tay. Điều này giúp rút ngắn đáng kể thời gian xây dựng và thực thi các bài kiểm thử API, đặc biệt đối với những hệ thống có nhiều endpoint hoặc yêu cầu kiểm tra lặp đi lặp lại.
+
+Tuy nhiên, đối với kiểm thử giao diện người dùng, hiệu quả của AI vẫn còn nhiều hạn chế. Mặc dù đã được hỗ trợ bởi các tính năng như web agent để tương tác với ứng dụng, tốc độ thực hiện vẫn chậm hơn đáng kể so với thao tác trực tiếp của con người. Bên cạnh đó, AI chủ yếu kiểm tra dựa trên cấu trúc và hành vi của giao diện nên khó có thể phát hiện các lỗi liên quan đến hiển thị, chẳng hạn như bố cục bị lệch, nội dung bị cắt, màu sắc hiển thị không phù hợp hoặc các vấn đề ảnh hưởng đến trải nghiệm người dùng. Do đó, kiểm thử giao diện vẫn cần sự tham gia của kiểm thử viên để đảm bảo chất lượng hiển thị và tính trực quan của hệ thống.
+
+# AI Audit Report
+**Student:** 23127391 - Nguyễn Anh Khoa
+I use AI tools for the following tasks,
+| # | Agent | Date & Time (UTC+7) | Assignment | Your Prompt | AI Output (summary) | Verdict | Student Fix |
+|---|-------|---------------------|------------|-------------|---------------------|---------|-------------|
+| 1 | Gemini 3.5 Flash | 2026-06-26 23:58 | HW02 - Domain Testing | Đọc đặc tả và api cho các chức năng này  để tạo DUY NHẤT test plan, không tạo các analysis hoặc test case\| FR-04 (Profile) \| FR-10 (Order State) \| FR-19… | Đã tạo kế hoạch kiểm thử chuẩn ISTQB (TP-EShop-v1.0.md) cho các tính năng FR-04, FR-10, FR-19 và Mobile Profile ứng dụng kỹ thuật Domain Testing. | INCOMPLETE | Tạo thừa phần Schedule & Milestones, đã xóa |
+| 2 | Gemini 3.5 Flash | 2026-06-27 01:18 | HW02 - Domain Testing | Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR4, theo đúng domain testing | Đã tạo tài liệu Phân tích miền (TA-EShop-Khoa-FR04-v1.0.md) phân tích chi tiết các lớp tương đương và giá trị biên cho Họ tên, SĐT, Địa chỉ, và các ràng buộc bảo mật của tính năng FR-04. | VALID | Sửa tên file để kèm theo tên module để tiện cho việc nhận biết |
+| 3 | Gemini 3.5 Flash | 2026-06-27 01:24 | HW02 - Domain Testing | Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR10, theo đúng domain testing | Đã tạo tài liệu Phân tích miền (TA-EShop-Khoa-FR10-ORDER-STATE-v1.0.md) phân tích chi tiết các lớp tương đương và giá trị biên cho id, status, current_status, Authorization, role, và order_ownership của tính năng FR-10. | VALID | |
+| 4 | Gemini 3.5 Flash | 2026-06-27 01:39 | HW02 - Domain Testing | Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR19, theo đúng domain testing | Đã tạo tài liệu Phân tích miền (TA-EShop-Khoa-FR19-USERMGMT-v1.0.md) phân tích chi tiết các lớp tương đương và giá trị biên cho id, Authorization, role, self_deletion, và target_user_is_self của tính năng FR-19. | VALID | |
+| 5 | Gemini 3.5 Flash | 2026-06-27 01:44 | HW02 - Domain Testing | Dựa vào test plan trong tests/test-plans và các api, readme trong docs, tạo test analysis cho tính năng FR4 nhưng cho mobile, theo đúng domain testing | Đã tạo tài liệu Phân tích miền (TA-EShop-Khoa-FR04-MOBILE-v1.0.md) phân tích chi tiết các lớp tương đương và giá trị biên của số điện thoại, địa chỉ, IP LAN, trạng thái mạng, và layout bàn phím ảo cho FR-04 trên Mobile. | VALID | |
+| 6 | Gemini 3.5 Flash | 2026-06-27 15:37 | HW02 - Domain Testing | đọc TA của tính năng FR4 và tạo test case chuẩn domain testing, số lượng | Đã tạo 29 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04. | INCOMPLETE | Bị dư các TC cho mobile, đã loại bỏ 9 TC không phù hợp|
+| 7 | Gemini 3.5 Flash | 2026-06-27 16:01 | HW02 - Domain Testing | đọc TA của tính năng FR10 và tạo test case chuẩn domain testing | Đã tạo 31 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-10. | VALID | |
+| 8 | Gemini 3.5 Flash | 2026-06-27 16:11 | HW02 - Domain Testing | đọc TA của tính năng FR19 và tạo test case chuẩn domain testing | Đã tạo 22 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-19. | INCOMPLETE | Dư thừa các TC về UI/UX và Security, không thuộc Domain testing |
+| 9 | Gemini 3.5 Flash (High) | 2026-06-27 16:40 | HW02 - Domain Testing | đọc TA của tính năng FR4 cho mobile và tạo test case chuẩn domain testing | Đã tạo 20 test case chuẩn Domain Testing và file chỉ mục bằng tiếng Việt có dấu cho tính năng FR-04 trên Mobile. | INCOMPLETE | Sửa lại tên để dễ phân biệt với TC của FR4 web, xóa các TC không thuộc Domain testing |
+| 10 | Gemini 3.5 Flash (High) | 2026-06-28 18:04 | HW02 - Domain Testing | tạo file test run cho FR4 web | Đã tạo file test run cho các test case Web/API của tính năng FR-04. | VALID | |
+| 11 | Gemini 3.5 Flash (High) | 2026-06-28 18:05 | HW02 - Domain Testing | tên Khoa và đây là lần đầu tiên | Đã tạo file test run cho các test case Web/API của tính năng FR-04 với Sprint 1 và Tester là Khoa. | VALID | |
+| 12 | Gemini 3.5 Flash (High) | 2026-06-28 19:55 | HW02 - Domain Testing | Vì các TC cho FR10 chủ yếu là api nên hãy thực hiện curl và viết các document test run và điền kết quả vào các test case, có bug nào thì báo tôi | Đã chạy test tự động cho FR-10, cập nhật kết quả vào 31 test case, tạo 6 báo cáo lỗi và lập tài liệu test run TR-ORDERSTATE-Sprint-2.md. | VALID | |
+| 13 | Gemini 3.5 Flash (High) | 2026-06-28 20:35 | HW02 - Domain Testing | tiếp tục thực hiện tương tự với FR-19 | Đã chạy test tự động cho FR-19, cập nhật kết quả vào 18 test case, lập 5 báo cáo lỗi và tài liệu test run TR-USERMGMT-Sprint-2.md. | VALID | |
+| 14 | Gemini 3.5 Flash (High) | 2026-06-28 22:13 | HW02 - Domain Testing | đọc và tổng hợp các kết quả test vào trace matrix, xóa các folder không thuộc tính năng của tôi | Đã dọn dẹp các thư mục không liên quan và tổng hợp kết quả của 77 test case vào ma trận truy vết (traceability-matrix.md). | VALID | |
+| 15 | Gemini 3.5 Flash (High) | 2026-06-28 22:25 | HW02 - Domain Testing | Đọc issue template và tạo issue cho github theo đúng template ở .github/ | Đã đọc mẫu báo cáo lỗi và tạo thành công 15 issue trên GitHub tương ứng với các bug tìm thấy trong các phân hệ kiểm thử. | VALID | |
+| 16 | Gemini 3.5 Flash (High) | 2026-06-28 22:36 | HW02 - Domain Testing | Thực hiện yêu cầu 1 và yêu cầu 2 trong file Report.md mới và placeholder cho 3 và 4 | Đã tạo báo cáo kiểm thử miền và giá trị biên chi tiết (Report.md) cho 4 phân hệ được phân công cùng các tiêu đề placeholder cho Yêu cầu 3 và 4. | VALID | |
+
