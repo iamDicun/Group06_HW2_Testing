@@ -38,10 +38,10 @@ High
 - Success message displayed
 
 ## Actual Result (filled after execution)
-
+- Failed login, notification poped up, said that the password was weak, though, I followed the password rule.
 
 ## Status
-Not Run
+Run
 
 ## Related Bugs
 None
