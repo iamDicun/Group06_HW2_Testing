@@ -1,0 +1,170 @@
+{
+  "title": "FR-09: Áp dụng mã giảm giá (Coupon)",
+  "conditions": [
+    {
+      "id": "C1",
+      "name": "Mã tồn tại và đang hoạt động",
+      "values": [
+        "T",
+        "F"
+      ]
+    },
+    {
+      "id": "C2",
+      "name": "Còn hạn sử dụng (ngày hiện tại trước expired_at)",
+      "values": [
+        "T",
+        "F"
+      ],
+      "interaction_risk": true
+    },
+    {
+      "id": "C3",
+      "name": "Đủ ngưỡng đơn hàng (tổng đơn hàng >= min_order_amount)",
+      "values": [
+        "T",
+        "F"
+      ],
+      "interaction_risk": true
+    },
+    {
+      "id": "C4",
+      "name": "Đã đăng nhập (JWT Token hợp lệ)",
+      "values": [
+        "T",
+        "F"
+      ]
+    },
+    {
+      "id": "C5",
+      "name": "Chưa dùng hết lượt (số lần dùng của user < max_uses_per_user)",
+      "values": [
+        "T",
+        "F"
+      ],
+      "interaction_risk": true
+    },
+    {
+      "id": "C6",
+      "name": "Loại mã giảm giá",
+      "values": [
+        "percent",
+        "fixed"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "name": "Áp dụng giảm giá phần trăm (percent)"
+    },
+    {
+      "id": "A2",
+      "name": "Áp dụng giảm giá cố định (fixed)"
+    },
+    {
+      "id": "A3",
+      "name": "Từ chối áp dụng và không giảm giá"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "conditions": {
+        "C1": "T",
+        "C2": "T",
+        "C3": "T",
+        "C4": "T",
+        "C5": "T",
+        "C6": "percent"
+      },
+      "actions": [
+        "A1"
+      ]
+    },
+    {
+      "id": "R2",
+      "conditions": {
+        "C1": "T",
+        "C2": "T",
+        "C3": "T",
+        "C4": "T",
+        "C5": "T",
+        "C6": "fixed"
+      },
+      "actions": [
+        "A2"
+      ]
+    },
+    {
+      "id": "R3",
+      "conditions": {
+        "C1": "F",
+        "C2": "T",
+        "C3": "T",
+        "C4": "T",
+        "C5": "T",
+        "C6": "—"
+      },
+      "actions": [
+        "A3"
+      ]
+    },
+    {
+      "id": "R4",
+      "conditions": {
+        "C1": "—",
+        "C2": "F",
+        "C3": "T",
+        "C4": "T",
+        "C5": "T",
+        "C6": "—"
+      },
+      "actions": [
+        "A3"
+      ]
+    },
+    {
+      "id": "R5",
+      "conditions": {
+        "C1": "—",
+        "C2": "—",
+        "C3": "F",
+        "C4": "T",
+        "C5": "T",
+        "C6": "—"
+      },
+      "actions": [
+        "A3"
+      ]
+    },
+    {
+      "id": "R6",
+      "conditions": {
+        "C1": "—",
+        "C2": "—",
+        "C3": "—",
+        "C4": "F",
+        "C5": "T",
+        "C6": "—"
+      },
+      "actions": [
+        "A3"
+      ]
+    },
+    {
+      "id": "R7",
+      "conditions": {
+        "C1": "—",
+        "C2": "—",
+        "C3": "—",
+        "C4": "—",
+        "C5": "F",
+        "C6": "—"
+      },
+      "actions": [
+        "A3"
+      ]
+    }
+  ]
+}
