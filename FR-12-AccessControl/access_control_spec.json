@@ -1,0 +1,68 @@
+{
+  "title": "FR-12: Access Control",
+  "conditions": [
+    {
+      "id": "C1",
+      "name": "API thuộc nhóm được bảo vệ (Admin API /api/admin/* hoặc POST/PUT/DELETE /api/products, /api/categories, /api/coupons)",
+      "values": ["T", "F"],
+      "interaction_risk": false
+    },
+    {
+      "id": "C2",
+      "name": "Token JWT hợp lệ và tồn tại",
+      "values": ["T", "F"],
+      "interaction_risk": false
+    },
+    {
+      "id": "C3",
+      "name": "Role của tài khoản trong Token là 'admin'",
+      "values": ["T", "F"],
+      "interaction_risk": false
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "name": "Cho phép truy cập (Allow Access)"
+    },
+    {
+      "id": "A2",
+      "name": "Từ chối truy cập với lỗi 401 Unauthorized (Thiếu hoặc sai Token)"
+    },
+    {
+      "id": "A3",
+      "name": "Từ chối truy cập với lỗi 403 Forbidden (Không đủ quyền - Role không phải admin)"
+    }
+  ],
+  "logic": [
+    {
+      "when": {
+        "C1": "F"
+      },
+      "then": ["A1"]
+    },
+    {
+      "when": {
+        "C1": "T",
+        "C2": "F"
+      },
+      "then": ["A2"]
+    },
+    {
+      "when": {
+        "C1": "T",
+        "C2": "T",
+        "C3": "F"
+      },
+      "then": ["A3"]
+    },
+    {
+      "when": {
+        "C1": "T",
+        "C2": "T",
+        "C3": "T"
+      },
+      "then": ["A1"]
+    }
+  ]
+}
