@@ -1,0 +1,281 @@
+{
+  "TC-ORDERSTATE-001": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "confirmed",
+    "expected_notes": "Mã phản hồi HTTP trả về là 200 OK và trạng thái là confirmed"
+  },
+  "TC-ORDERSTATE-002": {
+    "success": true,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": null,
+    "expected_notes": "Mã phản hồi HTTP trả về là 404 Not Found"
+  },
+  "TC-ORDERSTATE-003": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": null,
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-004": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": null,
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-005": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": null,
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-006": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from pending to processing"
+    },
+    "db_status": "pending",
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-007": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from pending to "
+    },
+    "db_status": "pending",
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-008": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from pending to undefined"
+    },
+    "db_status": "pending",
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-009": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from pending to 123"
+    },
+    "db_status": "pending",
+    "expected_notes": "Mã phản hồi HTTP trả về là 400 Bad Request"
+  },
+  "TC-ORDERSTATE-010": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "confirmed",
+    "expected_notes": "Chuyển thành công từ pending sang confirmed"
+  },
+  "TC-ORDERSTATE-011": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "shipping",
+    "expected_notes": "Chuyển thành công từ confirmed sang shipping"
+  },
+  "TC-ORDERSTATE-012": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "delivered",
+    "expected_notes": "Chuyển thành công từ shipping sang delivered"
+  },
+  "TC-ORDERSTATE-013": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "canceled",
+    "expected_notes": "Chuyển thành công từ pending sang canceled"
+  },
+  "TC-ORDERSTATE-014": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": "canceled",
+    "expected_notes": "Chuyển thành công từ confirmed sang canceled"
+  },
+  "TC-ORDERSTATE-015": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from pending to shipping"
+    },
+    "db_status": "pending",
+    "expected_notes": "Không cho nhảy bước từ pending sang shipping"
+  },
+  "TC-ORDERSTATE-016": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from confirmed to pending"
+    },
+    "db_status": "confirmed",
+    "expected_notes": "Không cho đi ngược từ confirmed sang pending"
+  },
+  "TC-ORDERSTATE-017": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from shipping to confirmed"
+    },
+    "db_status": "shipping",
+    "expected_notes": "Không cho đi ngược từ shipping sang confirmed"
+  },
+  "TC-ORDERSTATE-018": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from delivered to canceled"
+    },
+    "db_status": "delivered",
+    "expected_notes": "Không cho hủy đơn delivered"
+  },
+  "TC-ORDERSTATE-019": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from canceled to pending"
+    },
+    "db_status": "canceled",
+    "expected_notes": "Không cho phục hồi đơn canceled về pending"
+  },
+  "TC-ORDERSTATE-020": {
+    "success": true,
+    "actual_status": 400,
+    "actual_body": {
+      "error": "Invalid state transition from shipping to canceled"
+    },
+    "db_status": "shipping",
+    "expected_notes": "Không cho Admin hủy đơn shipping"
+  },
+  "TC-ORDERSTATE-021": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order canceled successfully"
+    },
+    "db_status": "canceled",
+    "expected_notes": "User hủy đơn pending của chính mình thành công"
+  },
+  "TC-ORDERSTATE-022": {
+    "success": true,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order canceled successfully"
+    },
+    "db_status": "canceled",
+    "expected_notes": "User hủy đơn confirmed của chính mình thành công"
+  },
+  "TC-ORDERSTATE-023": {
+    "success": false,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order canceled successfully"
+    },
+    "db_status": "canceled",
+    "expected_notes": "User không được hủy đơn shipping của chính mình"
+  },
+  "TC-ORDERSTATE-024": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": "pending",
+    "expected_notes": "Không cho phép user hủy đơn của người khác"
+  },
+  "TC-ORDERSTATE-025": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": "pending",
+    "expected_notes": "Admin hủy đơn pending của người khác thành công"
+  },
+  "TC-ORDERSTATE-026": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": "confirmed",
+    "expected_notes": "Admin hủy đơn confirmed của người khác thành công"
+  },
+  "TC-ORDERSTATE-027": {
+    "success": false,
+    "actual_status": 404,
+    "actual_body": {
+      "error": "Order not found"
+    },
+    "db_status": "shipping",
+    "expected_notes": "Admin không được hủy đơn shipping của người khác"
+  },
+  "TC-ORDERSTATE-028": {
+    "success": true,
+    "actual_status": 401,
+    "actual_body": {
+      "error": "Unauthorized"
+    },
+    "db_status": null,
+    "expected_notes": "Không truyền Auth header"
+  },
+  "TC-ORDERSTATE-029": {
+    "success": true,
+    "actual_status": 401,
+    "actual_body": {
+      "error": "Unauthorized"
+    },
+    "db_status": null,
+    "expected_notes": "Token không có Bearer prefix"
+  },
+  "TC-ORDERSTATE-030": {
+    "success": false,
+    "actual_status": 403,
+    "actual_body": {
+      "error": "Forbidden"
+    },
+    "db_status": null,
+    "expected_notes": "Token không hợp lệ"
+  },
+  "TC-ORDERSTATE-031": {
+    "success": false,
+    "actual_status": 200,
+    "actual_body": {
+      "message": "Order status updated"
+    },
+    "db_status": null,
+    "expected_notes": "User bình thường truy cập API Admin"
+  }
+}
