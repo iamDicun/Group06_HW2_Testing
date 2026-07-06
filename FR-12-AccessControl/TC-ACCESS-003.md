@@ -35,13 +35,13 @@ High
 - Dữ liệu dashboard không được trả về.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK và cung cấp toàn bộ thông tin nhạy cảm của Admin Dashboard mặc dù token sử dụng thuộc vai trò 'user'.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ACCESS-001
 
 ## Notes
 Kiểm tra xem hệ thống có trả về lỗi 403 khi tài khoản hợp lệ nhưng không đủ quyền hay không.

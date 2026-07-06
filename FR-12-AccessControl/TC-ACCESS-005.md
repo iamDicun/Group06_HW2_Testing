@@ -32,10 +32,10 @@ High
 - Mã giảm giá mới không được tạo trong cơ sở dữ liệu.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 403 Forbidden đúng như mong đợi do token hết hạn hoặc chữ ký không hợp lệ.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

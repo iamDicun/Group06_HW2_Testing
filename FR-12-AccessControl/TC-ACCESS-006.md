@@ -30,13 +30,13 @@ High
 - Sản phẩm có ID `1` không bị xóa khỏi cơ sở dữ liệu.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK và sản phẩm bị xóa thành công khỏi CSDL mặc dù hoàn toàn không gửi kèm JWT Token xác thực.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ACCESS-002
 
 ## Notes
 Đây là trường hợp kiểm thử thiếu token hoàn toàn.

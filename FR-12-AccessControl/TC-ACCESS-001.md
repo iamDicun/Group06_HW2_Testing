@@ -34,10 +34,10 @@ High
 - Response chứa đầy đủ thông tin thống kê của hệ thống (Doanh thu, tổng số đơn hàng) theo đặc tả của Dashboard Admin.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK cùng dữ liệu thống kê của hệ thống như mô tả.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

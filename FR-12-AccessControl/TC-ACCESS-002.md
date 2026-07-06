@@ -33,10 +33,10 @@ High
 - Thông tin sản phẩm được cập nhật thành công trong hệ thống.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK và chèn sản phẩm thành công.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None

@@ -32,13 +32,13 @@ High
 - Danh mục mới không được tạo trong cơ sở dữ liệu.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK và danh mục mới được chèn thành công mặc dù token mang vai trò 'user'.
 
 ## Status
-Not Run
+FAILED
 
 ## Related Bugs
-None
+BUG-ACCESS-001
 
 ## Notes
 Tạo danh mục mới là một thao tác ảnh hưởng dữ liệu (POST) thuộc nhóm được bảo vệ, do đó tài khoản thông thường không được phép thực hiện.

@@ -30,10 +30,10 @@ Medium
 - Response trả về đúng danh sách các danh mục sản phẩm hiện có.
 
 ## Actual Result (filled after execution)
-[What actually happened]
+- API trả về HTTP 200 OK và danh sách danh mục thành công mà không cần token.
 
 ## Status
-Not Run
+PASSED
 
 ## Related Bugs
 None
