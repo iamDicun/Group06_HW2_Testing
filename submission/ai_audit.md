@@ -1,17 +1,11 @@
-# AI Audit Report
+I use AI tools for the following tasks:
 
-**Student:** <MSSV> - <Name>
-
-> Nếu KHÔNG dùng AI, ghi: "I do not use any AI help in this exercise."
->
-> Nếu CÓ dùng AI, điền bảng bên dưới cho mỗi lần tương tác.
-
----
-
-| # | AI Tool | Date & Time | Prompt | AI Output (summary/link) |
-|---|---------|-------------|--------|--------------------------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| # | Agent | Date & Time (UTC+7) | Assignment | Your Prompt | AI Output (summary) | Verdict | Student Fix |
+|---|-------|---------------------|------------|-------------|---------------------|---------|-------------|
+| 1 | Gemini 3.6 Flash | 2026-07-31 16:47 | HW03 – GUI & Usability | Đọc yêu cầu và thực hiện tạo gui checklist cho các màn hình: FR-05: Product listing and search, FR-07: Shopping cart, FR-11: Order history view (user) thỏa yêu cầu trong file 2026.HW03 | Generated GUI checklists and report for FR-05, FR-07, and FR-11 screens. | ___ | |
+| 2 | Gemini 3.6 Flash | 2026-07-31 16:47 | HW03 – GUI & Usability | làm tầm 40-50 checklist items thôi | Refined GUI checklist items down to 45 items (15 items per screen). | ___ | |
+| 3 | Gemini 3.6 Flash | 2026-07-31 19:14 | HW03 – GUI & Usability | Tạo bảng tương tự như task 1 cho task 3 với 3 nền tảng Chrome lấy kết quả từ task 1. Firefox và Safari, ff và safari để trống, có ô minh chứng cho mỗi nền tảng | Created Task 3 cross-platform test tables for FR-05, FR-07, and FR-11 with Chrome, Firefox, and Safari columns. | ___ | |
+| 4 | Gemini 3.6 Flash | 2026-07-31 19:14 | HW03 – GUI & Usability | 6.1 hiển thị dưới dạng cột | Formatted section 6.1 test platform list as a markdown table. | ___ | |
+| 5 | Gemini 3.6 Flash | 2026-07-31 19:14 | HW03 – GUI & Usability | tự gọi API và set đơn hàng này thành đang giao ở https://group-6-seminar.onrender.com: #2 31/7/2026 134.000.000 ₫ Chờ xác nhận | Authenticated as admin and updated order #2 status to shipping via API on Render backend. | ___ | |
+| 6 | Gemini 3.6 Flash | 2026-07-31 19:14 | HW03 – GUI & Usability | bỏ các ảnh vào đúng thư mục, ảnh nào bị orphan thì xóa, sau đó viết script python và chạy thực hiện việc thêm chữ "nakhoa231@clc.fitus.edu.vn" vào góc dưới bên trái, chữ vàng viền đen | Organized images into images folder, removed orphan images, created script to add yellow watermarks with black stroke, and updated markdown report links. | ___ | |
+| 7 | Gemini 3.6 Flash | 2026-07-31 19:14 | HW03 – GUI & Usability | mấy cái ảnh ở task1 vẫn chưa có mark | Enhanced watermark script with bold Arial font and minimum 22px size for prominent watermarks across all images including Task 1. | ___ | |
