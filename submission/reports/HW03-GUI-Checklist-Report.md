@@ -165,32 +165,32 @@ Ngay sau phần điền SUS, người điều phối sẽ phỏng vấn nhanh ng
 
 ---
 
-### 5.3 Danh sách 7 Người Tham gia Đánh giá (Participant Recruitment)
+### 5.3 Danh sách 7 Người Tham gia Đánh giá
 
 *Người thực hiện tuyển 7 người tham gia thực tế bên ngoài lớp học HW03. Thông tin liên hệ cần mã hóa 4 số giữa theo quy định:*
 
-| STT | Họ tên người tham gia | Nghề nghiệp / Vai trò | Thói quen mua sắm | Thông tin liên hệ (Mã hóa 4 số giữa) | Phương thức kiểm thử |
-|---|---|---|---|---|---|
-| P1 | [Điền Họ tên P1] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0912***567] | [Trực tiếp / Online] |
-| P2 | [Điền Họ tên P2] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0988***123] | [Trực tiếp / Online] |
-| P3 | [Điền Họ tên P3] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0903***888] | [Trực tiếp / Online] |
-| P4 | [Điền Họ tên P4] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0971***456] | [Trực tiếp / Online] |
-| P5 | [Điền Họ tên P5] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0932***789] | [Trực tiếp / Online] |
-| P6 | [Điền Họ tên P6] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: phong***@gmail.com] | [Trực tiếp / Online] |
-| P7 | [Điền Họ tên P7] | [Điền Nghề nghiệp / Vai trò] | [Đặc điểm mua sắm] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0909***654] | [Trực tiếp / Online] |
+| STT | Họ tên người tham gia | Nghề nghiệp / Vai trò | Thông tin liên hệ (Mã hóa 4 số giữa) | Phương thức kiểm thử |
+|--- | --- | --- | --- | --- |
+| P1 | Trần Huy Hoàng | Sinh viên | 038****799 | Online Google Meet |
+| P2 | [Điền Họ tên P2] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0988***123] | [Trực tiếp / Online] |
+| P3 | [Điền Họ tên P3] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0903***888] | [Trực tiếp / Online] |
+| P4 | [Điền Họ tên P4] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0971***456] | [Trực tiếp / Online] |
+| P5 | [Điền Họ tên P5] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0932***789] | [Trực tiếp / Online] |
+| P6 | [Điền Họ tên P6] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: phong***@gmail.com] | [Trực tiếp / Online] |
+| P7 | [Điền Họ tên P7] | [Điền Nghề nghiệp / Vai trò] | [Mã hóa SĐT/Zalo/Email, ví dụ: 0909***654] | [Trực tiếp / Online] |
 
 ---
 
-### 5.4 Phiên Thử nghiệm Pilot & Tinh chỉnh Kịch bản (Pilot Session & Refinements)
+### 5.4 Phiên Thử nghiệm Pilot & Tinh chỉnh Kịch bản 
 
 Thực hiện 01 phiên Pilot với người dùng thử nghiệm để phát hiện câu từ kịch bản chưa rõ, lỗi luồng hoặc vấn đề thời gian trước khi chạy 7 phiên chính thức.
 
-- **Thông tin người tham gia Pilot**: `[Điền Họ tên / Vai trò / Liên hệ của người dùng Pilot]`
+- **Thông tin người tham gia Pilot**: Trần Huy Hoàng – P1 (Sinh viên, Liên hệ: `038****799`, Phương thức: Online qua Google Meet).
 - **Kết quả & Phát hiện từ Phiên Pilot**:
-  1. *Vấn đề kịch bản / luồng*: `[Điền vấn đề hoặc câu từ chưa rõ phát hiện khi chạy pilot]`
-  2. *Thời lượng & Thao tác*: `[Điền nhận xét về timing và sự cố môi trường (nếu có)]`
+  1. *Vấn đề kịch bản / luồng*: Phiên thử nghiệm diễn ra suôn sẻ và thuận lợi. Người tham gia nắm bắt rõ mục tiêu kịch bản, không gặp rào cản hay điểm nghẽn nào gây chặn (no blockers).
+  2. *Thời lượng & Thao tác*: Tốc độ thao tác ổn định, thời gian thực thi luồng đúng tiến độ dự kiến, môi trường kiểm thử trực tuyến qua Google Meet hoạt động tốt.
 - **Tinh chỉnh đã thực hiện trước các phiên chính thức (Refinements)**:
-  - `[Điền các điểm tinh chỉnh kịch bản, lời dặn Think-Aloud hoặc quy trình sau phiên pilot]`
+  - Kịch bản nhiệm vụ được giữ nguyên do tính rõ ràng cao, quy trình điều phối và các công cụ khảo sát (SUS + Probe) sẵn sàng cho các phiên kiểm thử tiếp theo.
 
 ---
 
@@ -200,7 +200,7 @@ Thực hiện 01 phiên Pilot với người dùng thử nghiệm để phát hi
 
 *Thực hiện tính điểm SUS cho từng người tham gia sau khi hoàn thành phiên thử nghiệm:*
 
-| Người tham gia | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Điểm SUS (/100) | Mức xếp loại (Grade Scale) |
+| Người tham gia | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Điểm SUS (/100) | Mức xếp loại |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **P1** | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | **[Điền điểm P1]** | [Điền Grade] |
 | **P2** | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | **[Điền điểm P2]** | [Điền Grade] |
@@ -211,8 +211,7 @@ Thực hiện 01 phiên Pilot với người dùng thử nghiệm để phát hi
 | **P7** | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | **[Điền điểm P7]** | [Điền Grade] |
 | **TRUNG BÌNH** | | | | | | | | | | | **[Điền SUS TB]** | **[Điền Xếp loại Tổng quan]** |
 
-> [!NOTE]
-> **Tổng hợp nhận xét SUS**: `[Điền nhận xét tổng quan về điểm số SUS trung bình sau khi thu thập dữ liệu từ 7 phiên]`
+**Tổng hợp nhận xét SUS**: `[Điền nhận xét tổng quan về điểm số SUS trung bình sau khi thu thập dữ liệu từ 7 phiên]`
 
 ---
 
