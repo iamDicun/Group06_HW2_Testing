@@ -1,0 +1,269 @@
+# AI Audit Report
+
+# AI Interaction 1
+
+## Name of the AI Tool
+
+ChatGPT (OpenAI GPT-5.5)
+
+---
+
+## Date and Time
+
+19:04 2026-08-02
+
+---
+
+## Your Prompt
+
+Hãy gợi ý giúp tui usability-evaluation-skill nên viết thế nào, file markdown, thỏa các yêu cầu sau:
+
+Task 2 — Usability Evaluation
+
+You will run a small-sample, moderated usability evaluation of the single end-to-end flow you selected in §5, with seven (7) real participants (seven sessions, one per participant).
+
+Phase 1 — Plan & Prepare
+- Define objectives.
+- Write a goal-oriented task scenario.
+- Prepare SUS or UEQ-S questionnaire.
+- Prepare probe questions covering clarity, error recovery, speed and trust.
+- Recruit 7 participants.
+- Run a pilot session.
+
+Phase 2 — Conduct
+- Explain that the product is being tested, not the participant.
+- Ask participants to think aloud.
+- Observe neutrally.
+- Record screen and notes.
+- Complete SUS / UEQ-S after each session.
+
+Phase 3 — Analyse & Report
+- Score SUS / UEQ-S.
+- Group similar pain points.
+- Separate isolated bugs from systemic issues.
+- Prioritize severity.
+- Generate Markdown report.
+- Generate GitHub Issues for genuine bugs.
+
+Hãy viết thành một Agent Skill ở dạng Markdown để có thể tái sử dụng cho nhiều website và nhiều end-to-end flow khác nhau.
+
+---
+
+## AI Output
+
+ChatGPT tạo một Agent Skill dạng Markdown gồm:
+
+- Name và Description của skill.
+- Vai trò của AI (Usability Evaluation Expert).
+- Input cần cung cấp.
+- Workflow gồm:
+  - Phase 1 – Plan & Prepare
+  - Phase 2 – Conduct
+  - Phase 3 – Analyse & Report
+- Định dạng Output (Markdown Report).
+- Các Rules nhằm tránh tạo dữ liệu giả, participant giả hoặc điểm SUS giả.
+- Khuyến nghị bổ sung phần "When Invoked" để AI biết khi nào cần sử dụng skill và cách thực hiện theo từng bước.
+
+# AI Interaction 2
+
+## Name of the AI Tool
+
+Cursor AI
+
+## Date and Time
+
+2026-08-02 19:26 (GMT+7)
+
+## Your Prompt
+
+/create-skill tui có tạo các file skill trong thư mục skills bạn có thấy không
+
+## The AI Output
+
+Có — mình thấy **2 file skill** trong thư mục `skills/` của project:
+
+| File | Trạng thái |
+|------|------------|
+| `skills/usability-evaluation-skill.md` | Có YAML frontmatter (`name`, `description`), nội dung đầy đủ workflow HW03 |
+| `skills/GUI-checklist-skill.md` | Chưa có YAML frontmatter, nội dung checklist IA-01 → IA-04 |
+
+## Tóm tắt nội dung
+
+**1. `usability-evaluation-skill.md`**
+- Hỗ trợ Usability Evaluation end-to-end: Plan → Conduct → Analyse → Báo cáo
+- Dùng SUS hoặc UEQ-S (mặc định SUS)
+- Quy tắc rõ: không tự tạo participant, điểm SUS, bug nếu thiếu dữ liệu
+
+**2. `GUI-checklist-skill.md`**
+- Sinh checklist kiểm thử GUI theo 4 nhóm: IA-01, IA-02, IA-03, IA-04
+- Output: bảng Markdown + Test Summary (số màn hình, pass/fail, bugs…)
+
+## Lưu ý về định dạng Cursor Skill
+
+Hai file hiện nằm ở `skills/` (thư mục tự tạo), **chưa phải** vị trí chuẩn để Cursor tự nhận skill:
+
+```
+.cursor/skills/
+├── usability-evaluation/
+│   └── SKILL.md
+└── gui-checklist/
+    └── SKILL.md
+```
+
+Khác biệt chính:
+- Mỗi skill là **một thư mục** với file **`SKILL.md`** (không phải `*-skill.md`)
+- Cần YAML frontmatter đầy đủ (`name`, `description` viết **ngôi thứ 3**, tiếng Anh thường giúp agent discover tốt hơn)
+- `GUI-checklist-skill.md` cần bổ sung frontmatter
+
+Bạn muốn mình **chuyển 2 file này sang `.cursor/skills/`** theo chuẩn Cursor không? Nếu có, mình sẽ:
+1. Tạo cấu trúc thư mục đúng
+2. Chuẩn hóa frontmatter
+3. Giữ nguyên nội dung tiếng Việt bạn đã viết
+
+# AI Interaction 3
+
+## Name of the AI Tool
+
+Cursor AI
+
+## Date and Time
+
+2026-08-02 19:27 (GMT+7)
+
+## Your Prompt
+
+bạn chuyển theo chuẩn cursor giúp tui
+
+## The AI Output
+
+Đã chuyển xong. Cấu trúc mới:
+
+```
+.cursor/skills/
+├── usability-evaluation/
+│   └── SKILL.md
+└── gui-checklist/
+    └── SKILL.md
+```
+
+## Thay đổi chính
+
+| Trước | Sau |
+|-------|-----|
+| `skills/usability-evaluation-skill.md` | `.cursor/skills/usability-evaluation/SKILL.md` |
+| `skills/GUI-checklist-skill.md` | `.cursor/skills/gui-checklist/SKILL.md` |
+
+- Thêm YAML frontmatter (`name`, `description`, `disable-model-invocation: true`)
+- `description` viết ngôi thứ 3 + trigger terms để Cursor nhận diện skill
+- Giữ nguyên nội dung tiếng Việt và workflow bạn đã viết
+- Chuẩn hóa heading (bỏ `#` thừa, cấu trúc rõ hơn)
+
+## Cách dùng
+
+Gọi skill bằng cách **@ mention** hoặc nhắc tên trong chat:
+
+- `@usability-evaluation` — đánh giá usability, SUS, báo cáo HW03
+- `@gui-checklist` — tạo checklist IA-01 → IA-04
+
+Hai file gốc trong `skills/` vẫn còn. Bạn muốn mình xóa chúng để tránh trùng lặp không?
+
+# AI Interaction 4
+
+## Name of the AI Tool
+
+Cursor AI
+
+## Date and Time
+
+2026-08-02 19:33 (GMT+7)
+
+## Your Prompt
+
+tạo gui-checklist cho 2 màn hình registry và login:
+FR-01: Đăng ký tài khoản
+Người dùng phải cung cấp: Họ Tên, Email, Mật khẩu.
+Email phải có định dạng hợp lệ (user@domain.com) và là duy nhất trong hệ thống.
+Yêu cầu mật khẩu mạnh: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (@, $, !, %, *, ?, &).
+Phải có trường Xác nhận mật khẩu — hệ thống từ chối nếu hai trường không khớp.
+Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập.
+
+FR-02: Đăng nhập & Khóa tài khoản
+Người dùng nhập Email và Mật khẩu.
+Sau mỗi lần đăng nhập sai, hệ thống tăng bộ đếm lên đúng 1 đơn vị.
+Nếu đăng nhập sai từ 3 lần trở lên liên tiếp, tài khoản bị tạm khóa 30 giây (môi trường demo). Hệ thống trả về thông báo lỗi phù hợp; không để lộ chi tiết nguyên nhân.
+Đăng nhập thành công trả về JWT Token. Token được lưu phía client và gửi kèm tất cả các yêu cầu có xác thực qua header Authorization: Bearer <token>.
+Trường email phải dùng type="email" (có validate HTML5 format). 
+
+## The AI Output
+
+Đã tạo checklist GUI cho 2 màn hình và lưu tại `gui-checklist-registry-login.md`.
+
+## Tổng quan
+
+| Màn hình | FR | Hạng mục |
+|----------|-----|----------|
+| **Registry (Đăng ký)** | FR-01 | 37 |
+| **Login (Đăng nhập)** | FR-02 | 29 |
+| **Tổng** | | **66** |
+
+## Phân bổ theo IA
+
+| IA | Nội dung chính | Số mục |
+|----|----------------|--------|
+| **IA-01** | Layout, label, typography, responsive | 13 |
+| **IA-02** | Trường form, validation email/mật khẩu, `type="email"` | 30 |
+| **IA-03** | Liên kết Login ↔ Registry, redirect sau thành công | 6 |
+| **IA-04** | Thông báo lỗi, khóa 30s, JWT, loading state | 17 |
+
+## Điểm nổi bật theo FR
+
+**Registry (FR-01):** Họ Tên, Email, Mật khẩu, Xác nhận mật khẩu; email hợp lệ & duy nhất; mật khẩu mạnh (8+ ký tự, hoa/thường/số/ký tự đặc biệt); từ chối khi không khớp; redirect sang Login.
+
+**Login (FR-02):** Email `type="email"`; đếm sai liên tiếp (+1/lần); khóa 30s từ lần 3; thông báo lỗi chung (không enumeration); JWT lưu client + header `Authorization: Bearer <token>`.
+
+Cột **Pass/Fail** đang để trống vì đây là checklist thiết kế — bạn điền khi chạy trên app EShop thực tế. Nếu bạn có URL hoặc screenshot, mình có thể giúp thực thi checklist và điền kết quả.
+
+# AI Interaction 5
+
+## Name of the AI Tool
+
+Cursor AI
+
+## Date and Time
+
+2026-08-02 20:04 (GMT+7)
+
+## Your Prompt
+
+Người dùng có thể hoàn thành form chỉ bằng bàn phím (Tab, Shift+Tab, Enter).
+Liên kết hoặc nút đổi màu khi hover để thể hiện trạng thái tương tác.
+Giao diện vẫn hiển thị đúng khi phóng to trình duyệt lên 200% (không vỡ bố cục, không chồng chữ).
+tui muốn thêm 3 mục này vào checklist, tên file tui đã đổi thành main-report.md
+
+## The AI Output
+
+Đã thêm 3 mục vào `main-report.md` và cập nhật Test Summary.
+
+## Mục mới (IA-01)
+
+| STT | Màn hình | Hạng mục |
+|-----|----------|----------|
+| **38** | Registry | Hoàn thành form chỉ bằng bàn phím (Tab, Shift+Tab, Enter) |
+| **39** | Registry | Liên kết/nút đổi màu khi hover |
+| **40** | Registry | Hiển thị đúng khi zoom trình duyệt 200% |
+| **70** | Login | Hoàn thành form chỉ bằng bàn phím (Tab, Shift+Tab, Enter) |
+| **71** | Login | Liên kết/nút đổi màu khi hover |
+| **72** | Login | Hiển thị đúng khi zoom trình duyệt 200% |
+
+Mỗi màn hình có 3 mục riêng để bạn ghi Pass/Fail độc lập khi kiểm thử.
+
+## Test Summary cập nhật
+
+| Chỉ số | Trước | Sau |
+|--------|-------|-----|
+| Tổng hạng mục | 66 | **72** |
+| IA-01 | 13 | **19** |
+| Registry | 37 | **40** |
+| Login | 29 | **32** |
+
+STT màn Login đã được đánh lại từ **41 → 72** cho liên tục.
