@@ -27,7 +27,7 @@ Trường Email phải dùng `type="email"` để trình duyệt tự động va
 Trường Email dùng `type="text"`, nhập `abc` được chấp nhận mà không có thông báo lỗi định dạng email nào.
 
 ### Evidence
-![BUG_01](screenshots/BUG_01.png)
+![BUG_01](bug_report_gihub_issues_screenshots/BUG_01.png)
 
 ---
 
@@ -57,7 +57,7 @@ Form phải có trường "Xác nhận mật khẩu" (Confirm Password) để ng
 Form chỉ có 3 trường: Họ Tên, Email, Mật khẩu. Không có trường Xác nhận mật khẩu.
 
 ### Evidence
-![BUG_02](screenshots/BUG_02.png)
+![BUG_02](bug_report_gihub_issues_screenshots/BUG_02.png)
 
 ---
 
@@ -89,7 +89,7 @@ Nút "Đăng Ký" phải bị disabled hoặc hiển thị spinner/loading indic
 Nút "Đăng Ký" vẫn enabled bình thường, không có bất kỳ indicator loading nào.
 
 ### Evidence
-![BUG_03](screenshots/BUG_04.png)
+![BUG_03](bug_report_gihub_issues_screenshots/BUG_03.png)
 
 ---
 
@@ -121,7 +121,7 @@ Hiển thị thông báo lỗi rõ ràng: "Email đã tồn tại" hoặc "Email
 Không hiển thị thông báo lỗi trùng email. Form vẫn ở trạng thái cũ, người dùng không biết tại sao đăng ký không thành công.
 
 ### Evidence
-![BUG_04](screenshots/BUG_06.png)
+![BUG_04](bug_report_gihub_issues_screenshots/BUG_04.png)
 
 ---
 
@@ -146,13 +146,13 @@ Major / P1
 3. Bấm "Đăng Ký"
 
 ### Expected Result
-Có thông báo thành công (toast/message) hoặc tự động redirect sang trang Login.
+Có thông báo thành công.
 
 ### Actual Result
-Không có thông báo thành công hoặc redirect. Người dùng không biết đăng ký đã thành công hay chưa.
+Không có thông báo thành công.
 
 ### Evidence
-![BUG_05](screenshots/BUG_03.png)
+![BUG_05](bug_report_gihub_issues_screenshots/BUG_05.png)
 
 ---
 
@@ -182,7 +182,7 @@ Heading trang Login phải hiển thị "Đăng Nhập" hoặc "Login".
 Heading trang Login hiển thị **"Đăng Ký"** — đây là text của trang Register, gây nhầm lẫn nghiêm trọng cho người dùng.
 
 ### Evidence
-![BUG_06](screenshots/BUG_07.png)
+![BUG_06](bug_report_gihub_issues_screenshots/BUG_06.png)
 
 ---
 
@@ -213,7 +213,7 @@ Trường Username phải dùng `type="email"` để trình duyệt tự động
 Trường Username dùng `type="text"`, nhập `abc` được chấp nhận mà không có thông báo lỗi định dạng email nào.
 
 ### Evidence
-![BUG_07](screenshots/BUG_08.png)
+![BUG_07](bug_report_gihub_issues_screenshots/BUG_07.png)
 
 ---
 
@@ -244,7 +244,7 @@ Trường Mật khẩu phải dùng `type="password"` để hiển thị dạng 
 Trường Mật khẩu dùng `type="text"` — mật khẩu hiển thị **PLAINTEXT** hoàn toàn, ai đứng bên cạnh cũng có thể thấy.
 
 ### Evidence
-![BUG_08](screenshots/BUG_09.png)
+![BUG_08](bug_report_gihub_issues_screenshots/BUG_08.png)
 
 ---
 
@@ -275,7 +275,7 @@ Sau 3 lần đăng nhập sai liên tiếp, tài khoản phải bị khóa 30 gi
 Không có thông báo khóa tài khoản nào.
 
 ### Evidence
-![BUG_09](screenshots/BUG_10.png)
+![BUG_09](bug_report_gihub_issues_screenshots/BUG_09.png)
 
 ---
 
@@ -307,7 +307,7 @@ Nút "Sign In" phải bị disabled hoặc hiển thị spinner/loading indicato
 Nút "Sign In" vẫn enabled bình thường, không có bất kỳ indicator loading nào.
 
 ### Evidence
-![BUG_10](screenshots/BUG_11.png)
+![BUG_10](bug_report_gihub_issues_screenshots/BUG_10.png)
 
 ---
 
