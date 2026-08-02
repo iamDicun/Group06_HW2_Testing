@@ -1,11 +1,5 @@
-# AI Critique (200–300 words)
+# AI Critique
 
-**Student:** <MSSV> - <Name>
+Hành vi AI hiểu sai yêu cầu và thực hiện vượt quá phạm vi cần thiết thường xuất phát từ việc câu lệnh thiếu độ rõ ràng và tính chính xác. Minh chứng cụ thể là khi người dùng chỉ yêu cầu khởi tạo các khung nội dung chờ, hệ thống lại tự động điền các thông tin giả lập không chính xác cho toàn bộ các mục.
 
----
-
-[Write your 200–300 word critique here. Address:]
-
-- Where did the AI get something wrong, biased, or incomplete?
-- Why did it fail to catch the issue?
-- What principle have you learned about collaborating with AI during this assignment?
+Bên cạnh đó, AI hoàn toàn không thể thay thế con người trong các công việc đòi hỏi tương tác thực tế và sự hiện diện trực tiếp. Các tác vụ như ghi hình video, lên lịch và tổ chức cuộc họp với các bên liên quan, hoặc tiến hành kiểm thử thủ công trên nền tảng Betterstack bắt buộc phải do con người trực tiếp thực hiện. Ngoài ra, năng lực của AI trong việc nhận diện và phân tích các lỗi trực quan trên giao diện người dùng hiện vẫn còn rất nhiều hạn chế, chưa thể đáp ứng được các tiêu chuẩn đánh giá tinh tế của con người.
