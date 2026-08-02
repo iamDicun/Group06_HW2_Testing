@@ -23,3 +23,8 @@ Desktop.ini
 .idea/
 *.swp
 *.swo
+
+/node_modules
+/scripts
+/package.json
+/package-lock.json
