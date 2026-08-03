@@ -1,0 +1,1 @@
+Output của AI cần phải có sự điều chỉnh để khớp với hoàn cảnh thực tế trong trường hợp chỉ hỏi một cách chung, không đưa đủ chi tiết cụ thể hay không dùng Agent đọc toàn bộ dự án.
