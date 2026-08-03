@@ -6,8 +6,11 @@
 * **Lớp / Nhóm:** Nhóm 06
 * **Môn học:** Kiểm Thử Phần Mềm
 * **Môi trường thử nghiệm:** Google Chrome, Mozilla Firefox (Desktop), Safari Mobile (iOS)
+* **Link Video Demo AI Agent Skill (YouTube):** https://youtu.be/LqkgvLuubdM
+* **Link Minh Chứng 7 Người Tham Gia (Google Drive):** https://drive.google.com/drive/folders/1BRLANvJOL6A_MZ9EkViuCaw-ANXOslwg?usp=sharing
 
 ---
+
 
 ## TASK 1 — GUI CHECKLIST (GOOGLE CHROME)
 
