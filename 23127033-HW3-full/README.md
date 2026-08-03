@@ -17,19 +17,20 @@ Dự án này chứa tài liệu báo cáo, checklist và các kịch bản ki�
 * **Số lượng mục checklist (Checklist Items):**
   * **Thiết kế (Designed):** 60 mục.
   * **Thực thi (Executed):** 60 mục trên 3 trình duyệt (Chrome, Firefox, Safari Mobile) = 180 lượt thực thi.
-  * **Đạt (Passed):** 41 mục trên Chrome.
-  * **Lỗi (Failed):** 19 mục trên Chrome (làm cơ sở đối chiếu cho Firefox & Safari).
+  * **Đạt (Passed):** 41 mục trên Chrome/Firefox, 51 mục trên Safari Mobile.
+  * **Lỗi (Failed):** 19 mục trên Chrome/Firefox, 9 mục trên Safari Mobile.
 * **Số lượng lỗi phát hiện (Bugs Found):** 19 lỗi (9 lỗi GUI và 10 lỗi Usability, được log chi tiết trong thư mục `bug-report/`).
 * **Số lượng người tham gia đánh giá usability (Participants):** 7 người dùng thực tế.
-* **Video Demo (Demo Videos):**
-  * Video quay lại quá trình chạy kiểm thử: `usability-recordings/` (hoặc link YouTube/Drive đính kèm trong thư mục báo cáo).
+* **Liên kết minh chứng:**
+  * **Link Video Demo AI Agent Skill (YouTube):** https://youtu.be/LqkgvLuubdM
+  * **Link Minh Chứng 7 Người Tham Gia (Google Drive):** https://drive.google.com/drive/folders/1BRLANvJOL6A_MZ9EkViuCaw-ANXOslwg?usp=sharing
 
 ---
 
 ## 📝 Bảng Tự Đánh Giá (Self-Assessment Table)
 
 | STT | Nội Dung Kiểm Thử (Criteria) | Điểm Tối Đa (Max Grade) | Điểm Tự Đánh Giá (Self-Assessed Grade) | Minh Chứng / Ghi Chú |
-|/---|/---|/---|/---|/---|
+|---|---|---|---|---|
 | 1 | **Task 1 — GUI Checklist** (Thiết kế + Thực thi + Báo cáo lỗi) | 30 | **30** | Thiết kế checklist 60 mục; thực thi chi tiết; tìm và log 19 lỗi thực tế kèm file `.md` và issue GitHub. |
 | 2 | **Task 2 — Usability Evaluation** (Kịch bản nhiệm vụ + Điều phối 7 phiên + Phân tích SUS) | 40 | **40** | Điều phối 7 người dùng thực tế; tính toán chi tiết điểm SUS trung bình (46.43/100); phân loại 10 lỗi khả dụng. |
 | 3 | **Task 3 — Cross-Browser / Cross-Platform** (Thực thi trên Chrome, Firefox và Safari Mobile) | 20 | **20** | Kiểm thử và so sánh đầy đủ 60 mục checklist trên 3 trình duyệt Chrome, Firefox, Safari (Mobile). |
@@ -42,19 +43,18 @@ Dự án này chứa tài liệu báo cáo, checklist và các kịch bản ki�
 
 * 📄 **[README.md](README.md)**: File này (chứa Test Summary và bảng tự đánh giá).
 * 📄 **[main_report.md](main_report.md)**: Báo cáo chính bao gồm cả 3 checklist (Chrome, Firefox, Safari) và phân tích usability Task 2.
-* 📄 **[checklist_chrome.csv](checklist_chrome.csv)**: File Excel/CSV checklist riêng cho Chrome kèm theo Test Summary.
+* 📄 **[main_report.pdf](main_report.pdf)**: Bản PDF xuất bản chính thức của báo cáo chính.
+* 📄 **[checklist_chrome.xlsx](checklist_chrome.xlsx)**: File Excel checklist riêng cho Chrome kèm theo Test Summary.
 * 📄 **[usability_session_evidence.md](usability_session_evidence.md)**: Hồ sơ Usability Testing của 7 người dùng (Scenarios, Bảng điểm SUS, Observation Notes, Severity Findings).
 * 📁 **[bug-report/](bug-report/)**: Chứa 19 báo cáo lỗi `.md` được chia thành:
   * 📁 `gui/`: Chứa 9 báo cáo lỗi giao diện.
   * 📁 `usability/`: Chứa 10 báo cáo lỗi khả dụng.
 * 📁 **[bug-report/evidence/](bug-report/evidence/)**: Thư mục chứa ảnh chụp màn hình lỗi, được phân chia theo trình duyệt:
-  * 📁 `chrome/`: Ảnh chụp màn hình lỗi trên Google Chrome (do người dùng chụp thật).
-  * 📁 `firefox/`: Ảnh chụp màn hình lỗi trên Mozilla Firefox (do người dùng chụp thật).
-  * 📁 `safari/`: Ảnh chụp màn hình lỗi trên Safari Mobile (chụp thật từ điện thoại).
-* 📁 **[scripts/](scripts/)**:
-  * ⚙️ `add_watermark.ps1`: Script PowerShell tự động chèn watermark tên/MSSV hàng loạt vào các góc ảnh.
-  * ⚙️ `sync_github_issues.ps1`: Script PowerShell đồng bộ hóa lỗi từ Markdown lên GitHub Issues sử dụng relative path.
-  * ⚙️ `take_desktop_screenshot.ps1`: Script PowerShell hỗ trợ chụp ảnh màn hình thủ công thuận tiện.
+  * 📁 `chrome/`: Ảnh chụp màn hình lỗi trên Google Chrome.
+  * 📁 `firefox/`: Ảnh chụp màn hình lỗi trên Mozilla Firefox (chèn watermark).
+  * 📁 `safari/`: Ảnh chụp màn hình lỗi trên Safari Mobile (chèn watermark vàng).
+  * 📁 `github issue screenshot/`: Ảnh chụp màn hình 19 lỗi trên GitHub Issues (chèn watermark).
+* 📁 **[gui-usability-tester-skills/](gui-usability-tester-skills/)**: Thư mục định nghĩa Agent Skill kiểm thử GUI & Usability có thể tái sử dụng.
 * 📄 **[ai_disclosure.md](ai_disclosure.md)**, **[ai_audit.md](ai_audit.md)**, **[ai_critique.md](ai_critique.md)**: Báo cáo khai báo AI, kiểm toán V/I/IC (G9.3 & G9.4) và phê bình AI.
 * 📄 **[git_log.md](git_log.md)**: Nhật ký các commit git.
 * 📄 **[prompt_log.md](prompt_log.md)**: Nhật ký các prompt đã tương tác với AI.
