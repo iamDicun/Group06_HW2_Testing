@@ -17,10 +17,6 @@ Dự án này chứa tài liệu báo cáo, checklist và các kịch bản ki�
 * **Số lượng mục checklist (Checklist Items):**
   * **Thiết kế (Designed):** 60 mục.
   * **Thực thi (Executed):** 60 mục trên 3 trình duyệt (Chrome, Firefox, Safari Mobile) = 180 lượt thực thi.
-  * **Đạt (Passed):** 41 mục trên Chrome/Firefox, 51 mục trên Safari Mobile.
-  * **Lỗi (Failed):** 19 mục trên Chrome/Firefox, 9 mục trên Safari Mobile.
-* **Số lượng lỗi phát hiện (Bugs Found):** 19 lỗi (9 lỗi GUI và 10 lỗi Usability, được log chi tiết trong thư mục `bug-report/`).
-* **Số lượng người tham gia đánh giá usability (Participants):** 7 người dùng thực tế.
 * **Liên kết minh chứng:**
   * **Link Video Demo AI Agent Skill (YouTube):** https://youtu.be/LqkgvLuubdM
   * **Link Minh Chứng 7 Người Tham Gia (Google Drive):** https://drive.google.com/drive/folders/1BRLANvJOL6A_MZ9EkViuCaw-ANXOslwg?usp=sharing
@@ -29,13 +25,38 @@ Dự án này chứa tài liệu báo cáo, checklist và các kịch bản ki�
 
 ## 📝 Bảng Tự Đánh Giá (Self-Assessment Table)
 
-| STT | Nội Dung Kiểm Thử (Criteria) | Điểm Tối Đa (Max Grade) | Điểm Tự Đánh Giá (Self-Assessed Grade) | Minh Chứng / Ghi Chú |
-|---|---|---|---|---|
-| 1 | **Task 1 — GUI Checklist** (Thiết kế + Thực thi + Báo cáo lỗi) | 30 | **30** | Thiết kế checklist 60 mục; thực thi chi tiết; tìm và log 19 lỗi thực tế kèm file `.md` và issue GitHub. |
-| 2 | **Task 2 — Usability Evaluation** (Kịch bản nhiệm vụ + Điều phối 7 phiên + Phân tích SUS) | 40 | **40** | Điều phối 7 người dùng thực tế; tính toán chi tiết điểm SUS trung bình (46.43/100); phân loại 10 lỗi khả dụng. |
-| 3 | **Task 3 — Cross-Browser / Cross-Platform** (Thực thi trên Chrome, Firefox và Safari Mobile) | 20 | **20** | Kiểm thử và so sánh đầy đủ 60 mục checklist trên 3 trình duyệt Chrome, Firefox, Safari (Mobile). |
-| 4 | **Agent Skills** (Xây dựng công cụ hỗ trợ và cộng tác AI) | 10 | **10** | Viết script chèn watermark ảnh tự động và script đồng bộ issue lên GitHub CLI rất hiệu quả. |
-| | **TỔNG CỘNG** | **100** | **100 / 100** | Hoàn thành xuất sắc toàn bộ yêu cầu, tài liệu chuẩn hóa relative path. |
+| No. | Criteria | Grade | Self-Assessed Grade |
+| :---: | :--- | :---: | :---: |
+| **1** | Task 1 — GUI Checklist (design + execution + bug report) | 30 | **30** |
+| **2** | Task 2 — Usability Evaluation (task scenario + 7 sessions + analysis) | 40 | **40** |
+| **3** | Task 3 — Cross-Browser / Cross-Platform (≥ 3 platforms) | 20 | **20** |
+| **4** | Agent Skills | 10 | **10** |
+| | **Total** | **100** | **100** |
+
+---
+
+## 🌐 Báo Cáo Tóm Tắt Cross-Browser Checklist
+
+Dưới đây là thống kê kết quả thực thi 60 mục kiểm thử giao diện đối chiếu trên cả 3 trình duyệt/nền tảng:
+
+### 1. Google Chrome (Desktop)
+* **Trạng thái:** Hoàn tất thực thi.
+* **Kết quả:** **41 Đạt (Passed) / 19 Lỗi (Failed)**.
+* **Chi tiết lỗi:** 9 lỗi GUI (màu sắc nút bấm, ẩn mật khẩu, lỗi email input...) và 10 lỗi Usability (logic đổi mật khẩu, áp mã coupon SAVE10...).
+* **Minh chứng:** Đã đồng bộ thành công 19 lỗi lên GitHub Issues (từ Issue #110 đến #128) kèm ảnh chụp màn hình có đóng dấu watermark ở góc dưới bên trái.
+
+### 2. Mozilla Firefox (Desktop)
+* **Trạng thái:** Hoàn tất thực thi.
+* **Kết quả:** **41 Đạt (Passed) / 19 Lỗi (Failed)** (Khớp hoàn toàn với lỗi trên Chrome do sử dụng chung nhân Web).
+* **Minh chứng:** Ảnh chụp màn hình lỗi trên trình duyệt Firefox được lưu tại thư mục `bug-report/evidence/firefox/` có đóng dấu watermark ở góc dưới bên trái.
+
+### 3. Safari Mobile (iOS - Responsive)
+* **Trạng thái:** Hoàn tất thực thi.
+* **Kết quả:** **51 Đạt (Passed) / 9 Lỗi (Failed)**.
+* **Đặc thù Mobile:** 
+  * Nhiều lỗi trên Desktop **đã được tự động sửa đổi hoặc không áp dụng** trên mobile (gộp sản phẩm giỏ hàng thành công, hiển thị mật khẩu ẩn chuẩn xác, tiêu đề đăng nhập đúng, khóa cứng ô tổng tiền...).
+  * Phát hiện **1 lỗi mới đặc thù mobile (BUG-FR-07-005)**: Nhập số lượng `x` trong giỏ hàng luôn bị tự động tăng thêm 1 đơn vị thành `x+1`.
+* **Minh chứng:** Ảnh chụp màn hình lỗi trên Safari di động được lưu tại thư mục `bug-report/evidence/safari/` có đóng dấu watermark màu vàng nổi bật ở góc dưới bên trái.
 
 ---
 
