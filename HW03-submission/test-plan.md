@@ -31,7 +31,7 @@
 | P02 | Huỳnh Vương Nhã Thụy | Nữ | 21 | Sinh viên | 077****699 |
 | P03 | Huỳnh Thanh Hòa | Nam | 53 | Giảng viên | 0918***542 |
 | P04 | Trần Minh Lý | Nam | 22 | Nhân viên L1 công ty manpower trong intel | 034***620 |
-| P05 | Vương Thị Kim Hạnh | Nữ | 50 | Nội trợ | 0908***394 |
+| P05 | Vũ Thành Đạt | Nam | 20 | Sinh viên | 098****064 |
 | P06 | Nguyễn Ngọc Minh Châu | Nữ | 21 | Sinh viên | 081****205 |
 | P07 | Vương Minh Kha | Nam | 33 | Nhân viên văn phòng | 093****394 |
 
