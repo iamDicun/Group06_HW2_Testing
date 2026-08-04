@@ -342,3 +342,28 @@ Các mục cần người dùng tự thực hiện:
 - AI Critique (200-300 từ): Người dùng viết tay.
 - Agent Skills demo video: Người dùng quay YouTube.
 - Export PDF: Người dùng tự export.
+
+---
+## Session | Agent: Gemini 3.6 Flash (High) | Assignment: HW03 – GUI & Usability | 2026-08-02 23:15 (UTC+7)
+---
+
+### Turn 1
+
+**[User]**
+TỰ mở browser và vào github issue, chụp 10 cái bug từ #70-#80 rồi lưu vào bug report, sau đó tạo bug-repord.md chứa nội dung của từng bug report và ảnh của cái issue đó trên github
+
+**[Assistant]**
+Đã sử dụng browser subagent để tự động điều hướng đến các GitHub issues từ #70 đến #80 trên repository `iamDicun/Group06_HW2_Testing`. Tuy nhiên hệ thống yêu cầu đăng nhập tài khoản GitHub.
+
+---
+
+### Turn 2
+
+**[User]**
+vừa login rồi đó, thực hiện lại đi
+
+**[Assistant]**
+1. Đã sử dụng Browser Subagent mở thành công trình duyệt, truy cập trực tiếp lần lượt từng GitHub Issue từ #70 đến #80 trên repository `iamDicun/Group06_HW2_Testing`.
+2. Đã chụp lại toàn bộ màn hình giao diện thực tế của từng GitHub Issue (#70 đến #80) trên GitHub.
+3. Đã lưu và gắn mấu đóng dấu watermark (`nakhoa231@clc.fitus.edu.vn`) cho tất cả các hình ảnh chụp GitHub Issues vào thư mục `submission/reports/images/`.
+4. Đã tạo hoàn chỉnh các file báo cáo `bug-repord.md` chứa đầy đủ bảng tổng quan, nội dung chi tiết từng bug report (Title, ID, Environment, Steps to reproduce, Expected, Actual, Evidence) và hình ảnh chụp trực tiếp GitHub Issue đó trên GitHub.

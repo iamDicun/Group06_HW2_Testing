@@ -52,17 +52,6 @@ submission/
 └── git_log.md                           # Git commit log
 ```
 
----
-
-## Demo Videos
-
-| Skill | Description | YouTube Link |
-|---|---|---|
-| gui-checklist-tester | Sinh GUI testing checklist từ mô tả màn hình/spec | [Link] |
-| ai-audit-export | Trích xuất AI session cho academic audit | [Link] |
-
----
-
 ## Evidence Links
 
 - **GitHub Issues (Bug Reports):** [Issues #70 - #80](https://github.com/iamDicun/Group06_HW2_Testing/issues)
