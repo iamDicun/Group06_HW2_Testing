@@ -25,5 +25,7 @@ Desktop.ini
 *.swo
 
 #Folder
-Eshop/
+.Eshop/
 Eshop.zip
+node_modules/
+21127498_HW03_AI_GUIUsability_030.zip
