@@ -1,0 +1,150 @@
+[
+  {
+    "scenarioId": "SC-FR10-001",
+    "description": "Admin chuyen trang thai hop le tu pending sang confirmed (Xac nhan)",
+    "testType": "positive_transition",
+    "actor": "admin",
+    "initialStatus": "pending",
+    "targetAction": "Xác nhận",
+    "expectedNextStatus": "confirmed",
+    "expectedStatusLabel": "Đã xác nhận",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-002",
+    "description": "Admin chuyen trang thai hop le tu confirmed sang shipping (Giao hang)",
+    "testType": "positive_transition",
+    "actor": "admin",
+    "initialStatus": "confirmed",
+    "targetAction": "Giao hàng",
+    "expectedNextStatus": "shipping",
+    "expectedStatusLabel": "Đang giao",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-003",
+    "description": "Admin chuyen trang thai hop le tu shipping sang delivered (Hoan thanh)",
+    "testType": "positive_transition",
+    "actor": "admin",
+    "initialStatus": "shipping",
+    "targetAction": "Hoàn thành",
+    "expectedNextStatus": "delivered",
+    "expectedStatusLabel": "Đã giao",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-004",
+    "description": "Admin chuyen trang thai hop le tu pending sang canceled (Huy don)",
+    "testType": "positive_transition",
+    "actor": "admin",
+    "initialStatus": "pending",
+    "targetAction": "Hủy",
+    "expectedNextStatus": "canceled",
+    "expectedStatusLabel": "Đã hủy",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-005",
+    "description": "Admin chuyen trang thai hop le tu confirmed sang canceled (Huy don)",
+    "testType": "positive_transition",
+    "actor": "admin",
+    "initialStatus": "confirmed",
+    "targetAction": "Hủy",
+    "expectedNextStatus": "canceled",
+    "expectedStatusLabel": "Đã hủy",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-006",
+    "description": "Khach hang tu huy don hang o trang thai pending tren trang ca nhan",
+    "testType": "customer_cancel_pending",
+    "actor": "customer",
+    "initialStatus": "pending",
+    "targetAction": "Hủy đơn",
+    "expectedNextStatus": "canceled",
+    "expectedStatusLabel": "Đã hủy",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-007",
+    "description": "Khach hang tu huy don hang o trang thai confirmed tren trang ca nhan",
+    "testType": "customer_cancel_confirmed",
+    "actor": "customer",
+    "initialStatus": "confirmed",
+    "targetAction": "Hủy đơn",
+    "expectedNextStatus": "canceled",
+    "expectedStatusLabel": "Đã hủy",
+    "isAllowed": true
+  },
+  {
+    "scenarioId": "SC-FR10-008",
+    "description": "Khach hang KHONG duoc phep tu huy don hang khi da chuyen sang shipping",
+    "testType": "security_customer_shipping_lock",
+    "actor": "customer",
+    "initialStatus": "shipping",
+    "targetAction": "Hủy đơn",
+    "expectedNextStatus": "shipping",
+    "expectedStatusLabel": "Đang giao",
+    "isAllowed": false,
+    "expectedError": "Cannot cancel this order."
+  },
+  {
+    "scenarioId": "SC-FR10-009",
+    "description": "Trang thai delivered la trang thai ket thuc (Final State), khong con nut chuyen tiep",
+    "testType": "final_state_delivered",
+    "actor": "admin",
+    "initialStatus": "delivered",
+    "targetAction": null,
+    "expectedNextStatus": "delivered",
+    "expectedStatusLabel": "Đã giao",
+    "isAllowed": false
+  },
+  {
+    "scenarioId": "SC-FR10-010",
+    "description": "Trang thai canceled la trang thai ket thuc (Final State), khong duoc chuyen sang delivered",
+    "testType": "final_state_canceled",
+    "actor": "admin",
+    "initialStatus": "canceled",
+    "targetAction": null,
+    "expectedNextStatus": "canceled",
+    "expectedStatusLabel": "Đã hủy",
+    "isAllowed": false
+  },
+  {
+    "scenarioId": "SC-FR10-011",
+    "description": "Backend tu choi chuyen doi nhay coc khong hop le tu pending sang delivered",
+    "testType": "invalid_skip_transition",
+    "actor": "admin",
+    "initialStatus": "pending",
+    "attemptedStatus": "delivered",
+    "expectedNextStatus": "pending",
+    "isAllowed": false,
+    "expectedError": "Invalid state transition"
+  },
+  {
+    "scenarioId": "SC-FR10-012",
+    "description": "Backend tu choi chuyen doi nguoc khong hop le tu shipping ve pending",
+    "testType": "invalid_reverse_transition",
+    "actor": "admin",
+    "initialStatus": "shipping",
+    "attemptedStatus": "pending",
+    "expectedNextStatus": "shipping",
+    "isAllowed": false,
+    "expectedError": "Invalid state transition"
+  },
+  {
+    "scenarioId": "SC-FR10-013",
+    "description": "Kiem tra tinh dong nhat cua 5 badge trang thai: pending, confirmed, shipping, delivered, canceled",
+    "testType": "ui_localization_badges",
+    "actor": "admin",
+    "initialStatus": "all",
+    "expectedLabels": {
+      "pending": "Chờ xác nhận",
+      "confirmed": "Đã xác nhận",
+      "shipping": "Đang giao",
+      "delivered": "Đã giao",
+      "canceled": "Đã hủy"
+    },
+    "isAllowed": true
+  }
+]

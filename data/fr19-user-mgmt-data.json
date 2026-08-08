@@ -1,0 +1,133 @@
+[
+  {
+    "scenarioId": "SC-FR19-001",
+    "description": "Admin xem danh sach nguoi dung day du cac cot (ID, Email, Role, So DT, Hanh dong)",
+    "testType": "positive_view_list",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "action": "view_users_tab",
+    "expectedResult": "success",
+    "expectedHeaders": ["ID", "Email", "Role", "Số ĐT", "Hành động"]
+  },
+  {
+    "scenarioId": "SC-FR19-002",
+    "description": "Bao mat: Khong de lo mat khau hoac hash mat khau trong DOM va bang Admin Users",
+    "testType": "security_no_passwords_leaked",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "action": "inspect_table_security",
+    "expectedResult": "passwords_not_exposed"
+  },
+  {
+    "scenarioId": "SC-FR19-003",
+    "description": "Admin xoa tai khoan nguoi dung thuong (role user) thanh cong",
+    "testType": "positive_delete_user",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "targetUserEmail": "temp_delete_target@eshop.com",
+    "action": "delete_user",
+    "expectedResult": "success"
+  },
+  {
+    "scenarioId": "SC-FR19-004",
+    "description": "Rang buoc an toan spec: Admin khong duoc xoa chinh tai khoan dang dang nhap",
+    "testType": "safety_admin_self_delete_protection",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "targetUserEmail": "admin@eshop.com",
+    "action": "delete_self_attempt",
+    "expectedResult": "self_protected"
+  },
+  {
+    "scenarioId": "SC-FR19-005",
+    "description": "Tu choi quyen truy cap Admin Web khi dang nhap bang tai khoan user thuong",
+    "testType": "access_control_non_admin_denied",
+    "loginEmail": "test@eshop.com",
+    "loginPassword": "Test1234!",
+    "action": "login_admin_portal",
+    "expectedResult": "access_denied",
+    "expectedAlert": "Bạn không phải là admin!"
+  },
+  {
+    "scenarioId": "SC-FR19-006",
+    "description": "Chua dang nhap truy cap Admin Web phai hien thi form dang nhap, khong lo du lieu",
+    "testType": "access_control_unauthenticated",
+    "loginEmail": null,
+    "loginPassword": null,
+    "action": "visit_admin_direct",
+    "expectedResult": "login_screen_displayed"
+  },
+  {
+    "scenarioId": "SC-FR19-007",
+    "description": "Danh sach nguoi dung tu dong cap nhat ngay lap tuc sau khi xoa (giam 1 hang)",
+    "testType": "positive_realtime_refresh",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "targetUserEmail": "refresh_test_user@eshop.com",
+    "action": "verify_row_decrement",
+    "expectedResult": "count_decremented"
+  },
+  {
+    "scenarioId": "SC-FR19-008",
+    "description": "Tai khoan da bi Admin xoa khong the tiep tuc dang nhap vao he thong khach hang",
+    "testType": "integration_deleted_user_login_blocked",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "targetUserEmail": "locked_out_test@eshop.com",
+    "targetUserPass": "LockPass123!",
+    "action": "test_deleted_user_auth",
+    "expectedResult": "login_rejected",
+    "expectedError": "Invalid email or password"
+  },
+  {
+    "scenarioId": "SC-FR19-009",
+    "description": "Kiem tra nhan vai tro Role phan biet chinh xac giua 'admin' va 'user'",
+    "testType": "ui_role_badge_verification",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "action": "verify_role_column_values",
+    "expectedRoles": ["admin", "user"],
+    "expectedResult": "roles_verified"
+  },
+  {
+    "scenarioId": "SC-FR19-010",
+    "description": "So dien thoai cap nhat tu trang Profile duoc phan anh dong bo trong bang Admin",
+    "testType": "integration_profile_phone_sync",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "targetUserEmail": "test@eshop.com",
+    "action": "check_synced_phone",
+    "expectedResult": "phone_synced"
+  },
+  {
+    "scenarioId": "SC-FR19-011",
+    "description": "API /api/admin/users tu choi request khi thieu hoac sai JWT token",
+    "testType": "security_api_auth_check",
+    "loginEmail": null,
+    "loginPassword": null,
+    "action": "direct_api_request",
+    "expectedStatus": 401,
+    "expectedResult": "unauthorized"
+  },
+  {
+    "scenarioId": "SC-FR19-012",
+    "description": "Lifecycle E2E: Dang ky tai khoan moi tai Web khach hang roi xoa tai Web Admin",
+    "testType": "lifecycle_register_and_delete",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "newUserName": "E2E Lifecycle User",
+    "newUserEmail": "lifecycle_user@eshop.com",
+    "newUserPass": "E2EPass123!",
+    "action": "register_then_delete",
+    "expectedResult": "lifecycle_completed"
+  },
+  {
+    "scenarioId": "SC-FR19-013",
+    "description": "Kiem tra toan ven cau truc bang nguoi dung va checkbox hang loat",
+    "testType": "ui_dom_structure_validation",
+    "loginEmail": "admin@eshop.com",
+    "loginPassword": "admin123",
+    "action": "verify_table_dom",
+    "expectedResult": "dom_valid"
+  }
+]
