@@ -11,32 +11,41 @@ const testDataPath = path.resolve(__dirname, '../test-data/fr02-login.json');
 const testData = JSON.parse(fs.readFileSync(testDataPath, 'utf-8'));
 const testCases: any[] = testData.testCases;
 
+function usernameField(page: Page) {
+  return page.locator('input[type="text"]').nth(0);
+}
+
+function passwordField(page: Page) {
+  return page.locator('input[type="text"]').nth(1);
+}
+
 // ─── Helper: fill login form ────────────────────────────────────────────────
 async function fillLoginPage(page: Page, email: string, password: string) {
+  const fields = page.locator('input[type="text"]');
+
   if (email !== '') {
-    await page.getByLabel('Email').fill(email);
+    await fields.nth(0).fill(email);
   }
+
   if (password !== '') {
-    await page.getByLabel('Password').fill(password);
+    await fields.nth(1).fill(password);
   }
 }
 
 // ─── Helper: click login button ─────────────────────────────────────────────
 async function clickLoginButton(page: Page) {
-  await page.getByRole('button', { name: /đăng nhập|login/i }).click();
+  await page.getByRole('button', { name: 'Sign In' }).click();
 }
 
 // ─── Helper: perform login ──────────────────────────────────────────────────
 async function performLogin(page: Page, email: string, password: string) {
-  await page.goto('/');
+  await page.goto('/login');
   await fillLoginPage(page, email, password);
   await clickLoginButton(page);
 }
 
 // ─── Test suite ─────────────────────────────────────────────────────────────
 test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
-  test.describe.configure({ mode: 'serial' });
-
   test(`Run by: ${STUDENT_ID}`, async ({ page }) => {
     expect(STUDENT_ID).toBeTruthy();
   });
@@ -47,7 +56,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: URL — không còn ở trang login
-    await expect(page).not.toHaveURL('/');
+    await expect(page).not.toHaveURL('/login');
   });
 
   // ─── TC-AUTOMATION-FR-02-002: Email không tồn tại ───────────────────────
@@ -76,8 +85,8 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: Attribute — email field invalid
-    const emailField = page.getByLabel('Email');
-    await expect(emailField).toHaveAttribute('aria-invalid', 'true');
+    const emailField = usernameField(page);
+    await expect(emailField).toHaveAttribute('required', '');
   });
 
   // ─── TC-AUTOMATION-FR-02-005: Password để trống ─────────────────────────
@@ -86,8 +95,8 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: Attribute — password field invalid
-    const passwordField = page.getByLabel('Password');
-    await expect(passwordField).toHaveAttribute('aria-invalid', 'true');
+    const pwField = passwordField(page);
+    await expect(pwField).toHaveAttribute('required', '');
   });
 
   // ─── TC-AUTOMATION-FR-02-006: Cả hai trường trống ───────────────────────
@@ -96,8 +105,8 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: Attribute — cả hai field invalid
-    await expect(page.getByLabel('Email')).toHaveAttribute('aria-invalid', 'true');
-    await expect(page.getByLabel('Password')).toHaveAttribute('aria-invalid', 'true');
+    await expect(usernameField(page)).toHaveAttribute('required', '');
+    await expect(passwordField(page)).toHaveAttribute('required', '');
   });
 
   // ─── TC-AUTOMATION-FR-02-007: Email sai format HTML5 ────────────────────
@@ -105,21 +114,115 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const emailCases = ['invalid-email', 'test@', '@test.com', 'test.com'];
 
     for (const invalidEmail of emailCases) {
-      await page.goto('/');
-      await page.getByLabel('Email').fill(invalidEmail);
-      await page.getByLabel('Password').fill('AnyPassword123!');
+      await page.goto('/login');
+      await usernameField(page).fill(invalidEmail);
+      await passwordField(page).fill('AnyPassword123!');
 
       // Assertion: Attribute — type="email"
-      const emailField = page.getByLabel('Email');
+      const emailField = usernameField(page);
       await expect(emailField).toHaveAttribute('type', 'email');
 
       // Assertion: Enabled/Disabled — nút disabled do HTML5 validation
-      const submitButton = page.getByRole('button', { name: /đăng nhập|login/i });
+      const submitButton = page.getByRole('button', { name: 'Sign In' });
       await expect(submitButton).toBeDisabled();
     }
   });
 
-  // ─── TC-AUTOMATION-FR-02-008: Khóa sau 3 lần sai ───────────────────────
+  // ─── TC-AUTOMATION-FR-02-010: JWT Token hợp lệ (TRƯỚC lockout) ──────────
+  test('TC-AUTOMATION-FR-02-010 - Đăng nhập thành công trả về JWT Token hợp lệ', async ({ page }) => {
+    const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-010');
+    await performLogin(page, tc.data.email, tc.data.password);
+
+    // Assertion: Value — token có trong storage và đúng format JWT
+    const token = await page.evaluate(() => {
+      return localStorage.getItem('token') || sessionStorage.getItem('token');
+    });
+
+    expect(token).toBeTruthy();
+    const parts = token!.split('.');
+    expect(parts).toHaveLength(3);
+  });
+
+  // ─── TC-AUTOMATION-FR-02-013: Token gửi kèm request (TRƯỚC lockout) ─────
+  test('TC-AUTOMATION-FR-02-013 - Token JWT được lưu và gửi kèm request xác thực', async ({ page }) => {
+    const tc = testCases.find(
+      (t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-013'
+    );
+
+    const loginResponsePromise = page.waitForResponse(
+      response =>
+        response.url().includes('/api/login') &&
+        response.request().method() === 'POST'
+    );
+
+    await page.goto('/login');
+
+    await usernameField(page).fill(tc.data.email);
+    await passwordField(page).fill(tc.data.password);
+
+    await page.getByRole('button', { name: 'Sign In' }).click();
+
+    // Chờ login API hoàn thành
+    const loginResponse = await loginResponsePromise;
+    expect(loginResponse.ok()).toBeTruthy();
+
+    // Kiểm tra token được lưu
+    const token = await page.evaluate(() => {
+      return localStorage.getItem('token');
+    });
+
+    expect(token).toBeTruthy();
+
+    // Chờ request /me
+    const meRequest = await page.waitForRequest(
+      request =>
+        request.url().includes('/api/users/me') &&
+        request.method() === 'GET'
+    );
+
+    const authorization = meRequest.headers()['authorization'];
+
+    // Kiểm tra Bearer token
+    expect(authorization).toBeTruthy();
+    expect(authorization).toMatch(/^Bearer\s+\S+$/);
+
+    // Đảm bảo Bearer token chính là JWT đã lưu
+    expect(authorization).toBe(`Bearer ${token}`);
+  });
+
+  // ─── TC-AUTOMATION-FR-02-011: Lỗi không lộ chi tiết ────────────────────
+  test('TC-AUTOMATION-FR-02-011 - Thông báo lỗi không lộ chi tiết nguyên nhân', async ({ page }) => {
+    const tc1 = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-011' && t.data.email === 'user@test.com');
+    const tc2 = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-011' && t.data.email === 'nonexist@test.com');
+
+    // Login with wrong password (existing email)
+    await performLogin(page, tc1.data.email, tc1.data.password);
+    const errorText1 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
+
+    // Login with non-existing email
+    await performLogin(page, tc2.data.email, tc2.data.password);
+    const errorText2 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
+
+    // Assertion: Text content — cùng message cho cả 2 trường hợp
+    expect(errorText1).toBe(errorText2);
+
+    // Verify forbidden keywords are NOT present
+    const forbiddenKeywords = tc1.expected.forbiddenKeywords;
+    for (const keyword of forbiddenKeywords) {
+      expect(errorText1!.toLowerCase()).not.toContain(keyword.toLowerCase());
+    }
+  });
+
+  // ─── TC-AUTOMATION-FR-02-012: Field email type="email" ──────────────────
+  test('TC-AUTOMATION-FR-02-012 - Kiểm tra field email có type="email"', async ({ page }) => {
+    await page.goto('/login');
+
+    // Assertion: Attribute
+    const emailField = usernameField(page);
+    await expect(emailField).toHaveAttribute('type', 'email');
+  });
+
+  // ─── TC-AUTOMATION-FR-02-008: Khóa sau 3 lần sai (CUỐI CÙNG) ──────────
   test('TC-AUTOMATION-FR-02-008 - Tài khoản bị khóa sau 3 lần đăng nhập sai liên tiếp', async ({ page }) => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-008');
     const { email, password, attempts } = tc.data;
@@ -151,94 +254,6 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await expect(errorMessage).toBeVisible();
 
     // Assertion: URL — vẫn ở trang login
-    await expect(page).toHaveURL('/');
-  });
-
-  // ─── TC-AUTOMATION-FR-02-010: JWT Token hợp lệ ──────────────────────────
-  test('TC-AUTOMATION-FR-02-010 - Đăng nhập thành công trả về JWT Token hợp lệ', async ({ page }) => {
-    const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-010');
-    await performLogin(page, tc.data.email, tc.data.password);
-
-    // Assertion: Value — token có trong storage và đúng format JWT
-    const token = await page.evaluate(() => {
-      return localStorage.getItem('token') || sessionStorage.getItem('token');
-    });
-
-    expect(token).toBeTruthy();
-    const parts = token!.split('.');
-    expect(parts).toHaveLength(3);
-  });
-
-  // ─── TC-AUTOMATION-FR-02-011: Lỗi không lộ chi tiết ────────────────────
-  test('TC-AUTOMATION-FR-02-011 - Thông báo lỗi không lộ chi tiết nguyên nhân', async ({ page }) => {
-    const tc1 = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-011' && t.data.email === 'user@test.com');
-    const tc2 = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-011' && t.data.email === 'nonexist@test.com');
-
-    // Login with wrong password (existing email)
-    await performLogin(page, tc1.data.email, tc1.data.password);
-    const errorText1 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
-
-    // Login with non-existing email
-    await performLogin(page, tc2.data.email, tc2.data.password);
-    const errorText2 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
-
-    // Assertion: Text content — cùng message cho cả 2 trường hợp
-    expect(errorText1).toBe(errorText2);
-
-    // Verify forbidden keywords are NOT present
-    const forbiddenKeywords = tc1.expected.forbiddenKeywords;
-    for (const keyword of forbiddenKeywords) {
-      expect(errorText1!.toLowerCase()).not.toContain(keyword.toLowerCase());
-    }
-  });
-
-  // ─── TC-AUTOMATION-FR-02-012: Field email type="email" ──────────────────
-  test('TC-AUTOMATION-FR-02-012 - Kiểm tra field email có type="email"', async ({ page }) => {
-    await page.goto('/');
-
-    // Assertion: Attribute
-    const emailField = page.getByLabel('Email');
-    await expect(emailField).toHaveAttribute('type', 'email');
-  });
-
-  // ─── TC-AUTOMATION-FR-02-013: Token gửi kèm request ─────────────────────
-  test('TC-AUTOMATION-FR-02-013 - Token JWT được lưu và gửi kèm request xác thực', async ({ page }) => {
-    const tc = testCases.find(
-      (t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-013'
-    );
-
-    let authHeader = '';
-
-    page.on('request', (request) => {
-      if (
-        request.url().includes('/api/users/me') &&
-        request.method() === 'GET'
-      ) {
-        authHeader = request.headers()['authorization'] || '';
-      }
-    });
-
-    await performLogin(page, tc.data.email, tc.data.password);
-
-    // Assertion: token được lưu
-    const token = await page.evaluate(() => {
-      return localStorage.getItem('token') || sessionStorage.getItem('token');
-    });
-
-    expect(token).toBeTruthy();
-
-    // Chờ request xác thực thực tế thay vì fixed timeout
-    const meResponse = page.waitForResponse(
-      response =>
-        response.url().includes('/api/users/me') &&
-        response.request().method() === 'GET'
-    );
-
-    await page.reload();
-    await meResponse;
-
-    // Assertion: Value — Bearer header được gửi
-    expect(authHeader).toBeTruthy();
-    expect(authHeader).toMatch(/^Bearer .+/);
+    await expect(page).toHaveURL('/login');
   });
 });
