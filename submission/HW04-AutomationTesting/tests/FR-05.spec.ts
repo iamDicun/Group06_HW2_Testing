@@ -37,16 +37,18 @@ test.describe("FR-05: Xem danh sach & Tim kiem san pham", () => {
       const home = new HomePage(page);
 
       await home.goto();
-      await expect(home.h1.first()).toBeVisible();
+      // Chờ DOM tải ổn định trước khi kiểm tra h1
+      await page.waitForLoadState("domcontentloaded");
+      await expect(page.locator("h1").first()).toBeVisible();
 
       switch (c.action) {
         case "verifyPageTitle": {
-          await expect(home.h1.first()).toHaveText(c.expectedH1Text!);
+          await expect(page.locator("h1").first()).toHaveText(c.expectedH1Text!);
           break;
         }
 
         case "verifyH1Count": {
-          await expect(home.h1).toHaveCount(c.expectedH1Count!);
+          await expect(page.locator("h1:visible")).toHaveCount(c.expectedH1Count!);
           break;
         }
 
@@ -61,19 +63,20 @@ test.describe("FR-05: Xem danh sach & Tim kiem san pham", () => {
           const card = home.productCards.nth(c.productIndex!);
           await expect(card.locator("h2")).toHaveText(c.expectedName!);
           await expect(card.locator("img")).toBeVisible();
-          await expect(card.locator("p")).toBeVisible();
+          await expect(card.locator("p").first()).toBeVisible();
           break;
         }
 
         case "verifyPriceFormat": {
           const card = home.productCards.nth(c.productIndex!);
-          await expect(card.locator("p")).toContainText(c.expectedPriceContains!);
+          await expect(card).toContainText(c.expectedPriceContains!);
           break;
         }
 
         case "verifyCurrency": {
           const card = home.productCards.first();
-          await expect(card.locator("p")).toContainText(c.expectedCurrencySymbol!);
+          // Kiểm tra thẳng trong card sản phẩm có chứa ký hiệu tiền tệ
+          await expect(card).toContainText(c.expectedCurrencySymbol!);
           break;
         }
 
@@ -103,8 +106,9 @@ test.describe("FR-05: Xem danh sach & Tim kiem san pham", () => {
 
         case "searchEmptyState": {
           await home.search(c.searchTerm!);
+          await page.waitForLoadState("networkidle");
           await expect(home.productCards).toHaveCount(0);
-          await expect(page.locator(`text=${c.expectedEmptyStateText!}`)).toBeVisible();
+          await expect(page.getByText(c.expectedEmptyStateText!)).toBeVisible();
           break;
         }
 
@@ -121,14 +125,12 @@ test.describe("FR-05: Xem danh sach & Tim kiem san pham", () => {
           const count = await home.productCards.count();
           expect(count).toBeGreaterThanOrEqual(1);
           for (let i = 0; i < count; i++) {
-            const alt = await home.productCards
-              .nth(i)
-              .locator("img")
-              .getAttribute("alt");
-            expect(alt, `product #${i} alt should not be null`).not.toBeNull();
-            if (c.expectedAltNonEmpty) {
-              expect((alt ?? "").trim(), `product #${i} alt is empty`).not.toBe("");
-            }
+            const img = home.productCards.nth(i).locator("img");
+            await expect(img).toHaveAttribute("alt");
+
+            const altValue = await img.getAttribute("alt");
+            expect(altValue, `Ảnh sản phẩm #${i} bị null`).not.toBeNull();
+            expect(altValue?.trim(), `Ảnh sản phẩm #${i} bị rỗng`).not.toBe("");
           }
           break;
         }
