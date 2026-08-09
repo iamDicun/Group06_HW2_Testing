@@ -11,6 +11,10 @@ import { Account, seedOrdersForUser } from "./utils/apiSeed";
  * Don hang duoc seed truoc qua API (tests/utils/apiSeed.ts).
  */
 
+//Add student ID
+test.beforeEach(async ({}, testInfo) => {
+  testInfo.annotations.push({type: "Run by", description: "23127459"});
+});
 
 interface FR11Case {
   id: string;
