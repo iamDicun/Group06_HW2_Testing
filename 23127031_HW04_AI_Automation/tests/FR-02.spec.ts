@@ -65,7 +65,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: Visibility — error message hiển thị
-    const errorBanner = page.getByText(/đăng nhập thất bại|invalid|không chính xác/i);
+    const errorBanner = page.getByText(/đăng nhập thất bại/i);
     await expect(errorBanner).toBeVisible();
   });
 
@@ -75,7 +75,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc.data.email, tc.data.password);
 
     // Assertion: Visibility
-    const errorBanner = page.getByText(/đăng nhập thất bại|invalid|không chính xác/i);
+    const errorBanner = page.getByText(/đăng nhập thất bại/i);
     await expect(errorBanner).toBeVisible();
   });
 
@@ -197,11 +197,11 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
 
     // Login with wrong password (existing email)
     await performLogin(page, tc1.data.email, tc1.data.password);
-    const errorText1 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
+    const errorText1 = await page.getByText(/đăng nhập thất bại/i).textContent();
 
     // Login with non-existing email
     await performLogin(page, tc2.data.email, tc2.data.password);
-    const errorText2 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
+    const errorText2 = await page.getByText(/đăng nhập thất bại/i).textContent();
 
     // Assertion: Text content — cùng message cho cả 2 trường hợp
     expect(errorText1).toBe(errorText2);
