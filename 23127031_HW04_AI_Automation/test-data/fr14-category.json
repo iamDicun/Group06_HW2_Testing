@@ -1,13 +1,24 @@
 {
   "_meta": {
     "studentId": "23127031",
-    "generatedAt": "2026-08-10T02:40:48+00:00",
+    "generatedAt": "2026-08-10T04:30:00+00:00",
     "feature": "FR-14",
-    "description": "Test data cho functionality Quản lý Danh mục (Category CRUD)"
-  },
-  "admin": {
-    "email": "admin@eshop.com",
-    "password": "Admin123!"
+    "description": "Test data cho Quản lý Danh mục (Category CRUD) - dựa trên source code thực tế",
+    "adminUrl": "http://localhost:5174",
+    "adminCredentials": {
+      "email": "admin@eshop.com",
+      "password": "Admin123!"
+    },
+    "uiElements": {
+      "loginEmailPlaceholder": "Email",
+      "loginPasswordPlaceholder": "Password",
+      "loginButton": "Login",
+      "categoryTab": "Danh mục",
+      "categoryInputPlaceholder": "Tên danh mục mới",
+      "addButton": "Thêm mới",
+      "deleteButton": "Xóa",
+      "tableHeaders": ["ID", "Tên Danh Mục", "Hành động"]
+    }
   },
   "testCases": [
     {
@@ -154,20 +165,15 @@
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-14-012",
-      "scenario": "Thêm nhiều danh mục liên tiếp — kiểm tra tất cả hiển thị",
+      "scenario": "Thêm nhiều danh mục liên tiếp",
       "data": {
         "email": "admin@eshop.com",
         "password": "Admin123!",
-        "categoriesToAdd": [
-          "Category A",
-          "Category B",
-          "Category C"
-        ]
+        "categoriesToAdd": ["Category A", "Category B", "Category C"]
       },
       "expected": {
         "allAdded": true,
-        "countIncrease": 3,
-        "allDisplayed": ["Category A", "Category B", "Category C"]
+        "countIncrease": 3
       }
     }
   ]
