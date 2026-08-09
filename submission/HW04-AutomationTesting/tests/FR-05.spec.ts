@@ -7,6 +7,10 @@ import { loadTestData, substituteTimestamp } from "./utils/dataLoader";
  * FR-05: Xem danh sach & Tim kiem san pham
  * Data-driven: toan bo du lieu duoc lay tu test-data/fr05-data.json
  */
+test.beforeEach(async ({}, testInfo) => {
+  testInfo.annotations.push({type: "Run by", description: "23127459"});
+});
+
 interface FR05Case {
   id: string;
   action: string;

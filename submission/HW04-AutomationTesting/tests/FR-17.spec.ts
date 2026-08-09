@@ -10,6 +10,10 @@ import { Account } from "./utils/apiSeed";
  * FR-17: Quan ly Ma Giam Gia (Coupon CRUD - Admin)
  * Data-driven: du lieu lay tu test-data/fr17-data.json
  */
+test.beforeEach(async ({}, testInfo) => {
+  testInfo.annotations.push({type: "Run by", description: "23127459"});
+});
+
 interface FR17Case {
   id: string;
   action: string;
@@ -100,9 +104,7 @@ test.describe("FR-17: Quan ly Ma Giam Gia (Coupon CRUD)", () => {
           await coupons.fillCoupon(c.coupon!);
           const countBefore = await coupons.tableRows.count();
           await coupons.createButton.click();
-          await page.waitForTimeout(800);
-          const countAfter = await coupons.tableRows.count();
-          expect(countAfter).toBe(countBefore);
+          await expect(coupons.tableRows).toHaveCount(countBefore);
           break;
         }
 
@@ -116,7 +118,6 @@ test.describe("FR-17: Quan ly Ma Giam Gia (Coupon CRUD)", () => {
           await coupons.createCoupon(c.coupon!);
           await expect(coupons.rowByCode(c.coupon!.code)).toHaveCount(1);
           await coupons.createCoupon(c.coupon!);
-          await page.waitForTimeout(800);
           await expect(coupons.rowByCode(c.coupon!.code)).toHaveCount(1);
           break;
         }
