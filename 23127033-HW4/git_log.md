@@ -9,6 +9,7 @@
 ## 1. Nhật Ký Commit Từng Bước (Incremental Commits Log)
 
 ```text
+* 4a9101d - Dicun : docs: final HW04 submission update with video links, git_log, code fixes comparison, and GitHub issue links
 * c91284a - Dicun : update report & final documentation
 * d5d2a95 - Dicun : kiểm tra giá sản phẩm = 0 (FR-15 TC_PM_14, TC_PM_15)
 * e21553a - Dicun : kiểm tra hộp thoại xác nhận delete (FR-15 TC_PM_03, TC_PM_13)
@@ -40,3 +41,5 @@
    - Bổ sung `TC_PM_14`, `TC_PM_15` kiểm thử BVA giá 0 ₫ / giá âm và phát hiện `BUG-FR15-002`.
 8. **`c91284a` - `update report & final documentation`**
    - Hoàn thiện `main-report.md`, `README.md`, các báo cáo AI và minh chứng 8 GitHub Issues.
+9. **`4a9101d` - `final HW04 submission update`**
+   - Cập nhật link 2 YouTube videos, đối chiếu mã code đã fix so với AI, công khai các đường dẫn GitHub Repo và Multi-browser HTML Report.
