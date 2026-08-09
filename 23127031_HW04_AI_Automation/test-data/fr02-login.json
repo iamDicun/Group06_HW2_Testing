@@ -1,0 +1,227 @@
+{
+  "_meta": {
+    "studentId": "23127031",
+    "generatedAt": "2026-08-09T21:32:00+00:00",
+    "feature": "FR-02",
+    "description": "Test data cho functionality Đăng nhập & Khóa tài khoản"
+  },
+  "testCases": [
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-001",
+      "scenario": "Đăng nhập thành công với email và password hợp lệ",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!"
+      },
+      "expected": {
+        "success": true,
+        "hasToken": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-002",
+      "scenario": "Đăng nhập thất bại - email không tồn tại",
+      "data": {
+        "email": "nonexist@test.com",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-003",
+      "scenario": "Đăng nhập thất bại - email đúng, password sai",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "WrongPassword999!"
+      },
+      "expected": {
+        "success": false,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-004",
+      "scenario": "Đăng nhập - email để trống",
+      "data": {
+        "email": "",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "validationError": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-005",
+      "scenario": "Đăng nhập - password để trống",
+      "data": {
+        "email": "user@test.com",
+        "password": ""
+      },
+      "expected": {
+        "success": false,
+        "validationError": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-006",
+      "scenario": "Đăng nhập - cả hai trường để trống",
+      "data": {
+        "email": "",
+        "password": ""
+      },
+      "expected": {
+        "success": false,
+        "validationError": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-007",
+      "scenario": "Đăng nhập - email không đúng format HTML5",
+      "data": {
+        "email": "invalid-email",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "html5Validation": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-007",
+      "scenario": "Đăng nhập - email không đúng format (thêm cases)",
+      "data": {
+        "email": "test@",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "html5Validation": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-007",
+      "scenario": "Đăng nhập - email không đúng format (thêm cases)",
+      "data": {
+        "email": "@test.com",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "html5Validation": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-007",
+      "scenario": "Đăng nhập - email không đúng format (thêm cases)",
+      "data": {
+        "email": "test.com",
+        "password": "AnyPassword123!"
+      },
+      "expected": {
+        "success": false,
+        "html5Validation": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-008",
+      "scenario": "Tài khoản bị khóa sau 3 lần đăng nhập sai liên tiếp",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "WrongPassword!",
+        "attempts": 3
+      },
+      "expected": {
+        "success": false,
+        "lockedOut": true,
+        "lockoutDuration": 30,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-009",
+      "scenario": "Đăng nhập khi tài khoản đang bị khóa",
+      "data": {
+        "email": "user@test.com",
+        "password": "CorrectPassword123!",
+        "precondition": "account_locked"
+      },
+      "expected": {
+        "success": false,
+        "lockedOut": true,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-010",
+      "scenario": "Đăng nhập thành công trả về JWT Token hợp lệ",
+      "data": {
+        "email": "user@test.com",
+        "password": "CorrectPassword123!"
+      },
+      "expected": {
+        "success": true,
+        "hasToken": true,
+        "tokenFormat": "header.payload.signature"
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-011",
+      "scenario": "Thông báo lỗi không lộ chi tiết - email đúng, password sai",
+      "data": {
+        "email": "user@test.com",
+        "password": "WrongPassword!"
+      },
+      "expected": {
+        "success": false,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại.",
+        "forbiddenKeywords": ["sai mật khẩu", "tài khoản không tồn tại", "email không hợp lệ"]
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-011",
+      "scenario": "Thông báo lỗi không lộ chi tiết - email không tồn tại",
+      "data": {
+        "email": "nonexist@test.com",
+        "password": "AnyPassword!"
+      },
+      "expected": {
+        "success": false,
+        "errorMessage": "Đăng nhập thất bại. Vui lòng kiểm tra lại.",
+        "forbiddenKeywords": ["sai mật khẩu", "tài khoản không tồn tại", "email không hợp lệ"]
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-012",
+      "scenario": "Kiểm tra field email có type=\"email\"",
+      "data": {},
+      "expected": {
+        "emailFieldType": "email"
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-02-013",
+      "scenario": "Token JWT được lưu và gửi kèm request xác thực",
+      "data": {
+        "email": "user@test.com",
+        "password": "CorrectPassword123!"
+      },
+      "expected": {
+        "success": true,
+        "hasToken": true,
+        "tokenInStorage": true,
+        "bearerHeader": true
+      }
+    }
+  ]
+}
