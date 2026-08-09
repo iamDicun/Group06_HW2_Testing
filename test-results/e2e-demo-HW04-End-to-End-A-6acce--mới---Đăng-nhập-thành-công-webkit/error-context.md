@@ -7,7 +7,7 @@
 # Test info
 
 - Name: e2e-demo.spec.ts >> HW04 End-to-End Automation Flow Demo >> E2E Flow: Quên mật khẩu -> Đặt lại mật khẩu mới -> Đăng nhập thành công
-- Location: tests\e2e-demo.spec.ts:4:7
+- Location: 23127033-HW4\tests\e2e-demo.spec.ts:4:7
 
 # Error details
 
