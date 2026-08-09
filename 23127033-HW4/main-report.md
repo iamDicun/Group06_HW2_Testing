@@ -12,10 +12,10 @@
 
 ## 🔗 Liên Kết Bài Nộp & Tài Nguyên Dự Án
 
-- **Public GitHub Repository:** [Group06_HW2_Testing (GitHub)](https://github.com/iamDicun/Group06_HW2_Testing)
-- **Thư mục Test Scripts (.spec.ts):** [`./tests/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/tests)
-- **Thư mục Test Data (.json):** [`./test-data/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/test-data)
-- **Playwright Multi-Browser HTML Report (GitHub):** [Playwright HTML Report trên GitHub Repo](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/playwright-report)
+- **Public GitHub Repository (Thư mục HW04):** [HW04 Directory (GitHub Branch 23127033-HW4-HW5)](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/)
+- **Thư mục Test Scripts (.spec.ts):** [`./tests/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/tests/)
+- **Thư mục Test Data (.json):** [`./test-data/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/test-data/)
+- **Playwright Multi-Browser HTML Report (GitHub):** [Playwright HTML Report trên GitHub Repo](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/playwright-report)
 - 🎬 **Video Demo 1: Agent Skill Process (YouTube Unlisted):** [https://youtu.be/_de9jzahfRE](https://youtu.be/_de9jzahfRE)
 - 🎬 **Video Demo 2: Automation E2E & Multi-Browser Run (YouTube Unlisted):** [https://youtu.be/m8WTSC1_GsI](https://youtu.be/m8WTSC1_GsI)
 
@@ -30,6 +30,7 @@ Bộ kịch bản kiểm thử tự động được tổ chức tách biệt d�
 23127033-HW4/
 ├── 2026.HW04.Automation Testing_En.pdf   # Đề bài yêu cầu
 ├── main-report.md                       # Báo cáo chính chi tiết toàn bộ HW04
+├── main-report.pdf                      # Tệp báo cáo dạng PDF
 ├── README.md                            # Main summary report + Self-Assessment Table
 ├── playwright.config.ts                 # Cấu hình Playwright (3 browsers, reporters, metadata)
 ├── test-cases/                          # 50 test cases Markdown cho 3 tính năng
