@@ -81,8 +81,7 @@ test.describe('FR-03: Forgot Password & Reset Tests', () => {
         const hasConfirmField = (await confirmPasswordInput.count() > 0) || (await confirmPasswordLabel.count() > 0);
         if (!hasConfirmField) {
           console.warn('[SUT Bug Detected - BUG-FR03-003] Giao diện đặt lại mật khẩu của SUT hoàn toàn thiếu ô Xác nhận mật khẩu (Confirm Password).');
-          // Expectation for test case: Report missing confirm password field gap
-          expect(hasConfirmField).toBe(false); // Validating empirical SUT bug state
+          expect(hasConfirmField).toBe(false);
           return;
         }
       }
@@ -111,6 +110,7 @@ test.describe('FR-03: Forgot Password & Reset Tests', () => {
       await submitResetButton.click();
       await page.waitForTimeout(500);
 
+      // Handle Password BVA & Special Character assertions
       if (tc.expected.alertContains) {
         expect(dialogText).toContain(tc.expected.alertContains);
       } else if (tc.expected.alertMessage) {
