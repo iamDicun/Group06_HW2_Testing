@@ -3,9 +3,12 @@
 **Sinh viên:** Bùi Dương Duy Cường  
 **Mã sinh viên:** `23127033`  
 **Bài tập:** HW04 - Automation Testing (EShop SUT)  
-**Repository GitHub:** [Group06_HW2_Testing](https://github.com/iamDicun/Group06_HW2_Testing)  
+**Public GitHub Repository:** [Group06_HW2_Testing (GitHub)](https://github.com/iamDicun/Group06_HW2_Testing)  
+**Thư mục Test Scripts (.spec.ts):** [`23127033-HW4/tests/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/tests)  
+**Thư mục Test Data (.json):** [`23127033-HW4/test-data/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/test-data)  
 **Báo cáo chính chi tiết:** [`main-report.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/main-report.md)  
-**Link Demo Video (YouTube Unlisted):** *(Sẽ cập nhật sau khi upload video)*
+**Link Video Demo Agent Skill (YouTube Unlisted):** [https://youtu.be/_de9jzahfRE](https://youtu.be/_de9jzahfRE)  
+**Link Video Demo Automation & Multi-Browser (YouTube Unlisted):** [https://youtu.be/m8WTSC1_GsI](https://youtu.be/m8WTSC1_GsI)  
 
 ---
 

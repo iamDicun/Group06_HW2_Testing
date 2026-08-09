@@ -3,7 +3,9 @@
 **Sinh viên:** Bùi Dương Duy Cường - `23127033`  
 **Bài tập:** HW04 - Automation Testing trên EShop  
 **Danh Mục Sử Dụng AI:** Cat. 4 - AI-Assisted Production  
-**Công Cụ AI:** Claude 3.7 Sonnet / Gemini 3.6 Flash (Antigravity Agent)
+**Công Cụ AI:** Claude 3.7 Sonnet / Gemini 3.6 Flash (Antigravity Agent)  
+**Link Video Agent Skill Demo:** [https://youtu.be/_de9jzahfRE](https://youtu.be/_de9jzahfRE)  
+**Link Video Automation Demo:** [https://youtu.be/m8WTSC1_GsI](https://youtu.be/m8WTSC1_GsI)  
 
 ---
 
@@ -19,11 +21,6 @@
 | **Test Cases & Data JSON (`FR-15`)** | **IC** | "Sinh 18 test cases cho Admin Product CRUD FR-15..." | 18 test cases kèm file `product-mgmt.data.json`. | AI quên kịch bản BVA giá 0 ₫ (`BUG-FR15-002`), thiếu Confirm Dialog khi xóa (`BUG-FR15-004`), và sửa riêng từng trường (`BUG-FR15-003`). | Bổ sung `TC_PM_13..18` kiểm soát toàn bộ các kịch bản biên và bug của SUT. |
 | **Playwright Script (`FR-15`)** | **IC** | "Viết Playwright script cho FR-15..." | File `product-mgmt.spec.ts`. | Script bị gãy do thiếu bước tự động đăng nhập Admin trước khi vào tab "Sản phẩm". | Thêm logic tự động login tài khoản Admin trong `beforeEach` hook. |
 
-*Ghi chú phân loại:*  
-- **Valid (V)**: Đạt chuẩn, có thể đưa vào sử dụng ngay.  
-- **Incomplete (IC)**: Thiếu sót kịch bản biên, selector chưa tối ưu, cần con người rà soát & điều chỉnh.  
-- **Invalid (I)**: Sai kịch bản nghiệp vụ hoặc sai phương pháp luận.
-
 ---
 
 ## 2. Quy Trình Làm Việc Nhóm Giữa Người và AI (Pair AI + Human Workflow - G9.3 & G9.4)
@@ -37,4 +34,4 @@
 | **Sinh Kịch Bản Playwright TypeScript** | **AI** | Tạo mã kịch bản `.spec.ts` sử dụng Playwright Test Runner. |
 | **Human Review & Refinement (G9.3 & G9.4)** | **Người** | Tối ưu hóa locator sang `getByRole`/`getByPlaceholder`, gia cố assertions, xử lý hộp thoại alert và thêm watermark `Run by: 23127033`. |
 | **Cấu hình Đa Trình Duyệt (Multi-browser)** | **Người** | Cấu hình `playwright.config.ts` hỗ trợ chạy trên Chromium, Firefox, WebKit. |
-| **Tạo Báo Cáo & Log Bug** | **Người** | Lập báo cáo chính `main-report.md`, `README.md`, nhật ký `ai_audit.md`, `ai_critique.md` và log 8 confirmed bugs. |
+| **Tạo Báo Cáo & Log Bug** | **Người** | Lập báo cáo chính `main-report.md`, `README.md`, nhật ký `ai_audit.md`, `ai_critique.md` và log 8 confirmed bugs lên GitHub Issues. |

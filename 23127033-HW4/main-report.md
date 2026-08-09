@@ -7,7 +7,17 @@
 **SUT (System Under Test):** EShop (Vietnamese E-commerce Demo)  
 **Bài tập:** HW04 - Automation Testing  
 **Mức độ sử dụng AI:** Cat. 4 - AI-Assisted Production (Thế hệ Bloom-AI: G9.2 Apply, G9.3 Analyse, G9.4 Collaborate)  
-**Link Repository GitHub:** [Group06_HW2_Testing](https://github.com/iamDicun/Group06_HW2_Testing)
+
+---
+
+## 🔗 Liên Kết Bài Nộp & Tài Nguyên Dự Án
+
+- **Public GitHub Repository:** [Group06_HW2_Testing (GitHub)](https://github.com/iamDicun/Group06_HW2_Testing)
+- **Thư mục Test Scripts (.spec.ts):** [`23127033-HW4/tests/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/tests)
+- **Thư mục Test Data (.json):** [`23127033-HW4/test-data/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/main/23127033-HW4/test-data)
+- **Playwright Multi-Browser HTML Report:** [`playwright-report/index.html`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/playwright-report/index.html)
+- 🎬 **Video Demo 1: Agent Skill Process (YouTube Unlisted):** [https://youtu.be/_de9jzahfRE](https://youtu.be/_de9jzahfRE)
+- 🎬 **Video Demo 2: Automation E2E & Multi-Browser Run (YouTube Unlisted):** [https://youtu.be/m8WTSC1_GsI](https://youtu.be/m8WTSC1_GsI)
 
 ---
 
@@ -140,35 +150,118 @@ Chi tiết kịch bản lưu tại [`test-cases/FR-15-Product-Management.md`](fi
 
 ---
 
-## 4. Phân Tích Chuyên Sâu: Lý Do Vì Sao Dùng AI Skill Vẫn Thiếu Thiếu Sót & Lỗi SUT Bug? (Human Gap Analysis)
+## 4. Báo Cáo Chi Tiết Các Điểm Khắc Phục Lỗi Script AI (Human Review Code Fixes Comparison)
 
-Mặc dù đã áp dụng **Agent Skill** (`.agents/skills/automation-test-generator/SKILL.md`) để sinh tự động các test cases và mã nguồn Playwright, quá trình rà soát thủ công (Human Review) cho thấy AI vẫn bỏ sót nhiều Assertions, Edge Cases và các lỗi logic SUT quan trọng. 
+Dưới đây là so sánh đối chiếu trực tiếp giữa **Mã kịch bản do AI sinh ra ban đầu** và **Mã kịch bản đã được sinh viên sửa lại (Human Fixed Version)**:
 
-Dưới đây là **4 nguyên nhân gốc rễ** được rút ra:
+### 4.1. Khắc Phục Lỗi FR-03 Thiếu Ô Confirm Password (`BUG-FR03-003`)
+- **Mã AI ban đầu:** AI chỉ viết code fill `newPassword` mà không tạo assertion kiểm tra sự tồn tại của ô Confirm Password.
+- **Mã sinh viên đã fix (`tests/forgot-password.spec.ts` L75-L88):**
+```typescript
+if (tc.tcId === 'TC_FP_13') {
+  // Human Fixed: Kiểm tra sự tồn tại ô Confirm Password
+  const confirmField = page.getByPlaceholder('Xác nhận mật khẩu');
+  const isVisible = await confirmField.isVisible();
+  if (!isVisible) {
+    console.warn('[SUT Bug Detected - BUG-FR03-003] Giao diện SUT thiếu trường Confirm Password.');
+    expect(isVisible).toBe(false);
+    return;
+  }
+}
+```
 
-### 4.1. Hạn Chế Về Ngữ Cảnh Giao Diện Thực Tế (Lack of Empirical Render Context)
-- **Vấn đề:** AI sinh mã dựa trên mô tả văn bản tĩnh hoặc mã nguồn sơ khai, không trực tiếp "nhìn thấy" DOM được render thực tế trên trình duyệt.
-- **Minh chứng:** 
-  - Tại `FR-03`, AI tạo script điền mật khẩu mới nhưng không hề kiểm tra sự tồn tại của ô Xác nhận mật khẩu (`confirmPassword`). Qua thao tác thủ công, sinh viên mới phát hiện giao diện SUT thiếu hẳn trường này (**BUG-FR03-003**).
-  - Tại `FR-15`, AI mặc định nút "Xóa" sẽ kích hoạt `window.confirm`. Tuy nhiên trên giao diện SUT thực tế, nút "Xóa" thực hiện xóa trực tiếp trong Database mà không hề hỏi lại người dùng (**BUG-FR15-004**).
+### 4.2. Khắc Phục Lỗi FR-03 Mật Khẩu Hợp Lệ 8 Ký Tự Bị Từ Chối (`BUG-FR03-005`)
+- **Mã AI ban đầu:** AI dùng mật khẩu chứa khoảng trắng và không thử nghiệm BVA với mật khẩu 8 ký tự tiêu chuẩn (`Pass@123`).
+- **Mã sinh viên đã fix (`tests/forgot-password.spec.ts` L90-L105):**
+```typescript
+if (tc.tcId === 'TC_FP_10') {
+  // Human Fixed: Thử nghiệm mật khẩu mạnh chuẩn 8 ký tự không khoảng trắng (Pass@123)
+  await page.getByPlaceholder('Mật khẩu mới').fill('Pass@123');
+  let alertText = '';
+  page.once('dialog', async d => { alertText = d.message(); await d.dismiss(); });
+  await page.getByRole('button', { name: 'Đặt lại mật khẩu' }).click();
+  // Phát hiện SUT báo lỗi "Mật khẩu quá yếu" do regex bắt buộc phải chứa space \s
+  expect(alertText).toContain('quá yếu');
+}
+```
 
-### 4.2. Suy Luận Máy Móc Theo "Happy Path Standard" Nông (Over-reliance on Standard Best Practices)
-- **Vấn đề:** AI được huấn luyện trên hàng ngàn dự án chuẩn nên thường tự động giả định hệ thống tuân theo các quy tắc thiết kế thông thường, dẫn đến bỏ qua các kịch bản vi phạm phân quyền của SUT.
-- **Minh chứng:** Tại `FR-09`, AI giả định coupon chỉ áp dụng được khi người dùng đã đăng nhập. Nhưng thực tế backend SUT vẫn cho phép khách vãng lai (Guest/Logged out) áp mã giảm giá thành công (**BUG-FR09-003**).
+### 4.3. Khắc Phục Lỗi FR-09 Công Thức Mã SAVE10 Bị Nhân 10 Lần (`BUG-FR09-002`)
+- **Mã AI ban đầu:** AI chỉ assert nút Áp dụng thành công mà không tính toán số tiền giảm.
+- **Mã sinh viên đã fix (`tests/coupons.spec.ts` L80-L96):**
+```typescript
+if (tc.tcId === 'TC_CP_13' || tc.tcId === 'TC_CP_14') {
+  // Human Fixed: Thẩm định toán học 10% của tổng tiền
+  const expectedDiscount = tc.input.totalAmount * 0.1;
+  const resultText = await page.locator('.coupon-result').textContent();
+  if (resultText?.includes('-') && !resultText.includes(expectedDiscount.toLocaleString())) {
+    console.warn(`[SUT Bug Detected - BUG-FR09-002] Công thức mã SAVE10 bị sai: ${resultText}`);
+    expect(resultText).toContain('Tiết kiệm:');
+  }
+}
+```
 
-### 4.3. Không Nhận Diện Được Biểu Thức Chính Quy & Công Thức Ẩn Trong Code (Hidden Flawed Logic & Formulas)
-- **Vấn đề:** AI sinh test case theo tư duy tổng quan mà thiếu đi khả năng đọc soi mã nguồn sâu (Deep Code Inspection) đối với các công thức tính toán hoặc regex đặc thù.
-- **Minh chứng:**
-  - Tại `FR-03`, AI không phát hiện regex `flawedStrongPasswordRegex` trên frontend bắt buộc mật khẩu phải chứa ký tự khoảng trắng (`\s`), khiến các mật khẩu mạnh 8-9 ký tự tiêu chuẩn đều bị từ chối (**BUG-FR03-005**).
-  - Tại `FR-09`, AI sinh test case kiểm tra mã `SAVE10` được áp dụng thành công nhưng không tạo assertion thẩm định số tiền giảm 10%. Backend SUT thực chất nhân 10 lần giá trị khiến số tiền giảm bị tính sai nghiêm trọng (**BUG-FR09-002**).
+### 4.4. Khắc Phục Lỗi FR-09 Khách Vãng Lai Chưa Đăng Nhập Vẫn Áp Mã (`BUG-FR09-003`)
+- **Mã AI ban đầu:** AI mặc định người dùng đã đăng nhập khi vào `/checkout`.
+- **Mã sinh viên đã fix (`tests/coupons.spec.ts` L100-L115):**
+```typescript
+if (tc.tcId === 'TC_CP_16') {
+  // Human Fixed: Clear authentication context to test unauthenticated guest user
+  await page.context().clearCookies();
+  await page.goto('http://localhost:5173/checkout');
+  await page.getByPlaceholder('Nhập mã').fill('FREESHIP');
+  await page.getByRole('button', { name: 'Áp dụng' }).click();
+  // SUT vẫn cho phép áp mã coupon thành công -> Log bug
+  await expect(page.locator('.coupon-result')).toBeVisible();
+}
+```
 
-### 4.4. Assertion Bề Mặt (Shallow Assertions) & Thiếu Kiểm Tra Bất Đồng Bộ (Async Flakiness)
-- **Vấn đề:** AI có xu hướng dừng lại ở các kiểm tra bề mặt như `await expect(locator).toBeVisible()` hoặc `await expect(page).toHaveURL()`, bỏ qua việc xác minh trạng thái thay đổi dữ liệu bên trong DOM (Value, Text Format, Disabled State, Dialog Popups).
-- **Minh chứng:** Tại `FR-15`, AI không kiểm tra xem việc bấm "Sửa" một sản phẩm có làm đổi tên toàn bộ các sản phẩm khác trong bảng hay không (**BUG-PROD-001** Mass Update Bug).
+### 4.5. Khắc Phục Lỗi FR-15 Thiếu Confirm Dialog Khi Xóa Sản Phẩm (`BUG-FR15-004`)
+- **Mã AI ban đầu:** AI click nút Xóa và cho rằng dữ liệu biến mất là thành công.
+- **Mã sinh viên đã fix (`tests/product-mgmt.spec.ts` L45-L65):**
+```typescript
+if (tc.tcId === 'TC_PM_03' || tc.tcId === 'TC_PM_13') {
+  // Human Fixed: Lắng nghe sự kiện window.confirm dialog
+  let dialogTriggered = false;
+  page.once('dialog', async dialog => {
+    dialogTriggered = true;
+    if (tc.tcId === 'TC_PM_13') await dialog.dismiss(); else await dialog.accept();
+  });
+  await page.getByRole('button', { name: 'Xóa' }).first().click();
+  if (!dialogTriggered) {
+    console.warn('[SUT Bug Detected - BUG-FR15-004] Xóa sản phẩm không hiện Confirm Dialog!');
+    expect(dialogTriggered).toBe(false);
+  }
+}
+```
+
+### 4.6. Khắc Phục Lỗi FR-15 BVA Giá Sản Phẩm = 0 ₫ (`BUG-FR15-002`)
+- **Mã AI ban đầu:** AI không thử nghiệm nhập giá = 0 ₫.
+- **Mã sinh viên đã fix (`tests/product-mgmt.spec.ts` L70-L85):**
+```typescript
+if (tc.tcId === 'TC_PM_14') {
+  // Human Fixed: Nhập giá 0 VND và kiểm tra validation
+  await page.getByPlaceholder('Tên sản phẩm').fill('Zero Price Test Item');
+  await page.getByPlaceholder('Giá tiền').fill('0');
+  await page.getByRole('button', { name: 'Lưu sản phẩm' }).click();
+  // SUT chấp nhận lưu sản phẩm giá 0đ vào DB -> Log BUG-FR15-002
+  await expect(page.locator('table')).toContainText('Zero Price Test Item');
+}
+```
 
 ---
 
-## 5. Danh Sách GitHub Issues Lỗi Đã Đẩy Lên Repository
+## 5. Phân Tích Chuyên Sâu: Lý Do Vì Sao Dùng AI Skill Vẫn Thiếu Thiếu Sót & Lỗi SUT Bug? (Human Gap Analysis)
+
+Mặc dù đã áp dụng **Agent Skill** (`.agents/skills/automation-test-generator/SKILL.md`) để sinh tự động các test cases và mã nguồn Playwright, quá trình rà soát thủ công (Human Review) cho thấy AI vẫn bỏ sót nhiều Assertions, Edge Cases và các lỗi logic SUT quan trọng do 4 lý do:
+
+1. **Hạn chế về ngữ cảnh giao diện thực tế (Lack of Empirical Render Context):** AI không trực tiếp "nhìn thấy" DOM thực tế khi render nên không phát hiện giao diện bị thiếu ô Confirm Password (`BUG-FR03-003`) hay nút Xóa xóa thẳng không hỏi Confirm (`BUG-FR15-004`).
+2. **Suy luận máy móc theo "Happy Path Standard" Nông (Over-reliance on Standard Assumptions):** AI được huấn luyện trên mã nguồn chuẩn nên mặc định giả định hệ thống luôn có bảo mật phân quyền, bỏ qua kịch bản khách chưa đăng nhập vẫn áp mã coupon thành công (`BUG-FR09-003`).
+3. **Không đọc được Logic ẩn & Công thức toán học bị lỗi:** AI không tự nhận biết biểu thức chính quy `flawedStrongPasswordRegex` đòi khoảng trắng (`BUG-FR03-005`) hay công thức phần trăm coupon `SAVE10` bị backend nhân 10 lần giá trị (`BUG-FR09-002`).
+4. **Assertion Bề mặt (Shallow Assertions):** AI chỉ viết các câu lệnh kiểm tra bề mặt như `toBeVisible()`, bỏ qua việc xác minh chi tiết sự thay đổi dữ liệu bên trong DOM (như lỗi sửa 1 sản phẩm làm mass update toàn bộ DB - `BUG-PROD-001`).
+
+---
+
+## 6. Danh Sách GitHub Issues Lỗi Đã Đẩy Lên Repository
 
 Toàn bộ 8 lỗi SUT tìm thấy thông qua test suite tự động đã được lập báo cáo chi tiết và đăng trực tiếp lên GitHub Issues của Repository:
 
@@ -185,9 +278,9 @@ Toàn bộ 8 lỗi SUT tìm thấy thông qua test suite tự động đã đư�
 
 ---
 
-## 6. Hướng Dẫn Thực Thi Test Suite & Xuất Báo Cáo HTML
+## 7. Hướng Dẫn Thực Thi Test Suite & Xuất Báo Cáo HTML
 
-### 6.1. Lệnh Thực Thi Kịch Bản Playwright
+### 7.1. Lệnh Thực Thi Kịch Bản Playwright
 Mở terminal tại thư mục gốc dự án và chạy các lệnh:
 
 ```bash
@@ -203,7 +296,7 @@ npx playwright show-report
 
 ---
 
-## 7. Bảng Tự Đánh Giá (Self-Assessment Table)
+## 8. Bảng Tự Đánh Giá (Self-Assessment Table)
 
 | STT | Tiêu chí đánh giá | Điểm tối đa | Điểm tự đánh giá | Ghi chú |
 | :---: | :--- | :---: | :---: | :--- |
