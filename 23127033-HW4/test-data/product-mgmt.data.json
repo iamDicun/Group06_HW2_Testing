@@ -157,5 +157,31 @@
       "productRetained": true,
       "expectedBugId": "BUG-FR15-004"
     }
+  },
+  {
+    "tcId": "TC_PM_14",
+    "category": "negative",
+    "description": "BVA Create product with price = 0 VND (Detect BUG-FR15-002)",
+    "input": {
+      "name": "Zero Price Item Test",
+      "price": 0
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm",
+      "expectedBugId": "BUG-FR15-002"
+    }
+  },
+  {
+    "tcId": "TC_PM_15",
+    "category": "positive",
+    "description": "BVA Create product with price = 1 VND (Min valid price)",
+    "input": {
+      "name": "One Dong Item Test",
+      "price": 1
+    },
+    "expected": {
+      "success": true,
+      "productInList": true
+    }
   }
 ]

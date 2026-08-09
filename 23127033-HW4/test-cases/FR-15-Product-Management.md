@@ -3,7 +3,7 @@
 **Feature:** `FR-15` Product Management (CRUD)  
 **Module:** Web Admin (`PROD_MGMT`)  
 **Target Page:** Web Admin Portal (Tab "Sản phẩm")  
-**Total Test Cases:** 13 (Positive: 5, Negative: 5, Edge: 3)
+**Total Test Cases:** 15 (Positive: 6, Negative: 6, Edge: 3)
 
 ---
 
@@ -22,3 +22,5 @@
 | `TC_PM_11` | Edge | Nhập tên sản phẩm chứa các ký tự HTML / Script injection (`<script>alert(1)</script>`) | Ở tab "Sản phẩm" | `name: "<script>alert('XSS')</script> Laptop"` | 1. Nhập tên có chứa thẻ script<br>2. Click Lưu | Tên hiển thị dạng plaintext an toàn, không thực thi script | P1 |
 | `TC_PM_12` | Edge | Phát hiện lỗi cập nhật đồng loạt tên sản phẩm khi chỉnh sửa (SUT Bug Feature) | Ở tab "Sản phẩm" | Chỉnh sửa tên 1 SP bất kỳ | 1. Click "Sửa" sản phẩm A<br>2. Đổi tên sản phẩm A<br>3. Click "Lưu sản phẩm" | Phát hiện bug: Tất cả sản phẩm trong bảng bị đổi tên theo SP A | P1 |
 | `TC_PM_13` | Positive | Hủy thao tác xóa sản phẩm qua Hộp thoại xác nhận (Confirm Dialog Cancel) | Đã có sản phẩm trong danh sách | Click nút "Xóa", bấm "Cancel" trên confirm dialog | 1. Click nút "Xóa"<br>2. Bấm "Cancel" trong confirm popup | Thao tác xóa bị hủy, sản phẩm vẫn được giữ nguyên trong danh sách | P1 |
+| `TC_PM_14` | Negative | BVA Giá sản phẩm bằng 0 (Price = 0 VND) | Đang ở tab "Sản phẩm" | `name: "Test SP Giá 0đ"`, `price: 0` | 1. Nhập tên sản phẩm<br>2. Nhập giá 0 ₫<br>3. Click "Lưu sản phẩm" | Hệ thống từ chối lưu và yêu cầu giá lớn hơn 0 (Bắt lỗi BUG-FR15-002 nếu lưu sản phẩm giá 0đ) | P1 |
+| `TC_PM_15` | Positive | BVA Giá sản phẩm tối thiểu hợp lệ 1 ₫ (Price = 1 VND) | Đang ở tab "Sản phẩm" | `name: "Test SP Giá 1đ"`, `price: 1` | 1. Nhập giá 1 ₫<br>2. Click "Lưu sản phẩm" | Lưu thành công sản phẩm 1 ₫ vào danh sách | P1 |

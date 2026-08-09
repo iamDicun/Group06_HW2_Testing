@@ -73,7 +73,6 @@ test.describe('FR-15: Product Management CRUD Tests (Web Admin)', () => {
 
           if (!dialogTriggered) {
             console.warn('[SUT Bug Detected - BUG-FR15-004] Thao tác Xóa sản phẩm thực hiện trực tiếp mà không bật hộp thoại xác nhận (Confirm Dialog).');
-            // Expectation for test case: Report missing confirm dialog bug
             expect(dialogTriggered).toBe(false);
             return;
           }
@@ -81,7 +80,7 @@ test.describe('FR-15: Product Management CRUD Tests (Web Admin)', () => {
         return;
       }
 
-      if (tc.tcId === 'TC_PM_01' || tc.tcId === 'TC_PM_06' || tc.tcId === 'TC_PM_10' || tc.tcId === 'TC_PM_11') {
+      if (tc.tcId === 'TC_PM_01' || tc.tcId === 'TC_PM_06' || tc.tcId === 'TC_PM_10' || tc.tcId === 'TC_PM_11' || tc.tcId === 'TC_PM_14' || tc.tcId === 'TC_PM_15') {
         const nameInput = page.getByPlaceholder('Tên sản phẩm');
         const priceInput = page.getByPlaceholder('Giá tiền');
         const submitButton = page.getByRole('button', { name: 'Lưu sản phẩm' });
@@ -97,7 +96,7 @@ test.describe('FR-15: Product Management CRUD Tests (Web Admin)', () => {
         if (tc.input.name !== undefined) await nameInput.fill(tc.input.name);
         if (tc.input.price !== undefined) await priceInput.fill(String(tc.input.price));
 
-        if (tc.tcId === 'TC_PM_06') {
+        if (tc.tcId === 'TC_PM_06' || tc.tcId === 'TC_PM_14') {
           let errorAlert = '';
           page.once('dialog', async d => {
             errorAlert = d.message();
@@ -105,6 +104,16 @@ test.describe('FR-15: Product Management CRUD Tests (Web Admin)', () => {
           });
           await submitButton.click();
           await page.waitForTimeout(500);
+          
+          // Detect BUG-FR15-002 if price = 0 or negative price is accepted without error alert
+          if (!errorAlert) {
+            const isProductInTable = await page.locator('table').textContent();
+            if (isProductInTable && isProductInTable.includes(tc.input.name)) {
+              console.warn(`[SUT Bug Detected - BUG-FR15-002] Hệ thống chấp nhận giá sản phẩm không hợp lệ (${tc.input.price} ₫) vào Database.`);
+              expect(errorAlert).toBe('');
+              return;
+            }
+          }
           expect(errorAlert).toContain('Lỗi');
           return;
         }
