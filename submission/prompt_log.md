@@ -158,5 +158,3 @@ Tái cấu trúc toàn diện báo cáo `submission/report.md` theo cấu trúc 
 - **Phần I (Task 1)**: Đầy đủ 6 mục chi tiết về Data-Driven Cross-Browser Testing (Phạm vi, Kiến trúc, 39 Test Scenarios, Hướng dẫn chạy, Kết quả & Bug SUT, Kiểm toán & Refactoring).
 - **Phần II (Task 2)**: Placeholder chi tiết gồm 5 mục (Mục tiêu & Phạm vi, Phương pháp & Công cụ, Thiết kế kịch bản kiểm thử, Kết quả thực thi & Phân tích chuyên sâu, Đánh giá tổng hợp & Bài học).
 - **Phần III (Tổng kết & Phụ lục)**: Bảng tiến độ và liên kết minh chứng (AI Audit Report, Prompt Log, Design Document, HTML Report).
-
-

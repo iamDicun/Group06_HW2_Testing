@@ -34,7 +34,7 @@ export class AuthHelper {
   /**
    * Fast, reliable admin token pre-seeding
    */
-  async injectAdminSession(email: string = 'admin@eshop.com', password: string = 'admin123') {
+  async injectAdminSession(email: string = 'admin@eshop.com', password: string = 'Admin123!') {
     try {
       const res = await axios.post(`${API_URL}/login`, { email, password });
       const { token } = res.data;
@@ -66,7 +66,7 @@ export class AuthHelper {
   /**
    * Admin UI Login
    */
-  async loginAdminUI(email: string = 'admin@eshop.com', password: string = 'admin123') {
+  async loginAdminUI(email: string = 'admin@eshop.com', password: string = 'Admin123!') {
     await this.page.goto('http://localhost:5174');
     const emailInput = this.page.getByPlaceholder('Email');
     if (await emailInput.isVisible({ timeout: 1500 }).catch(() => false)) {

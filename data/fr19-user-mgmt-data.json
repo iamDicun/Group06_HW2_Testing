@@ -4,7 +4,7 @@
     "description": "Admin xem danh sach nguoi dung day du cac cot (ID, Email, Role, So DT, Hanh dong)",
     "testType": "positive_view_list",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "action": "view_users_tab",
     "expectedResult": "success",
     "expectedHeaders": ["ID", "Email", "Role", "Số ĐT", "Hành động"]
@@ -14,7 +14,7 @@
     "description": "Bao mat: Khong de lo mat khau hoac hash mat khau trong DOM va bang Admin Users",
     "testType": "security_no_passwords_leaked",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "action": "inspect_table_security",
     "expectedResult": "passwords_not_exposed"
   },
@@ -23,7 +23,7 @@
     "description": "Admin xoa tai khoan nguoi dung thuong (role user) thanh cong",
     "testType": "positive_delete_user",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "targetUserEmail": "temp_delete_target@eshop.com",
     "action": "delete_user",
     "expectedResult": "success"
@@ -33,7 +33,7 @@
     "description": "Rang buoc an toan spec: Admin khong duoc xoa chinh tai khoan dang dang nhap",
     "testType": "safety_admin_self_delete_protection",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "targetUserEmail": "admin@eshop.com",
     "action": "delete_self_attempt",
     "expectedResult": "self_protected"
@@ -62,7 +62,7 @@
     "description": "Danh sach nguoi dung tu dong cap nhat ngay lap tuc sau khi xoa (giam 1 hang)",
     "testType": "positive_realtime_refresh",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "targetUserEmail": "refresh_test_user@eshop.com",
     "action": "verify_row_decrement",
     "expectedResult": "count_decremented"
@@ -72,7 +72,7 @@
     "description": "Tai khoan da bi Admin xoa khong the tiep tuc dang nhap vao he thong khach hang",
     "testType": "integration_deleted_user_login_blocked",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "targetUserEmail": "locked_out_test@eshop.com",
     "targetUserPass": "LockPass123!",
     "action": "test_deleted_user_auth",
@@ -84,7 +84,7 @@
     "description": "Kiem tra nhan vai tro Role phan biet chinh xac giua 'admin' va 'user'",
     "testType": "ui_role_badge_verification",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "action": "verify_role_column_values",
     "expectedRoles": ["admin", "user"],
     "expectedResult": "roles_verified"
@@ -94,7 +94,7 @@
     "description": "So dien thoai cap nhat tu trang Profile duoc phan anh dong bo trong bang Admin",
     "testType": "integration_profile_phone_sync",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "targetUserEmail": "test@eshop.com",
     "action": "check_synced_phone",
     "expectedResult": "phone_synced"
@@ -114,7 +114,7 @@
     "description": "Lifecycle E2E: Dang ky tai khoan moi tai Web khach hang roi xoa tai Web Admin",
     "testType": "lifecycle_register_and_delete",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "newUserName": "E2E Lifecycle User",
     "newUserEmail": "lifecycle_user@eshop.com",
     "newUserPass": "E2EPass123!",
@@ -126,7 +126,7 @@
     "description": "Kiem tra toan ven cau truc bang nguoi dung va checkbox hang loat",
     "testType": "ui_dom_structure_validation",
     "loginEmail": "admin@eshop.com",
-    "loginPassword": "admin123",
+    "loginPassword": "Admin123!",
     "action": "verify_table_dom",
     "expectedResult": "dom_valid"
   }

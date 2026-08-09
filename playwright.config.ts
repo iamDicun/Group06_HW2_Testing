@@ -12,8 +12,8 @@ export default defineConfig({
   expect: {
     timeout: 5000,
   },
-  fullyParallel: true,
-  workers: 3,
+  fullyParallel: false,
+  workers: 1,
   retries: 0,
   metadata: {
     'Run by': '23127391',
@@ -58,4 +58,28 @@ export default defineConfig({
       },
     },
   ],
+  webServer: [
+    {
+      command: 'node server.js',
+      cwd: path.resolve(__dirname, 'application/backend'),
+      url: 'http://localhost:3000/api/products',
+      reuseExistingServer: true,
+      timeout: 30000,
+    },
+    {
+      command: 'npm run dev',
+      cwd: path.resolve(__dirname, 'application/frontend-web'),
+      url: 'http://localhost:5173',
+      reuseExistingServer: true,
+      timeout: 30000,
+    },
+    {
+      command: 'npm run dev',
+      cwd: path.resolve(__dirname, 'application/frontend-admin'),
+      url: 'http://localhost:5174',
+      reuseExistingServer: true,
+      timeout: 30000,
+    },
+  ],
 });
+

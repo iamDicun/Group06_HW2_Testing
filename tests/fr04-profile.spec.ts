@@ -54,8 +54,19 @@ test.describe('FR-04: Personal Profile Management [Run by: 23127391]', () => {
       await profilePage.fillProfile(data.inputName, data.inputPhone, data.inputAddress);
       const alertMsg = await profilePage.submitUpdate();
 
-      // Verify that SUT responded to form submission
-      expect(typeof alertMsg).toBe('string');
+      // Verify that SUT responded with expected alert notification
+      if (data.expectedAlert) {
+        expect(alertMsg).toContain(data.expectedAlert);
+      } else {
+        expect(typeof alertMsg).toBe('string');
+      }
+
+      // Verify UI persistence for positive updates
+      if (data.testType.startsWith('positive') && alertMsg.includes('Cập nhật thành công')) {
+        await page.reload();
+        await expect(profilePage.nameInput).toHaveValue(data.inputName);
+      }
     });
   }
 });
+

@@ -1,11 +1,3 @@
-# AI Critique (200–300 words)
+# AI Critique 
 
-**Student:** <MSSV> - <Name>
-
----
-
-[Write your 200–300 word critique here. Address:]
-
-- Where did the AI get something wrong, biased, or incomplete?
-- Why did it fail to catch the issue?
-- What principle have you learned about collaborating with AI during this assignment?
+Automation Testing là lĩnh vực mà AI có thể phát huy tối đa hiệu quả nhờ khả năng đọc hiểu tài liệu đặc tả, phân tích mã nguồn và khởi tạo kịch bản tự động một cách nhanh chóng. Việc ứng dụng AI giúp giảm thiểu đáng kể các tác vụ lặp lại và tiết kiệm thời gian cho đội ngũ phát triển. Mặc dù vậy, AI vẫn tồn tại những hạn chế nhất định, đặc biệt là ở khía cạnh thẩm mỹ như bố cục, màu sắc hay hiển thị hình ảnh, bởi đây là những yếu tố đòi hỏi sự quan sát và đánh giá trực quan từ con người. Bên cạnh đó, hiệu quả của kịch bản tự động còn phụ thuộc lớn vào năng lực của người sử dụng. Kỹ năng chưa đáp ứng, câu lệnh quá đơn giản hoặc việc chọn lựa mô hình xử lý không phù hợp đều có thể dẫn đến kịch bản thiếu ổn định, gây tắc nghẽn tiến độ công việc. Đổi lại, AI vẫn là công cụ hỗ trợ đắc lực, nhưng trình độ chuyên môn của con người mới là yếu tố quyết định chất lượng sản phẩm.

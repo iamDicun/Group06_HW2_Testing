@@ -23,7 +23,7 @@ async function createTestOrder(status: string = 'pending'): Promise<number> {
   const orderId = checkoutRes.data.orderId;
 
   if (status !== 'pending') {
-    const adminLogin = await axios.post(`${API_URL}/login`, { email: 'admin@eshop.com', password: 'admin123' });
+    const adminLogin = await axios.post(`${API_URL}/login`, { email: 'admin@eshop.com', password: 'Admin123!' });
     const adminToken = adminLogin.data.token;
 
     // Follow state machine transitions up to requested status
@@ -70,7 +70,7 @@ test.describe('FR-10: Order State Machine [Run by: 23127391]', () => {
 
       if (data.testType === 'invalid_skip_transition' || data.testType === 'invalid_reverse_transition') {
         const orderId = await createTestOrder(data.initialStatus);
-        const adminLogin = await axios.post(`${API_URL}/login`, { email: 'admin@eshop.com', password: 'admin123' });
+        const adminLogin = await axios.post(`${API_URL}/login`, { email: 'admin@eshop.com', password: 'Admin123!' });
         const adminToken = adminLogin.data.token;
 
         try {
@@ -94,11 +94,13 @@ test.describe('FR-10: Order State Machine [Run by: 23127391]', () => {
         await profilePage.goto();
 
         if (data.testType === 'security_customer_shipping_lock') {
-          const row = page.locator(`tr:has-text("#${orderId}")`);
+          const row = profilePage.getOrderRow(orderId);
           const cancelBtn = row.getByRole('button', { name: data.targetAction! });
-          if (await cancelBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
-            const msg = await profilePage.cancelOrder(orderId);
-            expect(msg).toBeDefined();
+          if (await cancelBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
+            await profilePage.cancelOrder(orderId);
+            // Verify order status was not changed from shipping
+            const currentStatus = await profilePage.getOrderStatus(orderId);
+            expect(currentStatus).toContain('Đang giao');
           } else {
             expect(await cancelBtn.isVisible()).toBe(false);
           }
@@ -120,9 +122,8 @@ test.describe('FR-10: Order State Machine [Run by: 23127391]', () => {
 
         if (data.testType.startsWith('final_state_')) {
           const availableActions = await adminOrdersPage.getAllAvailableActions(orderId);
-          if (data.initialStatus === 'delivered') {
-            expect(availableActions.length).toBe(0);
-          }
+          // Both delivered and canceled are terminal states with 0 allowed transitions
+          expect(availableActions.length).toBe(0);
           return;
         }
 

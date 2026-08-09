@@ -1,16 +1,17 @@
-# BÁO CÁO KIỂM THỬ TỰ ĐỘNG FRONTEND — TASK 1 (DATA-DRIVEN CROSS-BROWSER TESTING)
+# BÁO CÁO BÀI TẬP KIỂM THỬ PHẦN MỀM (HW02)
+## AUTOMATION TESTING & TEST SUITE REPORT (TASK 1 & TASK 2)
 
-**Học phần:** Kiểm thử Phần mềm (Software Testing) — HW02  
-**Họ và tên sinh viên:** Nguyễn Khoa  
+**Họ và tên sinh viên:** Nguyễn Anh Khoa  
 **Mã số sinh viên (MSSV):** `23127391`  
 **Nhóm:** Group 06  
 **Hệ thống kiểm thử (SUT):** EShop ([https://github.com/ttbhanh/eshop-sut](https://github.com/ttbhanh/eshop-sut))  
 **Định danh báo cáo:** `Run by: 23127391`  
 **Framework:** Playwright (TypeScript)  
 **Trình duyệt mục tiêu:** 3 trình duyệt — **Chromium**, **Firefox**, **WebKit**  
-**Giai đoạn:** **TASK 1 — Automation Testing Data-Driven** (Sẵn sàng tiếp nối cho Task 2)
 
 ---
+
+# PHẦN I: TASK 1 — DATA-DRIVEN CROSS-BROWSER AUTOMATION TESTING
 
 ## 1. TỔNG QUAN VÀ PHẠM VI KIỂM THỬ (TASK 1)
 
@@ -27,11 +28,11 @@ Trong Task 1, nhóm đã thiết kế và triển khai bộ kiểm thử tự đ
 | **FR-04** | Quản lý hồ sơ cá nhân | `tests/fr04-profile.spec.ts` | `data/fr04-profile-data.json` | **13** | 3 (Chromium, Firefox, WebKit) | **39** |
 | **FR-10** | Trạng thái Đơn hàng (State Machine) | `tests/fr10-order-state.spec.ts` | `data/fr10-order-state-data.json` | **13** | 3 (Chromium, Firefox, WebKit) | **39** |
 | **FR-19** | Quản lý Người dùng (Admin) | `tests/fr19-user-mgmt.spec.ts` | `data/fr19-user-mgmt-data.json` | **13** | 3 (Chromium, Firefox, WebKit) | **39** |
-| **TỔNG CỘNG** | **3 Tính Năng** | **3 Scripts** | **3 Data Files** | **39 Cases** | **3 Browsers** | **117 Runs** |
+| **TỔNG CỘNG TASK 1** | **3 Tính Năng** | **3 Scripts** | **3 Data Files** | **39 Cases** | **3 Browsers** | **117 Runs** |
 
 ---
 
-## 2. NGUYÊN TẮC THIẾT KẾ VÀ KIẾN TRÚC TEST SUITE
+## 2. NGUYÊN TẮC THIẾT KẾ VÀ KIẾN TRÚC TEST SUITE (TASK 1)
 
 ### 2.1. Tách biệt 100% dữ liệu (Data-Driven Testing Principle)
 - Toàn bộ giá trị kiểm thử cụ thể (tài khoản, họ tên, số điện thoại, địa chỉ, trạng thái đơn hàng, nhãn tiếng Việt, lỗi mong đợi) được tách hoàn toàn ra các file JSON độc lập nằm tại thư mục `data/`.
@@ -40,17 +41,17 @@ Trong Task 1, nhóm đã thiết kế và triển khai bộ kiểm thử tự đ
 ### 2.2. Kiểm thử đa trình duyệt (Cross-Browser Architecture)
 - Thiết lập cấu hình tập trung trong `playwright.config.ts` với 3 project riêng biệt (`chromium`, `firefox`, `webkit`).
 - Cùng một bộ test logic chạy xuyên suốt cả 3 trình duyệt mà không cần nhân bản hay viết riêng code cho từng browser.
-- Tổng cộng sinh ra tối thiểu **9 browser suite runs** (3 feature × 3 trình duyệt) theo đúng yêu cầu đề bài.
+- Đảm bảo thực thi tối thiểu **9 browser suite runs** (3 feature × 3 trình duyệt) theo đúng yêu cầu đề bài.
 
 ### 2.3. Mô hình Page Object Model (POM)
-- `pages/AuthHelper.ts`: Xử lý đăng nhập khách hàng, đăng nhập quản trị viên, tiêm token session.
+- `pages/AuthHelper.ts`: Xử lý đăng nhập khách hàng, đăng nhập quản trị viên, tiêm token session nhanh chóng.
 - `pages/ProfilePage.ts`: Điều hướng, điền thông tin hồ sơ, bắt alert dialog, kiểm tra lịch sử đơn hàng.
 - `pages/AdminOrdersPage.ts`: Điều phối tab Đơn hàng của Admin, click chuyển trạng thái, kiểm tra badge màu sắc.
 - `pages/AdminUsersPage.ts`: Quản lý danh sách người dùng, xóa người dùng, kiểm tra hiển thị role.
 
 ---
 
-## 3. CHI TIẾT CÁC TEST CASES ĐÃ THIẾT KẾ VÀ THỰC THI
+## 3. CHI TIẾT CÁC TEST CASES ĐÃ THIẾT KẾ VÀ THỰC THI (TASK 1)
 
 ### 3.1. FR-04: Quản lý hồ sơ cá nhân (`tests/fr04-profile.spec.ts`)
 | Scenario ID | Mô tả chi tiết | Phân loại | Kết quả mong đợi |
@@ -105,7 +106,7 @@ Trong Task 1, nhóm đã thiết kế và triển khai bộ kiểm thử tự đ
 
 ---
 
-## 4. HƯỚNG DẪN THỰC THI & TẠO HTML REPORT
+## 4. HƯỚNG DẪN THỰC THI & XUẤT HTML REPORT
 
 ### 4.1. Khởi động các server hệ thống (SUT)
 ```bash
@@ -158,7 +159,61 @@ npx playwright show-report
 
 ---
 
-## 6. BƯỚC TIẾP THEO
-- **Trạng thái Task 1**: Hoàn thành toàn diện mã nguồn kiểm thử data-driven, page objects, data schemas, cấu hình cross-browser (Chromium, Firefox, WebKit) và tạo HTML Report với định danh `Run by: 23127391`.
-- **Sẵn sàng chuyển tiếp sang Task 2**: Tiếp tục thực hiện các bài kiểm thử tiếp theo, hoàn thiện ma trận truy vết và phân tích chuyên sâu.
+## 6. KIỂM TOÁN VÀ TỐI ƯU HÓA CODE TEST (AUDIT & REFACTORING)
+
+Nhóm đã thực hiện kiểm toán toàn diện mã nguồn test suite, xác định các điểm nghẽn và tiến hành chuẩn hóa code:
+
+### 6.1. Khắc phục lỗi Strict Mode Violations & Fragile Selectors
+- **Khắc phục Substring Match**: Thay thế bộ chọn `tr:has-text("#${orderId}")` và `tr:has-text("${email}")` bằng bộ lọc chính xác theo cell regex (`td:text-is` / `new RegExp("^#${orderId}$")`), loại bỏ triệt để xung đột khi `orderId = 1` khớp trùng hàng loạt với `#10`, `#11`, `#12`...
+- **Bỏ phụ thuộc Placeholder**: Thay thế các locator tìm theo placeholder tiếng Việt cứng bằng scoped selector gắn liền cấu trúc `form input[type="text"]` và `form textarea`.
+- **Định vị cột trạng thái tường minh**: Thay `row.locator('span').first()` bằng `row.locator('td:nth-child(4) span')` (Profile) và `td:nth-child(5) span` (Admin) tránh lấy nhầm các thẻ span icon hoặc badge khác.
+
+### 6.2. Thắt chặt Assertions & Xử lý Edge Cases
+- **FR-04**: Thay assertion lỏng lẻo `expect(typeof alertMsg).toBe('string')` bằng kiểm tra chính xác nội dung dialog (`expect(alertMsg).toContain(data.expectedAlert)`) và kiểm tra tính bền vững của dữ liệu sau khi `page.reload()`.
+- **FR-10**: Bổ sung assertion kiểm tra chặt chẽ Final State `canceled` và `delivered` (phải có đúng `0` hành động chuyển tiếp); xác minh trạng thái không bị thay đổi trái phép khi khách hàng cố hủy đơn đang giao (`shipping`).
+- **FR-19**: Bổ sung kiểm tra xác nhận tài khoản thực sự biến mất khỏi bảng (`isUserPresent() == false`) và hoàn thiện nhánh test case đồng bộ số điện thoại (`integration_profile_phone_sync`).
+
+### 6.3. Loại bỏ Flaky Waits & Tối ưu thời gian thực thi
+- Loại bỏ các lệnh `page.waitForTimeout()` cố định rải rác; chuyển sang cơ chế auto-waiting của Playwright (`waitForLoadState('networkidle')`).
+- Loại bỏ đoạn chờ `dialog` ảo 3000ms trong `AdminOrdersPage.clickOrderAction` (do Admin Web không bắn popup khi thành công), giúp rút ngắn thời gian chạy test đáng kể.
+## 7. Lý do AI viết scripts chưa tốt
+- Do giới hạn model vì đang sử dụng Gemini 3.6 Flash, một model thông minh trung bình, nên hay bị bỏ qua các chi tiết mà chỉ quan tâm viết script chạy được, dù đã cung cấp skill về automation testing nhưng kết quả vẫn không thể hoàn hảo ngay từ lần đầu tiên.
+---
+
+# PHẦN II: TASK 2 — DEMONSTRATION VIDEO & CODE REVIEW / NARRATION
+
+## 1. YÊU CẦU ĐỀ BÀI VÀ MỤC TIÊU TASK 2 (TASK REQUIREMENTS)
+
+Theo đặc tả yêu cầu của đề bài **HW02 – Task 2**:
+> *"Record an unlisted YouTube video of at least 5 minutes, narrated in Vietnamese, demonstrating one of your automation scripts running end to end (including the multi-browser run and the generated HTML report). Narrate at least one fix you made to the AI-generated script during your review."*
+
+### Các mục tiêu chính cần đạt:
+1. **Video minh chứng trực quan**: Video thời lượng tối thiểu **5 phút**, đăng tải ở chế độ **Không công khai (Unlisted)** trên YouTube.
+2. **Thuyết minh tiếng Việt (Vietnamese Narration)**: Trình bày rõ ràng, mạch lạc về quy trình thực thi, cấu trúc kịch bản và cơ chế kiểm thử.
+3. **Thực thi End-to-End & Multi-Browser**: Trình diễn kịch bản chạy tự động xuyên suốt từ đầu đến cuối trên cả **3 trình duyệt (Chromium, Firefox, WebKit)**.
+4. **Trình diễn Báo cáo HTML**: Mở và giải thích báo cáo `playwright-report/index.html` với định danh tác giả **`Run by: 23127391`**.
+5. **Thuyết minh Lỗi do AI sinh ra & Giải pháp tự sửa (Student Fix during Code Review)**: Phân tích chi tiết ít nhất 1 lỗi nghiêm trọng trong mã nguồn do AI sinh ra ban đầu (cụ thể là lỗi **Strict Mode Violations** khi định vị phần tử theo text content / substring matching khi có nhiều element cùng loại trong DOM) và cách thức sinh viên đã rà soát, refactor và khắc phục triệt để.
+
+---
+
+## 2. THÔNG TIN VIDEO MINH CHỨNG
+
+| Tiêu chí | Thông tin chi tiết |
+|---|---|
+| **Đường dẫn Video (YouTube Unlisted)** | **[https://youtu.be/4UfwFlRf53Y](https://youtu.be/4UfwFlRf53Y)** |
+| **Sinh viên thực hiện & Thuyết minh** | **Nguyễn Anh Khoa** (MSSV: `23127391`) |
+| **Hệ thống kiểm thử (SUT)** | EShop Web Application (`http://localhost:5173` & `http://localhost:5174`) |
+| **Test Framework & Browser Engines** | Playwright (TypeScript) — Chromium, Firefox, WebKit |
+
+---
+
+## 3. TÓM TẮT PHẦN SỬA CODE
+
+**Strict Mode Violation** trong mã nguồn do AI sinh ra ban đầu:
+
+- **Nguyên nhân lỗi từ AI**: AI sử dụng các bộ chọn tìm kiếm theo text/substring lỏng lẻo (như `tr:has-text("#${orderId}")` hoặc tìm textContent chung). Khi giao diện có nhiều phần tử cùng loại hoặc chứa chuỗi con trùng nhau (ví dụ: tìm đơn hàng `#1` bị khớp trùng với `#10`, `#11`, `#12`... hoặc có nhiều badge cùng trạng thái), Playwright kích hoạt cơ chế Strict Mode và ném lỗi do locator trả về nhiều hơn 1 phần tử.
+- **Giải pháp tự sửa**: Refactor các locator sang dạng **khớp chính xác (exact match)** bằng regular expression (`^#${orderId}$`), kết hợp scoped selector định vị tường minh theo thứ tự cột (`td:nth-child(...)`), đảm bảo Playwright luôn định vị chính xác duy nhất 1 element mục tiêu và test suite chạy ổn định 100% trên cả 3 trình duyệt.
+
+---
+
 

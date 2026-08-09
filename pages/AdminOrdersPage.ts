@@ -14,7 +14,7 @@ export class AdminOrdersPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.ordersTab = page.locator('li:has-text("Đơn hàng")');
+    this.ordersTab = page.locator('li').filter({ hasText: /^Đơn hàng$/ });
     this.ordersHeading = page.getByRole('heading', { name: 'Quản lý Đơn hàng' });
     this.ordersTable = page.locator('table');
     this.orderRows = page.locator('table tbody tr');
@@ -22,39 +22,41 @@ export class AdminOrdersPage {
 
   async goto() {
     await this.page.goto('http://localhost:5174');
-    if (await this.ordersTab.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await this.ordersTab.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
+    if (await this.ordersTab.isVisible().catch(() => false)) {
       await this.ordersTab.click();
-      await this.ordersHeading.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
+      await this.ordersHeading.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+      await this.ordersTable.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
     }
   }
 
   getOrderRow(orderId: number | string): Locator {
-    return this.page.locator(`tr:has-text("#${orderId}")`);
+    return this.page.locator('table tbody tr').filter({
+      has: this.page.locator('td', { hasText: new RegExp(`^#${orderId}$`) }),
+    });
   }
 
   async getOrderStatus(orderId: number | string): Promise<string> {
     const row = this.getOrderRow(orderId);
-    const badge = row.locator('span.rounded');
+    await row.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+    const badge = row.locator('td:nth-child(5) span');
     return (await badge.textContent())?.trim() || '';
   }
 
   async clickOrderAction(orderId: number | string, actionName: string): Promise<string> {
     const row = this.getOrderRow(orderId);
+    await row.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
     const btn = row.getByRole('button', { name: actionName });
-    if (await btn.isVisible({ timeout: 1500 }).catch(() => false)) {
-      try {
-        const [dialog] = await Promise.all([
-          this.page.waitForEvent('dialog', { timeout: 1500 }).catch(() => null),
-          btn.click(),
-        ]);
-        if (dialog) {
-          const msg = dialog.message();
-          await dialog.accept().catch(() => {});
-          await this.page.waitForTimeout(400);
-          return msg;
-        }
-      } catch (e) {}
-      await this.page.waitForTimeout(600);
+    if (await btn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      let alertMsg = '';
+      const dialogHandler = (dialog: any) => {
+        alertMsg = dialog.message();
+        dialog.accept().catch(() => {});
+      };
+      this.page.once('dialog', dialogHandler);
+      await btn.click();
+      await this.page.waitForLoadState('networkidle').catch(() => {});
+      return alertMsg;
     }
     return '';
   }
@@ -77,3 +79,4 @@ export class AdminOrdersPage {
     return actionNames;
   }
 }
+

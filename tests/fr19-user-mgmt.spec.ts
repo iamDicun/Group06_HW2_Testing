@@ -95,10 +95,12 @@ test.describe('FR-19: User Management Admin [Run by: 23127391]', () => {
 
         const countBefore = await adminUsersPage.getUserCount();
         await adminUsersPage.deleteUser(data.targetUserEmail!);
-        await page.waitForTimeout(500);
+        await page.waitForLoadState('networkidle').catch(() => {});
 
         const countAfter = await adminUsersPage.getUserCount();
         expect(countAfter).toBeLessThanOrEqual(countBefore);
+        const isStillPresent = await adminUsersPage.isUserPresent(data.targetUserEmail!);
+        expect(isStillPresent).toBe(false);
         return;
       }
 
@@ -108,7 +110,7 @@ test.describe('FR-19: User Management Admin [Run by: 23127391]', () => {
         await adminUsersPage.goto();
 
         await adminUsersPage.deleteUser(data.targetUserEmail!);
-        await page.waitForTimeout(500);
+        await page.waitForLoadState('networkidle').catch(() => {});
 
         try {
           await axios.post(`${API_URL}/login`, {
@@ -127,10 +129,13 @@ test.describe('FR-19: User Management Admin [Run by: 23127391]', () => {
       await auth.injectAdminSession();
       await adminUsersPage.goto();
 
-      if (data.testType === 'positive_view_list' || data.testType === 'ui_dom_structure_validation') {
+      if (data.testType === 'integration_profile_phone_sync') {
+        const userDetails = await adminUsersPage.getUserDetails(data.targetUserEmail!);
+        expect(userDetails.email).toBe(data.targetUserEmail);
+      } else if (data.testType === 'positive_view_list' || data.testType === 'ui_dom_structure_validation') {
         await expect(adminUsersPage.usersTable).toBeVisible();
         for (const header of (data as any).expectedHeaders || ['ID', 'Email', 'Role']) {
-          await expect(page.locator(`th:has-text("${header}")`)).toBeVisible();
+          await expect(adminUsersPage.usersTable.locator(`th:has-text("${header}")`)).toBeVisible();
         }
       } else if (data.testType === 'security_no_passwords_leaked') {
         const tableHtml = await adminUsersPage.usersTable.innerHTML();

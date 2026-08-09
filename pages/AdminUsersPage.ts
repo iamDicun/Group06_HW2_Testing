@@ -14,7 +14,7 @@ export class AdminUsersPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.usersTab = page.locator('li:has-text("Người dùng")');
+    this.usersTab = page.locator('li').filter({ hasText: /^Người dùng$/ });
     this.usersHeading = page.getByRole('heading', { name: 'Quản lý Người dùng' });
     this.usersTable = page.locator('table');
     this.userRows = page.locator('table tbody tr');
@@ -22,14 +22,18 @@ export class AdminUsersPage {
 
   async goto() {
     await this.page.goto('http://localhost:5174');
-    if (await this.usersTab.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await this.usersTab.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
+    if (await this.usersTab.isVisible().catch(() => false)) {
       await this.usersTab.click();
-      await this.usersHeading.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
+      await this.usersHeading.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+      await this.usersTable.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
     }
   }
 
   getUserRowByEmail(email: string): Locator {
-    return this.page.locator(`table tbody tr:has-text("${email}")`);
+    return this.page.locator('table tbody tr').filter({
+      has: this.page.locator('td', { hasText: new RegExp(`^${email}$`) }),
+    });
   }
 
   async getUserCount(): Promise<number> {
@@ -37,19 +41,20 @@ export class AdminUsersPage {
   }
 
   async deleteUser(email: string): Promise<string> {
-    const dialogPromise = this.page.waitForEvent('dialog', { timeout: 1000 }).catch(() => null);
     const row = this.getUserRowByEmail(email);
+    await row.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
     const deleteBtn = row.getByRole('button', { name: 'Xóa' });
     if (await deleteBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      let alertMsg = '';
+      const dialogHandler = (dialog: any) => {
+        alertMsg = dialog.message();
+        dialog.accept().catch(() => {});
+      };
+      this.page.once('dialog', dialogHandler);
       await deleteBtn.click();
-      const dialog = await dialogPromise;
-      if (dialog) {
-        const msg = dialog.message();
-        await dialog.accept().catch(() => {});
-        return msg;
-      }
+      await this.page.waitForLoadState('networkidle').catch(() => {});
+      return alertMsg;
     }
-    await this.page.waitForTimeout(500);
     return '';
   }
 
@@ -69,3 +74,4 @@ export class AdminUsersPage {
     };
   }
 }
+
