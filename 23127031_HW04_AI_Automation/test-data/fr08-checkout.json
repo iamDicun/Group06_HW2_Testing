@@ -1,0 +1,194 @@
+{
+  "_meta": {
+    "studentId": "23127031",
+    "generatedAt": "2026-08-10T01:37:58+00:00",
+    "feature": "FR-08",
+    "description": "Test data cho functionality Thanh toán (Checkout)"
+  },
+  "testCases": [
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-001",
+      "scenario": "Chưa đăng nhập → không access checkout page",
+      "data": {
+        "isLoggedIn": false
+      },
+      "expected": {
+        "redirectedToLogin": true,
+        "cannotAccessCheckout": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-002",
+      "scenario": "Đã đăng nhập →access checkout page thành công",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "canAccessCheckout": true,
+        "pageLoaded": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-003",
+      "scenario": "Hiển thị danh sách sản phẩm đặt mua trên checkout",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "MacBook Pro M3", "price": 45000000, "quantity": 1 },
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "productCount": 2,
+        "productsDisplayed": ["MacBook Pro M3", "Tai nghe AirPods Pro 2"]
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-004",
+      "scenario": "Tổng tiền hiển thị đúng theo giỏ hàng",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "MacBook Pro M3", "price": 45000000, "quantity": 1 },
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "expectedTotal": 51000000,
+        "formula": "(45000000 × 1) + (6000000 × 1)"
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-005",
+      "scenario": "Tổng tiền không cho phép chỉnh sửa (readonly/disabled)",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "totalFieldReadonly": true,
+        "totalFieldDisabled": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-006",
+      "scenario": "Backend bỏ qua total_amount do client gửi lên",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "iPhone 15 Pro Max", "price": 30000000, "quantity": 1 }
+        ],
+        "fakeTotalAmount": 1
+      },
+      "expected": {
+        "backendRecalculates": true,
+        "actualTotal": 30000000,
+        "paymentSuccessful": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-007",
+      "scenario": "Thanh toán thành công → giỏ hàng được xóa",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "paymentSuccess": true,
+        "cartEmpty": true,
+        "cartItemCount": 0
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-008",
+      "scenario": "Sau thanh toán, checkout page hiển thị giỏ hàng trống",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "precondition": "payment_completed"
+      },
+      "expected": {
+        "checkoutPageEmpty": true,
+        "noProductsDisplayed": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-009",
+      "scenario": "Thanh toán với nhiều sản phẩm (>=3)",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "MacBook Pro M3", "price": 45000000, "quantity": 1 },
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 1 },
+          { "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 1 }
+        ]
+      },
+      "expected": {
+        "productCount": 3,
+        "expectedTotal": 55000000,
+        "paymentSuccess": true,
+        "cartEmpty": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-010",
+      "scenario": "Thanh toán với sản phẩm có số lượng > 1",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 2 }
+        ]
+      },
+      "expected": {
+        "expectedTotal": 12000000,
+        "formula": "6000000 × 2",
+        "paymentSuccess": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-011",
+      "scenario": "Gửi total_amount = 0 → backend tính lại đúng",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": [
+          { "name": "Samsung Galaxy S24 Ultra", "price": 28000000, "quantity": 1 }
+        ],
+        "fakeTotalAmount": 0
+      },
+      "expected": {
+        "backendRecalculates": true,
+        "actualTotal": 28000000,
+        "paymentSuccessful": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-08-012",
+      "scenario": "Thanh toán với giỏ hàng trống",
+      "data": {
+        "email": "test@eshop.com",
+        "password": "Test1234!",
+        "cartItems": []
+      },
+      "expected": {
+        "cannotCheckout": true,
+        "emptyCartMessage": true
+      }
+    }
+  ]
+}
