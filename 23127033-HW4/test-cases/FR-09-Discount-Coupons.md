@@ -3,7 +3,7 @@
 **Feature:** `FR-09` Discount Coupons  
 **Module:** Shopping Cart & Checkout (`COUPON`)  
 **Target Page:** `/checkout` (Web Frontend)  
-**Total Test Cases:** 15 (Positive: 6, Negative: 5, Edge: 4)
+**Total Test Cases:** 16 (Positive: 6, Negative: 6, Edge: 4)
 
 ---
 
@@ -24,3 +24,4 @@
 | `TC_CP_13` | Positive | Kiểm tra công thức tính phần trăm mã `SAVE10` với tổng đơn 300,000 ₫ | Ở trang `/checkout` | `couponCode: "SAVE10"`, `totalAmount: 300000` | 1. Nhập 300,000 ₫ vào ô tổng tiền<br>2. Áp mã `SAVE10` | Số tiền tiết kiệm đúng bằng 30,000 ₫ (10%), Thành tiền: 270,000 ₫ (Bắt lỗi BUG-FR09-002 nếu tính sai) | P0 |
 | `TC_CP_14` | Positive | Kiểm tra công thức tính phần trăm mã `SAVE10` với tổng đơn 1,000,000 ₫ | Ở trang `/checkout` | `couponCode: "SAVE10"`, `totalAmount: 1000000` | 1. Nhập 1,000,000 ₫ vào ô tổng tiền<br>2. Áp mã `SAVE10` | Số tiền tiết kiệm đúng bằng 100,000 ₫ (10%), Thành tiền: 900,000 ₫ (Bắt lỗi BUG-FR09-002 nếu tính sai) | P0 |
 | `TC_CP_15` | Positive | Kiểm tra công thức tính phần trăm `SAVE10` sau khi nhập chữ thường `save10` tại tổng đơn 500,000 ₫ | Ở trang `/checkout` | `couponCode: "save10"`, `totalAmount: 500000` | 1. Nhập `save10` tại đơn 500,000 ₫<br>2. Bấm Áp dụng | Tiết kiệm: 50,000 ₫, Thành tiền: 450,000 ₫ | P1 |
+| `TC_CP_16` | Negative | Áp dụng mã giảm giá khi người dùng chưa đăng nhập (Unauthenticated Guest User) | Chưa đăng nhập tài khoản | `couponCode: "SAVE10"`, `totalAmount: 200000` | 1. Truy cập `/checkout` khi chưa đăng nhập<br>2. Nhập mã `SAVE10`<br>3. Bấm "Áp dụng" | Hệ thống từ chối áp mã và yêu cầu đăng nhập (Phát hiện BUG-FR09-003 nếu guest vẫn áp mã được) | P0 |

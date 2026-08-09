@@ -195,5 +195,19 @@
       "discountAmount": 50000,
       "finalAmount": 450000
     }
+  },
+  {
+    "tcId": "TC_CP_16",
+    "category": "negative",
+    "description": "Attempt to apply coupon when user is not logged in / guest user (Detect BUG-FR09-003)",
+    "input": {
+      "couponCode": "SAVE10",
+      "totalAmount": 200000,
+      "isLoggedOut": true
+    },
+    "expected": {
+      "errorText": "Bạn cần đăng nhập để sử dụng mã giảm giá",
+      "expectedBugId": "BUG-FR09-003"
+    }
   }
 ]
