@@ -4,7 +4,8 @@
 **Mã sinh viên:** `23127033`  
 **Bài tập:** HW04 - Automation Testing (EShop SUT)  
 **Repository GitHub:** [Group06_HW2_Testing](https://github.com/iamDicun/Group06_HW2_Testing)  
-**Link Demo Video (YouTube Unlisted):** *(Sẽ cập nhật sau khi hoàn thành video)*
+**Báo cáo chính chi tiết:** [`main-report.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/main-report.md)  
+**Link Demo Video (YouTube Unlisted):** *(Sẽ cập nhật sau khi upload video)*
 
 ---
 
@@ -14,7 +15,7 @@
 | :---: | :--- | :--- | :---: | :--- | :--- |
 | **Pool A** | `FR-03` | Forgot Password & Password Reset | 16 | [`forgot-password.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/forgot-password.data.json) | [`forgot-password.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/forgot-password.spec.ts) |
 | **Pool B** | `FR-09` | Discount Coupons | 16 | [`coupons.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/coupons.data.json) | [`coupons.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/coupons.spec.ts) |
-| **Pool C** | `FR-15` | Product Management (CRUD) | 15 | [`product-mgmt.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/product-mgmt.data.json) | [`product-mgmt.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/product-mgmt.spec.ts) |
+| **Pool C** | `FR-15` | Product Management (CRUD) | 18 | [`product-mgmt.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/product-mgmt.data.json) | [`product-mgmt.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/product-mgmt.spec.ts) |
 
 ---
 
@@ -24,33 +25,33 @@
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **FR-03: Forgot Password** | 16 | 48 | 42 | 6 | Chromium, Firefox, WebKit | 2 (Missing Confirm Field, Password Rejected) |
 | **FR-09: Discount Coupons** | 16 | 48 | 36 | 12 | Chromium, Firefox, WebKit | 2 (SAVE10 Formula Error, Unauthenticated Coupon App) |
-| **FR-15: Product Management** | 15 | 45 | 36 | 9 | Chromium, Firefox, WebKit | 3 (Mass Update Bug, Missing Delete Confirm, Price 0 Accepted) |
-| **Tổng cộng** | **47** | **141** | **114** | **27** | **3 Browsers** | **7 Bugs** |
+| **FR-15: Product Management** | 18 | 54 | 42 | 12 | Chromium, Firefox, WebKit | 4 (Mass Update Bug, Missing Delete Confirm, Price 0 Accepted, Broken Edit Fields) |
+| **Tổng cộng** | **50** | **150** | **120** | **30** | **3 Browsers** | **8 Bugs** |
 
 ---
 
 ## 3. Human Review & Gap Analysis (AI Limitations)
 
-Trong quá trình rà soát các test script và kịch bản do AI sinh ra, tôi đã phát hiện và khắc phục các thiếu sót sau:
-1. **Kiểm tra Giá sản phẩm bằng 0₫ (`FR-15`)**: AI ban đầu không tạo kịch bản kiểm thử BVA giá sản phẩm `= 0`. Tôi đã bổ sung `TC_PM_14` và `TC_PM_15` để kiểm tra validation giá sản phẩm, phát hiện lỗi **BUG-FR15-002** (Hệ thống chấp nhận lưu sản phẩm giá 0 ₫ vào Database).
-2. **Thiếu Hộp thoại Xác nhận khi Xóa sản phẩm (`FR-15`)**: AI không tự kiểm tra sự tồn tại của `window.confirm`. Tôi đã bổ sung `TC_PM_03` và `TC_PM_13` để bắt lỗi **BUG-FR15-004** (Nút Xóa thực hiện xóa trực tiếp không hiển thị confirm dialog).
-3. **Áp dụng Mã giảm giá khi Chưa đăng nhập (`FR-09`)**: Bổ sung `TC_CP_16` phát hiện lỗi **BUG-FR09-003** (Khách chưa đăng nhập vẫn áp được coupon thành công).
-4. **Kiểm tra công thức tính phần trăm mã `SAVE10` (`FR-09`)**: Bổ sung `TC_CP_13`, `TC_CP_14`, `TC_CP_15` phát hiện **BUG-FR09-002** (Công thức tính giảm giá phần trăm bị sai).
-5. **BVA Độ dài Mật khẩu & Ký tự đặc biệt (`FR-03`)**: Bổ sung BVA độ dài 7, 8 (`@`), 9 (`$`) ký tự phát hiện **BUG-FR03-005**.
-6. **Thiếu kiểm tra ô Xác nhận mật khẩu (`FR-03`)**: Bổ sung `TC_FP_13` phát hiện **BUG-FR03-003** (Giao diện SUT thiếu trường Confirm Password).
-7. **Lỗi Selector tĩnh và Thiếu Login Hook (`FR-15`)**: Tái cấu trúc selector sang Accessibility Locators và bổ sung luồng login Admin tự động.
+Xem nội dung phân tích chi tiết tại file [`main-report.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/main-report.md#4-phan-tich-chuyen-sau-ly-do-vi-sao-dung-ai-skill-van-thieu-thieu-sot--loi-sut-bug-human-gap-analysis) với 4 nguyên nhân cốt lõi:
+1. Hạn chế về ngữ cảnh giao diện thực tế (Lack of Empirical Live DOM Context).
+2. Sự suy luận máy móc theo "Happy Path Standard" nông (Over-reliance on Standard Assumptions).
+3. Không đọc được logic ẩn & công thức toán học bị lỗi trong code.
+4. Assertion bề mặt (Shallow Assertions) & Thiếu kiểm tra bất đồng bộ.
 
 ---
 
-## 4. Bug Reports & GitHub Issues
+## 4. Confirmed Bug Reports & GitHub Issues Evidence
 
-- **BUG-FR03-003**: Giao diện đặt lại mật khẩu của SUT hoàn toàn thiếu ô Xác nhận mật khẩu (Confirm Password).
-- **BUG-FR03-005**: Mật khẩu hợp lệ chuẩn 8-9 ký tự chứa ký tự đặc biệt bị hệ thống từ chối do biểu thức chính quy yêu cầu khoảng trắng (`\s`).
-- **BUG-FR09-002**: Mã giảm giá phần trăm `SAVE10` tính sai số tiền giảm (nhân 10 lần giá trị thay vì giảm 10%).
-- **BUG-FR09-003**: Người dùng khách chưa đăng nhập vẫn có thể áp dụng thành công mã coupon giảm giá.
-- **BUG-FR15-002**: Dữ liệu sản phẩm không hợp lệ (Giá sản phẩm bằng 0 ₫ / Giá âm) vẫn được hệ thống chấp nhận lưu vào Database.
-- **BUG-FR15-004**: Thao tác xóa sản phẩm trong Admin Portal không hiển thị hộp thoại xác nhận (Confirm Dialog).
-- **BUG-PROD-001**: Lỗi cập nhật đồng loạt tên toàn bộ sản phẩm trong Database khi Admin tiến hành sửa thông tin 1 sản phẩm bất kỳ.
+| Mã Lỗi | Mô Tả Lỗi | File Report Local | GitHub Issue |
+| :---: | :--- | :--- | :---: |
+| **BUG-FR03-003** | Giao diện đặt lại mật khẩu SUT thiếu ô Xác nhận mật khẩu (Confirm Password) | [`BUG-FR03-003.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR03-003.md) | [#132](https://github.com/iamDicun/Group06_HW2_Testing/issues/132) |
+| **BUG-FR03-005** | Mật khẩu hợp lệ 8-9 ký tự bị từ chối do Regex đòi khoảng trắng | [`BUG-FR03-005.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR03-005.md) | [#133](https://github.com/iamDicun/Group06_HW2_Testing/issues/133) |
+| **BUG-FR09-002** | Mã giảm giá phần trăm SAVE10 tính sai số tiền giảm (nhân 10 lần) | [`BUG-FR09-002.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR09-002.md) | [#134](https://github.com/iamDicun/Group06_HW2_Testing/issues/134) |
+| **BUG-FR09-003** | Khách chưa đăng nhập vẫn áp dụng thành công mã coupon | [`BUG-FR09-003.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR09-003.md) | [#135](https://github.com/iamDicun/Group06_HW2_Testing/issues/135) |
+| **BUG-FR15-002** | Chấp nhận giá sản phẩm bằng 0 ₫ / Giá âm khi tạo hoặc sửa | [`BUG-FR15-002.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR15-002.md) | [#136](https://github.com/iamDicun/Group06_HW2_Testing/issues/136) |
+| **BUG-FR15-003** | Sửa chi tiết các trường sản phẩm (Giá, Mô tả, Danh mục) không hoạt động | [`BUG-FR15-003.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR15-003.md) | [#137](https://github.com/iamDicun/Group06_HW2_Testing/issues/137) |
+| **BUG-FR15-004** | Xóa sản phẩm trong Admin không hiển thị Hộp thoại xác nhận (Confirm Dialog) | [`BUG-FR15-004.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-FR15-004.md) | [#138](https://github.com/iamDicun/Group06_HW2_Testing/issues/138) |
+| **BUG-PROD-001** | Sửa 1 sản phẩm làm mass update đổi tên toàn bộ sản phẩm trong DB | [`BUG-PROD-001.md`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/bug-reports/BUG-PROD-001.md) | [#139](https://github.com/iamDicun/Group06_HW2_Testing/issues/139) |
 
 ---
 
@@ -58,9 +59,9 @@ Trong quá trình rà soát các test script và kịch bản do AI sinh ra, tô
 
 | No. | Criteria | Max Grade | Self-Assessed Grade |
 | :---: | :--- | :---: | :---: |
-| 1 | Task 1 - Feature A (`FR-03` Forgot Password) | 25 | 25 |
-| 1 | Task 1 - Feature B (`FR-09` Discount Coupons) | 25 | 25 |
-| 1 | Task 1 - Feature C (`FR-15` Product Management) | 25 | 25 |
+| 1 | Task 1 — Feature A (`FR-03` Forgot Password) | 25 | 25 |
+| 1 | Task 1 — Feature B (`FR-09` Discount Coupons) | 25 | 25 |
+| 1 | Task 1 — Feature C (`FR-15` Product Management) | 25 | 25 |
 | 2 | Task 2 — Demo video (Voice, facecam/terminal, end-to-end run) | 15 | 15 |
 | 3 | Agent Skills (Skill file + Demo process) | 10 | 10 |
 | **Tổng** | | **100** | **100** |

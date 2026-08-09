@@ -183,5 +183,42 @@
       "success": true,
       "productInList": true
     }
+  },
+  {
+    "tcId": "TC_PM_16",
+    "category": "positive",
+    "description": "Edit product price field specifically (Detect BUG-FR15-003)",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newPrice": 24990000
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!",
+      "expectedBugId": "BUG-FR15-003"
+    }
+  },
+  {
+    "tcId": "TC_PM_17",
+    "category": "positive",
+    "description": "Edit product description field specifically",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newDescription": "Updated product description text"
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
+  },
+  {
+    "tcId": "TC_PM_18",
+    "category": "positive",
+    "description": "Edit product category field specifically",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newCategoryId": 2
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
   }
 ]

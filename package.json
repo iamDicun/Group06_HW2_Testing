@@ -1,0 +1,11 @@
+{
+  "name": "group06-hw2-testing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test:hw4": "playwright test --config=23127033-HW4/playwright.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1"
+  }
+}

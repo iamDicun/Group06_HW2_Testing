@@ -3,7 +3,7 @@
 **Feature:** `FR-15` Product Management (CRUD)  
 **Module:** Web Admin (`PROD_MGMT`)  
 **Target Page:** Web Admin Portal (Tab "Sản phẩm")  
-**Total Test Cases:** 15 (Positive: 6, Negative: 6, Edge: 3)
+**Total Test Cases:** 18 (Positive: 9, Negative: 6, Edge: 3)
 
 ---
 
@@ -24,3 +24,6 @@
 | `TC_PM_13` | Positive | Hủy thao tác xóa sản phẩm qua Hộp thoại xác nhận (Confirm Dialog Cancel) | Đã có sản phẩm trong danh sách | Click nút "Xóa", bấm "Cancel" trên confirm dialog | 1. Click nút "Xóa"<br>2. Bấm "Cancel" trong confirm popup | Thao tác xóa bị hủy, sản phẩm vẫn được giữ nguyên trong danh sách | P1 |
 | `TC_PM_14` | Negative | BVA Giá sản phẩm bằng 0 (Price = 0 VND) | Đang ở tab "Sản phẩm" | `name: "Test SP Giá 0đ"`, `price: 0` | 1. Nhập tên sản phẩm<br>2. Nhập giá 0 ₫<br>3. Click "Lưu sản phẩm" | Hệ thống từ chối lưu và yêu cầu giá lớn hơn 0 (Bắt lỗi BUG-FR15-002 nếu lưu sản phẩm giá 0đ) | P1 |
 | `TC_PM_15` | Positive | BVA Giá sản phẩm tối thiểu hợp lệ 1 ₫ (Price = 1 VND) | Đang ở tab "Sản phẩm" | `name: "Test SP Giá 1đ"`, `price: 1` | 1. Nhập giá 1 ₫<br>2. Click "Lưu sản phẩm" | Lưu thành công sản phẩm 1 ₫ vào danh sách | P1 |
+| `TC_PM_16` | Positive | Chỉnh sửa riêng trường Giá tiền của sản phẩm (`price`) | Đã có sản phẩm trong danh sách | `targetProduct: "iPhone 15"`, `newPrice: 24990000` | 1. Click "Sửa"<br>2. Chỉnh sửa Giá tiền<br>3. Click "Lưu sản phẩm" | Giá tiền sản phẩm trong bảng cập nhật đúng giá trị mới (Phát hiện BUG-FR15-003 nếu lỗi edit) | P1 |
+| `TC_PM_17` | Positive | Chỉnh sửa riêng trường Mô tả của sản phẩm (`description`) | Đã có sản phẩm trong danh sách | `targetProduct: "iPhone 15"`, `newDescription: "Mô tả mới được cập nhật"` | 1. Click "Sửa"<br>2. Chỉnh sửa ô Mô tả<br>3. Click "Lưu sản phẩm" | Mô tả sản phẩm được cập nhật thành công | P1 |
+| `TC_PM_18` | Positive | Chỉnh sửa riêng trường Danh mục của sản phẩm (`category_id`) | Đã có danh mục mới | `targetProduct: "iPhone 15"`, `newCategory: 2` | 1. Click "Sửa"<br>2. Thay đổi ô chọn Danh mục<br>3. Click "Lưu sản phẩm" | Danh mục sản phẩm được cập nhật thành công | P1 |
