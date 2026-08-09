@@ -63,6 +63,8 @@ test.describe("FR-11: Xem lich su don hang (User)", () => {
         const loginPage = new LoginPage(page);
         await loginPage.goto();
         await loginPage.login(c.user.email, c.user.password);
+        // Đợi chuyển trang thành công sau khi login để lưu auth token
+        await page.waitForURL((url) => !url.pathname.includes("/login"));
       }
 
       await profile.goto();
@@ -119,7 +121,9 @@ test.describe("FR-11: Xem lich su don hang (User)", () => {
           await expect(profile.rows.first()).toBeVisible();
           for (const item of c.expect!.statuses!) {
             const row = profile.rowContaining(item.label);
-            await expect(row.locator("span")).toHaveClass(new RegExp(item.colorClass));
+            // Chỉ định rõ thẻ badge/status class cụ thể thay vì span chung chung
+            const statusBadge = row.locator(".badge, .status, span[class*='status'], span[class*='badge']").first();
+            await expect(statusBadge).toHaveClass(new RegExp(item.colorClass));
           }
           break;
         }
