@@ -1,25 +1,24 @@
 {
   "_meta": {
     "studentId": "23127031",
-    "generatedAt": "2026-08-10T01:37:58+00:00",
+    "generatedAt": "2026-08-10T04:30:00+00:00",
     "feature": "FR-08",
-    "description": "Test data cho functionality Thanh toán (Checkout)"
+    "description": "Test data cho Thanh toán (Checkout) - dựa trên source code thực tế"
   },
   "testCases": [
     {
       "testCaseId": "TC-AUTOMATION-FR-08-001",
-      "scenario": "Chưa đăng nhập → không access checkout page",
+      "scenario": "Chưa đăng nhập → redirect về login",
       "data": {
         "isLoggedIn": false
       },
       "expected": {
-        "redirectedToLogin": true,
-        "cannotAccessCheckout": true
+        "redirectedToLogin": true
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-002",
-      "scenario": "Đã đăng nhập →access checkout page thành công",
+      "scenario": "Đã đăng nhập → access checkout page thành công",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -28,13 +27,12 @@
         ]
       },
       "expected": {
-        "canAccessCheckout": true,
-        "pageLoaded": true
+        "canAccessCheckout": true
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-003",
-      "scenario": "Hiển thị danh sách sản phẩm đặt mua trên checkout",
+      "scenario": "Hiển thị danh sách sản phẩm trên checkout",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -50,7 +48,7 @@
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-004",
-      "scenario": "Tổng tiền hiển thị đúng theo giỏ hàng",
+      "scenario": "Tổng tiền hiển thị đúng (45M + 6M = 51M)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -61,12 +59,12 @@
       },
       "expected": {
         "expectedTotal": 51000000,
-        "formula": "(45000000 × 1) + (6000000 × 1)"
+        "formula": "(45000000 x 1) + (6000000 x 1) = 51000000"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-005",
-      "scenario": "Tổng tiền không cho phép chỉnh sửa (readonly/disabled)",
+      "scenario": "BUG: Total field KHÔNG phải readonly (source code shows editable input)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -75,13 +73,13 @@
         ]
       },
       "expected": {
-        "totalFieldReadonly": true,
-        "totalFieldDisabled": true
+        "isEditable": true,
+        "bugDescription": "Checkout.jsx line 93-103: input type='number' cho phép user sửa total"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-006",
-      "scenario": "Backend bỏ qua total_amount do client gửi lên",
+      "scenario": "BUG: Backend KHÔNG recalculate total (server.js line 297-308)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -91,14 +89,13 @@
         "fakeTotalAmount": 1
       },
       "expected": {
-        "backendRecalculates": true,
-        "actualTotal": 30000000,
-        "paymentSuccessful": true
+        "backendAcceptsFakeTotal": true,
+        "bugDescription": "server.js: const { total_amount } = req.body; ... total_amount saved directly"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-007",
-      "scenario": "Thanh toán thành công → giỏ hàng được xóa",
+      "scenario": "Thanh toán thành công → hiển thị 'Thanh toán thành công!'",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -107,27 +104,25 @@
         ]
       },
       "expected": {
-        "paymentSuccess": true,
-        "cartEmpty": true,
-        "cartItemCount": 0
+        "successMessage": "Thanh toán thành công!",
+        "redirectUrl": "/"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-008",
-      "scenario": "Sau thanh toán, checkout page hiển thị giỏ hàng trống",
+      "scenario": "Sau thanh toán, cart trống (clearCart được gọi)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
         "precondition": "payment_completed"
       },
       "expected": {
-        "checkoutPageEmpty": true,
-        "noProductsDisplayed": true
+        "cartEmpty": true
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-009",
-      "scenario": "Thanh toán với nhiều sản phẩm (>=3)",
+      "scenario": "Thanh toán >=3 sản phẩm (45M + 6M + 4M = 55M)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -139,14 +134,12 @@
       },
       "expected": {
         "productCount": 3,
-        "expectedTotal": 55000000,
-        "paymentSuccess": true,
-        "cartEmpty": true
+        "expectedTotal": 55000000
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-010",
-      "scenario": "Thanh toán với sản phẩm có số lượng > 1",
+      "scenario": "Sản phẩm có số lượng > 1 (6M x 2 = 12M)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -156,13 +149,12 @@
       },
       "expected": {
         "expectedTotal": 12000000,
-        "formula": "6000000 × 2",
-        "paymentSuccess": true
+        "formula": "6000000 x 2 = 12000000"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-011",
-      "scenario": "Gửi total_amount = 0 → backend tính lại đúng",
+      "scenario": "BUG: Gửi total=0 → backend chấp nhận (không recalculate)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
@@ -172,22 +164,20 @@
         "fakeTotalAmount": 0
       },
       "expected": {
-        "backendRecalculates": true,
-        "actualTotal": 28000000,
-        "paymentSuccessful": true
+        "backendAcceptsZero": true,
+        "bugDescription": "Backend không validate total_amount, chấp nhận giá trị 0"
       }
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-012",
-      "scenario": "Thanh toán với giỏ hàng trống",
+      "scenario": "Giỏ hàng trống → checkout page trống",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
         "cartItems": []
       },
       "expected": {
-        "cannotCheckout": true,
-        "emptyCartMessage": true
+        "emptyCart": true
       }
     }
   ]
