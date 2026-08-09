@@ -38,7 +38,6 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
   test.describe.configure({ mode: 'serial' });
 
   test(`Run by: ${STUDENT_ID}`, async ({ page }) => {
-    // Metadata test — always passes
     expect(STUDENT_ID).toBeTruthy();
   });
 
@@ -47,7 +46,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-001');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: URL (navigation after login)
+    // Assertion: URL — không còn ở trang login
     await expect(page).not.toHaveURL('/');
   });
 
@@ -56,7 +55,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-002');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Visibility (error message visible)
+    // Assertion: Visibility — error message hiển thị
     const errorBanner = page.getByText(/đăng nhập thất bại|invalid|không chính xác/i);
     await expect(errorBanner).toBeVisible();
   });
@@ -66,7 +65,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-003');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Visibility
+    // Assertion: Visibility
     const errorBanner = page.getByText(/đăng nhập thất bại|invalid|không chính xác/i);
     await expect(errorBanner).toBeVisible();
   });
@@ -76,12 +75,9 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-004');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Attribute (HTML5 required / aria-invalid)
+    // Assertion: Attribute — email field invalid
     const emailField = page.getByLabel('Email');
-    const isInvalid = await emailField.evaluate((el: HTMLInputElement) => {
-      return !el.validity.valid || el.getAttribute('aria-invalid') === 'true';
-    });
-    expect(isInvalid).toBeTruthy();
+    await expect(emailField).toHaveAttribute('aria-invalid', 'true');
   });
 
   // ─── TC-AUTOMATION-FR-02-005: Password để trống ─────────────────────────
@@ -89,12 +85,9 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-005');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Attribute
+    // Assertion: Attribute — password field invalid
     const passwordField = page.getByLabel('Password');
-    const isInvalid = await passwordField.evaluate((el: HTMLInputElement) => {
-      return !el.validity.valid || el.getAttribute('aria-invalid') === 'true';
-    });
-    expect(isInvalid).toBeTruthy();
+    await expect(passwordField).toHaveAttribute('aria-invalid', 'true');
   });
 
   // ─── TC-AUTOMATION-FR-02-006: Cả hai trường trống ───────────────────────
@@ -102,19 +95,9 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-006');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Attribute (both fields invalid)
-    const emailField = page.getByLabel('Email');
-    const passwordField = page.getByLabel('Password');
-
-    const emailInvalid = await emailField.evaluate((el: HTMLInputElement) => {
-      return !el.validity.valid || el.getAttribute('aria-invalid') === 'true';
-    });
-    const passwordInvalid = await passwordField.evaluate((el: HTMLInputElement) => {
-      return !el.validity.valid || el.getAttribute('aria-invalid') === 'true';
-    });
-
-    expect(emailInvalid).toBeTruthy();
-    expect(passwordInvalid).toBeTruthy();
+    // Assertion: Attribute — cả hai field invalid
+    await expect(page.getByLabel('Email')).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.getByLabel('Password')).toHaveAttribute('aria-invalid', 'true');
   });
 
   // ─── TC-AUTOMATION-FR-02-007: Email sai format HTML5 ────────────────────
@@ -126,13 +109,13 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
       await page.getByLabel('Email').fill(invalidEmail);
       await page.getByLabel('Password').fill('AnyPassword123!');
 
-      // Assertion pattern: Attribute (type="email" + validity check)
+      // Assertion: Attribute — type="email"
       const emailField = page.getByLabel('Email');
-      const fieldType = await emailField.getAttribute('type');
-      expect(fieldType).toBe('email');
+      await expect(emailField).toHaveAttribute('type', 'email');
 
-      const isValid = await emailField.evaluate((el: HTMLInputElement) => el.validity.valid);
-      expect(isValid).toBeFalsy();
+      // Assertion: Enabled/Disabled — nút disabled do HTML5 validation
+      const submitButton = page.getByRole('button', { name: /đăng nhập|login/i });
+      await expect(submitButton).toBeDisabled();
     }
   });
 
@@ -145,7 +128,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
       await performLogin(page, email, password);
     }
 
-    // Assertion pattern: Visibility (lockout message)
+    // Assertion: Visibility — lockout message hiển thị
     const lockoutMessage = page.getByText(/khóa|locked|tạm khóa|vui lòng thử lại sau/i);
     await expect(lockoutMessage).toBeVisible();
   });
@@ -163,11 +146,11 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     // Try to login with correct password while locked
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Visibility (still locked / error shown)
+    // Assertion: Visibility — lỗi vẫn hiển thị
     const errorMessage = page.getByText(/khóa|locked|thất bại|không chính xác/i);
     await expect(errorMessage).toBeVisible();
 
-    // Assertion pattern: URL (should NOT navigate away)
+    // Assertion: URL — vẫn ở trang login
     await expect(page).toHaveURL('/');
   });
 
@@ -176,13 +159,12 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-010');
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Value (token in storage)
+    // Assertion: Value — token có trong storage và đúng format JWT
     const token = await page.evaluate(() => {
       return localStorage.getItem('token') || sessionStorage.getItem('token');
     });
 
     expect(token).toBeTruthy();
-    // JWT format: header.payload.signature
     const parts = token!.split('.');
     expect(parts).toHaveLength(3);
   });
@@ -200,7 +182,7 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
     await performLogin(page, tc2.data.email, tc2.data.password);
     const errorText2 = await page.getByText(/đăng nhập thất bại|invalid|không chính xác/i).textContent();
 
-    // Assertion pattern: Text content (same error message for both cases)
+    // Assertion: Text content — cùng message cho cả 2 trường hợp
     expect(errorText1).toBe(errorText2);
 
     // Verify forbidden keywords are NOT present
@@ -214,39 +196,49 @@ test.describe('FR-02: Đăng nhập & Khóa tài khoản', () => {
   test('TC-AUTOMATION-FR-02-012 - Kiểm tra field email có type="email"', async ({ page }) => {
     await page.goto('/');
 
-    // Assertion pattern: Attribute
+    // Assertion: Attribute
     const emailField = page.getByLabel('Email');
     await expect(emailField).toHaveAttribute('type', 'email');
   });
 
   // ─── TC-AUTOMATION-FR-02-013: Token gửi kèm request ─────────────────────
   test('TC-AUTOMATION-FR-02-013 - Token JWT được lưu và gửi kèm request xác thực', async ({ page }) => {
-    const tc = testCases.find((t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-013');
+    const tc = testCases.find(
+      (t: any) => t.testCaseId === 'TC-AUTOMATION-FR-02-013'
+    );
 
-    // Intercept requests to check Authorization header
     let authHeader = '';
+
     page.on('request', (request) => {
-      const header = request.headers()['authorization'];
-      if (header) {
-        authHeader = header;
+      if (
+        request.url().includes('/api/users/me') &&
+        request.method() === 'GET'
+      ) {
+        authHeader = request.headers()['authorization'] || '';
       }
     });
 
     await performLogin(page, tc.data.email, tc.data.password);
 
-    // Assertion pattern: Value (token in storage + header sent)
+    // Assertion: token được lưu
     const token = await page.evaluate(() => {
       return localStorage.getItem('token') || sessionStorage.getItem('token');
     });
+
     expect(token).toBeTruthy();
 
-    // Navigate to a page that triggers authenticated requests
-    await page.reload();
-    await page.waitForTimeout(2000);
+    // Chờ request xác thực thực tế thay vì fixed timeout
+    const meResponse = page.waitForResponse(
+      response =>
+        response.url().includes('/api/users/me') &&
+        response.request().method() === 'GET'
+    );
 
-    // Check if Bearer token was sent in any request
-    if (authHeader) {
-      expect(authHeader).toMatch(/^Bearer .+/);
-    }
+    await page.reload();
+    await meResponse;
+
+    // Assertion: Value — Bearer header được gửi
+    expect(authHeader).toBeTruthy();
+    expect(authHeader).toMatch(/^Bearer .+/);
   });
 });
