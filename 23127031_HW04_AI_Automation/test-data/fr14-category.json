@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "studentId": "23127031",
+    "generatedAt": "2026-08-10T02:40:48+00:00",
+    "feature": "FR-14",
+    "description": "Test data cho functionality Quản lý Danh mục (Category CRUD)"
+  },
+  "admin": {
+    "email": "admin@eshop.com",
+    "password": "Admin123!"
+  },
+  "testCases": [
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-001",
+      "scenario": "Xem danh sách danh mục",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!"
+      },
+      "expected": {
+        "hasCategories": true,
+        "minCount": 1
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-002",
+      "scenario": "Thêm danh mục mới thành công",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "Danh mục Test FR14"
+      },
+      "expected": {
+        "success": true,
+        "categoryAppears": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-003",
+      "scenario": "Thêm danh mục với tên rỗng — bị từ chối",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": ""
+      },
+      "expected": {
+        "success": false,
+        "validationError": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-004",
+      "scenario": "Xóa danh mục thành công",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryToDelete": "Danh mục Test FR14"
+      },
+      "expected": {
+        "success": true,
+        "categoryDisappears": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-005",
+      "scenario": "Thêm danh mục — kiểm tra count +1",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "Category Count Test"
+      },
+      "expected": {
+        "success": true,
+        "countIncrease": 1
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-006",
+      "scenario": "Xóa danh mục — kiểm tra count -1",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryToDelete": "Category Count Test"
+      },
+      "expected": {
+        "success": true,
+        "countDecrease": 1
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-007",
+      "scenario": "Thêm rồi xóa danh mục — full CRUD cycle",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "Category CRUD Cycle"
+      },
+      "expected": {
+        "addSuccess": true,
+        "deleteSuccess": true,
+        "restoredToOriginal": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-008",
+      "scenario": "Thêm tên chỉ có spaces — bị từ chối",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "   "
+      },
+      "expected": {
+        "success": false,
+        "validationError": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-009",
+      "scenario": "Thêm danh mục tên dài 100+ ký tự",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      },
+      "expected": {
+        "success": true,
+        "categoryAppears": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-010",
+      "scenario": "Xóa danh mục cuối cùng — danh sách trống",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!"
+      },
+      "expected": {
+        "deleteSuccess": true,
+        "listEmpty": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-011",
+      "scenario": "Thêm danh mục với ký tự đặc biệt",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoryName": "Danh mục @#$%^&*"
+      },
+      "expected": {
+        "success": true,
+        "categoryAppears": true
+      }
+    },
+    {
+      "testCaseId": "TC-AUTOMATION-FR-14-012",
+      "scenario": "Thêm nhiều danh mục liên tiếp — kiểm tra tất cả hiển thị",
+      "data": {
+        "email": "admin@eshop.com",
+        "password": "Admin123!",
+        "categoriesToAdd": [
+          "Category A",
+          "Category B",
+          "Category C"
+        ]
+      },
+      "expected": {
+        "allAdded": true,
+        "countIncrease": 3,
+        "allDisplayed": ["Category A", "Category B", "Category C"]
+      }
+    }
+  ]
+}
