@@ -1,0 +1,155 @@
+[
+  {
+    "tcId": "TC_CP_01",
+    "category": "positive",
+    "description": "Apply valid percentage coupon SAVE10 (10% discount)",
+    "input": {
+      "couponCode": "SAVE10",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "success": true,
+      "message": "Áp dụng mã thành công!",
+      "discountAmount": 10000,
+      "finalAmount": 90000
+    }
+  },
+  {
+    "tcId": "TC_CP_02",
+    "category": "positive",
+    "description": "Apply valid fixed amount coupon FREESHIP (30,000 VND off)",
+    "input": {
+      "couponCode": "FREESHIP",
+      "totalAmount": 200000
+    },
+    "expected": {
+      "success": true,
+      "discountAmount": 30000,
+      "finalAmount": 170000
+    }
+  },
+  {
+    "tcId": "TC_CP_03",
+    "category": "positive",
+    "description": "Apply lowercase coupon code save10 automatically converted to uppercase",
+    "input": {
+      "couponCode": "save10",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "success": true,
+      "finalAmount": 90000
+    }
+  },
+  {
+    "tcId": "TC_CP_04",
+    "category": "positive",
+    "description": "Confirm checkout successfully with applied coupon",
+    "input": {
+      "couponCode": "SAVE10",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "checkoutSuccess": true,
+      "successText": "Thanh toán thành công!"
+    }
+  },
+  {
+    "tcId": "TC_CP_05",
+    "category": "negative",
+    "description": "Apply non-existent coupon code INVALID99",
+    "input": {
+      "couponCode": "INVALID99",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "errorText": "Mã không tồn tại"
+    }
+  },
+  {
+    "tcId": "TC_CP_06",
+    "category": "negative",
+    "description": "Apply coupon when total order amount is below min_order_amount",
+    "input": {
+      "couponCode": "MIN500K",
+      "totalAmount": 200000
+    },
+    "expected": {
+      "errorText": "Giá trị đơn hàng chưa đủ điều kiện áp dụng mã"
+    }
+  },
+  {
+    "tcId": "TC_CP_07",
+    "category": "negative",
+    "description": "Apply expired coupon code EXPIRED2025",
+    "input": {
+      "couponCode": "EXPIRED2025",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "errorText": "Mã giảm giá đã hết hạn"
+    }
+  },
+  {
+    "tcId": "TC_CP_08",
+    "category": "negative",
+    "description": "Attempt to apply empty coupon code",
+    "input": {
+      "couponCode": ""
+    },
+    "expected": {
+      "buttonDisabled": true
+    }
+  },
+  {
+    "tcId": "TC_CP_09",
+    "category": "negative",
+    "description": "Apply coupon exceeding max usage per user",
+    "input": {
+      "couponCode": "ONETIME",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "errorText": "Bạn đã sử dụng hết số lần cho phép của mã này"
+    }
+  },
+  {
+    "tcId": "TC_CP_10",
+    "category": "edge",
+    "description": "Apply coupon with leading and trailing whitespaces",
+    "input": {
+      "couponCode": "  SAVE10  ",
+      "totalAmount": 100000
+    },
+    "expected": {
+      "success": true,
+      "finalAmount": 90000
+    }
+  },
+  {
+    "tcId": "TC_CP_11",
+    "category": "edge",
+    "description": "Modify total amount field after coupon is applied resets coupon result",
+    "input": {
+      "couponCode": "SAVE10",
+      "initialTotal": 100000,
+      "newTotal": 150000
+    },
+    "expected": {
+      "couponResultReset": true
+    }
+  },
+  {
+    "tcId": "TC_CP_12",
+    "category": "edge",
+    "description": "Apply 100% discount coupon",
+    "input": {
+      "couponCode": "FULL100",
+      "totalAmount": 50000
+    },
+    "expected": {
+      "success": true,
+      "finalAmount": 0
+    }
+  }
+]

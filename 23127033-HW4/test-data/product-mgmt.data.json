@@ -1,0 +1,148 @@
+[
+  {
+    "tcId": "TC_PM_01",
+    "category": "positive",
+    "description": "Create new product with valid data",
+    "input": {
+      "name": "iPhone 16 Pro Max",
+      "price": 34990000,
+      "imageUrl": "https://placehold.co/300",
+      "description": "Smartphone cao cấp Apple",
+      "category_id": 1
+    },
+    "expected": {
+      "success": true,
+      "productInList": true
+    }
+  },
+  {
+    "tcId": "TC_PM_02",
+    "category": "positive",
+    "description": "Update product name and price",
+    "input": {
+      "targetProductName": "iPhone 16 Pro Max",
+      "newName": "iPhone 16 Pro Max 512GB",
+      "newPrice": 39990000
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
+  },
+  {
+    "tcId": "TC_PM_03",
+    "category": "positive",
+    "description": "Delete existing product from admin table",
+    "input": {
+      "targetProductName": "iPhone 16 Pro Max 512GB"
+    },
+    "expected": {
+      "productRemoved": true
+    }
+  },
+  {
+    "tcId": "TC_PM_04",
+    "category": "positive",
+    "description": "Cancel edit mode resets product form",
+    "input": {
+      "targetProductName": "MacBook Pro M3"
+    },
+    "expected": {
+      "formHeader": "Thêm sản phẩm mới"
+    }
+  },
+  {
+    "tcId": "TC_PM_05",
+    "category": "negative",
+    "description": "Create product with empty product name",
+    "input": {
+      "name": "",
+      "price": 100000
+    },
+    "expected": {
+      "validationTriggered": true
+    }
+  },
+  {
+    "tcId": "TC_PM_06",
+    "category": "negative",
+    "description": "Create product with negative price",
+    "input": {
+      "name": "Invalid Price Product",
+      "price": -50000
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm"
+    }
+  },
+  {
+    "tcId": "TC_PM_07",
+    "category": "negative",
+    "description": "Create product with non-existent category_id",
+    "input": {
+      "name": "No Category Product",
+      "price": 100000,
+      "category_id": 9999
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm"
+    }
+  },
+  {
+    "tcId": "TC_PM_08",
+    "category": "negative",
+    "description": "Access admin product management without authentication token",
+    "input": {},
+    "expected": {
+      "showLoginPrompt": true,
+      "loginButtonVisible": true
+    }
+  },
+  {
+    "tcId": "TC_PM_09",
+    "category": "negative",
+    "description": "Attempt login to admin portal with standard customer role account",
+    "input": {
+      "email": "user@example.com",
+      "password": "User123!"
+    },
+    "expected": {
+      "alertMessage": "Bạn không phải là admin!"
+    }
+  },
+  {
+    "tcId": "TC_PM_10",
+    "category": "edge",
+    "description": "Create product with extremely long product name (300 chars)",
+    "input": {
+      "name": "Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test",
+      "price": 150000
+    },
+    "expected": {
+      "success": true
+    }
+  },
+  {
+    "tcId": "TC_PM_11",
+    "category": "edge",
+    "description": "Create product with XSS script injection string in name",
+    "input": {
+      "name": "<script>alert('XSS')</script> Tablet",
+      "price": 5000000
+    },
+    "expected": {
+      "renderedAsPlaintext": true
+    }
+  },
+  {
+    "tcId": "TC_PM_12",
+    "category": "edge",
+    "description": "Detect SUT bug: Mass update of all product names when editing single product",
+    "input": {
+      "targetProductName": "AirPods Pro",
+      "newName": "AirPods Pro Gen 2"
+    },
+    "expected": {
+      "isBugDetected": true
+    }
+  }
+]
