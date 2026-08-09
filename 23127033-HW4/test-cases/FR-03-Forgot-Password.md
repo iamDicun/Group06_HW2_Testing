@@ -3,7 +3,7 @@
 **Feature:** `FR-03` Forgot Password & Reset (Two Steps)  
 **Module:** Authentication (`FORGOT_PW`)  
 **Target Page:** `/forgot-password` (Web Frontend)  
-**Total Test Cases:** 12 (Positive: 4, Negative: 5, Edge: 3)
+**Total Test Cases:** 13 (Positive: 4, Negative: 6, Edge: 3)
 
 ---
 
@@ -21,3 +21,4 @@
 | `TC_FP_10` | Edge | Đặt lại mật khẩu không chứa ký tự khoảng trắng/ký tự đặc biệt theo yêu cầu regex flawed | Ở bước 2 | `otp: "1234"`, `newPassword: "Password123"` (không space/ký tự đặc biệt) | 1. Nhập OTP<br>2. Nhập MK không đúng regex flawedStrongPasswordRegex<br>3. Submit | Alert báo lỗi "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự..." | P2 |
 | `TC_FP_11` | Edge | Nhập mã OTP chứa ký tự chữThay vì 4 số | Ở bước 2 | `otp: "ABCD"`, `newPassword: "NewPassword123! "` | 1. Nhập OTP dạng chữ<br>2. Submit | Server báo lỗi OTP không khớp hoặc không hợp lệ | P2 |
 | `TC_FP_12` | Edge | Đặt lại mật khẩu khớp chính xác regex flawed (có chữ hoa, chữ thường, số, khoảng trắng) | Ở bước 2 | `otp: "1234"`, `newPassword: "Pass Word123"` | 1. Nhập OTP đúng<br>2. Nhập MK chứa khoảng trắng<br>3. Submit | Đổi mật khẩu thành công | P2 |
+| `TC_FP_13` | Negative | Kiểm tra ô Xác nhận Mật khẩu (Confirm Password) và xử lý không trùng khớp | Ở bước 2 form đặt lại mật khẩu | `newPassword: "Pass Word123"`, `confirmPassword: "MismatchPass123!"` | 1. Nhập OTP<br>2. Kiểm tra sự tồn tại ô "Xác nhận mật khẩu"<br>3. Nhập mật khẩu không trùng khớp | Mẫu giao diện phải có ô "Xác nhận mật khẩu" và từ chối nếu 2 ô không trùng nhau (Ghi nhận BUG-FR03-003 nếu thiếu ô này trên SUT) | P1 |
