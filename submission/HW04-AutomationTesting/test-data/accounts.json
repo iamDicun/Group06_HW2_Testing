@@ -1,0 +1,19 @@
+{
+  "admin": {
+    "name": "Admin User",
+    "email": "admin@eshop.com",
+    "password": "Admin123!"
+  },
+  "user": {
+    "name": "Test User",
+    "email": "test@eshop.com",
+    "password": "Test1234!"
+  },
+  "seedProducts": {
+    "iphone": "iPhone 15 Pro Max",
+    "samsung": "Samsung Galaxy S24 Ultra",
+    "macbook": "MacBook Pro M3",
+    "airpods": "Tai nghe AirPods Pro 2",
+    "keychron": "Ban phim co Keychron Q1"
+  }
+}

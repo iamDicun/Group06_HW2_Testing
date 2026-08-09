@@ -1,0 +1,147 @@
+[
+  {
+    "id": "FR11-TC001",
+    "action": "verifySectionVisible",
+    "description": "Sau khi dang nhap, phan 'Lich su don hang' duoc hien thi (FR-11)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "expect": { "sectionHeading": "Lịch sử đơn hàng" }
+  },
+  {
+    "id": "FR11-TC002",
+    "action": "verifyColumnHeaders",
+    "description": "Bang lich su don hang co day du tieu de cot (FR-11)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "expect": { "headers": ["Mã ĐH", "Ngày đặt", "Tổng tiền", "Trạng thái", "Thao tác"] }
+  },
+  {
+    "id": "FR11-TC003",
+    "action": "verifyOrderIdFormat",
+    "description": "Ma don hang hien thi dung dinh dang #<id>",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "expect": { "idRegex": "^#\\d+$" }
+  },
+  {
+    "id": "FR11-TC004",
+    "action": "verifyOrderDate",
+    "description": "Ngay dat don duoc hien thi dinh dang ngay hop le (dd/mm/yyyy)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "expect": { "dateRegex": "^\\d{1,2}/\\d{1,2}/\\d{4}$" }
+  },
+  {
+    "id": "FR11-TC005",
+    "action": "verifyTotalAmountFormat",
+    "description": "Tong tien hien thi phan cach hang nghin va don vi ₫",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "seedTotals": [500000],
+    "expect": { "totalText": "500,000 ₫" }
+  },
+  {
+    "id": "FR11-TC006",
+    "action": "verifyStatusPendingLabel",
+    "description": "Trang thai 'pending' duoc dich sang 'Chờ xác nhận'",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending"],
+    "expect": { "statusLabel": "Chờ xác nhận" }
+  },
+  {
+    "id": "FR11-TC007",
+    "action": "verifyStatusConfirmedLabel",
+    "description": "Trang thai 'confirmed' duoc dich sang 'Đã xác nhận'",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["confirmed"],
+    "expect": { "statusLabel": "Đã xác nhận" }
+  },
+  {
+    "id": "FR11-TC008",
+    "action": "verifyStatusShippingLabel",
+    "description": "Trang thai 'shipping' duoc dich sang 'Đang giao'",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["shipping"],
+    "expect": { "statusLabel": "Đang giao" }
+  },
+  {
+    "id": "FR11-TC009",
+    "action": "verifyStatusDeliveredLabel",
+    "description": "Trang thai 'delivered' duoc dich sang 'Đã giao'",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["delivered"],
+    "expect": { "statusLabel": "Đã giao" }
+  },
+  {
+    "id": "FR11-TC010",
+    "action": "verifyStatusCanceledLabel",
+    "description": "Trang thai 'canceled' duoc dich sang 'Đã hủy'",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["canceled"],
+    "expect": { "statusLabel": "Đã hủy" }
+  },
+  {
+    "id": "FR11-TC011",
+    "action": "verifyStatusColorCoded",
+    "description": "Trang thai duoc phan biet bang mau sac khac nhau (FR-11)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending", "confirmed", "shipping", "delivered", "canceled"],
+    "expect": {
+      "statuses": [
+        { "label": "Chờ xác nhận", "colorClass": "yellow" },
+        { "label": "Đã xác nhận", "colorClass": "indigo" },
+        { "label": "Đang giao", "colorClass": "blue" },
+        { "label": "Đã giao", "colorClass": "green" },
+        { "label": "Đã hủy", "colorClass": "red" }
+      ]
+    }
+  },
+  {
+    "id": "FR11-TC012",
+    "action": "verifyNewestFirst",
+    "description": "Don hang moi nhat duoc hien thi o vi tri dau tien",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["delivered", "pending"],
+    "expect": { "firstRowLabel": "Chờ xác nhận" }
+  },
+  {
+    "id": "FR11-TC013",
+    "action": "verifyCancelHiddenForFinalStates",
+    "description": "Don 'delivered'/'canceled' khong hien nut Huy don (FR-10)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["delivered", "canceled"],
+    "expect": { "cancelButtonCount": 0 }
+  },
+  {
+    "id": "FR11-TC014",
+    "action": "verifyNoCancelForShipping",
+    "description": "Don dang giao ('shipping') User khong duoc phep huy (FR-10)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["shipping"],
+    "expect": { "cancelButtonCount": 0 }
+  },
+  {
+    "id": "FR11-TC015",
+    "action": "verifyOnlyOwnOrders",
+    "description": "User chi xem duoc don hang cua chinh minh, khong thay don cua nguoi khac",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "otherUser": { "name": "Other {{ts}}", "email": "other{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": ["pending", "confirmed"],
+    "otherUserStatuses": ["delivered"],
+    "expect": { "rowCount": 2, "notVisibleLabel": "Đã giao" }
+  },
+  {
+    "id": "FR11-TC016",
+    "action": "verifyEmptyHistory",
+    "description": "User chua co don hang nao -> hien thi empty state (FR-11)",
+    "user": { "name": "User {{ts}}", "email": "user{{ts}}@test.com", "password": "Test1234!" },
+    "seedStatuses": [],
+    "expect": { "emptyText": "Bạn chưa có đơn hàng nào." }
+  },
+  {
+    "id": "FR11-TC017",
+    "action": "verifyRequireLogin",
+    "description": "Chua dang nhap khong xem duoc lich su don hang (FR-11)",
+    "expect": { "loginRequiredText": "Vui lòng đăng nhập" }
+  }
+]

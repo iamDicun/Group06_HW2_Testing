@@ -1,0 +1,96 @@
+[
+  {
+    "id": "FR05-TC001",
+    "action": "verifyPageTitle",
+    "description": "Trang chu hien thi tieu de 'Danh sach san pham' dung (FR-05)",
+    "expectedH1Text": "Danh sách sản phẩm"
+  },
+  {
+    "id": "FR05-TC002",
+    "action": "verifyH1Count",
+    "description": "Trang chu chi co DUNG MOT the <h1> theo dac ta FR-05/FR-21",
+    "expectedH1Count": 1
+  },
+  {
+    "id": "FR05-TC003",
+    "action": "verifyGrid",
+    "description": "Danh sach san pham hien thi dang luoi (grid) co it nhat 1 san pham",
+    "expectedMinProducts": 1
+  },
+  {
+    "id": "FR05-TC004",
+    "action": "verifyProductCard",
+    "description": "The san pham hien thi day du ten, gia va hinh anh (FR-05)",
+    "productIndex": 0,
+    "expectedName": "iPhone 15 Pro Max"
+  },
+  {
+    "id": "FR05-TC005",
+    "action": "verifyPriceFormat",
+    "description": "Gia san pham dung dinh dang phan cach hang nghin (FR-05)",
+    "productIndex": 0,
+    "expectedPriceContains": "30,000,000"
+  },
+  {
+    "id": "FR05-TC006",
+    "action": "verifyCurrency",
+    "description": "Gia san pham su dung don vi dong (₫) theo dac ta FR-05/FR-21",
+    "expectedCurrencySymbol": "₫"
+  },
+  {
+    "id": "FR05-TC007",
+    "action": "searchExactMatch",
+    "description": "Tim kiem ten san pham chinh xac tra ve dung 1 san pham",
+    "searchTerm": "iPhone 15 Pro Max",
+    "expectedResultCount": 1,
+    "expectedResultName": "iPhone 15 Pro Max"
+  },
+  {
+    "id": "FR05-TC008",
+    "action": "searchPartialKeyword",
+    "description": "Tim kiem tu khoa mot phan ('Pro') tra ve it nhat 1 ket qua",
+    "searchTerm": "Pro",
+    "expectedMinResults": 1
+  },
+  {
+    "id": "FR05-TC009",
+    "action": "searchCaseInsensitive",
+    "description": "Tim kiem khong phan biet hoa thuong ('iphone') tra ve it nhat 1 ket qua",
+    "searchTerm": "iphone",
+    "expectedMinResults": 1
+  },
+  {
+    "id": "FR05-TC010",
+    "action": "searchNoResult",
+    "description": "Tim kiem tu khoa khong ton tai thi luoi san pham rong",
+    "searchTerm": "zzzzzzzzzz",
+    "expectedResultCount": 0
+  },
+  {
+    "id": "FR05-TC011",
+    "action": "searchEmptyState",
+    "description": "Khong co ket qua thi hien thi thong bao empty state phu hop (FR-05)",
+    "searchTerm": "zzzzzzzzzz",
+    "expectedEmptyStateText": "Không tìm thấy sản phẩm"
+  },
+  {
+    "id": "FR05-TC012",
+    "action": "searchXss",
+    "description": "Tu khoa tim kiem hien thi an toan, khong render HTML (SEC-04)",
+    "searchTerm": "<b>test</b>",
+    "expectedRenderedBoldTags": 0
+  },
+  {
+    "id": "FR05-TC013",
+    "action": "verifyImageAlt",
+    "description": "Tat ca anh san pham co thuoc tinh alt khong rong (FR-24)",
+    "expectedAltNonEmpty": true
+  },
+  {
+    "id": "FR05-TC014",
+    "action": "searchKeywordShown",
+    "description": "Tu khoa tim kiem duoc hien thi lai tren man hinh ket qua",
+    "searchTerm": "MacBook",
+    "expectedKeywordText": "MacBook"
+  }
+]

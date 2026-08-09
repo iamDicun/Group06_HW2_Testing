@@ -1,0 +1,186 @@
+[
+  {
+    "id": "FR17-TC001",
+    "action": "verifyCouponTabOpens",
+    "description": "Admin mo duoc tab 'Quan ly Ma Giam Gia' (FR-17)",
+    "expect": { "heading": "Quản lý Mã Giảm Giá" }
+  },
+  {
+    "id": "FR17-TC002",
+    "action": "verifyCouponFormFields",
+    "description": "Form tao ma giam gia co day du truong bat buoc (FR-17)",
+    "expect": { "formVisible": true }
+  },
+  {
+    "id": "FR17-TC003",
+    "action": "createPercentCoupon",
+    "description": "Tao ma giam gia loai 'percent' hop le",
+    "coupon": {
+      "code": "AUTO{{ts}}P",
+      "type": "percent",
+      "discount_value": 10,
+      "min_order_amount": 300000,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 1
+    },
+    "expect": {
+      "typeText": "Phần trăm",
+      "valueText": "10%",
+      "minText": "300,000 ₫",
+      "expiryText": "2099-12-31",
+      "usesText": "1 lần"
+    }
+  },
+  {
+    "id": "FR17-TC004",
+    "action": "createFixedCoupon",
+    "description": "Tao ma giam gia loai 'fixed' (so tien co dinh) hop le",
+    "coupon": {
+      "code": "AUTO{{ts}}F",
+      "type": "fixed",
+      "discount_value": 50000,
+      "min_order_amount": 500000,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 1
+    },
+    "expect": {
+      "typeText": "Cố định",
+      "valueText": "50,000 ₫",
+      "minText": "500,000 ₫",
+      "expiryText": "2099-12-31",
+      "usesText": "1 lần"
+    }
+  },
+  {
+    "id": "FR17-TC005",
+    "action": "createMissingCode",
+    "description": "Bo trong truong 'code' -> form tu choi submit (truong bat buoc)",
+    "coupon": {
+      "code": "",
+      "type": "percent",
+      "discount_value": 10,
+      "min_order_amount": 0,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 1
+    },
+    "expect": { "rejected": true }
+  },
+  {
+    "id": "FR17-TC006",
+    "action": "createNegativeValue",
+    "description": "discount_value am -> he thong phai tu choi (FR-17 bat buoc duong)",
+    "coupon": {
+      "code": "NEG{{ts}}",
+      "type": "percent",
+      "discount_value": -5,
+      "min_order_amount": 0,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 1
+    },
+    "expect": { "rejected": true }
+  },
+  {
+    "id": "FR17-TC007",
+    "action": "createInvalidMaxUses",
+    "description": "max_uses_per_user < 1 -> form tu choi submit (toi thieu 1)",
+    "coupon": {
+      "code": "MAX{{ts}}",
+      "type": "percent",
+      "discount_value": 10,
+      "min_order_amount": 0,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 0
+    },
+    "expect": { "rejected": true }
+  },
+  {
+    "id": "FR17-TC008",
+    "action": "createMissingExpiry",
+    "description": "Bo trong 'expired_at' -> form tu choi submit (truong bat buoc)",
+    "coupon": {
+      "code": "EXP{{ts}}",
+      "type": "percent",
+      "discount_value": 10,
+      "min_order_amount": 0,
+      "expired_at": "",
+      "max_uses_per_user": 1
+    },
+    "expect": { "rejected": true }
+  },
+  {
+    "id": "FR17-TC009",
+    "action": "createDuplicateCode",
+    "description": "Tao trung ma da ton tai -> bi tu choi (rang buoc UNIQUE, FR-17)",
+    "coupon": {
+      "code": "DUP{{ts}}",
+      "type": "percent",
+      "discount_value": 10,
+      "min_order_amount": 0,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 1
+    },
+    "expect": { "rejected": true }
+  },
+  {
+    "id": "FR17-TC010",
+    "action": "deleteCoupon",
+    "description": "Xoa ma giam gia -> bien mat khoi bang (FR-17 Xoa)",
+    "coupon": {
+      "code": "DEL{{ts}}",
+      "type": "fixed",
+      "discount_value": 20000,
+      "min_order_amount": 100000,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 2
+    },
+    "expect": { "deleted": true }
+  },
+  {
+    "id": "FR17-TC011",
+    "action": "expiredCouponShown",
+    "description": "Ma giam gia het han duoc danh dau 'Hết hạn' tren bang",
+    "coupon": {
+      "code": "OLD{{ts}}",
+      "type": "percent",
+      "discount_value": 20,
+      "min_order_amount": 100000,
+      "expired_at": "2020-01-01",
+      "max_uses_per_user": 1
+    },
+    "expect": { "expiredLabel": "Hết hạn" }
+  },
+  {
+    "id": "FR17-TC012",
+    "action": "verifySeededCoupons",
+    "description": "Bang hien thi cac ma giam gia mac dinh (SAVE10, BIGBUY, VIP100, EXPIRED)",
+    "expect": {
+      "coupons": [
+        { "code": "SAVE10", "typeText": "Phần trăm", "valueText": "10%" },
+        { "code": "BIGBUY", "typeText": "Cố định", "valueText": "50,000 ₫" },
+        { "code": "VIP100", "typeText": "Cố định", "valueText": "100,000 ₫" },
+        { "code": "EXPIRED", "expiredLabel": "Hết hạn" }
+      ]
+    }
+  },
+  {
+    "id": "FR17-TC013",
+    "action": "verifyFormResetAfterCreate",
+    "description": "Form duoc reset ve trong sau khi tao ma thanh cong",
+    "coupon": {
+      "code": "RES{{ts}}",
+      "type": "percent",
+      "discount_value": 15,
+      "min_order_amount": 200000,
+      "expired_at": "2099-12-31",
+      "max_uses_per_user": 3
+    },
+    "expect": { "resetFields": ["code", "discount_value", "expired_at"] }
+  },
+  {
+    "id": "FR17-TC014",
+    "action": "nonAdminCannotAccess",
+    "description": "Tai khoan thuong khong the dang nhap phan he Admin (FR-12)",
+    "user": { "email": "test@eshop.com", "password": "Test1234!" },
+    "expect": { "deniedMessage": "Bạn không phải là admin!" }
+  }
+]
