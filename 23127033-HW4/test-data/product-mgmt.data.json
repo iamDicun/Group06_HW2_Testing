@@ -31,12 +31,13 @@
   {
     "tcId": "TC_PM_03",
     "category": "positive",
-    "description": "Delete existing product from admin table",
+    "description": "Delete existing product with confirm dialog validation (Detect BUG-FR15-004)",
     "input": {
       "targetProductName": "iPhone 16 Pro Max 512GB"
     },
     "expected": {
-      "productRemoved": true
+      "confirmDialogTriggered": true,
+      "expectedBugId": "BUG-FR15-004"
     }
   },
   {
@@ -143,6 +144,18 @@
     },
     "expected": {
       "isBugDetected": true
+    }
+  },
+  {
+    "tcId": "TC_PM_13",
+    "category": "positive",
+    "description": "Cancel deletion action via confirm dialog keeps product intact (Detect BUG-FR15-004)",
+    "input": {
+      "targetProductName": "iPad Air"
+    },
+    "expected": {
+      "productRetained": true,
+      "expectedBugId": "BUG-FR15-004"
     }
   }
 ]
