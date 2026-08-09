@@ -6,6 +6,7 @@ Repository: https://github.com/iamDicun/Group06_HW2_Testing
 
 1. INCREMENTAL COMMITS LOG:
 
+* 076e395 - Dicun : docs: update all paths to relative paths, set HTML report link to github, and update git_commit_log.txt
 * 3572253 - Dicun : docs: sync git_log.md
 * 4a9101d - Dicun : docs: final HW04 submission update with video links, git_log, code fixes comparison, and GitHub issue links
 * c91284a - Dicun : update report & final documentation
@@ -47,3 +48,6 @@ Repository: https://github.com/iamDicun/Group06_HW2_Testing
 
 [Commit 4a9101d] - docs: final HW04 submission update
 - Cập nhật link 2 YouTube videos, đối chiếu mã code đã fix so với AI, công khai các đường dẫn GitHub Repo và Multi-browser HTML Report.
+
+[Commit 076e395] - docs: update relative paths & git_commit_log.txt
+- Chuyển đường dẫn sang relative paths, công khai HTML report trên GitHub repo và tạo git_commit_log.txt dạng text file.
