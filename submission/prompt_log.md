@@ -2,7 +2,7 @@
 Verbatim record of all AI sessions for academic audit purposes.
 
 ---
-## Session | Agent: Gemini | Assignment: HW02 – Automation Testing | 2026-08-08 16:35 (UTC+7)
+## Session | Agent: Gemini | Assignment: HW04 – Automation Testing | 2026-08-08 16:35 (UTC+7)
 ---
 
 ### Turn 1
@@ -78,7 +78,7 @@ npx playwright show-report
 Task 1 đã hoàn tất trọn vẹn và sẵn sàng để tiếp tục triển khai **Task 2** theo yêu cầu của bạn!
 
 ---
-## Session | Agent: Gemini | Assignment: HW02 – Automation Testing | 2026-08-09 13:41 (UTC+7)
+## Session | Agent: Gemini | Assignment: HW04 – Automation Testing | 2026-08-09 13:41 (UTC+7)
 ---
 
 ### Turn 1
@@ -131,7 +131,7 @@ Tất cả **117 ca kiểm thử tự động (Cross-Browser Data-Driven)** đã
    - Cấu hình thực thi tuần tự cho SQLite database để loại bỏ race condition khi tạo và xóa tài khoản/đơn hàng.
 
 ---
-## Session | Agent: Gemini | Assignment: HW02 – Automation Testing | 2026-08-09 16:18 (UTC+7)
+## Session | Agent: Gemini | Assignment: HW04 – Automation Testing | 2026-08-09 16:18 (UTC+7)
 ---
 
 ### Turn 1
