@@ -1,5 +1,3 @@
-# BÁO CÁO BÀI TẬP KIỂM THỬ PHẦN MỀM (HW02)
-## AUTOMATION TESTING & TEST SUITE REPORT (TASK 1 & TASK 2)
 
 **Họ và tên sinh viên:** Nguyễn Anh Khoa  
 **Mã số sinh viên (MSSV):** `23127391`  
@@ -182,14 +180,14 @@ Nhóm đã thực hiện kiểm toán toàn diện mã nguồn test suite, xác 
 
 # PHẦN II: TASK 2 — DEMONSTRATION VIDEO & CODE REVIEW / NARRATION
 
-## 1. YÊU CẦU ĐỀ BÀI VÀ MỤC TIÊU TASK 2 (TASK REQUIREMENTS)
+## 1. YÊU CẦU ĐỀ BÀI VÀ MỤC TIÊU TASK 2 
 
 Theo đặc tả yêu cầu của đề bài **HW02 – Task 2**:
 > *"Record an unlisted YouTube video of at least 5 minutes, narrated in Vietnamese, demonstrating one of your automation scripts running end to end (including the multi-browser run and the generated HTML report). Narrate at least one fix you made to the AI-generated script during your review."*
 
 ### Các mục tiêu chính cần đạt:
 1. **Video minh chứng trực quan**: Video thời lượng tối thiểu **5 phút**, đăng tải ở chế độ **Không công khai (Unlisted)** trên YouTube.
-2. **Thuyết minh tiếng Việt (Vietnamese Narration)**: Trình bày rõ ràng, mạch lạc về quy trình thực thi, cấu trúc kịch bản và cơ chế kiểm thử.
+2. **Thuyết minh tiếng Việt**: Trình bày rõ ràng, mạch lạc về quy trình thực thi, cấu trúc kịch bản và cơ chế kiểm thử.
 3. **Thực thi End-to-End & Multi-Browser**: Trình diễn kịch bản chạy tự động xuyên suốt từ đầu đến cuối trên cả **3 trình duyệt (Chromium, Firefox, WebKit)**.
 4. **Trình diễn Báo cáo HTML**: Mở và giải thích báo cáo `playwright-report/index.html` với định danh tác giả **`Run by: 23127391`**.
 5. **Thuyết minh Lỗi do AI sinh ra & Giải pháp tự sửa (Student Fix during Code Review)**: Phân tích chi tiết ít nhất 1 lỗi nghiêm trọng trong mã nguồn do AI sinh ra ban đầu (cụ thể là lỗi **Strict Mode Violations** khi định vị phần tử theo text content / substring matching khi có nhiều element cùng loại trong DOM) và cách thức sinh viên đã rà soát, refactor và khắc phục triệt để.
@@ -215,5 +213,21 @@ Theo đặc tả yêu cầu của đề bài **HW02 – Task 2**:
 - **Giải pháp tự sửa**: Refactor các locator sang dạng **khớp chính xác (exact match)** bằng regular expression (`^#${orderId}$`), kết hợp scoped selector định vị tường minh theo thứ tự cột (`td:nth-child(...)`), đảm bảo Playwright luôn định vị chính xác duy nhất 1 element mục tiêu và test suite chạy ổn định 100% trên cả 3 trình duyệt.
 
 ---
+# AI Critique 
+
+Automation Testing là lĩnh vực mà AI có thể phát huy tối đa hiệu quả nhờ khả năng đọc hiểu tài liệu đặc tả, phân tích mã nguồn và khởi tạo kịch bản tự động một cách nhanh chóng. Việc ứng dụng AI giúp giảm thiểu đáng kể các tác vụ lặp lại và tiết kiệm thời gian cho đội ngũ phát triển. Mặc dù vậy, AI vẫn tồn tại những hạn chế nhất định, đặc biệt là ở khía cạnh thẩm mỹ như bố cục, màu sắc hay hiển thị hình ảnh, bởi đây là những yếu tố đòi hỏi sự quan sát và đánh giá trực quan từ con người. Bên cạnh đó, hiệu quả của kịch bản tự động còn phụ thuộc lớn vào năng lực của người sử dụng. Kỹ năng chưa đáp ứng, câu lệnh quá đơn giản hoặc việc chọn lựa mô hình xử lý không phù hợp đều có thể dẫn đến kịch bản thiếu ổn định, gây tắc nghẽn tiến độ công việc. Đổi lại, AI vẫn là công cụ hỗ trợ đắc lực, nhưng trình độ chuyên môn của con người mới là yếu tố quyết định chất lượng sản phẩm.
+
+# AI Audit Report
+
+**Student:** 23127391 - Nguyễn Khoa
+
+
+
+| # | AI Tool | Date & Time (UTC+7) | Prompt | AI Output (summary/link) | Verdict | Student Fix |
+|---|---------|---------------------|--------|--------------------------|---------|-------------|
+| 1 | Gemini | 2026-08-08 16:35 | Đọc skill và thực hiện viết script playwright cho việc automation testing data driven cho 3 tính năng FR-4, FR10, FR-19; mỗi feature là 1 file script, phải ít nhất 12 cases đủ loại cho mỗi feature, sau khi chạy phải xuất report (có thể bằng html report của framework)... | Thiết kế và sinh mã nguồn kiểm thử tự động Data-Driven cho FR-04, FR-10, FR-19 (39 test cases), 3 data JSON, các lớp Page Object, cấu hình chạy trên 3 trình duyệt (Chromium, Firefox, WebKit) và báo cáo HTML hiển thị "Run by: 23127391". | INCOMPLETE | Scripts đã tạo bị lỗi về strict mode trên firefox |
+| 2 | Gemini | 2026-08-09 13:41 | chạy đống automation test đi | Thực thi toàn bộ 117 test cases cross-browser, sửa lỗi timing/dialog trong ProfilePage.ts và AdminOrdersPage.ts, đạt 117/117 passed (100%) trên Chromium, Firefox, WebKit. | VALID | |
+| 3 | Gemini | 2026-08-09 16:18 | Sau khi kiểm tra và đọc run log tôi thấy các lỗi liên quan đến strict mode trong các scripts, và kiểm tra thêm fragile selectors weak or missing assertions, missing edge cases, flaky waits và báo cáo lại... ghi ngắn gọn vào báo cáo và thực hiện fix | Kiểm toán chi tiết 5 nhóm lỗi (Strict Mode, Fragile Selectors, Weak Assertions, Flaky Waits, Missing Edge Cases), cập nhật mục 6 vào submission/report.md và refactor toàn bộ Page Objects + Test Specs. | VALID | |
+| 4 | Gemini | 2026-08-09 16:41 | refactor lại cái report, report là cho cả task 1 và 2, nên hãy để place holder cho task 2 | Tái cấu trúc lại submission/report.md thành cấu trúc báo cáo tổng thể gồm Phần I (Task 1), Phần II (Placeholder Task 2 chi tiết), và Phần III (Tổng kết & Phụ lục minh chứng). | VALID | |
 
 
