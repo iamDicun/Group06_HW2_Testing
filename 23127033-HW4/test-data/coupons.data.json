@@ -151,5 +151,49 @@
       "success": true,
       "finalAmount": 0
     }
+  },
+  {
+    "tcId": "TC_CP_13",
+    "category": "positive",
+    "description": "Validate SAVE10 percentage discount formula at 300,000 VND total order (Detect BUG-FR09-002)",
+    "input": {
+      "couponCode": "SAVE10",
+      "totalAmount": 300000
+    },
+    "expected": {
+      "success": true,
+      "discountAmount": 30000,
+      "finalAmount": 270000,
+      "expectedBugId": "BUG-FR09-002"
+    }
+  },
+  {
+    "tcId": "TC_CP_14",
+    "category": "positive",
+    "description": "Validate SAVE10 percentage discount formula at 1,000,000 VND total order (Detect BUG-FR09-002)",
+    "input": {
+      "couponCode": "SAVE10",
+      "totalAmount": 1000000
+    },
+    "expected": {
+      "success": true,
+      "discountAmount": 100000,
+      "finalAmount": 900000,
+      "expectedBugId": "BUG-FR09-002"
+    }
+  },
+  {
+    "tcId": "TC_CP_15",
+    "category": "positive",
+    "description": "Validate save10 lowercase percentage discount formula at 500,000 VND total order",
+    "input": {
+      "couponCode": "save10",
+      "totalAmount": 500000
+    },
+    "expected": {
+      "success": true,
+      "discountAmount": 50000,
+      "finalAmount": 450000
+    }
   }
 ]

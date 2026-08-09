@@ -27,6 +27,10 @@ test.describe('FR-09: Discount Coupons Tests', () => {
         return;
       }
 
+      if (tc.input.totalAmount !== undefined) {
+        await editableTotalInput.fill(String(tc.input.totalAmount));
+      }
+
       if (tc.input.couponCode !== undefined) {
         await couponInput.fill(tc.input.couponCode);
       }
@@ -55,6 +59,17 @@ test.describe('FR-09: Discount Coupons Tests', () => {
         // Assertion Type 4: Text Content / Value assertion
         const successMsg = page.locator('div.text-green-700');
         await expect(successMsg).toBeVisible();
+        
+        if (tc.expected.discountAmount !== undefined) {
+          const successText = await successMsg.textContent();
+          // Detect BUG-FR09-002 if discount amount formula calculation fails
+          const expectedDiscountStr = tc.expected.discountAmount.toLocaleString();
+          if (successText && !successText.includes(expectedDiscountStr)) {
+            console.warn(`[SUT Bug Detected - BUG-FR09-002] Công thức tính mã SAVE10 bị sai. Kỳ vọng giảm ${expectedDiscountStr} ₫ nhưng thực tế: ${successText}`);
+          }
+          await expect(successMsg).toContainText(expectedDiscountStr);
+        }
+
         if (tc.expected.finalAmount !== undefined) {
           await expect(successMsg).toContainText(tc.expected.finalAmount.toLocaleString());
         }

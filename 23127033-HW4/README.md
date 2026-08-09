@@ -13,7 +13,7 @@
 | Pool | Feature ID | Feature Name | Test Cases Count | Data File | Spec File |
 | :---: | :--- | :--- | :---: | :--- | :--- |
 | **Pool A** | `FR-03` | Forgot Password & Password Reset | 16 | [`forgot-password.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/forgot-password.data.json) | [`forgot-password.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/forgot-password.spec.ts) |
-| **Pool B** | `FR-09` | Discount Coupons | 12 | [`coupons.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/coupons.data.json) | [`coupons.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/coupons.spec.ts) |
+| **Pool B** | `FR-09` | Discount Coupons | 15 | [`coupons.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/coupons.data.json) | [`coupons.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/coupons.spec.ts) |
 | **Pool C** | `FR-15` | Product Management (CRUD) | 12 | [`product-mgmt.data.json`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/test-data/product-mgmt.data.json) | [`product-mgmt.spec.ts`](file:///c:/Users/ADMIN/OneDrive%20-%20CONG%20TY%20TNHH%20BIGIN-SGIM00458/Documents/GitHub/Group06_HW2_Testing/23127033-HW4/tests/product-mgmt.spec.ts) |
 
 ---
@@ -23,20 +23,21 @@
 | Feature | Automated | Executed | Passed | Failed | Browsers Tested | Bugs Found |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **FR-03: Forgot Password** | 16 | 48 | 42 | 6 | Chromium, Firefox, WebKit | 2 (Missing Confirm Field, Password Rejected) |
-| **FR-09: Discount Coupons** | 12 | 36 | 36 | 0 | Chromium, Firefox, WebKit | 0 |
+| **FR-09: Discount Coupons** | 15 | 45 | 36 | 9 | Chromium, Firefox, WebKit | 1 (SAVE10 Formula Error) |
 | **FR-15: Product Management** | 12 | 36 | 33 | 3 | Chromium, Firefox, WebKit | 1 (Mass Update Bug) |
-| **Tổng cộng** | **40** | **120** | **111** | **9** | **3 Browsers** | **3 Bugs** |
+| **Tổng cộng** | **43** | **129** | **111** | **18** | **3 Browsers** | **4 Bugs** |
 
 ---
 
 ## 3. Human Review & Gap Analysis (AI Limitations)
 
 Trong quá trình rà soát các test script và kịch bản do AI sinh ra, tôi đã phát hiện và khắc phục các thiếu sót sau:
-1. **BVA Độ dài Mật khẩu & Ký tự đặc biệt (`FR-03`)**: AI ban đầu chỉ tạo kịch bản đổi mật khẩu cơ bản. Tôi đã bổ sung các kịch bản BVA độ dài 7, 8 (`@`), 9 (`$`) ký tự (`TC_FP_09`, `TC_FP_14`, `TC_FP_15`, `TC_FP_16`) để kiểm tra quy tắc mật khẩu mạnh và bắt lỗi **BUG-FR03-005** (Mật khẩu hợp lệ 8-9 ký tự không chứa khoảng trắng bị từ chối).
-2. **Thiếu kiểm tra ô Xác nhận mật khẩu (`FR-03`)**: AI ban đầu không kiểm tra sự tồn tại của ô Confirm Password. Tôi đã thêm `TC_FP_13` và script `forgot-password.spec.ts` để bắt lỗi **BUG-FR03-003** (Giao diện SUT thiếu trường Confirm Password).
-3. **Lỗi Regex Mật khẩu Flawed (`FR-03`)**: AI không tự phát hiện ra regex kiểm tra mật khẩu mạnh trên frontend (`flawedStrongPasswordRegex`) bắt buộc chứa khoảng trắng (`\s`). Tôi đã thêm `TC_FP_10` và `TC_FP_12` để kiểm soát lỗi này.
-4. **Thiếu xử lý reset Coupon (`FR-09`)**: AI bỏ qua trường hợp người dùng thay đổi số tiền đơn hàng sau khi áp mã coupon (`TC_CP_11`).
-5. **Lỗi Selector tĩnh và Thiếu Login Hook (`FR-15`)**: Tái cấu trúc selector sang Accessibility Locators và bổ sung luồng login Admin tự động.
+1. **Kiểm tra công thức tính phần trăm mã `SAVE10` (`FR-09`)**: AI ban đầu chỉ áp dụng mã coupon thành công mà bỏ qua việc xác minh số tiền tiết kiệm có đúng bằng 10% tổng đơn hay không. Tôi đã bổ sung các test cases `TC_CP_13`, `TC_CP_14`, `TC_CP_15` trên các mốc giá trị (300k, 500k, 1M VND) để bắt lỗi **BUG-FR09-002** (Công thức tính giảm giá phần trăm bị sai trên backend/UI).
+2. **BVA Độ dài Mật khẩu & Ký tự đặc biệt (`FR-03`)**: AI ban đầu chỉ tạo kịch bản đổi mật khẩu cơ bản. Tôi đã bổ sung các kịch bản BVA độ dài 7, 8 (`@`), 9 (`$`) ký tự (`TC_FP_09`, `TC_FP_14`, `TC_FP_15`, `TC_FP_16`) để kiểm tra quy tắc mật khẩu mạnh và bắt lỗi **BUG-FR03-005** (Mật khẩu hợp lệ 8-9 ký tự không chứa khoảng trắng bị từ chối).
+3. **Thiếu kiểm tra ô Xác nhận mật khẩu (`FR-03`)**: AI ban đầu không kiểm tra sự tồn tại của ô Confirm Password. Tôi đã thêm `TC_FP_13` và script `forgot-password.spec.ts` để bắt lỗi **BUG-FR03-003** (Giao diện SUT thiếu trường Confirm Password).
+4. **Lỗi Regex Mật khẩu Flawed (`FR-03`)**: AI không tự phát hiện ra regex kiểm tra mật khẩu mạnh trên frontend (`flawedStrongPasswordRegex`) bắt buộc chứa khoảng trắng (`\s`).
+5. **Thiếu xử lý reset Coupon (`FR-09`)**: AI bỏ qua trường hợp người dùng thay đổi số tiền đơn hàng sau khi áp mã coupon (`TC_CP_11`).
+6. **Lỗi Selector tĩnh và Thiếu Login Hook (`FR-15`)**: Tái cấu trúc selector sang Accessibility Locators và bổ sung luồng login Admin tự động.
 
 ---
 
@@ -44,6 +45,7 @@ Trong quá trình rà soát các test script và kịch bản do AI sinh ra, tô
 
 - **BUG-FR03-003**: Giao diện đặt lại mật khẩu của SUT hoàn toàn thiếu ô Xác nhận mật khẩu (Confirm Password).
 - **BUG-FR03-005**: Mật khẩu hợp lệ chuẩn 8-9 ký tự chứa ký tự đặc biệt bị hệ thống từ chối do biểu thức chính quy yêu cầu khoảng trắng (`\s`).
+- **BUG-FR09-002**: Mã giảm giá phần trăm `SAVE10` tính sai số tiền giảm (nhân 10 lần giá trị thay vì giảm 10%).
 - **BUG-PROD-001**: Lỗi cập nhật đồng loạt tên toàn bộ sản phẩm trong Database khi Admin tiến hành sửa thông tin 1 sản phẩm bất kỳ.
 
 ---
