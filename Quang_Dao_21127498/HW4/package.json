@@ -1,0 +1,24 @@
+{
+  "name": "hw4",
+  "version": "1.0.0",
+  "description": "| Member | MSSV | Pool A | Pool B | Pool C | Pool D |\r |--------|------|--------|--------|--------|--------|\r | **Trần Quang Đạo** | **`21127498`** | **FR-01 (Register)** | **FR-07 (Cart)** | **FR-12 (Access Ctrl)** | FR-06 Mobile #1 |\r | Châu | `23127031` | FR-02 (Login) | FR-08 (Checkout) | FR-14 (Category) | FR-02 (Mobile) |\r | Cường | `MSSV` | FR-03 (Forgot PW) | FR-09 (Coupon) | FR-15 (Product Mgmt) | FR-18 | Mobile #3 |\r | Khoa | `MSSV` | FR-04 (Profile) | FR-10 (Order State) | FR-19 | Mobile FR-4 |\r | Quân | `MSSV` | FR-05 (Prod Search) | FR-11 (Order History) | FR-17 (Coupon Mgmt) | Mobile #5 |",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1",
+    "playwright-core": "^1.62.1",
+    "undici-types": "^8.3.0"
+  }
+}

@@ -29,3 +29,12 @@ Quang_Dao_21127498/Eshop/
 Eshop.zip
 node_modules/
 21127498_HW03_AI_GUIUsability_030.zip
+
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
