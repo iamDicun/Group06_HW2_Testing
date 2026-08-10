@@ -5,7 +5,7 @@
     },
     "item": [
       {
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "name": "POST Login API",
         "request": {
           "url": {
@@ -36,7 +36,7 @@
           {
             "listen": "prerequest",
             "script": {
-              "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+              "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
               "type": "text/javascript",
               "exec": [
                 "pm.request.headers.upsert({",
@@ -44,13 +44,13 @@
                 "  value: pm.environment.get(\"studentId\")",
                 "});"
               ],
-              "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
             }
           },
           {
             "listen": "test",
             "script": {
-              "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+              "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
               "type": "text/javascript",
               "exec": [
                 "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -61,7 +61,7 @@
                 "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                 "});"
               ],
-              "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
             }
           }
         ]
@@ -95,7 +95,7 @@
     ]
   },
   "globals": {
-    "id": "d54b78df-6740-418f-b030-6c39bed7ce3d",
+    "id": "1220936c-a3d4-4f1a-a5b9-6de78d33a1ed",
     "values": []
   },
   "run": {
@@ -147,10 +147,10 @@
       }
     },
     "timings": {
-      "responseAverage": 7.4,
-      "responseMin": 3,
+      "responseAverage": 10.2,
+      "responseMin": 6,
       "responseMax": 23,
-      "responseSd": 7.812809993849845,
+      "responseSd": 6.462197768561405,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -159,8 +159,8 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1786352851725,
-      "completed": 1786352852001
+      "started": 1786354072100,
+      "completed": 1786354072513
     },
     "executions": [
       {
@@ -173,11 +173,11 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
-          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448"
+          "ref": "e2e9e05c-e049-4ce6-b7ad-7e93708298a4",
+          "httpRequestId": "e39b82fa-d794-4f36-b972-fb7af8f829bd"
         },
         "item": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -208,7 +208,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -216,13 +216,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -233,7 +233,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -278,7 +278,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "00b055f4-a1e7-410b-a4f7-107c3099d2cf",
+              "value": "c73c8098-40aa-4848-aa52-e1517f883676",
               "system": true
             },
             {
@@ -309,7 +309,7 @@
           }
         },
         "response": {
-          "id": "72f41427-87e6-41a0-8df3-53e8f920d3ac",
+          "id": "e49d878e-9557-4c97-882a-2aee1d13f6af",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -319,7 +319,7 @@
             },
             {
               "key": "Date",
-              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+              "value": "Mon, 10 Aug 2026 09:27:52 GMT"
             },
             {
               "key": "Content-Type",
@@ -335,7 +335,7 @@
             },
             {
               "key": "X-Request-Id",
-              "value": "b3182a49-5526-4a78-a9e8-aa08818fbc94"
+              "value": "04350d76-604d-47d6-824f-40b64172feda"
             }
           ],
           "stream": {
@@ -365,7 +365,7 @@
           "responseTime": 23,
           "responseSize": 18
         },
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "assertions": [
           {
             "assertion": "[MINI] Status code matches expected",
@@ -393,16 +393,16 @@
       },
       {
         "cursor": {
-          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "ref": "85b8a7b8-5044-443b-805f-02b871447a96",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 1,
           "cr": true,
-          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7"
+          "httpRequestId": "0c5dcf59-dab1-447d-b87d-82195f60dbe9"
         },
         "item": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -433,7 +433,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -441,13 +441,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -458,7 +458,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -503,7 +503,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "5efcc012-5088-42e5-9cb0-e6d29ed9d361",
+              "value": "061f4cb6-d9ca-4e29-a57c-92c015ddabef",
               "system": true
             },
             {
@@ -534,7 +534,7 @@
           }
         },
         "response": {
-          "id": "47e1ad21-728c-4052-993e-12ac0876327b",
+          "id": "ab2e6f9c-023e-459d-aac0-9d32811a39b0",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -544,7 +544,7 @@
             },
             {
               "key": "Date",
-              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+              "value": "Mon, 10 Aug 2026 09:27:52 GMT"
             },
             {
               "key": "Content-Type",
@@ -560,7 +560,7 @@
             },
             {
               "key": "X-Request-Id",
-              "value": "fe64cc94-d751-4248-8006-75b30146518d"
+              "value": "71517cee-26e4-4cbd-b082-384d535480a6"
             }
           ],
           "stream": {
@@ -587,10 +587,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 4,
+          "responseTime": 8,
           "responseSize": 18
         },
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "assertions": [
           {
             "assertion": "[MINI] Status code matches expected",
@@ -618,16 +618,16 @@
       },
       {
         "cursor": {
-          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "ref": "691d64a8-7e60-4aa8-8ee5-fa31dfc63be9",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 2,
           "cr": true,
-          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770"
+          "httpRequestId": "d3da4bc4-545a-4636-8353-5def3fd84b45"
         },
         "item": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -658,7 +658,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -666,13 +666,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -683,7 +683,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -728,7 +728,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "817d6693-5701-4b86-b611-284c9f632957",
+              "value": "676aab2e-f9b7-4bd2-bd83-c356d846b679",
               "system": true
             },
             {
@@ -759,7 +759,7 @@
           }
         },
         "response": {
-          "id": "84052eb5-6b0e-456e-a7ce-aada8be25a79",
+          "id": "91ba3582-7a9d-433f-be64-08a5076814b2",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -769,7 +769,7 @@
             },
             {
               "key": "Date",
-              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+              "value": "Mon, 10 Aug 2026 09:27:52 GMT"
             },
             {
               "key": "Content-Type",
@@ -785,7 +785,7 @@
             },
             {
               "key": "X-Request-Id",
-              "value": "110d86e6-a2cc-4473-af84-26c357b22f9c"
+              "value": "27ca34d4-14ff-44b9-9645-93fc8f03e959"
             }
           ],
           "stream": {
@@ -812,10 +812,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 3,
+          "responseTime": 6,
           "responseSize": 18
         },
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "assertions": [
           {
             "assertion": "[MINI] Status code matches expected",
@@ -843,16 +843,16 @@
       },
       {
         "cursor": {
-          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "ref": "906bb9a9-d892-449f-a3e9-882d2424cc37",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 3,
           "cr": true,
-          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a"
+          "httpRequestId": "8003ec29-a362-4192-ad30-babbf9723ea3"
         },
         "item": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -883,7 +883,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -891,13 +891,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -908,7 +908,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -953,7 +953,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "fe37164f-d93f-4975-bba0-908159672a71",
+              "value": "25311b65-fc64-4789-8e53-90592d92d883",
               "system": true
             },
             {
@@ -984,7 +984,7 @@
           }
         },
         "response": {
-          "id": "e96bd75b-f38b-4404-8934-17580befc49a",
+          "id": "32850a6b-f726-4554-8632-d6ebabcae5f6",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -994,7 +994,7 @@
             },
             {
               "key": "Date",
-              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+              "value": "Mon, 10 Aug 2026 09:27:52 GMT"
             },
             {
               "key": "Content-Type",
@@ -1010,7 +1010,7 @@
             },
             {
               "key": "X-Request-Id",
-              "value": "80a368fe-a233-4b9b-bf13-1fb5850f41ae"
+              "value": "3f9e05f1-417c-4f58-9d39-c4a98f811a74"
             }
           ],
           "stream": {
@@ -1037,10 +1037,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 3,
+          "responseTime": 8,
           "responseSize": 18
         },
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "assertions": [
           {
             "assertion": "[MINI] Status code matches expected",
@@ -1068,16 +1068,16 @@
       },
       {
         "cursor": {
-          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "ref": "c9356ee6-1bd8-46c3-ae7a-ef44266e09f6",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 4,
           "cr": true,
-          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90"
+          "httpRequestId": "2b8e101f-044a-494d-a5f9-8929dd15c047"
         },
         "item": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -1108,7 +1108,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -1116,13 +1116,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1133,7 +1133,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -1178,7 +1178,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "628cc4ce-f668-40c7-8819-cb769fa9f172",
+              "value": "f073ef3c-3535-4838-8fbb-0c62b40eff81",
               "system": true
             },
             {
@@ -1209,7 +1209,7 @@
           }
         },
         "response": {
-          "id": "7725be0b-aee5-415a-a3f7-df9efe1291ef",
+          "id": "53a6bde1-6f30-4c97-bc9c-c58b5cef2ce2",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -1219,7 +1219,7 @@
             },
             {
               "key": "Date",
-              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+              "value": "Mon, 10 Aug 2026 09:27:52 GMT"
             },
             {
               "key": "Content-Type",
@@ -1235,7 +1235,7 @@
             },
             {
               "key": "X-Request-Id",
-              "value": "7e9674ae-e229-4df8-ab7d-c7cdb9b88fa6"
+              "value": "5bea133d-31d2-483f-a821-1223672e4778"
             }
           ],
           "stream": {
@@ -1262,10 +1262,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 4,
+          "responseTime": 6,
           "responseSize": 18
         },
-        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
         "assertions": [
           {
             "assertion": "[MINI] Status code matches expected",
@@ -1274,8 +1274,8 @@
               "name": "AssertionError",
               "index": 0,
               "test": "[MINI] Status code matches expected",
-              "message": "expected response to have status code 999 but got 404",
-              "stack": "AssertionError: expected response to have status code 999 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+              "message": "expected response to have status code 200 but got 404",
+              "stack": "AssertionError: expected response to have status code 200 but got 404\n   at Object.eval sandbox-script.js:1:1)"
             }
           },
           {
@@ -1304,8 +1304,8 @@
           "message": "expected response to have status code 200 but got 404",
           "stack": "AssertionError: expected response to have status code 200 but got 404\n   at Object.eval sandbox-script.js:1:1)",
           "checksum": "55adab66ef62c672a21631fa978cb4de",
-          "id": "ea85c109-6142-4bb5-ab06-7fd8f4040fc6",
-          "timestamp": 1786352851795,
+          "id": "cee61f3a-c209-4428-8775-ab251b565ee4",
+          "timestamp": 1786354072172,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -1320,7 +1320,7 @@
         },
         "at": "assertion:0 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -1351,7 +1351,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -1359,13 +1359,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1376,7 +1376,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -1387,7 +1387,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -1418,7 +1418,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -1426,13 +1426,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1443,7 +1443,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -1466,10 +1466,10 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
-          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "006cfa21-8996-427f-9b02-4cc7051841b6"
+          "ref": "e2e9e05c-e049-4ce6-b7ad-7e93708298a4",
+          "httpRequestId": "e39b82fa-d794-4f36-b972-fb7af8f829bd",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "78c8e742-2ac6-4288-b639-3c3881311e18"
         }
       },
       {
@@ -1480,8 +1480,8 @@
           "message": "expected 'text/plain' to include 'application/json'",
           "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
           "checksum": "ffa96b45239574547209de5ec010067d",
-          "id": "c9a12807-b2ef-48f5-8e90-1a222205faad",
-          "timestamp": 1786352851797,
+          "id": "8db5f539-8bc8-4053-929f-31aa9c9dedfc",
+          "timestamp": 1786354072174,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -1496,7 +1496,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -1527,7 +1527,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -1535,13 +1535,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1552,7 +1552,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -1563,7 +1563,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -1594,7 +1594,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -1602,13 +1602,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1619,7 +1619,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -1642,10 +1642,10 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
-          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "006cfa21-8996-427f-9b02-4cc7051841b6"
+          "ref": "e2e9e05c-e049-4ce6-b7ad-7e93708298a4",
+          "httpRequestId": "e39b82fa-d794-4f36-b972-fb7af8f829bd",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "78c8e742-2ac6-4288-b639-3c3881311e18"
         }
       },
       {
@@ -1656,8 +1656,8 @@
           "message": "expected response to have status code 401 but got 404",
           "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
           "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
-          "id": "4db415df-b61c-46e8-a731-de2cd0e6cad5",
-          "timestamp": 1786352851860,
+          "id": "c5333e16-fa61-41fc-a45a-85666c87c9c7",
+          "timestamp": 1786354072252,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -1672,7 +1672,7 @@
         },
         "at": "assertion:0 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -1703,7 +1703,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -1711,13 +1711,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1728,7 +1728,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -1739,7 +1739,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -1770,7 +1770,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -1778,13 +1778,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1795,7 +1795,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -1810,15 +1810,15 @@
           }
         },
         "cursor": {
-          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "ref": "85b8a7b8-5044-443b-805f-02b871447a96",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 1,
           "cr": true,
-          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "a34cd7ad-1a6f-4eef-a410-39140aa7ad97"
+          "httpRequestId": "0c5dcf59-dab1-447d-b87d-82195f60dbe9",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "96187191-0c28-4a40-884b-10390303a83d"
         }
       },
       {
@@ -1829,8 +1829,8 @@
           "message": "expected 'text/plain' to include 'application/json'",
           "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
           "checksum": "ffa96b45239574547209de5ec010067d",
-          "id": "bf694935-b6b3-4910-b038-a8313f9c26b3",
-          "timestamp": 1786352851861,
+          "id": "5ddb7062-5b62-403f-a677-5021e91a3ec3",
+          "timestamp": 1786354072252,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -1845,7 +1845,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -1876,7 +1876,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -1884,13 +1884,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1901,7 +1901,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -1912,7 +1912,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -1943,7 +1943,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -1951,13 +1951,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -1968,7 +1968,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -1983,15 +1983,15 @@
           }
         },
         "cursor": {
-          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "ref": "85b8a7b8-5044-443b-805f-02b871447a96",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 1,
           "cr": true,
-          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "a34cd7ad-1a6f-4eef-a410-39140aa7ad97"
+          "httpRequestId": "0c5dcf59-dab1-447d-b87d-82195f60dbe9",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "96187191-0c28-4a40-884b-10390303a83d"
         }
       },
       {
@@ -2002,8 +2002,8 @@
           "message": "expected response to have status code 401 but got 404",
           "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
           "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
-          "id": "ae62acf5-72da-46fe-a3bd-d58dc3747716",
-          "timestamp": 1786352851901,
+          "id": "576930b5-57cd-4167-b6ef-f52708fbdce7",
+          "timestamp": 1786354072347,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2018,7 +2018,7 @@
         },
         "at": "assertion:0 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2049,7 +2049,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2057,13 +2057,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2074,7 +2074,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2085,7 +2085,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2116,7 +2116,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2124,13 +2124,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2141,7 +2141,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -2156,15 +2156,15 @@
           }
         },
         "cursor": {
-          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "ref": "691d64a8-7e60-4aa8-8ee5-fa31dfc63be9",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 2,
           "cr": true,
-          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "756a6932-6e93-44d5-95ff-f3ceeb1c328a"
+          "httpRequestId": "d3da4bc4-545a-4636-8353-5def3fd84b45",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "5b1a653d-6764-4c6e-80e6-1cfa20a2939d"
         }
       },
       {
@@ -2175,8 +2175,8 @@
           "message": "expected 'text/plain' to include 'application/json'",
           "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
           "checksum": "ffa96b45239574547209de5ec010067d",
-          "id": "bc9f0c28-e3c7-425d-977e-456a33905330",
-          "timestamp": 1786352851901,
+          "id": "af71f136-a723-4ca3-9aa5-421fae8ae6eb",
+          "timestamp": 1786354072348,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2191,7 +2191,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2222,7 +2222,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2230,13 +2230,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2247,7 +2247,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2258,7 +2258,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2289,7 +2289,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2297,13 +2297,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2314,7 +2314,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -2329,15 +2329,15 @@
           }
         },
         "cursor": {
-          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "ref": "691d64a8-7e60-4aa8-8ee5-fa31dfc63be9",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 2,
           "cr": true,
-          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "756a6932-6e93-44d5-95ff-f3ceeb1c328a"
+          "httpRequestId": "d3da4bc4-545a-4636-8353-5def3fd84b45",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "5b1a653d-6764-4c6e-80e6-1cfa20a2939d"
         }
       },
       {
@@ -2348,8 +2348,8 @@
           "message": "expected response to have status code 401 but got 404",
           "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
           "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
-          "id": "40c351e4-f102-4aa0-ac5e-df809c10b965",
-          "timestamp": 1786352851937,
+          "id": "4eae20a2-b4e4-418e-b55b-6f26b2cf9b17",
+          "timestamp": 1786354072416,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2364,7 +2364,7 @@
         },
         "at": "assertion:0 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2395,7 +2395,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2403,13 +2403,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2420,7 +2420,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2431,7 +2431,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2462,7 +2462,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2470,13 +2470,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2487,7 +2487,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -2502,15 +2502,15 @@
           }
         },
         "cursor": {
-          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "ref": "906bb9a9-d892-449f-a3e9-882d2424cc37",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 3,
           "cr": true,
-          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "43127a81-560d-476e-871a-4946f722789f"
+          "httpRequestId": "8003ec29-a362-4192-ad30-babbf9723ea3",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "1c6ec44e-3a39-4aec-907b-6ea46aaa116f"
         }
       },
       {
@@ -2521,8 +2521,8 @@
           "message": "expected 'text/plain' to include 'application/json'",
           "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
           "checksum": "ffa96b45239574547209de5ec010067d",
-          "id": "6ea3ce9e-b3fc-43a8-800b-e72c37639890",
-          "timestamp": 1786352851937,
+          "id": "5517f9af-b10d-4407-a7bb-201b4bf8737b",
+          "timestamp": 1786354072417,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2537,7 +2537,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2568,7 +2568,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2576,13 +2576,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2593,7 +2593,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2604,7 +2604,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2635,7 +2635,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2643,13 +2643,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2660,7 +2660,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -2675,15 +2675,15 @@
           }
         },
         "cursor": {
-          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "ref": "906bb9a9-d892-449f-a3e9-882d2424cc37",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 3,
           "cr": true,
-          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "43127a81-560d-476e-871a-4946f722789f"
+          "httpRequestId": "8003ec29-a362-4192-ad30-babbf9723ea3",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "1c6ec44e-3a39-4aec-907b-6ea46aaa116f"
         }
       },
       {
@@ -2691,11 +2691,11 @@
           "name": "AssertionError",
           "index": 0,
           "test": "[MINI] Status code matches expected",
-          "message": "expected response to have status code 999 but got 404",
-          "stack": "AssertionError: expected response to have status code 999 but got 404\n   at Object.eval sandbox-script.js:1:1)",
-          "checksum": "f0c0d1ac67f6542c3860278e423a8f0c",
-          "id": "b9632ca4-41ba-42d7-ac6e-73a7cc27d103",
-          "timestamp": 1786352851987,
+          "message": "expected response to have status code 200 but got 404",
+          "stack": "AssertionError: expected response to have status code 200 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "55adab66ef62c672a21631fa978cb4de",
+          "id": "3bb9ff3f-1337-4a22-a0ac-6e3136188e83",
+          "timestamp": 1786354072494,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2710,7 +2710,7 @@
         },
         "at": "assertion:0 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2741,7 +2741,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2749,13 +2749,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2766,7 +2766,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2777,7 +2777,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2808,7 +2808,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2816,13 +2816,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2833,7 +2833,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -2848,15 +2848,15 @@
           }
         },
         "cursor": {
-          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "ref": "c9356ee6-1bd8-46c3-ae7a-ef44266e09f6",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 4,
           "cr": true,
-          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+          "httpRequestId": "2b8e101f-044a-494d-a5f9-8929dd15c047",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "46074a3c-508c-436d-b313-269d56c49147"
         }
       },
       {
@@ -2867,8 +2867,8 @@
           "message": "expected 'text/plain' to include 'application/json'",
           "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
           "checksum": "ffa96b45239574547209de5ec010067d",
-          "id": "96076b4a-ae05-4918-969b-dc899a93626d",
-          "timestamp": 1786352851988,
+          "id": "578b98ce-a227-43cb-b218-cdbc75c5c337",
+          "timestamp": 1786354072494,
           "stacktrace": [
             {
               "fileName": "sandbox-script.js",
@@ -2883,7 +2883,7 @@
         },
         "at": "assertion:1 in test-script",
         "source": {
-          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
           "name": "POST Login API",
           "request": {
             "url": {
@@ -2914,7 +2914,7 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                 "type": "text/javascript",
                 "exec": [
                   "pm.request.headers.upsert({",
@@ -2922,13 +2922,13 @@
                   "  value: pm.environment.get(\"studentId\")",
                   "});"
                 ],
-                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
               }
             },
             {
               "listen": "test",
               "script": {
-                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -2939,7 +2939,7 @@
                   "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                   "});"
                 ],
-                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
               }
             }
           ]
@@ -2950,7 +2950,7 @@
           },
           "item": [
             {
-              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "id": "c78ec2e7-a665-4ae2-8d77-0d1b182fb385",
               "name": "POST Login API",
               "request": {
                 "url": {
@@ -2981,7 +2981,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "id": "c517a773-75a4-4b2c-852e-9fed32b8dbee",
                     "type": "text/javascript",
                     "exec": [
                       "pm.request.headers.upsert({",
@@ -2989,13 +2989,13 @@
                       "  value: pm.environment.get(\"studentId\")",
                       "});"
                     ],
-                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                    "_lastExecutionId": "247d18e8-9f10-4a0c-8849-b84bc7d56760"
                   }
                 },
                 {
                   "listen": "test",
                   "script": {
-                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "id": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
                     "type": "text/javascript",
                     "exec": [
                       "pm.test(\"[MINI] Status code matches expected\", function () {",
@@ -3006,7 +3006,7 @@
                       "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
                       "});"
                     ],
-                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                    "_lastExecutionId": "46074a3c-508c-436d-b313-269d56c49147"
                   }
                 }
               ]
@@ -3021,15 +3021,15 @@
           }
         },
         "cursor": {
-          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "ref": "c9356ee6-1bd8-46c3-ae7a-ef44266e09f6",
           "length": 1,
           "cycles": 5,
           "position": 0,
           "iteration": 4,
           "cr": true,
-          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90",
-          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
-          "execution": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+          "httpRequestId": "2b8e101f-044a-494d-a5f9-8929dd15c047",
+          "scriptId": "97870a7b-08a2-4d2b-8ee1-ea07193fd497",
+          "execution": "46074a3c-508c-436d-b313-269d56c49147"
         }
       }
     ],
