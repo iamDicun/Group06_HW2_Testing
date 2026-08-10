@@ -52,7 +52,7 @@ export class CartPage {
 
   lineTotal(productName: string): Locator {
     // TODO(verify): xác nhận đây đúng là ô "Thành tiền" của dòng, không phải "Đơn giá".
-    return this.row(productName).getByText(/₫/);
+    return this.row(productName).getByText(/vn₫/);
   }
 
   /** README FR-07: nhãn CHÍNH XÁC phải là "Tổng cộng" (không phải "Tổng tạm tính"). */
