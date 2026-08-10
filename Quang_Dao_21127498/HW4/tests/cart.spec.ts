@@ -94,7 +94,7 @@ export class CartPage {
 
   emptyStateIllustration(): Locator {
     // TODO(verify): xác nhận đây là <img> hay <svg>; điều chỉnh role tương ứng.
-    return this.page.getByRole('img').first();
+    return this.page.getByRole('svg').first();
   }
 
   /** Đọc số lượng hiện tại của một dòng, xử lý cả trường hợp <input> lẫn text thường. */
