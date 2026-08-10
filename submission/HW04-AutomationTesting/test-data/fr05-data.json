@@ -92,5 +92,44 @@
     "description": "Tu khoa tim kiem duoc hien thi lai tren man hinh ket qua",
     "searchTerm": "MacBook",
     "expectedKeywordText": "MacBook"
+  },
+  {
+    "id": "FR05-TC015",
+    "action": "verifyExactCurrencySymbol",
+    "description": "Gia san pham PHAI chua ky hieu '₫', KHONG duoc dung 'VND' (FR-05/FR-21)",
+    "expectedCurrencySymbol": "₫",
+    "forbiddenText": "VND"
+  },
+  {
+    "id": "FR05-TC016",
+    "action": "verifyImageAltNotEmpty",
+    "description": "Anh san pham PHAI co alt text mo ta, khong duoc de trong (FR-05/FR-24)",
+    "expectedMinImages": 1
+  },
+  {
+    "id": "FR05-TC017",
+    "action": "verifyNoXssInSearch",
+    "description": "Tim kiem voi XSS payload khong duoc render HTML (SEC-04/FR-05)",
+    "searchTerm": "<script>alert('xss')</script>",
+    "expectedNoScriptTags": true
+  },
+  {
+    "id": "FR05-TC018",
+    "action": "verifyNoDuplicateH1",
+    "description": "Trang KHONG duoc co nhieu hon 1 the <h1> (FR-05/FR-21)",
+    "expectedH1Count": 1
+  },
+  {
+    "id": "FR05-TC019",
+    "action": "verifyPriceExactFormat",
+    "description": "Gia san pham phai co dinh dang 'XX,XXX,XXX ₫' (FR-05/FR-21)",
+    "productIndex": 0,
+    "expectedPriceRegex": "^[\\d,]+ ₫$"
+  },
+  {
+    "id": "FR05-TC020",
+    "action": "verifyImageSrcValid",
+    "description": "Anh san pham co src hop le, khong trong (FR-05)",
+    "expectedMinImages": 1
   }
 ]
