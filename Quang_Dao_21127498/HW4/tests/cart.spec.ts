@@ -107,7 +107,7 @@ export class CartPage {
         : (await locator.textContent()) ?? '';
     const qty = Number(raw.replace(/[^\d]/g, ''));
     if (Number.isNaN(qty)) {
-      throw new Error(`[CartPage] Không đọc được số lượng cho sản phẩm "${productName}"`);
+      throw new Error(`[CartPage] Không đọc được số lượng từng sản phẩm "${productName}"`);
     }
     return qty;
   }
