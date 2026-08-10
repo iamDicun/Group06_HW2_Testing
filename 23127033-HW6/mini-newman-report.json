@@ -1,0 +1,3038 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+    },
+    "item": [
+      {
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "name": "POST Login API",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+              "type": "text/javascript",
+              "exec": [
+                "pm.request.headers.upsert({",
+                "  key: \"X-Student-Id\",",
+                "  value: pm.environment.get(\"studentId\")",
+                "});"
+              ],
+              "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+            }
+          },
+          {
+            "listen": "test",
+            "script": {
+              "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"[MINI] Status code matches expected\", function () {",
+                "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                "});",
+                "",
+                "pm.test(\"[MINI] Response is JSON\", function () {",
+                "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                "});"
+              ],
+              "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+      "name": "mini-login.postman_collection",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment"
+    },
+    "id": "e9b25a3d-3c22-4091-a1e6-23127033env",
+    "name": "mini-local.postman_environment",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://localhost:3000",
+        "key": "baseUrl"
+      },
+      {
+        "type": "any",
+        "value": "23127033",
+        "key": "studentId"
+      }
+    ]
+  },
+  "globals": {
+    "id": "d54b78df-6740-418f-b030-6c39bed7ce3d",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 10,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 10,
+        "pending": 0,
+        "failed": 10
+      },
+      "testScripts": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 7.4,
+      "responseMin": 3,
+      "responseMax": 23,
+      "responseSd": 7.812809993849845,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1786352851725,
+      "completed": 1786352852001
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 5,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
+          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448"
+        },
+        "item": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127033"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "00b055f4-a1e7-410b-a4f7-107c3099d2cf",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "59",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"admin@eshop.com\",\n  \"password\": \"Admin123!\"\n}"
+          }
+        },
+        "response": {
+          "id": "72f41427-87e6-41a0-8df3-53e8f920d3ac",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.27.5"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "b3182a49-5526-4a78-a9e8-aa08818fbc94"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              52,
+              48,
+              52,
+              32,
+              112,
+              97,
+              103,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100
+            ]
+          },
+          "cookie": [],
+          "responseTime": 23,
+          "responseSize": 18
+        },
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "assertions": [
+          {
+            "assertion": "[MINI] Status code matches expected",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 0,
+              "test": "[MINI] Status code matches expected",
+              "message": "expected response to have status code 200 but got 404",
+              "stack": "AssertionError: expected response to have status code 200 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+            }
+          },
+          {
+            "assertion": "[MINI] Response is JSON",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 1,
+              "test": "[MINI] Response is JSON",
+              "message": "expected 'text/plain' to include 'application/json'",
+              "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)"
+            }
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 1,
+          "cr": true,
+          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7"
+        },
+        "item": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127033"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5efcc012-5088-42e5-9cb0-e6d29ed9d361",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"admin@eshop.com\",\n  \"password\": \"WrongPassword\"\n}"
+          }
+        },
+        "response": {
+          "id": "47e1ad21-728c-4052-993e-12ac0876327b",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.27.5"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "fe64cc94-d751-4248-8006-75b30146518d"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              52,
+              48,
+              52,
+              32,
+              112,
+              97,
+              103,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 18
+        },
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "assertions": [
+          {
+            "assertion": "[MINI] Status code matches expected",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 0,
+              "test": "[MINI] Status code matches expected",
+              "message": "expected response to have status code 401 but got 404",
+              "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+            }
+          },
+          {
+            "assertion": "[MINI] Response is JSON",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 1,
+              "test": "[MINI] Response is JSON",
+              "message": "expected 'text/plain' to include 'application/json'",
+              "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)"
+            }
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 2,
+          "cr": true,
+          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770"
+        },
+        "item": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127033"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "817d6693-5701-4b86-b611-284c9f632957",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "65",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"nonexistent@eshop.com\",\n  \"password\": \"Test1234!\"\n}"
+          }
+        },
+        "response": {
+          "id": "84052eb5-6b0e-456e-a7ce-aada8be25a79",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.27.5"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "110d86e6-a2cc-4473-af84-26c357b22f9c"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              52,
+              48,
+              52,
+              32,
+              112,
+              97,
+              103,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 18
+        },
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "assertions": [
+          {
+            "assertion": "[MINI] Status code matches expected",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 0,
+              "test": "[MINI] Status code matches expected",
+              "message": "expected response to have status code 401 but got 404",
+              "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+            }
+          },
+          {
+            "assertion": "[MINI] Response is JSON",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 1,
+              "test": "[MINI] Response is JSON",
+              "message": "expected 'text/plain' to include 'application/json'",
+              "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)"
+            }
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 3,
+          "cr": true,
+          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a"
+        },
+        "item": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127033"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "fe37164f-d93f-4975-bba0-908159672a71",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "44",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"\",\n  \"password\": \"Test1234!\"\n}"
+          }
+        },
+        "response": {
+          "id": "e96bd75b-f38b-4404-8934-17580befc49a",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.27.5"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "80a368fe-a233-4b9b-bf13-1fb5850f41ae"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              52,
+              48,
+              52,
+              32,
+              112,
+              97,
+              103,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 18
+        },
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "assertions": [
+          {
+            "assertion": "[MINI] Status code matches expected",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 0,
+              "test": "[MINI] Status code matches expected",
+              "message": "expected response to have status code 401 but got 404",
+              "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+            }
+          },
+          {
+            "assertion": "[MINI] Response is JSON",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 1,
+              "test": "[MINI] Response is JSON",
+              "message": "expected 'text/plain' to include 'application/json'",
+              "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)"
+            }
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 4,
+          "cr": true,
+          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90"
+        },
+        "item": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127033"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "628cc4ce-f668-40c7-8819-cb769fa9f172",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "58",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"test@eshop.com\",\n  \"password\": \"Test1234!\"\n}"
+          }
+        },
+        "response": {
+          "id": "7725be0b-aee5-415a-a3f7-df9efe1291ef",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Server",
+              "value": "nginx/1.27.5"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 10 Aug 2026 09:07:31 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            },
+            {
+              "key": "Content-Length",
+              "value": "18"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "7e9674ae-e229-4df8-ab7d-c7cdb9b88fa6"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              52,
+              48,
+              52,
+              32,
+              112,
+              97,
+              103,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 18
+        },
+        "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+        "assertions": [
+          {
+            "assertion": "[MINI] Status code matches expected",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 0,
+              "test": "[MINI] Status code matches expected",
+              "message": "expected response to have status code 999 but got 404",
+              "stack": "AssertionError: expected response to have status code 999 but got 404\n   at Object.eval sandbox-script.js:1:1)"
+            }
+          },
+          {
+            "assertion": "[MINI] Response is JSON",
+            "skipped": false,
+            "error": {
+              "name": "AssertionError",
+              "index": 1,
+              "test": "[MINI] Response is JSON",
+              "message": "expected 'text/plain' to include 'application/json'",
+              "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)"
+            }
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 90
+    },
+    "failures": [
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 0,
+          "test": "[MINI] Status code matches expected",
+          "message": "expected response to have status code 200 but got 404",
+          "stack": "AssertionError: expected response to have status code 200 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "55adab66ef62c672a21631fa978cb4de",
+          "id": "ea85c109-6142-4bb5-ab06-7fd8f4040fc6",
+          "timestamp": 1786352851795,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 1,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:0 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 5,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
+          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "006cfa21-8996-427f-9b02-4cc7051841b6"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 1,
+          "test": "[MINI] Response is JSON",
+          "message": "expected 'text/plain' to include 'application/json'",
+          "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
+          "checksum": "ffa96b45239574547209de5ec010067d",
+          "id": "c9a12807-b2ef-48f5-8e90-1a222205faad",
+          "timestamp": 1786352851797,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 2,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:1 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 5,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "700d510d-633d-4a33-b0ba-40a4565cf223",
+          "httpRequestId": "64582f7a-f9fd-420f-8e24-3a45c95f6448",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "006cfa21-8996-427f-9b02-4cc7051841b6"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 0,
+          "test": "[MINI] Status code matches expected",
+          "message": "expected response to have status code 401 but got 404",
+          "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
+          "id": "4db415df-b61c-46e8-a731-de2cd0e6cad5",
+          "timestamp": 1786352851860,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 1,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:0 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 1,
+          "cr": true,
+          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "a34cd7ad-1a6f-4eef-a410-39140aa7ad97"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 1,
+          "test": "[MINI] Response is JSON",
+          "message": "expected 'text/plain' to include 'application/json'",
+          "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
+          "checksum": "ffa96b45239574547209de5ec010067d",
+          "id": "bf694935-b6b3-4910-b038-a8313f9c26b3",
+          "timestamp": 1786352851861,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 2,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:1 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "e6c2025a-1474-4845-a432-4701023f0fd7",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 1,
+          "cr": true,
+          "httpRequestId": "feff36cc-714c-4d52-a8ae-36f5ce7117c7",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "a34cd7ad-1a6f-4eef-a410-39140aa7ad97"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 0,
+          "test": "[MINI] Status code matches expected",
+          "message": "expected response to have status code 401 but got 404",
+          "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
+          "id": "ae62acf5-72da-46fe-a3bd-d58dc3747716",
+          "timestamp": 1786352851901,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 1,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:0 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 2,
+          "cr": true,
+          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "756a6932-6e93-44d5-95ff-f3ceeb1c328a"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 1,
+          "test": "[MINI] Response is JSON",
+          "message": "expected 'text/plain' to include 'application/json'",
+          "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
+          "checksum": "ffa96b45239574547209de5ec010067d",
+          "id": "bc9f0c28-e3c7-425d-977e-456a33905330",
+          "timestamp": 1786352851901,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 2,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:1 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "8cc90183-3c74-4d69-ac5c-2611a43c2e29",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 2,
+          "cr": true,
+          "httpRequestId": "23171ecb-54bf-44f5-9853-d0f63d342770",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "756a6932-6e93-44d5-95ff-f3ceeb1c328a"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 0,
+          "test": "[MINI] Status code matches expected",
+          "message": "expected response to have status code 401 but got 404",
+          "stack": "AssertionError: expected response to have status code 401 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "5a4e06541e37d2a9748271f4a111b8c0",
+          "id": "40c351e4-f102-4aa0-ac5e-df809c10b965",
+          "timestamp": 1786352851937,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 1,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:0 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 3,
+          "cr": true,
+          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "43127a81-560d-476e-871a-4946f722789f"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 1,
+          "test": "[MINI] Response is JSON",
+          "message": "expected 'text/plain' to include 'application/json'",
+          "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
+          "checksum": "ffa96b45239574547209de5ec010067d",
+          "id": "6ea3ce9e-b3fc-43a8-800b-e72c37639890",
+          "timestamp": 1786352851937,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 2,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:1 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "42495244-563a-4b62-9506-7631d58842f4",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 3,
+          "cr": true,
+          "httpRequestId": "5e8903bd-fc9a-41c6-9ae6-abf2f2b2618a",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "43127a81-560d-476e-871a-4946f722789f"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 0,
+          "test": "[MINI] Status code matches expected",
+          "message": "expected response to have status code 999 but got 404",
+          "stack": "AssertionError: expected response to have status code 999 but got 404\n   at Object.eval sandbox-script.js:1:1)",
+          "checksum": "f0c0d1ac67f6542c3860278e423a8f0c",
+          "id": "b9632ca4-41ba-42d7-ac6e-73a7cc27d103",
+          "timestamp": 1786352851987,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 1,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:0 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 4,
+          "cr": true,
+          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+        }
+      },
+      {
+        "error": {
+          "name": "AssertionError",
+          "index": 1,
+          "test": "[MINI] Response is JSON",
+          "message": "expected 'text/plain' to include 'application/json'",
+          "stack": "AssertionError: expected 'text/plain' to include 'application/json'\n   at Object.eval sandbox-script.js:2:1)",
+          "checksum": "ffa96b45239574547209de5ec010067d",
+          "id": "96076b4a-ae05-4918-969b-dc899a93626d",
+          "timestamp": 1786352851988,
+          "stacktrace": [
+            {
+              "fileName": "sandbox-script.js",
+              "lineNumber": 2,
+              "functionName": "Object.eval",
+              "typeName": "Object",
+              "methodName": "eval",
+              "columnNumber": 1,
+              "native": false
+            }
+          ]
+        },
+        "at": "assertion:1 in test-script",
+        "source": {
+          "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+          "name": "POST Login API",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.headers.upsert({",
+                  "  key: \"X-Student-Id\",",
+                  "  value: pm.environment.get(\"studentId\")",
+                  "});"
+                ],
+                "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[MINI] Status code matches expected\", function () {",
+                  "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                  "});",
+                  "",
+                  "pm.test(\"[MINI] Response is JSON\", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});"
+                ],
+                "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a5c6d321-4f10-4822-8321-23127033coll"
+          },
+          "item": [
+            {
+              "id": "c171cf8d-80e8-4d04-96df-6507783b1be6",
+              "name": "POST Login API",
+              "request": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8860ac7d-a56a-40e5-b013-e680cbe9a331",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.headers.upsert({",
+                      "  key: \"X-Student-Id\",",
+                      "  value: pm.environment.get(\"studentId\")",
+                      "});"
+                    ],
+                    "_lastExecutionId": "f1dc3ed7-0cfe-46a6-982d-fe901c98fcb0"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[MINI] Status code matches expected\", function () {",
+                      "    pm.response.to.have.status(pm.iterationData.get(\"expected_status\"));",
+                      "});",
+                      "",
+                      "pm.test(\"[MINI] Response is JSON\", function () {",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                      "});"
+                    ],
+                    "_lastExecutionId": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a5c6d321-4f10-4822-8321-23127033coll",
+            "name": "mini-login.postman_collection",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "ref": "35ac91fd-90b8-455f-a5f2-50af44261d66",
+          "length": 1,
+          "cycles": 5,
+          "position": 0,
+          "iteration": 4,
+          "cr": true,
+          "httpRequestId": "89df252d-cd52-4e23-9229-8bc928659b90",
+          "scriptId": "910219e1-05e3-4a02-8462-5bc8e7fd027c",
+          "execution": "dc2c8488-cb51-4aa8-90a7-0a1fc09a23fe"
+        }
+      }
+    ],
+    "error": null
+  }
+}
