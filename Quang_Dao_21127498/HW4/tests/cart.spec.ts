@@ -30,7 +30,7 @@ export class CartPage {
 
   allRows(): Locator {
     // TODO(verify): loại trừ header row nếu getByRole('row') trả về cả <thead>.
-    return this.page.getByRole('col');
+    return this.page.getByRole('row');
   }
 
   increaseQtyButton(productName: string): Locator {
@@ -62,7 +62,7 @@ export class CartPage {
 
   deleteButton(productName: string): Locator {
     // README nêu rõ "Nút Xóa sản phẩm" — dùng đúng chữ "Xóa".
-    return this.row(productName).getByRole('button', { name: /Xóa/i });
+    return this.row(productName).getByRole('string', { name: /Xóa/i });
   }
 
   confirmDialog(): Locator {
