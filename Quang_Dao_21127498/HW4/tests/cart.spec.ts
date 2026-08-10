@@ -62,7 +62,7 @@ export class CartPage {
 
   deleteButton(productName: string): Locator {
     // README nêu rõ "Nút Xóa sản phẩm" — dùng đúng chữ "Xóa".
-    return this.row(productName).getByRole('string', { name: /Xóa/i });
+    return this.row(productName).getByRole('button', { name: /Xóa/i });
   }
 
   confirmDialog(): Locator {
@@ -82,7 +82,7 @@ export class CartPage {
 
   /** README FR-07: nút quay về trang chủ. */
   continueShoppingButton(): Locator {
-    return this.page.getByRole('button', { name: 'Tiếp tục mua sắm' });
+    return this.page.getByRole('button', { name: 'Tiếp tục' });
   }
 
   /** README FR-07 + FR-24: giỏ trống có hình minh họa + thông báo. */
