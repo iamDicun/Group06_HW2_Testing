@@ -36,12 +36,12 @@ export class CartPage {
   increaseQtyButton(productName: string): Locator {
     // TODO(verify): xác nhận accessible name thật của nút "+" (có thể là aria-label
     // "Tăng số lượng" thay vì ký tự "+"). Mở DevTools > Accessibility để kiểm tra.
-    return this.row(productName).getByRole('button', { name: /^\+$|Tăng số lượng/i });
+    return this.row(productName).getByRole('button', { name: /^\+$|Tăng số lượng sản phẩm/i });
   }
 
   decreaseQtyButton(productName: string): Locator {
     // TODO(verify): tương tự nút tăng — xác nhận accessible name thật.
-    return this.row(productName).getByRole('button', { name: /^-$|Giảm số lượng/i });
+    return this.row(productName).getByRole('button', { name: /^-$|Giảm số lượng sản phẩm/i });
   }
 
   qtyValue(productName: string): Locator {
