@@ -28,8 +28,8 @@ jobs:
       - name: Start Backend Server
         run: |
           cd application/backend
-          node server.js &
-          npx wait-on http://localhost:3000
+          node server.js > /dev/null 2>&1 &
+          sleep 3
 
       - name: Install Newman
         run: npm install -g newman
