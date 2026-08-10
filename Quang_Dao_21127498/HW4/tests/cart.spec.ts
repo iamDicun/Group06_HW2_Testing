@@ -62,7 +62,7 @@ export class CartPage {
 
   deleteButton(productName: string): Locator {
     // README nêu rõ "Nút Xóa sản phẩm" — dùng đúng chữ "Xóa".
-    return this.row(productName).getByRole('button', { name: /Xóa/i });
+    return this.row(productName).getByRole('button', { name: /Xóa sản phẩm/i });
   }
 
   confirmDialog(): Locator {
