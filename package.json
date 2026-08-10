@@ -1,0 +1,28 @@
+{
+  "name": "group06_hw2_testing",
+  "version": "1.0.0",
+  "description": "**Course:** Software Testing  \r **SUT:** [EShop](https://github.com/ttbhanh/eshop-sut) — Vietnamese e-commerce demo  \r **Assignment:** Individual (each student submits their own `<MSSV>_HW02_AI_DomainTesting_<Grade>.zip`)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamDicun/Group06_HW2_Testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/iamDicun/Group06_HW2_Testing/issues"
+  },
+  "homepage": "https://github.com/iamDicun/Group06_HW2_Testing#readme",
+  "dependencies": {
+    "playwright": "^1.62.0"
+  }
+}

@@ -1,0 +1,30 @@
+# Temp files
+*.tmp
+*.temp
+
+# PDF export temp files (only keep source PDFs in docs/)
+*_output.txt
+*_template.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+
+# node_modules
+/node_modules
+/scripts
