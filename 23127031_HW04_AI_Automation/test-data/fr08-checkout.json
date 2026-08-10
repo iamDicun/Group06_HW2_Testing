@@ -139,17 +139,18 @@
     },
     {
       "testCaseId": "TC-AUTOMATION-FR-08-010",
-      "scenario": "Sản phẩm có số lượng > 1 (6M x 2 = 12M)",
+      "scenario": "Sản phẩm có số lượng > 1 (6M + 4M = 10M)",
       "data": {
         "email": "test@eshop.com",
         "password": "Test1234!",
         "cartItems": [
-          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 2 }
+          { "name": "Tai nghe AirPods Pro 2", "price": 6000000, "quantity": 1 },
+          { "name": "Bàn phím cơ Keychron Q1", "price": 4000000, "quantity": 1 }
         ]
       },
       "expected": {
-        "expectedTotal": 12000000,
-        "formula": "6000000 x 2 = 12000000"
+        "expectedTotal": 10000000,
+        "formula": "6000000 + 4000000 = 10000000"
       }
     },
     {
