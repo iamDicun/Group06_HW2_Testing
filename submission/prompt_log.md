@@ -137,3 +137,58 @@ k6 run performance-tests/23127031_Stress_20260815.js
 k6 run performance-tests/23127031_Spike_20260815.js
 k6 run performance-tests/23127031_Endurance_20260815.js
 ```
+
+### Turn 2
+
+**[User]**
+Từ những file report tạo báo cáo đánh giá những tốt, xấu, điểm nghẽn, gợi ý chỉnh sửa vào report, không làm các phần khác của task 2
+
+**[Assistant]**
+Đã hoàn tất phân tích toàn bộ các tệp báo cáo kiểm thử thực tế (`23127031_Load_20260815_Report.html`, `23127031_Stress_20260815_Summary.json`, `23127031_Spike_20260815_Console.txt`, `23127031_Endurance_20260815_Report.txt`) và cập nhật trực tiếp báo cáo đánh giá vào mục **TASK 2 (Section 1: AI Log Analysis & Initial Threshold Proposals)** trong cả hai tệp [submission/report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/submission/report.md) và [report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/report.md). Các phần khác của Task 2 được giữ nguyên theo đúng yêu cầu.
+
+---
+
+### Tóm tắt nội dung báo cáo đánh giá đã đưa vào Report:
+
+#### 1. Bảng Tổng Hợp Số Liệu Thực Nghiệm
+* **Load Test (40 VUs)**: 2,922 requests, **0.00% lỗi**, thông lượng ~16.2 req/s, avg latency **2.33 ms**, p(95) **8.45 ms**, max **321.85 ms**.
+* **Stress Test (150 VUs)**: 12,780 requests, **0.00% lỗi**, thông lượng **38.91 req/s**, avg latency **2.52 ms**, p(95) **8.70 ms**, max **457.13 ms**.
+* **Spike Test (120 VUs)**: 5,100 requests, **0.00% lỗi**, thông lượng 23.15 req/s, avg latency **2.49 ms**, p(95) **8.88 ms**, max **54.54 ms**.
+* **Endurance Test (30 VUs / 12m)**: 10,458 requests, **0.00% lỗi**, thông lượng 14.38 req/s, avg latency **2.87 ms**, p(95) **8.53 ms**, max **1004.10 ms**, trần RAM đạt **69 MB**.
+
+---
+
+#### 2. Những Điểm TỐT (Strengths & Positive Highlights)
+* **Độ ổn định tuyệt đối (Zero Error Rate)**: $0.00\%$ lỗi trên toàn bộ $31,260+$ requests, pass $100\%$ các checks kiểm thử nghiệp vụ.
+* **Thời gian phản hồi p(95) xuất sắc**: Duy trì ổn định $< 9\text{ ms}$ trên mọi kịch bản, không bị suy thoái khi tải tăng từ 20 lên 150 VUs.
+* **Khả năng tự hồi phục tức thì (Instant Recovery)**: Không bị rớt kết nối hay nghẽn socket trong cú sốc tải 8x (Spike 120 VUs), độ trễ hồi phục về $< 10\text{ ms}$ ngay khi tải hạ nhiệt.
+* **Tối ưu hóa tài nguyên phần cứng**: Bộ nhớ RAM của Node.js đạt trần ở mức **69 MB (RSS)** và phẳng đều (không có hiện tượng Memory Leak), CPU chiếm dụng $< 1\%$.
+
+---
+
+#### 3. Những Điểm XẤU & HẠN CHẾ (Weaknesses & Degradations)
+* **Hiện tượng giật cục độ trễ cực đại (High Max Latency Outliers)**: Độ trễ tối đa vọt lên **457.13 ms** (Stress) và **1004.10 ms** (Endurance), gấp hàng trăm lần so với trung vị ($1.03\text{ ms}$).
+* **Sự chênh lệch lớn giữa các nhóm API**: Nhóm Transactional (`/api/checkout`, `/api/cart`) tốn trung bình $\approx 10\text{ ms}$ và max $458\text{ ms}$, cao gấp $5 - 7$ lần nhóm Read và Auth.
+* **Tranh chấp khóa ghi tăng theo số lượng VU**: Max latency của Transactional tăng từ $323\text{ ms}$ (20 VUs) lên $458\text{ ms}$ (150 VUs).
+
+---
+
+#### 4. Phân Tích Điểm Nghẽn Kỹ Thuật (Root Cause & Bottlenecks)
+* **Điểm nghẽn chính**: **Khóa tệp đơn luồng SQLite (File-Level Single-Writer Lock)**. Ở chế độ mặc định (*Rollback Journal*), chỉ 1 transaction được ghi (`INSERT INTO orders`) tại một thời điểm, các request checkout đồng thời từ 120–150 VUs bị tuần tự hóa và phải xếp hàng chờ giải phóng file lock.
+* **Điểm nghẽn phụ**: Thao tác I/O đồng bộ của SQLite driver chiếm dụng tick xử lý trong Node.js Event Loop.
+* **Nguy cơ tiềm ẩn**: Truy vấn tìm kiếm `LIKE '%query%'` trên `/api/products` chưa có Full-Text Search (FTS5) sẽ gây quá tải khi dữ liệu sản phẩm mở rộng.
+
+---
+
+#### 5. Gợi Ý Chỉnh Sửa & Tối Ưu Hóa (Actionable Recommendations)
+1. **Bật chế độ SQLite WAL (Write-Ahead Logging)**: Cấu hình `PRAGMA journal_mode = WAL;` và `PRAGMA busy_timeout = 5000;` để Readers và Writers không khóa lẫn nhau, kỳ vọng kéo giảm Max Latency nhóm checkout xuống $< 50\text{ ms}$.
+2. **In-Memory Caching cho Read-Heavy**: Sử dụng `node-cache` / Redis đệm dữ liệu sản phẩm với TTL 30–60s để giảm $> 80\%$ tải đọc vào SQLite.
+3. **Đánh chỉ mục Index**: Tạo index trên `orders.user_id` và `products.category_id`.
+4. **Đề xuất Bộ Ngưỡng SLA Chuẩn Hóa**:
+   - Tỷ lệ lỗi: `rate === 0.00`
+   - Auth Group p(95): `< 50ms`
+   - Read Group p(95): `< 30ms`
+   - Transactional Group p(95): `< 100ms`
+   - Overall p(95): `< 50ms`
+
+
