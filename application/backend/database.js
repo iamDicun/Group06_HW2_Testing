@@ -88,9 +88,22 @@ function initDatabase() {
         insertCategory.finalize();
 
         // Seed Users
-        const insertUser = db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)');
-        insertUser.run('Admin User', 'admin@eshop.com', 'Admin123!', 'admin');
-        insertUser.run('Test User', 'test@eshop.com', 'Test1234!', 'user');
+        const insertUser = db.prepare('INSERT INTO users (name, email, password, role, shipping_address, phone) VALUES (?, ?, ?, ?, ?, ?)');
+        insertUser.run('Admin User', 'admin@eshop.com', 'Admin123!', 'admin', '123 Le Loi, Q1, TP.HCM', '0912345678');
+        insertUser.run('Test User', 'test@eshop.com', 'Test1234!', 'user', '456 Nguyen Trai, Q5, TP.HCM', '0901234567');
+        
+        // Seed 500 performance test users for k6 load/stress testing
+        for (let i = 1; i <= 500; i++) {
+            const padded = String(i).padStart(4, '0');
+            insertUser.run(
+                `Perf User ${padded}`,
+                `perf_user_${padded}@eshop.local`,
+                'Password123!',
+                'user',
+                `${i} Nguyen Hue St, District 1, Ho Chi Minh City`,
+                `090${String(1000000 + i).slice(1)}`
+            );
+        }
         insertUser.finalize();
 
         // Seed Products

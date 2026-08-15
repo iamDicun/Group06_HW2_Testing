@@ -1,0 +1,9 @@
+search_query,expected_id,expected_name,price
+iPhone,1,iPhone 15 Pro Max,30000000
+Samsung,2,Samsung Galaxy S24 Ultra,28000000
+MacBook,3,MacBook Pro M3,45000000
+Sony,4,Sony WH-1000XM5,8500000
+iPad,5,iPad Air M2,17000000
+Phone,1,iPhone 15 Pro Max,30000000
+Laptop,3,MacBook Pro M3,45000000
+Headphones,4,Sony WH-1000XM5,8500000

@@ -1,0 +1,64 @@
+================================================================================
+EShop Performance Test — ENDURANCE / SOAK TEST THRESHOLD REPORT
+Scenario: 23127031_Endurance_20260815
+Execution Time: 2026-08-15T12:41:26.292Z
+Sustained Duration: 12 minutes (10 minutes steady load @ 30 Virtual Users)
+================================================================================
+
+[EMPIRICAL HARDWARE THRESHOLD SUMMARY]
+- Total Completed Requests: 10458
+- Maximum Stable Throughput (RPS): ~14.38 requests/sec
+- Overall Failure Rate: 0.00% (Target: < 2.0%)
+- Latency p(95): 8.53 ms (Target: < 1200 ms)
+- Maximum Observed Latency: 1004.10 ms
+
+[RESOURCE USAGE OBSERVATION GUIDELINES]
+- Process: Node.js (backend) + SQLite + k6 Runner
+- Target Memory Ceiling: < 150 MB RSS (Check Task Manager during peak)
+- Target CPU Utilization: Stable around 10% - 25% across test duration
+- Memory Leak Detection: If RSS increases continuously without plateauing after min 5, flag potential leak.
+
+================================================================================
+DETAILED K6 METRICS BREAKDOWN:
+================================================================================
+      █ auth
+
+        ✓ login status is 200
+        ✓ login token exists
+
+      █ read
+
+        ✓ search status is 200
+        ✓ search returns array
+        ✓ detail status is 200
+        ✓ detail returns product object
+        ✓ orders history status is 200
+        ✓ orders history is array
+
+      █ transactional
+
+        ✓ add to cart status is 200
+        ✓ checkout status is 200
+        ✓ checkout returns orderId
+
+      checks.........................: 100.00% ✓ 19173     ✗ 0    
+      data_received..................: 17 MB   23 kB/s
+      data_sent......................: 2.4 MB  3.4 kB/s
+      group_duration.................: avg=4.45ms  min=508.2µs med=1.55ms max=1s       p(90)=9.27ms  p(95)=9.74ms 
+      ✓ { group:::auth }.............: avg=2.79ms  min=509µs   med=1.06ms max=999.22ms p(90)=1.6ms   p(95)=2.05ms 
+      ✓ { group:::read }.............: avg=2.11ms  min=508.2µs med=1.09ms max=887.91ms p(90)=2.05ms  p(95)=2.14ms 
+      ✓ { group:::transactional }....: avg=10.78ms min=4.71ms  med=8.93ms max=1s       p(90)=10.18ms p(95)=10.9ms 
+      http_req_blocked...............: avg=2.9µs   min=0s      med=0s     max=1.07ms   p(90)=0s      p(95)=0s     
+      http_req_connecting............: avg=1.38µs  min=0s      med=0s     max=605.4µs  p(90)=0s      p(95)=0s     
+    ✓ http_req_duration..............: avg=2.87ms  min=0s      med=1.03ms max=1s       p(90)=8.02ms  p(95)=8.53ms 
+        { expected_response:true }...: avg=2.87ms  min=0s      med=1.03ms max=1s       p(90)=8.02ms  p(95)=8.53ms 
+    ✓ http_req_failed................: 0.00%   ✓ 0         ✗ 10458
+      http_req_receiving.............: avg=40.06µs min=0s      med=0s     max=1.08ms   p(90)=0s      p(95)=516.9µs
+      http_req_sending...............: avg=6.66µs  min=0s      med=0s     max=4.69ms   p(90)=0s      p(95)=0s     
+      http_req_tls_handshaking.......: avg=0s      min=0s      med=0s     max=0s       p(90)=0s      p(95)=0s     
+      http_req_waiting...............: avg=2.83ms  min=0s      med=1.03ms max=1s       p(90)=7.93ms  p(95)=8.42ms 
+      http_reqs......................: 10458   14.380721/s
+      iteration_duration.............: avg=11.46s  min=8.01s   med=11.01s max=15.01s   p(90)=13.01s  p(95)=14.01s 
+      iterations.....................: 1743    2.396787/s
+      vus............................: 1       min=1       max=30 
+      vus_max........................: 30      min=30      max=30 

@@ -1,0 +1,45 @@
+========================================================================
+EShop Performance Test - SPIKE TEST RUN REPORT
+Scenario: 23127031_Spike_20260815
+Executed At: 2026-08-15T12:22:13.832Z
+Report Format: Raw Console & Metric Summary Log (Listener Type 3)
+========================================================================
+
+      █ auth
+
+        ✓ login status is 200
+        ✓ login token exists
+
+      █ read
+
+        ✓ search status is 200
+        ✓ search returns array
+        ✓ detail status is 200
+        ✓ detail returns product object
+        ✓ orders history status is 200
+        ✓ orders history is array
+
+      █ transactional
+
+        ✓ add to cart status is 200
+        ✓ checkout status is 200
+        ✓ checkout returns orderId
+
+      checks.........................: 100.00% ✓ 9350     ✗ 0    
+      data_received..................: 2.8 MB  13 kB/s
+      data_sent......................: 1.2 MB  5.4 kB/s
+      group_duration.................: avg=3.88ms  min=507.2µs med=1.55ms  max=55.62ms p(90)=9.4ms  p(95)=10.64ms
+      http_req_blocked...............: avg=13.81µs min=0s      med=0s      max=1.08ms  p(90)=0s     p(95)=0s     
+      http_req_connecting............: avg=11.32µs min=0s      med=0s      max=1.08ms  p(90)=0s     p(95)=0s     
+      http_req_duration..............: avg=2.49ms  min=0s      med=1.02ms  max=54.54ms p(90)=8.04ms p(95)=8.88ms 
+        { expected_response:true }...: avg=2.49ms  min=0s      med=1.02ms  max=54.54ms p(90)=8.04ms p(95)=8.88ms 
+    ✓ http_req_failed................: 0.00%   ✓ 0        ✗ 5100 
+      http_req_receiving.............: avg=45.71µs min=0s      med=0s      max=1.08ms  p(90)=0s     p(95)=518.1µs
+      http_req_sending...............: avg=5.83µs  min=0s      med=0s      max=1.03ms  p(90)=0s     p(95)=0s     
+      http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s      p(90)=0s     p(95)=0s     
+      http_req_waiting...............: avg=2.44ms  min=0s      med=563.6µs max=54.54ms p(90)=7.96ms p(95)=8.84ms 
+      http_reqs......................: 5100    23.15182/s
+      iteration_duration.............: avg=11.54s  min=8.01s   med=11.53s  max=15.02s  p(90)=13.04s p(95)=14.01s 
+      iterations.....................: 850     3.858637/s
+      vus............................: 1       min=1      max=120
+      vus_max........................: 120     min=120    max=120
