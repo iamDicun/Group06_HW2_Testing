@@ -40,6 +40,7 @@ Login → Product Search → Product Detail → Add to Cart → Checkout
 | Think-time (Cart → Checkout) | 1 giây | Thao tác chuyển tiếp nhanh, người dùng đã quyết định mua |
 | Số user tạo sẵn (setup) | 50 (bằng VU tối đa) | Mỗi VU dùng 1 tài khoản riêng — tránh đụng độ giỏ hàng (userCarts lưu theo user_id trong RAM) và tránh kích hoạt lockout chéo giữa các VU dùng chung account |
 
+<<<<<<< HEAD
 ## 4b. Report Type được phân công: Raw JSON Output
 
 Theo yêu cầu đề bài "use three distinct listener/report types across the
@@ -55,11 +56,26 @@ k6 run --out json=load-test-raw.json load-test.js | Tee-Object -FilePath load-te
 (Stress Test dùng HTML Dashboard, Spike Test dùng k6 Cloud — xem test-plan
 tương ứng. Có thể xuất thêm các định dạng khác làm bằng chứng bổ sung, nhưng
 JSON là định dạng **bắt buộc** theo phân công của Load Test.)
+=======
+## 4b. Xuất raw log & HTML report
+
+```powershell
+k6 run --out json=load-test-raw.json load-test.js | Tee-Object -FilePath load-test-console.txt
+
+$env:K6_WEB_DASHBOARD="true"
+$env:K6_WEB_DASHBOARD_EXPORT="load-test-report.html"
+k6 run load-test.js
+```
+
+Lưu ý: k6 xuất JSON/HTML, không có định dạng `.jtl` (đó là định dạng riêng
+của JMeter) — xem thảo luận chi tiết trong báo cáo tổng về lựa chọn công cụ.
+>>>>>>> 1f01d7892aea1147446c4e8bc7ad51c108100bfa
 
 Load Test không có lockout probe (yêu cầu đề bài chỉ nêu rõ cho Stress/Spike),
 vì luồng chính ở đây chỉ dùng password đúng theo đúng mục tiêu đo tải bình
 thường, không có nhánh cố ý gây lỗi.
 
+<<<<<<< HEAD
 ## 4c. Data-Driven Workflow (CSV)
 
 Theo yêu cầu đề bài "Make the workflow data-driven... Use CSV input data to
@@ -102,6 +118,8 @@ SQL injection ở endpoint search khi search term có ký tự đặc biệt).
 50 dòng dữ liệu trong `data.csv`, khớp với 50 VU tối đa của Load Test, giá
 trị `quantity`/`unit_price`/`product_id` xoay vòng qua 5 sản phẩm thật.
 
+=======
+>>>>>>> 1f01d7892aea1147446c4e8bc7ad51c108100bfa
 ## 5. Tiêu chí đánh giá (Threshold)
 
 | Chỉ số | Ngưỡng |
