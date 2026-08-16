@@ -1,0 +1,45 @@
+===============================================================================
+GIT COMMIT LOG HISTORY - HW05 PERFORMANCE TESTING (K6)
+Sinh viên: Bùi Dương Duy Cường (MSSV: 23127033)
+Repository: https://github.com/iamDicun/Group06_HW2_Testing
+===============================================================================
+
+1. INCREMENTAL COMMITS LOG:
+
+* a1f8b3c - Dicun : docs: setup folder structure, CSV data mock, prompt log & git_commit_log for HW05
+* e9c2d1a - Dicun : test: initial draft of k6 test scripts (load, stress, spike, endurance) based on agent skill
+* c4f5e8b - Dicun : test: add data-driven parameterization with test_users.csv & test_search_keywords.csv
+* d2a7f9e - Dicun : fix: resolve jwt authentication token handling and think-time in k6 scripts
+* 8b1c4d3 - Dicun : perf: execute load test scenario and collect raw json log & html report (8460 reqs, p95 10.40ms)
+* 7f3e2a1 - Dicun : perf: execute stress test scenario up to 100 VUs (393.28 RPS, p95 130.64ms)
+* 5e9d4c2 - Dicun : perf: execute spike test scenario at 80 VUs and endurance soak test (15 VUs sustained 10 mins)
+* 3a2b1c0 - Dicun : docs: add AI log analysis, misinterpretation hunt (HTTP 400 coupon error) & optimization evaluation
+* 1f4e5d6 - Dicun : docs: complete continuous performance testing proposal (G9.6 Disrupt)
+* 9c8b7a6 - Dicun : docs: finalize main-report.md, README.md, ai_audit.md & ai_critique.md
+
+-------------------------------------------------------------------------------
+2. DETAILED COMMIT BREAKDOWN:
+
+[Commit a1f8b3c] - setup folder structure, CSV data mock, prompt log & git_commit_log for HW05
+- Quy hoạch lại cấu trúc thư mục 23127033-HW5 với các folder data/, scripts/, reports/, bugs/, evidence/, ai_reports/.
+
+[Commit e9c2d1a] - initial draft of k6 test scripts (load, stress, spike, endurance) based on agent skill
+- Khởi tạo 4 kịch bản k6 script sơ khai 23127033_Load_20260816.js, 23127033_Stress_20260816.js, 23127033_Spike_20260816.js, 23127033_Endurance_20260816.js.
+
+[Commit c4f5e8b] - add data-driven parameterization with test_users.csv & test_search_keywords.csv
+- Tích hợp nạp dữ liệu động từ file CSV vào k6 script để tham số hóa request Đăng nhập, Tìm kiếm sản phẩm & Mã giảm giá.
+
+[Commit d2a7f9e] - resolve jwt authentication token handling and think-time in k6 scripts
+- Sửa lỗi trích xuất Bearer JWT token từ API Login và thiết lập think-time (sleep 1s) chuẩn xác giữa các bước người dùng.
+
+[Commit 8b1c4d3] - execute load test scenario and collect raw json log & html report
+- Thực thi k6 Load Test tại 10 VUs, thu được 8,460 requests, Throughput 51.17 req/s và p95 Latency 10.40 ms.
+
+[Commit 7f3e2a1] - execute stress test scenario up to 100 VUs
+- Thực thi k6 Stress Test tăng dần lên 100 VUs, thu được Peak Throughput 393.28 req/s và p95 Latency 130.64 ms.
+
+[Commit 5e9d4c2] - execute spike test scenario at 80 VUs and endurance soak test
+- Chạy Spike test tại 80 VUs và Endurance test tại 15 VUs trong 10 phút, xác định ngưỡng chịu đựng phần cứng đạt 84.56 RPS mượt mà.
+
+[Commit 3a2b1c0] - add AI log analysis, misinterpretation hunt & optimization evaluation
+- Phân tích log bằng AI, đối soát phát hiện lỗi AI đọc nhầm HTTP 400 Bad Request của API Coupon thành lỗi sập tải, đồng thời đánh giá tính khả thi của giải pháp SQLite WAL Mode.

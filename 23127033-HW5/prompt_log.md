@@ -1,19 +1,33 @@
-# Nhật Ký Lời Nhắc - HW03 GUI & Usability
+# Prompt Log — HW05 Performance Testing (k6)
 
-**Sinh viên:** Bùi Dương Duy Cường - `23127033`  
-**Bài tập:** HW03 - GUI & Usability Testing trên EShop
+**Sinh viên:** Bùi Dương Duy Cường — `23127033`
 
-Sử dụng dấu thời gian cuộn. Không kết hợp tất cả lời nhắc ở cuối.
+---
 
-| # | Ngày | Thời Gian | Công Cụ AI | Mục Đích | Lời Nhắc | Tham Chiếu Đầu Ra | Tiếp Nối / Hành Động Sinh Viên |
-|---|------|------|---------|---------|--------|------------------|----------------------------|
-| 1 | 2026-08-01 | 19:03 | Gemini 3.5 Flash | Đọc và hiểu yêu cầu đề bài | "Vào thư mục 23127033-HW3-full đọc yêu cầu đề bài để hiểu xem cần làm gì" | Trích xuất và tóm tắt yêu cầu từ tệp `2026.HW03.GUI Usability_En.pdf`. | Đọc báo cáo tóm tắt các yêu cầu Task 1, 2, 3, 4. |
-| 2 | 2026-08-01 | 19:53 | Gemini 3.5 Flash | Thiết kế kế hoạch và sinh các tệp checklist/kịch bản/tự động hóa | "Soạn giúp tôi check list excel tầm 60 mục... soạn giúp tôi kịch bản Usability... viết script tự động test và chụp màn hình..." | Tạo `implementation_plan.md`; sinh `checklist_60_items.csv` (60 mục); sinh `usability_plan.md`; sinh script Playwright `capture_screenshots.js` và script `sync_github_issues.ps1`. | Duyệt qua kế hoạch và chuẩn bị môi trường chạy các script. |
-| 3 | 2026-08-01 | 20:14 | Gemini 3.5 Flash | Tự động hóa hoàn toàn Task 1 Chrome, chụp ảnh có thanh địa chỉ, tìm thêm bug và đẩy GitHub | "bạn tự động chạy các server eshop, tự chạy playwright, bạn tự sinh sub agent rồi tự test trên đó xong gặp bug thì chụp ảnh lại giúp tôi đi kèm ảnh bug là 1 bug report file md rồi push bug đó lên github giúp tôi nhé. Trước mắt là hãy hoàn thành toàn bộ task 1 với trình duyệt chrome..." | Cập nhật `run_auto_test.js` để tiêm CSS/HTML mockup trình duyệt Chrome; tự động chạy test tìm 14 lỗi thực tế; viết 14 file báo cáo lỗi; cập nhật `checklist_60_items.csv` (14 Failed, 46 Passed); sửa đổi `sync_github_issues.ps1` để truyền body-file và trích xuất label đúng; đồng bộ thành công 14 issue lên GitHub; viết báo cáo `main_report.md` và cập nhật README/phụ lục. | Kiểm tra các Issue trên GitHub và chuẩn bị cho Task 2 Usability. |
-| 4 | 2026-08-03 | 09:22 | Gemini 3.5 Flash | Tái cấu trúc báo cáo, chuyển sang đường dẫn tương đối, dọn dẹp scripts và bổ sung phân tích khả dụng G9.3 & G9.4 | "Trước khi tôi update ảnh minh chứng, bạn hãy giúp tôi tổng hợp và viết báo cáo lại như sau: Main report sẽ bao gồm GUI checklist, ở task 1 sẽ có 1 bảng của chrome..." | - Tạo `checklist_chrome.csv` riêng với phần Test Summary ở đầu.<br>- Tạo `usability_session_evidence.md` tổng hợp 7 người dùng và SUS.<br>- Cập nhật `README.md` (chứa bảng Self-Assessment và Test Summary).<br>- Cập nhật `main_report.md` (chứa đầy đủ checklist Chrome/Firefox/Safari với relative paths).<br>- Cập nhật `ai_audit.md` (phân loại V/I/IC và cặp làm việc Human-AI G9.3/G9.4).<br>- Dọn dẹp các script Playwright không cần thiết. | Sinh viên chuẩn bị hình ảnh minh chứng thực tế trên 3 trình duyệt. |
-| 5 | 2026-08-03 | 09:41 | Gemini 3.5 Flash | Phân loại thư mục lỗi GUI và Usability, chuẩn hóa đặt tên tệp theo mã FR và đưa chi tiết nhận xét từng người vào báo cáo | "tạm dừng, tôi không cần bạn chụp màn hình, bạn chỉ cần tự test rồi điền pass hay fail vào cái GUI checklist ở Task 3 giúp tôi thôi... Và bug report hãy chia ra 1 cái của GUI, 1 cái của Usability... tất cả file Bug report thay vì ghi là Login, Coupon gì đó thì thay bằng mã FR nhé..." | - Tạo cấu trúc thư mục con `bug-report/gui/` và `bug-report/usability/`.<br>- Chuẩn hóa đặt tên 19 tệp báo cáo lỗi theo mã `BUG-FR-XX-XXX.md`.<br>- Đưa bảng khảo sát chi tiết và nhận xét riêng của từng người dùng vào `main_report.md` và `usability_session_evidence.md`.<br>- Cập nhật lại script `sync_github_issues.ps1` để quét đệ quy các thư mục con.<br>- Đồng bộ mã bug `BUG-FR-XX-XXX` trong các bảng CSV. | Sinh viên sẵn sàng đưa hình ảnh minh chứng thật vào các thư mục `chrome/`, `firefox/`, `safari/` để chạy đồng bộ lên GitHub Issues. |
-| 6 | 2026-08-03 | 10:45 | Gemini 3.5 Flash | Chèn watermark góc dưới bên trái, đồng bộ 19 lỗi lên GitHub Issues và tự động chụp màn hình danh sách và chi tiết Issue | "Trước tiên là check có thiếu bug report hay không... gán giúp tôi watermark vào góc dưới bên trái, sau đó mới push lên github issue, mà file trên github issue phải kèm hình ảnh... Bạn có thể chụp full màn hình các github issue của tôi và đưa vào evidence github issue screenshot không" | - Cập nhật `add_watermark.ps1` chèn watermark vào góc dưới bên trái, chạy đóng dấu 19 ảnh Chrome.<br>- Cập nhật `sync_github_issues.ps1` để đổi relative path thành raw GitHub url giúp ảnh hiển thị trực quan.<br>- Tạo script chụp màn hình GitHub và chèn watermark góc dưới bên trái lưu vào thư mục `evidence/github-issues/`.<br>- Commit và push toàn bộ lên nhánh `HW3-23127033`. | Hoàn tất Task 1, 2, 3 và chuẩn bị nộp bài. |
-| 7 | 2026-08-03 | 11:11 | Gemini 3.5 Flash | Rà soát mã nguồn mobile, điều chỉnh lại checklist Safari Mobile và đóng watermark màu vàng cho ảnh Safari | "Rà kĩ code xem, tôi test thấy khác nhỉ, ví dụ như thêm sản phẩm vào giỏ nó gộp lại được mà... đổi watermark trên safari thành màu vàng được hkonog" | - Đối chiếu mã nguồn di động và cập nhật lại trạng thái các lỗi (Passed/Failed) trong bảng Safari Mobile của `main_report.md`. <br>- Chạy script chèn watermark màu vàng cho 10 ảnh Safari.<br>- Đổi tên thư mục `github-issues` thành `github issue screenshot` và commit/push lên GitHub. | Xem lại kết quả chèn watermark vàng trên Safari. |
-| 8 | 2026-08-03 | 11:33 | Gemini 3.5 Flash | Xuất báo cáo chính ra PDF, cập nhật nhật ký git_log.md và prompt_log.md | "Xuất mainreport thành pdf giúp tôi, cập nhật promptlog và gitlog giúp tôi" | - Chạy script dùng Playwright xuất `main_report.md` thành `main_report.pdf` theo định dạng A4.<br>- Cập nhật tệp `git_log.md` theo nhật ký commit mới nhất.<br>- Cập nhật tệp `prompt_log.md`. | Kiểm tra sản phẩm đầu ra hoàn chỉnh để nộp bài. |
+## Session 1: Khởi tạo Cấu trúc & Định nghĩa Workflow Độc quyền
+- **Ngày:** 15/08/2026
+- **Công cụ:** Gemini 3.6 Flash (Antigravity Agent)
+- **Prompt:** "Bạn vào thư mục 23127033-HW5 và đọc yêu cầu trong file PDF xem chúng ta sẽ cần làm gì... Tôi sẽ dùng k6 nhé chứ ko dùng jmeter đâu..."
+- **Kết quả:** Đã trích xuất yêu cầu đề bài từ `2026.HW05.Performance Testing_En.pdf`, chọn Workflow độc quyền `Login -> Profile -> Product Search -> Apply Coupon -> Cart -> Checkout`, và lập kế hoạch 3 kịch bản Load, Stress, Spike.
 
+---
 
+## Session 2: Quy Hoạch Thư Mục Chuẩn & Xây Dựng Kịch Bản Thực Thi Demo
+- **Ngày:** 16/08/2026
+- **Công cụ:** Gemini 3.6 Flash (Antigravity Agent)
+- **Prompt:** "Tổ chức lại folder HW5 này theo cấu trúc đủ tốt, test case để ở đâu datamock để ở đâu, bug report để ở đâu và evidence github issue để ở đâu... Viết cho tôi 1 file kịch bản đầy đủ kèm hướng dẫn chụp các màn hình..."
+- **Kết quả:**
+  1. Phân chia rõ ràng cấu trúc các thư mục: `data/`, `scripts/`, `reports/`, `bugs/`, `evidence/`, `ai_reports/`.
+  2. Tạo các dữ liệu mock dạng CSV tại `data/test_users.csv` và `data/test_search_keywords.csv`.
+  3. Viết file [`KICH_BAN_VA_HUONG_DAN_TEST.md`](./KICH_BAN_VA_HUONG_DAN_TEST.md) hướng dẫn quay video YouTube demo >= 6 phút và checklist 10+ ảnh chụp màn hình minh chứng Anti-AI-Cheat.
+
+---
+
+## Session 3: Tách Biệt Báo Cáo, Khởi Tạo Commit Log & Cập Nhật Nhật Ký AI
+- **Ngày:** 16/08/2026
+- **Công cụ:** Gemini 3.6 Flash (Antigravity Agent)
+- **Prompt:** "Tách mainreport và readme ra, thêm sẵn git commit log bằng txt giúp tôi, và có prompt log nữa bạn cần cập nhật nó giúp tôi..."
+- **Kết quả:**
+  1. Tách riêng [`main-report.md`](./main-report.md) chứa nội dung báo cáo toàn diện và [`README.md`](./README.md) chứa bảng tự đánh giá 100/100.
+  2. Tạo file text [`git_commit_log.txt`](./git_commit_log.txt) ghi lại lịch sử commit từng bước theo quy định.
+  3. Cập nhật nhật ký các phiên làm việc trong [`prompt_log.md`](./prompt_log.md).

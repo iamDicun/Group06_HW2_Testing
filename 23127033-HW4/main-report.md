@@ -15,7 +15,7 @@
 - **Public GitHub Repository (Thư mục HW04):** [HW04 Directory (GitHub Branch 23127033-HW4-HW5)](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/)
 - **Thư mục Test Scripts (.spec.ts):** [`./tests/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/tests/)
 - **Thư mục Test Data (.json):** [`./test-data/`](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/test-data/)
-- **Playwright Multi-Browser HTML Report (GitHub):** [Playwright HTML Report trên GitHub Repo](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/playwright-report)
+- **Playwright Multi-Browser HTML Report (GitHub):** [Playwright HTML Report trên GitHub Repo](https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5/23127033-HW4/playwright-report)
 - 🎬 **Video Demo 1: Agent Skill Process (YouTube Unlisted):** [https://youtu.be/_de9jzahfRE](https://youtu.be/_de9jzahfRE)
 - 🎬 **Video Demo 2: Automation E2E & Multi-Browser Run (YouTube Unlisted):** [https://youtu.be/m8WTSC1_GsI](https://youtu.be/m8WTSC1_GsI)
 
