@@ -34,6 +34,9 @@ Login -> Product Search -> Product Detail -> Add to Cart -> Update Cart -> Check
 submission/HW05-PerformanceTesting/
 ├── README.md                    (Bao cao tong ket)
 ├── AI_CRITIQUE.md               (Phan tich loi AI)
+├── bug-report.md                (Bao cao loi)
+├── ai_audit.md                  (Nhat ky hop tac voi AI)
+├── git_log.txt                  (Lichsu commit)
 ├── scripts/
 │   ├── 23127459_Load_20260816.jmx
 │   ├── 23127459_Stress_20260816.jmx
