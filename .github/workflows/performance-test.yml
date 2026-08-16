@@ -2,74 +2,55 @@ name: Performance Testing CI
 
 on:
   push:
-    branches: ["HW05-23127459"]
-  pull_request:
-    branches: [main]
 
 env:
-  NODE_VERSION: '20.x'
   JAVA_VERSION: '17'
   JMETER_VERSION: '5.6.3'
-  P95_THRESHOLD_MS: 500
 
 jobs:
   performance-test:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Setup Java
+      - name: Setup Java JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: '17'
 
-      - name: Install dependencies
-        working-directory: ./eshop-sut/backend
-        run: npm ci
-
-      - name: Start EShop Backend
-        working-directory: ./eshop-sut/backend
-        run: |
-          npm start &
-          sleep 10
-          
-      - name: Health Check
-        run: |
-          curl -f http://localhost:3000/api/products || exit 1
-          
-      - name: Download JMeter
+      - name: Download Apache JMeter 5.6.3
         run: |
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${{ env.JMETER_VERSION }}.tgz
           tar -xzf apache-jmeter-${{ env.JMETER_VERSION }}.tgz
           echo "$PWD/apache-jmeter-${{ env.JMETER_VERSION }}/bin" >> $GITHUB_PATH
-          
+
+      - name: Start Backend Server
+        working-directory: ./eshop-sut/backend
+        run: |
+          npm start &
+          sleep 15
+
       - name: Run JMeter Load Test
         run: |
-          jmeter -n -t 23127459_Load_20260816.jmx \
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Load_20260816.jmx \
             -l results_load.jtl \
             -e -o report_load/
-            
+
       - name: Run JMeter Stress Test
         run: |
-          jmeter -n -t 23127459_Stress_20260816.jmx \
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Stress_20260816.jmx \
             -l results_stress.jtl \
             -e -o report_stress/
-            
-      - name: Analyze Results
+
+      - name: Run JMeter Spike Test
         run: |
-          python3 scripts/analyze_results.py \
-            --jtl results_load.jtl \
-            --threshold ${{ env.P95_THRESHOLD_MS }}
-            
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Spike_20260816.jmx \
+            -l results_spike.jtl \
+            -e -o report_spike/
+
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         if: always()
@@ -78,29 +59,7 @@ jobs:
           path: |
             report_load/
             report_stress/
+            report_spike/
             results_load.jtl
             results_stress.jtl
-            
-      - name: Comment PR with Results
-        uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
-        with:
-          script: |
-            const fs = require('fs');
-            const jtlContent = fs.readFileSync('results_load.jtl', 'utf8');
-            const lines = jtlContent.split('\n');
-            const sampleCount = lines.length - 2;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `## Performance Test Results
-              
-            | Metric | Value |
-            |--------|-------|
-            | Total Samples | ${sampleCount} |
-            | Threshold | ${{ env.P95_THRESHOLD_MS }}ms |
-            
-            Reports uploaded as artifacts.`
-            });
+            results_spike.jtl

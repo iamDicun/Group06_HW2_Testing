@@ -748,7 +748,3 @@ jmeter -n -t 23127459_Spike_20260816.jmx -l results.jtl -e -o report/
 start report/index.html  # Windows
 open report/index.html    # macOS
 ```
-
----
-
-**End of Report**

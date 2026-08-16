@@ -14,7 +14,7 @@
 2. [Moi truong & Thong so phan cung](#2-moi-truong--thong-so-phan-cung)
 3. [Tong ket ket qua kiem thu](#3-tong-ket-ket-qua-kiem-thu)
 4. [Phan tich Loi & Nut thuc hieu nang](#4-phan-tich-loi--nut-thuc-hieu-nang)
-5. [Lien ket Video Minh chung](#5-lien-ket-video-minh-chung)
+5. [Link Lien Ket](#5-link-lien-ket)
 6. [AI Critique Summary](#6-ai-critique-summary)
 7. [Lich su Commit Nhanh Ca Nhan](#7-lich-su-commit-nhanh-ca-nhan)
 
@@ -40,16 +40,15 @@ submission/HW05-PerformanceTesting/
 │   ├── 23127459_Spike_20260816.jmx
 │   ├── 23127459_auth_credentials.csv
 │   ├── 23127459_products.csv
-│   ├── 23127459_checkout.csv
-│   └── analyze_results.py
+│   └── 23127459_checkout.csv
 ├── reports/
 │   ├── Report_Load/
 │   ├── Report_Stress/
 │   └── Report_Spike/
 └── screenshots/
-    ├── Screenshot (92).png
-    ├── Screenshot (93).png
-    └── Screenshot (94).png
+    ├── task_manager.png
+    ├── hardware_spec.png
+    └── system_info.png
 ```
 
 ---
@@ -74,13 +73,13 @@ submission/HW05-PerformanceTesting/
 | Database | SQLite (file-based) |
 | Backend Port | localhost:3000 |
 
-### 2.3 Anh man hinh cau hinh
+### 2.3 Bang chung hinh anh tai nguyen (Screenshots)
 
-![Task Manager](screenshots/Screenshot%20(92).png)
+![Hardware Spec & Task Manager](screenshots/task_manager.png)
 
-![Hardware Spec](screenshots/Screenshot%20(93).png)
+![Hardware Spec](screenshots/hardware_spec.png)
 
-![System Info](screenshots/Screenshot%20(94).png)
+![System Info](screenshots/system_info.png)
 
 ---
 
@@ -163,11 +162,10 @@ Khi dui Spike Test 200 VUs, xay ra cac hien tuong:
 
 ---
 
-## 5. Lien ket Video Minh chung
+## 5. Link Lien Ket
 
-[Link Video Minh Chung Demo](URL_HERE)
-
-*Ghi chu: Cap nhat link video sau khi quay demo.*
+- **Link Repository Du An:** [Link Repo GitHub](DÁN_LINK_PROJECT_REPO_VÀO_ĐÂY)
+- **Link Video Minh Chung:** [Video Demo Youtube/Loom](DÁN_LINK_YOUTUBE_MINH_CHỨNG_VÀO_ĐÂY)
 
 ---
 
@@ -189,6 +187,7 @@ Trong qua trinh thuc hanh, AI da mac mot so loi chinh:
 ## 7. Lich su Commit Nhanh Ca Nhan
 
 ```
+d9af86f  hoan-thien(HW05): sap xep lai cau truc thu muc va viet README.md
 b7f7644  doc(HW05): remove Chinese characters from AI Critique
 5ff6e6d  doc(HW05): add AI Critique analysis
 edf89d6  feat(HW05): add performance testing scripts and JMX files
