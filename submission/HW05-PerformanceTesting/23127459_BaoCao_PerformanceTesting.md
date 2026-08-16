@@ -657,16 +657,18 @@ open report/index.html    # macOS
 ## APPENDIX: Lịch sử Commit
 
 ```
+0a69ce3  cap-nhat(HW05): viet lai bao cao theo git log va ai_audit moi
 c25cb3a  cap-nhat(HW05): them 3 file moi vao cau truc thu muc
 ccc9903  sua-loi(HW05): fix working-directory trong workflow CI/CD
 faceabc  them-file(HW05): them git_log, bug_report, ai_audit
 166e508  sua-loi(HW05): sua workflow CI/CD va xoa file thua
 d9af86f  hoan-thien(HW05): sap xep lai cau truc thu muc va viet README.md
+031675a  fix(Stress.jmx): resolve tag error in the Stress
 b7f7644  doc(HW05): remove Chinese characters from AI Critique
 5ff6e6d  doc(HW05): add AI Critique analysis
+d04194a  fix(Spike.jmx): resolve tag error in the Spike
+d7bbc0e  fix(Load.jmx): fix URL protocol duplication in Load test script
+d051860  fix(Spike.jmx): resolve URL protocol duplication and cross-thread auth token scoping in Spike test
+63a2066  fix(Stress.jmx): add 4th request to verify the account lockout with correct credentials
 edf89d6  feat(HW05): add performance testing scripts and JMX files
-63a2066  fix(Stress.jmx): add 4th request to verify lockout
-d051860  fix(Spike.jmx): resolve URL duplication and token scoping
-d7bbc0e  fix(Load.jmx): fix URL protocol duplication
-d04194a  fix(Spike.jmx): resolve tag error
 ```

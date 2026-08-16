@@ -1,23 +1,16 @@
-* 166e508 sua-loi(HW05): sua workflow CI/CD va xoa file thua
-* d9af86f hoan-thien(HW05): sap xep lai cau truc thu muc va viet README.md
-* 031675a fix(Stress.jmx): resolve tag error in the Stress
-* b7f7644 fix(HW05): remove Chinese characters from AI Critique
-* 5ff6e6d doc(HW05): add AI Critique analysis
-* d04194a fix(Spike.jmx): resolve tag error in the Spike
-* d7bbc0e fix(Load.jmx): fix URL protocol duplication in Load test script
-* d051860 fix(Spike.jmx): resolve URL protocol duplication and cross-thread auth token scoping in Spike test
-* 63a2066 fix(Stress.jmx): add 4th request to verify the account lockout with correct credentials
-* edf89d6 feat(HW05): add performance testing scripts and JMX files
-* 83e0ca7 Update Quang Dao's work
-* f26bdc7 add eshop-sut
-* 1951c14 Update README.md
-* 8c14bc6 Update member MSSV for Châu in README.md
-* 34f7281 Fix Pool D assignment for member Châu
-* a58b681 label
-* 1b88cd2 Feature Assignment
-* ddba4b7 add new bug report
-* fecc5a5 update bug template
-* c608b2b init
-* e907fc8 init update
-* 2a31fdb init
-* d1562c6 Initial commit
+Họ và tên: Huỳnh Vương Thụy Quân - MSSV: 23127459
+
+* 0a69ce3  cap-nhat(HW05): viet lai bao cao theo git log va ai_audit moi
+* c25cb3a  cap-nhat(HW05): them 3 file moi vao cau truc thu muc
+* ccc9903  sua-loi(HW05): fix working-directory trong workflow CI/CD
+* faceabc  them-file(HW05): them git_log, bug_report, ai_audit
+* 166e508  sua-loi(HW05): sua workflow CI/CD va xoa file thua
+* d9af86f  hoan-thien(HW05): sap xep lai cau truc thu muc va viet README.md
+* 031675a  fix(Stress.jmx): resolve tag error in the Stress
+* b7f7644  doc(HW05): remove Chinese characters from AI Critique
+* 5ff6e6d  doc(HW05): add AI Critique analysis
+* d04194a  fix(Spike.jmx): resolve tag error in the Spike
+* d7bbc0e  fix(Load.jmx): fix URL protocol duplication in Load test script
+* d051860  fix(Spike.jmx): resolve URL protocol duplication and cross-thread auth token scoping in Spike test
+* 63a2066  fix(Stress.jmx): add 4th request to verify the account lockout with correct credentials
+* edf89d6  feat(HW05): add performance testing scripts and JMX files
