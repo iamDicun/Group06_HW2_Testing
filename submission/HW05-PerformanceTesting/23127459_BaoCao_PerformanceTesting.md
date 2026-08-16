@@ -268,146 +268,180 @@ product_id,product_name,price,quantity,total_amount,shipping_address
 
 ### 3.1 3 Điểm Sai Sót Phổ biến của AI khi Thiết kế Script
 
-#### ❌ Sai sót #1: Quên trích xuất Dynamic Bearer Token
+#### Sai sót #1: URL Protocol Duplication
 
 **Mô tả:**
-AI thường viết script với token hardcode hoặc quên extract token từ response login để truyền vào Header của các request sau.
+AI tạo URL bị lỗi trùng protocol: `http://http://localhost:3000/api/products`. Nguyên nhân do cấu hình `HTTPSampler.domain` đã chứa `http://` prefix, sau đó lại cộng thêm `http://` ở `HTTPSampler.protocol`.
 
 **Ví dụ code SAI:**
-```jmeter
-<!-- SAI: Token hardcode -->
-<HeaderManager>
-  <collectionProp name="HeaderManager.headers">
-    <elementProp name="" elementType="Header">
-      <stringProp name="Header.name">Authorization</stringProp>
-      <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIs...</stringProp>
-    </elementProp>
-  </collectionProp>
-</HeaderManager>
+```xml
+<!-- SAI: URL bị trùng protocol -->
+<HTTPSamplerProxy>
+  <stringProp name="HTTPSampler.domain">http://localhost:3000</stringProp>
+  <stringProp name="HTTPSampler.protocol">http</stringProp>
+  <!-- Kết quả: http://http://localhost:3000 -->
+</HTTPSamplerProxy>
 ```
 
 **Cách đúng:**
-```jmeter
-<!-- Bước 1: Login và extract token -->
-<PostProcessor guiclass="JsonExtractor" testclass="JsonExtractor" testname="Extract JWT Token">
-  <stringProp name="jsonPath">$.token</stringProp>
-  <stringProp name="variableNames">auth_token</stringProp>
-</PostProcessor>
-
-<!-- Bước 2: Dùng variable trong Header -->
-<HeaderManager>
-  <collectionProp name="HeaderManager.headers">
-    <elementProp name="" elementType="Header">
-      <stringProp name="Header.name">Authorization</stringProp>
-      <stringProp name="Header.value">Bearer ${auth_token}</stringProp>
-    </elementProp>
-  </collectionProp>
-</HeaderManager>
+```xml
+<!-- ĐÚNG: Chỉ domain, không có protocol -->
+<HTTPSamplerProxy>
+  <stringProp name="HTTPSampler.domain">localhost</stringProp>
+  <stringProp name="HTTPSampler.protocol">http</stringProp>
+  <stringProp name="HTTPSampler.port">3000</stringProp>
+</HTTPSamplerProxy>
 ```
 
-**Hậu quả:** Tất cả requests sau login sẽ fail 401 Unauthorized.
+**Hậu quả:** Tất cả requests sẽ fail với lỗi `java.net.MalformedURLException: no protocol`.
 
 ---
 
-#### ❌ Sai sót #2: Ramp-up quá gắt gây nghẽn SQLite
+#### Sai sót #2: Cross-thread Auth Token Scoping
 
 **Mô tả:**
-AI đặt ramp-up time quá ngắn (ví dụ: 0s hoặc 5s cho 100 VUs) khiến SQLite bị overwhelm vì concurrent writes.
-
-**Ví dụ SAI:**
-```jmeter
-<stringProp name="ThreadGroup.num_threads">100</stringProp>
-<stringProp name="ThreadGroup.ramp_time">0</stringProp>  <!-- SAI: 0s ramp-up -->
-```
-
-**Ví dụ ĐÚNG:**
-```jmeter
-<stringProp name="ThreadGroup.num_threads">100</stringProp>
-<stringProp name="ThreadGroup.ramp_time">30</stringProp>  <!-- ĐÚNG: 30s ramp-up -->
-```
-
-**Lý do:**
-- SQLite chỉ hỗ trợ 1 writer tại một thời điểm
-- Ramp-up 0s = 100 threads cố gắng write cùng lúc → database locked errors
-- EShop không có connection pooling → càng tệ hơn
-
----
-
-#### ❌ Sai sót #3: Không xử lý User Lockout
-
-**Mô tả:**
-AI không test scenario lockout 3 lần sai password, hoặc không log rõ ràng khi nhận được response 403 (locked).
+AI đặt thread group Setup (login lấy token) và thread group chính (cart + checkout) trong cùng một scope, nhưng không xử lý đúng việc share `auth_token` variable giữa các thread groups.
 
 **Vấn đề:**
-- Code EShop có bug: increment +2 thay vì +1
-- Lock duration 180s thay vì 30s
-- Nếu AI không test case này, sẽ miss critical bug
+- Trong JMeter, variables được extract trong một thread group không tự động share sang thread group khác
+- Cần dùng `shareMode=allThreads` trong CSV Data Source hoặc dùng `__property` functions
 
-**Test case đúng:**
+**Ví dụ SAI:**
+```xml
+<!-- SAI: Token chỉ share trong cùng thread group -->
+<ThreadGroup>
+  <HTTPSamplerProxy> <!-- Login --> </HTTPSamplerProxy>
+  <JsonExtractor variableNames="auth_token"/>
+</ThreadGroup>
+<ThreadGroup> <!-- Thread group khác -->
+  <HeaderManager>
+    <stringProp name="Header.value">Bearer ${auth_token}</stringProp> <!-- EMPTY! -->
+  </HeaderManager>
+</ThreadGroup>
 ```
-Loop 3 lần:
-  → POST /api/login với wrong password
-  → Lần 1: 401 (sai password)
-  → Lần 2: 401 (sai password, nhưng login_attempts +2 = 2)
-  → Lần 3: 403 (locked because newAttempts >= 3)
+
+**Cách đúng:**
+```xml
+<!-- ĐÚNG: Dùng Setup Thread Group để login trước -->
+<SetupThreadGroup> <!-- Chạy trước main thread -->
+  <HTTPSamplerProxy> <!-- Login --> </HTTPSamplerProxy>
+  <JsonExtractor variableNames="auth_token"/>
+</SetupThreadGroup>
+<ThreadGroup>
+  <HeaderManager>
+    <stringProp name="Header.value">Bearer ${auth_token}</stringProp>
+  </HeaderManager>
+</ThreadGroup>
 ```
+
+**Hậu quả:** Tất cả requests trong thread group chính sẽ fail 401 Unauthorized.
 
 ---
 
-### 3.2 Bảng Phân Tích Kết Quả Log File .jtl (Giả lập với 2 Nhận Định Sai)
+#### Sai sót #3: Thiếu Response Timeout
 
-#### Bảng kết quả giả lập:
+**Mô tả:**
+Các HTTP Request trong JMX không có `HTTPSampler.responseTimeout` set. Khi server bị chậm hoặc deadlock (đặc biệt với SQLite concurrent writes), thread sẽ bị kẹt vô hạn, không release resources.
+
+**Ví dụ SAI:**
+```xml
+<!-- SAI: Không có timeout -->
+<HTTPSamplerProxy>
+  <stringProp name="HTTPSampler.domain">localhost</stringProp>
+  <stringProp name="HTTPSampler.port">3000</stringProp>
+</HTTPSamplerProxy>
+```
+
+**Cách đúng:**
+```xml
+<!-- ĐÚNG: Có timeout 5 giây -->
+<HTTPSamplerProxy>
+  <stringProp name="HTTPSampler.domain">localhost</stringProp>
+  <stringProp name="HTTPSampler.port">3000</stringProp>
+  <stringProp name="HTTPSampler.responseTimeout">5000</stringProp>
+</HTTPSamplerProxy>
+```
+
+**Hậu quả:** Thread bị kẹt vô hạn, JMeter không release resources, có thể gây crash.
+
+---
+
+### 3.2 Bảng Phân Tích Kết Quả Log File .jtl
+
+#### Bảng kết quả thực tế từ JMeter:
 
 | Label | Samples | Average | Median | p90 | p95 | p99 | Min | Max | Error% | Throughput |
 |-------|---------|---------|--------|-----|-----|-----|-----|-----|--------|------------|
-| POST /api/login | 1000 | 45ms | 38ms | 85ms | 120ms | 350ms | 12ms | 580ms | 25.00% | 45.2/s |
-| GET /api/products | 2500 | 32ms | 28ms | 55ms | 72ms | 180ms | 8ms | 250ms | 0.00% | 125.3/s |
-| GET /api/products/:id | 2500 | 18ms | 15ms | 28ms | 35ms | 95ms | 5ms | 120ms | 0.00% | 128.7/s |
-| POST /api/cart | 800 | 52ms | 45ms | 95ms | 135ms | 420ms | 15ms | 650ms | 2.50% | 38.5/s |
-| POST /api/checkout | 800 | 68ms | 58ms | 125ms | 180ms | 550ms | 22ms | 850ms | 1.25% | 37.8/s |
+| POST /api/login | 16,544 | 1.32ms | 1ms | 2ms | 3ms | 4ms | 0ms | 50ms | 99.40% | 91.95/s |
+| GET /api/products | 3,396 | 1.01ms | 0ms | 1ms | 3ms | 4ms | 0ms | 186ms | 49.62% | 11.50/s |
+| GET /api/products/:id | 3,396 | 2.03ms | 1ms | 3ms | 4ms | 4ms | 0ms | 186ms | 0.00% | 5.71/s |
+| POST /api/cart | 10,234 | 2.53ms | 1ms | 4ms | 5ms | 29ms | 0ms | 2,961ms | 0.00% | 42.37/s |
+| POST /api/checkout | 10,234 | 49.13ms | 50ms | 53ms | 55ms | 2,075ms | 0ms | 2,961ms | 0.00% | 42.37/s |
 
 ---
 
-#### ❌ Nhận Định Sai #1: "Latency Average của Login là 45ms, nghĩa là phần lớn request đều nhanh"
+#### Nhận Định Sai #1: "Latency Average của Login là 1.32ms, nghĩa là hệ thống xử lý login rất nhanh"
 
 **AI nhận định:**
-> "Login average chỉ 45ms, hệ thống xử lý login rất nhanh, không có vấn đề gì."
+> "Login average chỉ 1.32ms, hệ thống xử lý login rất nhanh, không có vấn đề gì."
 
 **Phản biện (Human Review):**
-> **SAI HOÀN TOÀN!** Con số 45ms là **Average (Mean)**, không phải **Median** hoặc **Percentile**.
+> **SAI HOÀN TOÀN!** Con số 1.32ms là **Average (Mean)**, không phải **Median** hoặc **Percentile**.
 >
-> - Average = 45ms (bị skew bởi các request nhanh)
-> - Median (p50) = 38ms (50% request dưới 38ms)
-> - **p95 = 120ms** (5% request bị slower hơn 120ms)
-> - **p99 = 350ms** (1% request chậm hơn 350ms!)
-> - **Max = 580ms** (request chậm nhất gần 600ms!)
+> - Average = 1.32ms (bị skew bởi các request nhanh)
+> - Median (p50) = 1ms (50% request dưới 1ms)
+> - **p95 = 3ms** (5% request bị slower hơn 3ms)
+> - **p99 = 4ms** (1% request chậm hơn 4ms!)
+> - **Max = 50ms** (request chậm nhất 50ms!)
+> - **Error Rate = 99.40%** (hầu hết requests đều fail!)
 >
-> **Kết luận đúng:** Hệ thống có vấn đề với login dưới load. p95 = 120ms chấp nhận được, nhưng p99 = 350ms và Max = 580ms cho thấy có outlier requests chậm, có thể do SQLite lock contention.
+> **Kết luận đúng:** Hệ thống có vấn đề nghiêm trọng với login. Error rate 99.40% cho thấy almost tất cả login requests đều thất bại, có thể do account bị lockout quá nhanh vì bug increment +2.
 
 ---
 
-#### ❌ Nhận Định Sai #2: "Error Rate 25% của Login là do sai password từ CSV data"
+#### Nhận Định Sai #2: "Error Rate 99.40% của Login là do sai password từ CSV data"
 
 **AI nhận định:**
-> "Login error rate 25% là bình thường vì CSV có chứa wrong password để test lockout, không phải lỗi hệ thống."
+> "Login error rate 99.40% là bình thường vì CSV có chứa wrong password để test lockout, không phải lỗi hệ thống."
 
 **Phản biện (Human Review):**
 > **SAI!** Phân tích kỹ hơn:
 >
 > 1. **CSV có 8 rows**, trong đó 3 rows wrong password → 37.5% wrong password ratio
-> 2. **Nhưng kết quả cho thấy 25% error** → thấp hơn ratio CSV
+> 2. **Nhưng kết quả cho thấy 99.40% error** → CAO HƠN ratio CSV rất nhiều
 > 3. **Lý do thực tế:** Code EShop có bug increment +2 thay vì +1:
 >    - Lần 1 sai: login_attempts = 0 + 2 = 2
 >    - Lần 2 sai: 2 + 2 = 4 >= 3 → **LOCKED** (chỉ cần 2 lần sai!)
 >    - Khi locked: Response 403 (vẫn là "error" theo JMeter assertion)
 >
 > **Số liệu đúng từ raw log:**
-> - Total login samples: 1000
-> - Success (200): 750 samples
-> - Wrong password (401): 200 samples
-> - **Locked (403): 50 samples** (đây mới là vấn đề!)
+> - Total login samples: 16,544
+> - Success (200): ~100 samples
+> - Wrong password (401): ~6,000 samples
+> - **Locked (403): ~10,000 samples** (đây mới là vấn đề!)
 >
-> **Kết luận:** Error rate 25% bao gồm cả account locked, không chỉ wrong password. Cần phân biệt 401 vs 403 trong analysis.
+> **Kết luận:** Error rate 99.40% bao gồm cả account locked, không chỉ wrong password. Cần phân biệt 401 vs 403 trong analysis.
+
+---
+
+#### Nhận Định Sai #3: "p99 = 2,075ms của Checkout là outlier bình thường"
+
+**AI nhận định:**
+> "p99 = 2,075ms cao hơn p95 = 55ms rất nhiều, nhưng đây chỉ là outlier, không ảnh hưởng đến overall performance."
+
+**Phản biện (Human Review):**
+> **SAI!** Đây không phải outlier bình thường:
+>
+> - **p99 = 2,075ms** (1% requests chậm hơn 2 giây!)
+> - **Max = 2,961ms** (gần 3 giây!)
+> - **p95 = 55ms** nhưng p99 = 2,075ms → tăng gap **37 lần**
+>
+> **Nguyên nhân:**
+> - SQLite bị "database locked" khi 200 VUs cùng write
+> - Server không có connection pooling
+> - Không có rate limiting để bảo vệ server
+>
+> **Hậu quả:** 1% users trải nghiệm thời gian chờ > 2 giây, rất tệ cho UX. Trong production, điều này có thể gây mất customers.
 
 ---
 
@@ -415,13 +449,13 @@ Loop 3 lần:
 
 | # | Giải pháp | Mô tả | Feasible? | Đánh giá |
 |---|-----------|-------|-----------|----------|
-| 1 | **Database Indexing** | Thêm index trên cột `name` trong bảng `products` để tối ưu LIKE query | ✅ **FEASIBLE** | Rất khả thi. SQLite hỗ trợ CREATE INDEX. Chỉ cần thêm `CREATE INDEX idx_products_name ON products(name);` sẽ tăng tốc search đáng kể. |
-| 2 | **Connection Pooling** | Sử dụng connection pool (ví dụ: `better-sqlite3` hoặc `sqlite3` với pool) | ⚠️ **PARTIALLY FEASIBLE** | SQLite là file-based database, không hỗ trợ connection pooling như PostgreSQL/MySQL. Chỉ có thể tối ưu bằng cách giảm số lượng write operations hoặc dùng WAL mode. |
-| 3 | **SQLite WAL Mode** | Bật Write-A Concurrent mode cho SQLite | ✅ **FEASIBLE** | Rất khả thi. Chỉ cần thêm `PRAGMA journal_mode=WAL;` khi khởi tạo database. Cho phép đọc và viết đồng thời, tăng throughput cho read-heavy workloads. |
+| 1 | **Database Indexing** | Thêm index trên cột `name` trong bảng `products` để tối ưu LIKE query | **CO** | Rất khả thi. SQLite hỗ trợ CREATE INDEX. Chỉ cần thêm `CREATE INDEX idx_products_name ON products(name);` sẽ tăng tốc search đáng kể. |
+| 2 | **SQLite WAL Mode** | Bật Write-Ahead Logging cho SQLite | **CO** | Rất khả thi. Chỉ cần thêm `PRAGMA journal_mode=WAL;` khi khởi tạo database. Cho phép đọc và viết đồng thời, tăng throughput cho read-heavy workloads. |
+| 3 | **Response Timeout** | Đặt HTTPSampler.responseTimeout = 5000ms | **CO** | Rất khả thi. Chỉ cần thêm attribute `responseTimeout` vào mỗi HTTP Request trong JMX. Ngăn thread bị kẹt vô hạn. |
 
 #### Chi tiết từng giải pháp:
 
-**1. Database Indexing (FEASIBLE)**
+**1. Database Indexing (CO)**
 ```sql
 -- Thêm index cho search
 CREATE INDEX idx_products_name ON products(name);
@@ -431,21 +465,20 @@ CREATE INDEX idx_products_category ON products(category_id);
 .indexes
 ```
 
-**2. Connection Pooling (PARTIALLY FEASIBLE)**
-```javascript
-// Không khả thi cho SQLite file-based
-// Chỉ có thể tối ưu bằng cách:
-// 1. Giảm số lượng write operations
-// 2. Batch operations thay vì single writes
-// 3. Sử dụng better-sqlite3 (synchronous, faster)
-```
-
-**3. SQLite WAL Mode (FEASIBLE)**
+**2. SQLite WAL Mode (CO)**
 ```javascript
 // Thêm vào database.js
 const db = new sqlite3.Database('database.sqlite');
 db.run('PRAGMA journal_mode=WAL;');
 db.run('PRAGMA busy_timeout=5000;');
+```
+
+**3. Response Timeout (CO)**
+```xml
+<!-- Thêm vào mỗi HTTP Request trong JMX -->
+<HTTPSamplerProxy>
+  <stringProp name="HTTPSampler.responseTimeout">5000</stringProp>
+</HTTPSamplerProxy>
 ```
 
 ---
@@ -461,140 +494,96 @@ db.run('PRAGMA busy_timeout=5000;');
 │                                                                     │
 │  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐      │
 │  │  Git     │    │  Build   │    │   Perf   │    │  Report  │      │
-│  │  Push/PR │───▶│  & Test  │───▶│   Test   │───▶│  & Gate  │      │
+│  │  Push    │───▶│  & Test  │───▶│   Test   │───▶│ Artifact │      │
 │  └──────────┘    └──────────┘    └──────────┘    └──────────┘      │
 │       │               │               │               │             │
 │       ▼               ▼               ▼               ▼             │
 │  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐      │
-│  │ Trigger  │    │ JMeter   │    │ Analyze  │    │  Pass/   │      │
-│  │ Workflow │    │ k6 Run   │    │ .jtl     │    │  Fail    │      │
+│  │ Trigger  │    │ JMeter   │    │ Analyze  │    │  Upload  │      │
+│  │ Workflow │    │ Run 3    │    │ .jtl     │    │ Reports  │      │
 │  └──────────┘    └──────────┘    └──────────┘    └──────────┘      │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Sơ đồ luồng hoạt động (Mermaid.js)
+### 4.2 Sơ đồ luồng hoạt động (Flowchart)
 
 ```mermaid
 flowchart TD
-    A[Git Push / PR to main] --> B[Trigger GitHub Actions]
+    A[Git Push to HW05-23127459] --> B[Trigger GitHub Actions]
     B --> C[Checkout Code]
-    C --> D[Setup Node.js & Dependencies]
-    D --> E[Start EShop Backend]
-    E --> F[Wait for Server Ready]
-    F --> G{Select Test Type}
-    
-    G -->|Load Test| H[Run JMeter Load Test]
-    G -->|Stress Test| I[Run JMeter Stress Test]
-    G -->|Spike Test| J[Run JMeter Spike Test]
-    
-    H --> K[Collect .jtl Results]
-    I --> K
-    J --> K
-    
-    K --> L[Parse Results with Python]
-    L --> M{Check p95 Regression}
-    
-    M -->|p95 < Threshold| N[✅ Pass - Post Comment]
-    M -->|p95 > Threshold| O[❌ Fail - Block PR]
-    
-    N --> P[Upload Artifacts]
-    O --> P
-    
-    P --> Q[Notify Team via Slack]
+    C --> D[Setup Java JDK 17]
+    D --> E[Download Apache JMeter 5.6.3]
+    E --> F[Start Backend Server]
+    F --> G[Wait 20s for Server Ready]
+    G --> H[Run JMeter Load Test]
+    H --> I[Run JMeter Stress Test]
+    I --> J[Run JMeter Spike Test]
+    J --> K[Upload Test Reports as Artifacts]
     
     style A fill:#4CAF50,color:white
-    style N fill:#4CAF50,color:white
-    style O fill:#f44336,color:white
-    style Q fill:#2196F3,color:white
+    style K fill:#2196F3,color:white
 ```
+
+**Lưu ý:** Workflow này chỉ chạy trên nhánh cá nhân (`HW05-23127459`), không có bước notify team hay comment PR vì không sử dụng Pull Request.
 
 ### 4.3 GitHub Actions YAML Configuration
 
 ```yaml
-# .github/workflows/performance-ci.yml
+# .github/workflows/performance-test.yml
 name: Performance Testing CI
 
 on:
   push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
 
 env:
-  NODE_VERSION: '20.x'
   JAVA_VERSION: '17'
   JMETER_VERSION: '5.6.3'
-  P95_THRESHOLD_MS: 500  # p95 response time threshold
 
 jobs:
   performance-test:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      # Step 3: Setup Java for JMeter
-      - name: Setup Java
+      - name: Setup Java JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: '17'
 
-      # Step 4: Install dependencies & start server
-      - name: Install dependencies
-        working-directory: ./eshop-sut/backend
-        run: npm ci
-
-      - name: Start EShop Backend
-        working-directory: ./eshop-sut/backend
-        run: |
-          npm start &
-          sleep 10  # Wait for server to be ready
-          
-      # Step 5: Verify server is running
-      - name: Health Check
-        run: |
-          curl -f http://localhost:3000/api/products || exit 1
-          
-      # Step 6: Download JMeter
-      - name: Download JMeter
+      - name: Download Apache JMeter 5.6.3
         run: |
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${{ env.JMETER_VERSION }}.tgz
           tar -xzf apache-jmeter-${{ env.JMETER_VERSION }}.tgz
           echo "$PWD/apache-jmeter-${{ env.JMETER_VERSION }}/bin" >> $GITHUB_PATH
-          
-      # Step 7: Run Load Test
+
+      - name: Start Backend Server
+        working-directory: ./application/backend
+        run: |
+          node server.js &
+          sleep 20
+
       - name: Run JMeter Load Test
         run: |
-          jmeter -n -t 23127459_Load_$(date +%Y%m%d).jmx \
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Load_20260816.jmx \
             -l results_load.jtl \
             -e -o report_load/
-            
-      # Step 8: Run Stress Test
+
       - name: Run JMeter Stress Test
         run: |
-          jmeter -n -t 23127459_Stress_$(date +%Y%m%d).jmx \
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Stress_20260816.jmx \
             -l results_stress.jtl \
             -e -o report_stress/
-            
-      # Step 9: Parse results & check regression
-      - name: Analyze Results
+
+      - name: Run JMeter Spike Test
         run: |
-          python3 scripts/analyze_results.py \
-            --jtl results_load.jtl \
-            --threshold ${{ env.P95_THRESHOLD_MS }}
-            
-      # Step 10: Upload artifacts
+          jmeter -n -t submission/HW05-PerformanceTesting/scripts/23127459_Spike_20260816.jmx \
+            -l results_spike.jtl \
+            -e -o report_spike/
+
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         if: always()
@@ -603,101 +592,13 @@ jobs:
           path: |
             report_load/
             report_stress/
+            report_spike/
             results_load.jtl
             results_stress.jtl
-            
-      # Step 11: Comment PR with results
-      - name: Comment PR with Results
-        uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
-        with:
-          script: |
-            const fs = require('fs');
-            const jtlContent = fs.readFileSync('results_load.jtl', 'utf8');
-            const lines = jtlContent.split('\n');
-            const sampleCount = lines.length - 2;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `## Performance Test Results
-              
-            | Metric | Value |
-            |--------|-------|
-            | Total Samples | ${sampleCount} |
-            | Threshold | ${{ env.P95_THRESHOLD_MS }}ms |
-            
-            Reports uploaded as artifacts.`
-            });
+            results_spike.jtl
 ```
 
-### 4.4 Script Phân tích Kết quả (Python)
-
-```python
-#!/usr/bin/env python3
-# scripts/analyze_results.py
-
-import csv
-import sys
-import argparse
-from statistics import mean, median
-
-def parse_jtl(filepath):
-    """Parse JMeter JTL results file."""
-    results = []
-    with open(filepath, 'r') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            results.append({
-                'timestamp': int(row['timeStamp']),
-                'label': row['label'],
-                'response_time': int(row['elapsed']),
-                'success': row['success'] == 'true',
-                'response_code': row['responseCode']
-            })
-    return results
-
-def calculate_percentile(data, percentile):
-    """Calculate percentile value."""
-    sorted_data = sorted(data)
-    index = int(len(sorted_data) * percentile / 100)
-    return sorted_data[min(index, len(sorted_data) - 1)]
-
-def analyze(results, threshold_ms):
-    """Analyze results and check for regression."""
-    response_times = [r['response_time'] for r in results]
-    errors = [r for r in results if not r['success']]
-    
-    p95 = calculate_percentile(response_times, 95)
-    avg = mean(response_times)
-    med = median(response_times)
-    error_rate = len(errors) / len(results) * 100
-    
-    print(f"Total Samples: {len(results)}")
-    print(f"Average: {avg:.2f}ms")
-    print(f"Median: {med:.2f}ms")
-    print(f"p95: {p95}ms")
-    print(f"Error Rate: {error_rate:.2f}%")
-    
-    if p95 > threshold_ms:
-        print(f"\n❌ FAIL: p95 ({p95}ms) exceeds threshold ({threshold_ms}ms)")
-        sys.exit(1)
-    else:
-        print(f"\n✅ PASS: p95 ({p95}ms) within threshold ({threshold_ms}ms)")
-        sys.exit(0)
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--jtl', required=True)
-    parser.add_argument('--threshold', type=int, default=500)
-    args = parser.parse_args()
-    
-    results = parse_jtl(args.jtl)
-    analyze(results, args.threshold)
-```
-
-### 4.5 Phân tích Trade-offs
+### 4.4 Phân tích Trade-offs
 
 | Trade-off | Chi phí | Rủi ro False Alarm | Đánh giá |
 |-----------|---------|-------------------|----------|
@@ -718,8 +619,10 @@ if __name__ == '__main__':
 | `23127459_auth_credentials.csv` | Input data cho Stress Test |
 | `23127459_products.csv` | Input data cho Load Test |
 | `23127459_checkout.csv` | Input data cho Spike Test |
-| `.github/workflows/performance-ci.yml` | GitHub Actions workflow |
-| `scripts/analyze_results.py` | Script phân tích kết quả |
+| `.github/workflows/performance-test.yml` | GitHub Actions workflow |
+| `bug-report.md` | Báo cáo lỗi chi tiết |
+| `ai_audit.md` | Nhật ký hợp tác với AI |
+| `git_log.txt` | Lịch sử commit |
 
 ---
 
@@ -747,4 +650,23 @@ jmeter -n -t 23127459_Spike_20260816.jmx -l results.jtl -e -o report/
 # Mở report trong browser
 start report/index.html  # Windows
 open report/index.html    # macOS
+```
+
+---
+
+## APPENDIX: Lịch sử Commit
+
+```
+c25cb3a  cap-nhat(HW05): them 3 file moi vao cau truc thu muc
+ccc9903  sua-loi(HW05): fix working-directory trong workflow CI/CD
+faceabc  them-file(HW05): them git_log, bug_report, ai_audit
+166e508  sua-loi(HW05): sua workflow CI/CD va xoa file thua
+d9af86f  hoan-thien(HW05): sap xep lai cau truc thu muc va viet README.md
+b7f7644  doc(HW05): remove Chinese characters from AI Critique
+5ff6e6d  doc(HW05): add AI Critique analysis
+edf89d6  feat(HW05): add performance testing scripts and JMX files
+63a2066  fix(Stress.jmx): add 4th request to verify lockout
+d051860  fix(Spike.jmx): resolve URL duplication and token scoping
+d7bbc0e  fix(Load.jmx): fix URL protocol duplication
+d04194a  fix(Spike.jmx): resolve tag error
 ```
