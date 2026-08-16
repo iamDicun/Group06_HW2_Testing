@@ -1,6 +1,6 @@
-# Báo Cáo Khảo Sát Ngưỡng Bền Bỉ & Năng Lực Phần Cứng (Endurance / Soak Test Report)
+﻿# Báo Cáo Khảo Sát Ngưỡng Bền Bỉ & Năng Lực Phần Cứng (Endurance / Soak Test Report)
 
-**Mã kịch bản**: `23127031_Endurance_20260815`  
+**Mã kịch bản**: `23127391_Endurance_20260815`  
 **Thời lượng**: 12 phút (1m ramp-up $\rightarrow$ 10m giữ tải liên tục ở 30 VUs $\rightarrow$ 1m ramp-down)  
 **Mục tiêu**: Thực nghiệm xác định ngưỡng chịu tải của phần cứng (Empirical Hardware Thresholds), đo lường thông lượng ổn định tối đa (Maximum Stable RPS), trần tiêu thụ bộ nhớ (Memory Ceiling) và kiểm tra hiện tượng rò rỉ bộ nhớ (Memory Leak).
 
@@ -45,9 +45,9 @@ Dưới đây là các chỉ số thực nghiệm thu thập từ quá trình ch
 
 Chạy kịch bản Endurance Test:
 ```powershell
-k6 run performance-tests/23127031_Endurance_20260815.js
+k6 run performance-tests/23127391_Endurance_20260815.js
 ```
 
 Báo cáo kết quả sẽ được tự động lưu vào:
-- File văn bản tổng hợp: `reports/23127031_Endurance_20260815_Report.txt`
-- File JSON chi tiết: `reports/23127031_Endurance_20260815_Summary.json`
+- File văn bản tổng hợp: `reports/23127391_Endurance_20260815_Report.txt`
+- File JSON chi tiết: `reports/23127391_Endurance_20260815_Summary.json`

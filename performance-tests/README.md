@@ -1,6 +1,6 @@
-# HW05 — Performance Testing Suite (EShop System)
+﻿# HW05 — Performance Testing Suite (EShop System)
 
-**Sinh viên thực hiện**: Châu (MSSV: `23127031`)  
+**Sinh viên thực hiện**: Châu (MSSV: `23127391`)  
 **Học phần**: Software Testing & Quality Assurance  
 **Công cụ kiểm thử**: [k6](https://k6.io/) (v2.0+)  
 **Hệ thống mục tiêu (SUT)**: EShop Backend (`http://localhost:3000`) — Node.js + Express + SQLite  
@@ -11,10 +11,10 @@
 
 ```
 performance-tests/
-├── 23127031_Load_20260815.js           # Kịch bản Load Test (Listener 1: HTML Dashboard)
-├── 23127031_Stress_20260815.js         # Kịch bản Stress Test (Listener 2: Summary JSON)
-├── 23127031_Spike_20260815.js          # Kịch bản Spike Test (Listener 3: Raw Text Log)
-├── 23127031_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (10-15 phút đo Hardware Threshold)
+├── 23127391_Load_20260815.js           # Kịch bản Load Test (Listener 1: HTML Dashboard)
+├── 23127391_Stress_20260815.js         # Kịch bản Stress Test (Listener 2: Summary JSON)
+├── 23127391_Spike_20260815.js          # Kịch bản Spike Test (Listener 3: Raw Text Log)
+├── 23127391_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (10-15 phút đo Hardware Threshold)
 ├── k6-eshop-workflow.js                # Module Workflow nghiệp vụ dùng chung (End-to-End User Journey)
 ├── run_tests.ps1                       # Script PowerShell tự động hóa toàn bộ quá trình chạy và gom báo cáo
 ├── README.md                           # Tài liệu tổng quan này
@@ -23,9 +23,9 @@ performance-tests/
 │   ├── products.csv                    # Danh sách từ khóa tìm kiếm & ID sản phẩm
 │   └── orders.csv                      # Dữ liệu địa chỉ giao hàng & giỏ hàng
 ├── test-plans/                         # Bộ 3 Test Plan chi tiết theo định dạng yêu cầu
-│   ├── 23127031_Load_20260815_TestPlan.md
-│   ├── 23127031_Stress_20260815_TestPlan.md
-│   └── 23127031_Spike_20260815_TestPlan.md
+│   ├── 23127391_Load_20260815_TestPlan.md
+│   ├── 23127391_Stress_20260815_TestPlan.md
+│   └── 23127391_Spike_20260815_TestPlan.md
 ├── analysis/                           # Tài liệu phân tích & đánh giá phản biện
 │   ├── eshop-perf-analysis.md          # Phân loại endpoint 3 nhóm & phân tích luồng
 │   └── ai_critique_review.md           # Báo cáo đánh giá những gì AI làm sai / bỏ sót
@@ -34,9 +34,9 @@ performance-tests/
 │   ├── generate_csv_data.js            # Sinh file CSV data-driven
 │   └── reset_lockouts.js               # Reset lockout & login_attempts giữa các lần test
 └── reports/                            # Thư mục chứa báo cáo sau khi chạy test
-    ├── 23127031_Load_20260815_Report.html
-    ├── 23127031_Stress_20260815_Summary.json
-    └── 23127031_Spike_20260815_Console.txt
+    ├── 23127391_Load_20260815_Report.html
+    ├── 23127391_Stress_20260815_Summary.json
+    └── 23127391_Spike_20260815_Console.txt
 ```
 
 ---
@@ -67,9 +67,9 @@ Theo yêu cầu của đề bài, 3 kịch bản sử dụng 3 định dạng b�
 
 | Kịch bản | Tên file k6 | Định dạng báo cáo (Listener View) | Vị trí file lưu |
 |---|---|---|---|
-| **Load Test** | `23127031_Load_20260815.js` | **Interactive HTML Dashboard** (Giao diện đồ họa sinh động với biểu đồ phân bố độ trễ, throughput, checks status qua `k6-reporter`) | `reports/23127031_Load_20260815_Report.html` |
-| **Stress Test** | `23127031_Stress_20260815.js` | **Aggregated JSON Metrics Export** (Cấu trúc JSON tổng hợp chi tiết các chỉ số p90, p95, p99, error rate, RPS phục vụ phân tích tự động) | `reports/23127031_Stress_20260815_Summary.json` |
-| **Spike Test** | `23127031_Spike_20260815.js` | **Formatted Text Console & Metric Stream Log** (Báo cáo văn bản chi tiết ghi nhận từng phase tải và thời gian tự phục hồi) | `reports/23127031_Spike_20260815_Console.txt` |
+| **Load Test** | `23127391_Load_20260815.js` | **Interactive HTML Dashboard** (Giao diện đồ họa sinh động với biểu đồ phân bố độ trễ, throughput, checks status qua `k6-reporter`) | `reports/23127391_Load_20260815_Report.html` |
+| **Stress Test** | `23127391_Stress_20260815.js` | **Aggregated JSON Metrics Export** (Cấu trúc JSON tổng hợp chi tiết các chỉ số p90, p95, p99, error rate, RPS phục vụ phân tích tự động) | `reports/23127391_Stress_20260815_Summary.json` |
+| **Spike Test** | `23127391_Spike_20260815.js` | **Formatted Text Console & Metric Stream Log** (Báo cáo văn bản chi tiết ghi nhận từng phase tải và thời gian tự phục hồi) | `reports/23127391_Spike_20260815_Console.txt` |
 
 ---
 
@@ -105,16 +105,16 @@ Mở một terminal khác tại thư mục gốc của repository:
 Hoặc chạy từng kịch bản đơn lẻ:
 ```powershell
 # 1. Load Test
-k6 run performance-tests/23127031_Load_20260815.js
+k6 run performance-tests/23127391_Load_20260815.js
 
 # 2. Stress Test
-k6 run performance-tests/23127031_Stress_20260815.js
+k6 run performance-tests/23127391_Stress_20260815.js
 
 # 3. Spike Test
-k6 run performance-tests/23127031_Spike_20260815.js
+k6 run performance-tests/23127391_Spike_20260815.js
 
 # 4. Endurance Test (10-15 phút đo ngưỡng phần cứng)
-k6 run performance-tests/23127031_Endurance_20260815.js
+k6 run performance-tests/23127391_Endurance_20260815.js
 ```
 
 ### Bước 3: Reset Lockout (Nếu cần)

@@ -1,10 +1,10 @@
-import { runEShopWorkflow } from './k6-eshop-workflow.js';
+﻿import { runEShopWorkflow } from './k6-eshop-workflow.js';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 /**
  * SCENARIO 1: LOAD TEST
- * Name: 23127031_Load_20260815
+ * Name: 23127391_Load_20260815
  * Objective: Verify system stability, response times, and throughput under normal and expected peak load.
  * Report View: HTML Dashboard Report (Listener 1)
  */
@@ -32,7 +32,7 @@ export default function () {
 // Distinct Report Output 1: Rich HTML Dashboard Report
 export function handleSummary(data) {
   return {
-    'reports/23127031_Load_20260815_Report.html': htmlReport(data),
+    'reports/23127391_Load_20260815_Report.html': htmlReport(data),
     stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }

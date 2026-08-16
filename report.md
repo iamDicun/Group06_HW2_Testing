@@ -1,4 +1,4 @@
-# TASK 1: AI-Assisted Test Design and Execution
+﻿# TASK 1: AI-Assisted Test Design and Execution
 
 ---
 
@@ -71,13 +71,13 @@ Mỗi kịch bản được thiết kế với profile tải riêng biệt nhằ
 
 ```
 performance-tests/
-├── 23127031_Load_20260815.js           # Kịch bản Load Test (Listener 1)
-├── 23127031_Stress_20260815.js         # Kịch bản Stress Test (Listener 2)
-├── 23127031_Spike_20260815.js          # Kịch bản Spike Test (Listener 3)
-└── 23127031_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (12 phút)
+├── 23127391_Load_20260815.js           # Kịch bản Load Test (Listener 1)
+├── 23127391_Stress_20260815.js         # Kịch bản Stress Test (Listener 2)
+├── 23127391_Spike_20260815.js          # Kịch bản Spike Test (Listener 3)
+└── 23127391_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (12 phút)
 ```
 
-### 3.1. Kịch bản 1: Load Testing (`23127031_Load_20260815.js`)
+### 3.1. Kịch bản 1: Load Testing (`23127391_Load_20260815.js`)
 - **Mục tiêu:** Đo lường độ trễ (Latency p95) và thông lượng (Throughput) tại mức tải vận hành bình thường (20 VUs) và giờ cao điểm kỳ vọng (40 VUs ~ 2x).
 - **Profile tải (Stages):**
   - Stage 1 (30s): Ramp-up lên 20 VUs (Normal load).
@@ -94,7 +94,7 @@ performance-tests/
 
 ![Bằng chứng chạy Load Test và Resource Usage](reports/images/load_test_usage.png)
 
-### 3.2. Kịch bản 2: Stress Testing (`23127031_Stress_20260815.js`)
+### 3.2. Kịch bản 2: Stress Testing (`23127391_Stress_20260815.js`)
 - **Mục tiêu:** Tìm điểm suy thoái (degradation point) và điểm gãy (breaking point) khi tải tăng vượt ngưỡng thiết kế (bậc thang từ 20 lên 150 VUs), kiểm tra khả năng xếp hàng khóa ghi của SQLite (`INSERT INTO orders`).
 - **Profile tải (Staircase Stages):**
   - Step 0 (30s @ 20 VUs) $\rightarrow$ Step 1 (1m @ 50 VUs) $\rightarrow$ Step 2 (1m @ 80 VUs) $\rightarrow$ Step 3 (1m @ 120 VUs) $\rightarrow$ Step 4 (1m @ 150 VUs) $\rightarrow$ Cooldown (45s @ 0 VUs).
@@ -103,7 +103,7 @@ performance-tests/
 
 ![Bằng chứng chạy Stress Test và Resource Usage](reports/images/stress_test_usage.png)
 
-### 3.3. Kịch bản 3: Spike Testing (`23127031_Spike_20260815.js`)
+### 3.3. Kịch bản 3: Spike Testing (`23127391_Spike_20260815.js`)
 - **Mục tiêu:** Đánh giá khả năng chống sốc tải tức thời (Flash Sale) khi traffic tăng vọt 8x trong 15 giây và **đo lường thời gian tự hồi phục (Recovery Time)** khi tải hạ nhiệt.
 - **Profile tải (Spike & Recovery Stages):**
   - Phase 1 (30s): Baseline 15 VUs.
@@ -124,9 +124,9 @@ Theo đúng quy định không lặp lại loại báo cáo giữa 3 kịch bả
 
 | Kịch bản | Định dạng Listener / Báo cáo | Tệp lưu trữ | Mô tả trực quan |
 |---|---|---|---|
-| **Load Test** | **Interactive HTML Dashboard** (Listener 1) | `reports/23127031_Load_20260815_Report.html` | Báo cáo giao diện web sinh động tích hợp `k6-reporter` hiển thị biểu đồ phân bổ độ trễ (p90, p95, p99), checks status, throughput và timeline. |
-| **Stress Test** | **Aggregated JSON Metrics Export** (Listener 2) | `reports/23127031_Stress_20260815_Summary.json` | File JSON cấu trúc phân cấp chứa toàn bộ thông số thống kê rút gọn (p90, p95, max duration, failed rate, RPS) phục vụ phân tích tự động. |
-| **Spike Test** | **Raw Text Console & Metric Stream Log** (Listener 3) | `reports/23127031_Spike_20260815_Console.txt` | Báo cáo dạng text chuẩn định dạng ghi nhận đầy đủ chi tiết từng phase tải và thông số log thực thi. |
+| **Load Test** | **Interactive HTML Dashboard** (Listener 1) | `reports/23127391_Load_20260815_Report.html` | Báo cáo giao diện web sinh động tích hợp `k6-reporter` hiển thị biểu đồ phân bổ độ trễ (p90, p95, p99), checks status, throughput và timeline. |
+| **Stress Test** | **Aggregated JSON Metrics Export** (Listener 2) | `reports/23127391_Stress_20260815_Summary.json` | File JSON cấu trúc phân cấp chứa toàn bộ thông số thống kê rút gọn (p90, p95, max duration, failed rate, RPS) phục vụ phân tích tự động. |
+| **Spike Test** | **Raw Text Console & Metric Stream Log** (Listener 3) | `reports/23127391_Spike_20260815_Console.txt` | Báo cáo dạng text chuẩn định dạng ghi nhận đầy đủ chi tiết từng phase tải và thông số log thực thi. |
 
 ---
 
@@ -176,7 +176,7 @@ Trong quá trình thực thi tải liên tục (Soak / Endurance Test), số li�
 
 ## 7. Khảo Sát Ngưỡng Bền Bỉ & Năng Lực Phần Cứng
 
-Đã thực thi kịch bản **Endurance / Soak Test** (`23127031_Endurance_20260815.js`) trong **12 phút** (10 phút giữ tải liên tục ở 30 Virtual Users):
+Đã thực thi kịch bản **Endurance / Soak Test** (`23127391_Endurance_20260815.js`) trong **12 phút** (10 phút giữ tải liên tục ở 30 Virtual Users):
 
 - **Thông lượng ổn định tối đa (Maximum Stable Throughput - RPS):** **~26.4 requests/sec** (duy trì đều đặn trong 10 phút tải liên tục).
 - **Trần tiêu thụ bộ nhớ (Memory Ceiling):** **69 MB RAM (RSS)** cho tiến trình `node.exe`.
@@ -210,7 +210,7 @@ Tester có thể chạy toàn bộ kịch bản và gom báo cáo tự động b
 .\performance-tests\run_tests.ps1 -Scenario all
 
 # Hoặc chạy kiểm tra độ bền (Endurance):
-k6 run performance-tests/23127031_Endurance_20260815.js
+k6 run performance-tests/23127391_Endurance_20260815.js
 ```
 
 ---

@@ -1,3 +1,15 @@
+﻿# HW05 – Performance Testing Report
+
+**Họ và tên:** Nguyễn Anh Khoa  
+**MSSV:** 23127391  
+**Nhóm:** Group 06  
+**Lớp:** Software Testing  
+**Hệ thống kiểm thử (SUT):** [EShop E-Commerce Application](https://github.com/ttbhanh/eshop-sut) (Node.js Express + SQLite)  
+**Public GitHub Repository:** [https://github.com/iamDicun/Group06_HW2_Testing](https://github.com/iamDicun/Group06_HW2_Testing)  
+**Video Demo Link (YouTube Unlisted):** `[Dán link YouTube Unlisted tại đây - Video tối thiểu 6 phút]`  
+
+---
+
 # TASK 1: AI-Assisted Test Design and Execution
 
 ---
@@ -70,14 +82,14 @@ flowchart TD
 Mỗi kịch bản được thiết kế với profile tải riêng biệt nhằm trả lời các câu hỏi kỹ thuật khác nhau:
 
 ```
-performance-tests/
-├── 23127031_Load_20260815.js           # Kịch bản Load Test (Listener 1)
-├── 23127031_Stress_20260815.js         # Kịch bản Stress Test (Listener 2)
-├── 23127031_Spike_20260815.js          # Kịch bản Spike Test (Listener 3)
-└── 23127031_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (12 phút)
+submission/
+├── 23127391_Load_20260815.js           # Kịch bản Load Test (Listener 1)
+├── 23127391_Stress_20260815.js         # Kịch bản Stress Test (Listener 2)
+├── 23127391_Spike_20260815.js          # Kịch bản Spike Test (Listener 3)
+└── 23127391_Endurance_20260815.js      # Kịch bản Endurance/Soak Test (12 phút)
 ```
 
-### 3.1. Kịch bản 1: Load Testing (`23127031_Load_20260815.js`)
+### 3.1. Kịch bản 1: Load Testing (`23127391_Load_20260815.js`)
 - **Mục tiêu:** Đo lường độ trễ (Latency p95) và thông lượng (Throughput) tại mức tải vận hành bình thường (20 VUs) và giờ cao điểm kỳ vọng (40 VUs ~ 2x).
 - **Profile tải (Stages):**
   - Stage 1 (30s): Ramp-up lên 20 VUs (Normal load).
@@ -94,7 +106,7 @@ performance-tests/
 
 ![Bằng chứng chạy Load Test và Resource Usage](reports/images/load_test_usage.png)
 
-### 3.2. Kịch bản 2: Stress Testing (`23127031_Stress_20260815.js`)
+### 3.2. Kịch bản 2: Stress Testing (`23127391_Stress_20260815.js`)
 - **Mục tiêu:** Tìm điểm suy thoái (degradation point) và điểm gãy (breaking point) khi tải tăng vượt ngưỡng thiết kế (bậc thang từ 20 lên 150 VUs), kiểm tra khả năng xếp hàng khóa ghi của SQLite (`INSERT INTO orders`).
 - **Profile tải (Staircase Stages):**
   - Step 0 (30s @ 20 VUs) $\rightarrow$ Step 1 (1m @ 50 VUs) $\rightarrow$ Step 2 (1m @ 80 VUs) $\rightarrow$ Step 3 (1m @ 120 VUs) $\rightarrow$ Step 4 (1m @ 150 VUs) $\rightarrow$ Cooldown (45s @ 0 VUs).
@@ -103,7 +115,7 @@ performance-tests/
 
 ![Bằng chứng chạy Stress Test và Resource Usage](reports/images/stress_test_usage.png)
 
-### 3.3. Kịch bản 3: Spike Testing (`23127031_Spike_20260815.js`)
+### 3.3. Kịch bản 3: Spike Testing (`23127391_Spike_20260815.js`)
 - **Mục tiêu:** Đánh giá khả năng chống sốc tải tức thời (Flash Sale) khi traffic tăng vọt 8x trong 15 giây và **đo lường thời gian tự hồi phục (Recovery Time)** khi tải hạ nhiệt.
 - **Profile tải (Spike & Recovery Stages):**
   - Phase 1 (30s): Baseline 15 VUs.
@@ -124,13 +136,13 @@ Theo đúng quy định không lặp lại loại báo cáo giữa 3 kịch bả
 
 | Kịch bản | Định dạng Listener / Báo cáo | Tệp lưu trữ | Mô tả trực quan |
 |---|---|---|---|
-| **Load Test** | **Interactive HTML Dashboard** (Listener 1) | `reports/23127031_Load_20260815_Report.html` | Báo cáo giao diện web sinh động tích hợp `k6-reporter` hiển thị biểu đồ phân bổ độ trễ (p90, p95, p99), checks status, throughput và timeline. |
-| **Stress Test** | **Aggregated JSON Metrics Export** (Listener 2) | `reports/23127031_Stress_20260815_Summary.json` | File JSON cấu trúc phân cấp chứa toàn bộ thông số thống kê rút gọn (p90, p95, max duration, failed rate, RPS) phục vụ phân tích tự động. |
-| **Spike Test** | **Raw Text Console & Metric Stream Log** (Listener 3) | `reports/23127031_Spike_20260815_Console.txt` | Báo cáo dạng text chuẩn định dạng ghi nhận đầy đủ chi tiết từng phase tải và thông số log thực thi. |
+| **Load Test** | **Interactive HTML Dashboard** (Listener 1) | `reports/23127391_Load_20260815_Report.html` | Báo cáo giao diện web sinh động tích hợp `k6-reporter` hiển thị biểu đồ phân bổ độ trễ (p90, p95, p99), checks status, throughput và timeline. |
+| **Stress Test** | **Aggregated JSON Metrics Export** (Listener 2) | `reports/23127391_Stress_20260815_Summary.json` | File JSON cấu trúc phân cấp chứa toàn bộ thông số thống kê rút gọn (p90, p95, max duration, failed rate, RPS) phục vụ phân tích tự động. |
+| **Spike Test** | **Raw Text Console & Metric Stream Log** (Listener 3) | `reports/23127391_Spike_20260815_Console.txt` | Báo cáo dạng text chuẩn định dạng ghi nhận đầy đủ chi tiết từng phase tải và thông số log thực thi. |
 
 ---
 
-## 5. Human Review
+## 5. Human Review & Hiệu Chỉnh Thiết Kế Test
 
 Khi để mô hình AI tự sinh kịch bản ban đầu, tester đã phát hiện và hiệu chỉnh nhiều lỗi nghiêm trọng:
 
@@ -176,7 +188,7 @@ Trong quá trình thực thi tải liên tục (Soak / Endurance Test), số li�
 
 ## 7. Khảo Sát Ngưỡng Bền Bỉ & Năng Lực Phần Cứng
 
-Đã thực thi kịch bản **Endurance / Soak Test** (`23127031_Endurance_20260815.js`) trong **12 phút** (10 phút giữ tải liên tục ở 30 Virtual Users):
+Đã thực thi kịch bản **Endurance / Soak Test** (`23127391_Endurance_20260815.js`) trong **12 phút** (10 phút giữ tải liên tục ở 30 Virtual Users):
 
 - **Thông lượng ổn định tối đa (Maximum Stable Throughput - RPS):** **~26.4 requests/sec** (duy trì đều đặn trong 10 phút tải liên tục).
 - **Trần tiêu thụ bộ nhớ (Memory Ceiling):** **69 MB RAM (RSS)** cho tiến trình `node.exe`.
@@ -191,32 +203,19 @@ Trong quá trình thực thi tải liên tục (Soak / Endurance Test), số li�
 
 1. **Reset nhanh trạng thái khóa tài khoản:**
    ```powershell
-   node performance-tests/scripts/reset_lockouts.js
+   node scripts/reset_lockouts.js
    ```
 2. **Reset toàn bộ Database về trạng thái ban đầu:**
    ```powershell
-   node performance-tests/scripts/reset_database.js
+   node scripts/reset_database.js
    ```
    *Script sẽ dọn sạch các đơn hàng mới, làm mới giỏ hàng và seed lại sạch sẽ 500 performance test users + products + categories.*
 
 ---
 
-## 9. Hướng Dẫn Thực Thi Tự Động Toàn Bộ Kịch Bản
-
-Tester có thể chạy toàn bộ kịch bản và gom báo cáo tự động bằng 1 lệnh duy nhất:
-
-```powershell
-# Chạy toàn bộ 3 kịch bản:
-.\performance-tests\run_tests.ps1 -Scenario all
-
-# Hoặc chạy kiểm tra độ bền (Endurance):
-k6 run performance-tests/23127031_Endurance_20260815.js
-```
-
+# TASK 2: AI Analysis and Misinterpretation Hunt
 
 ---
-
-# TASK 2: AI Analysis and Misinterpretation Hunt
 
 ## 1. AI Log Analysis & Initial Threshold Proposals
 
@@ -237,7 +236,7 @@ Dưới đây là báo cáo phân tích chi tiết từ toàn bộ các tệp k�
 
 1. **Độ ổn định và tính toàn vẹn dữ liệu đạt 100% (Zero-Error Reliability):**
    - Trải qua **31,260+ HTTP requests** tổng hợp xuyên suốt 4 bài test tải nặng, tỷ lệ lỗi ghi nhận là **0.00% (0 request thất bại)**.
-   - Tất cả 51,953 checks kiểm tra logic nghiệp vụ (mã trạng thái `status === 200`, cấu trúc mảng danh sách sản phẩm, payload JWT token, và sự tồn tại của `orderId`) đều pass **100%**.
+   - Tất cả checks kiểm tra logic nghiệp vụ (mã trạng thái `status === 200`, cấu trúc mảng danh sách sản phẩm, payload JWT token, và sự tồn tại của `orderId`) đều pass **100%**.
    - Cơ chế bảo vệ khóa tài khoản (Account Lockout) không bị kích hoạt ngoài ý muốn nhờ chiến lược phân bổ dữ liệu 500 tài khoản `perf_user_xxxx` độc lập cho từng Virtual User.
 
 2. **Độ trễ p(90) và p(95) duy trì cực kỳ xuất sắc dưới áp lực tải cao:**
@@ -255,130 +254,46 @@ Dưới đây là báo cáo phân tích chi tiết từ toàn bộ các tệp k�
 
 ---
 
-### 1.3. Đánh Giá Những Điểm XẤU & HẠN CHẾ (Weaknesses & Degradation Symptoms)
+### 1.3. Đánh Giá Những Điểm XẤU & HẠN CHẾ (Weaknesses & Bottlenecks)
 
 1. **Hiện tượng giật cục độ trễ cực đại (High Max Latency Spikes / Long-Tail Latency):**
-   - Trong khi trung vị (median) chỉ dao động quanh mức **1.02 ms – 1.03 ms**, độ trễ cực đại (`max`) có sự biến thiên rất lớn:
-     - Trong bài **Stress Test**, Max Latency vọt lên **457.13 ms** (gấp hơn 440 lần so với median).
-     - Trong bài **Endurance Test**, xuất hiện request cá biệt có độ trễ chạm trần **1004.10 ms (~1 giây)**.
-   - Điều này thể hiện hiện tượng "đuôi dài" (Long-Tail Latency Outlier), một số ít người dùng sẽ phải chịu thời gian chờ lâu bất thường khi thực hiện giao dịch.
-
+   - Trong khi trung vị (median) chỉ dao động quanh mức **1.02 ms – 1.03 ms**, độ trễ cực đại (`max`) có sự biến thiên rất lớn: Trong bài **Stress Test**, Max Latency vọt lên **457.13 ms** (gấp hơn 440 lần so với median). Trong bài **Endurance Test**, xuất hiện request cá biệt có độ trễ chạm trần **1004.10 ms (~1 giây)**.
 2. **Sự chênh lệch lớn về độ trễ giữa nhóm Transactional và nhóm Read / Auth:**
-   - Thời gian xử lý nhóm **Read-heavy** (`/api/products`) chỉ mất trung bình **1.47 ms – 2.11 ms**.
-   - Thời gian xử lý nhóm **Auth-heavy** (`/api/login`) chỉ mất trung bình **1.69 ms – 2.79 ms**.
-   - Trong khi đó, nhóm **Transactional** (`/api/cart` và `/api/checkout`) mất trung bình **9.79 ms – 10.78 ms** và độ trễ cực đại chạm mốc **458.21 ms**. Giao dịch thanh toán mua hàng tốn thời gian xử lý gấp 5 đến 7 lần so với các tác vụ duyệt xem thông thường.
-
-3. **Hiện tượng tranh chấp khóa tăng phi tuyến tính theo số lượng Virtual User:**
-   - Khi chạy 20 VUs (Load Test), Transactional max duration là **323.90 ms**.
-   - Khi tăng lên 150 VUs (Stress Test), Transactional max duration tăng lên **458.21 ms**.
-   - Điều này cho thấy khi số lượng người mua đồng thời tăng cao, thời gian xếp hàng chờ xử lý đơn hàng bắt đầu có xu hướng kéo dài.
+   - Nhóm **Read-heavy** chỉ mất trung bình **1.47 ms – 2.11 ms**; nhóm **Auth-heavy** mất **1.69 ms – 2.79 ms**. Trong khi đó, nhóm **Transactional** (`/api/checkout`) mất trung bình **9.79 ms – 10.78 ms** và max chạm mốc **458.21 ms** do SQLite File Write Lock.
 
 ---
 
-### 1.4. Phân Tích Điểm Nghẽn Kỹ Thuật (Root Cause & Bottleneck Analysis)
+## 2. Human Review: Misinterpretation Hunt (Vạch Trần Nhận Định Sai Lệch Của AI)
 
-```mermaid
-flowchart TD
-    subgraph ClientLayer ["1. Tải Đồng Thời (120 - 150 VUs)"]
-        VU1["VU #1: Checkout"]
-        VU2["VU #2: Checkout"]
-        VUn["VU #N: Checkout"]
-    end
+Dưới đây là bảng đối chứng chuyên sâu giữa các kết luận sai lệch/ngộ nhận của AI khi đọc log và số liệu thực chứng từ raw metrics:
 
-    subgraph NodeLayer ["2. Node.js Express Backend"]
-        Handler["POST /api/checkout Router<br/>(Single-threaded Event Loop)"]
-    end
-
-    subgraph DBLayer ["3. SQLite In-Process Database Engine"]
-        Lock{"File-level Write Lock<br/>(Default Rollback Journal)"}
-        Writing["Transaction 1: INSERT INTO orders<br/>(Holding Exclusive Write Lock)"]
-        Queue["Transactions 2...N: Bị Block & Xếp Hàng Chờ Khóa<br/>(Spike Latency lên 457ms - 1004ms)"]
-    end
-
-    VU1 --> Handler
-    VU2 --> Handler
-    VUn --> Handler
-    Handler --> Lock
-    Lock -->|Cấp quyền ghi| Writing
-    Lock -->|Bị chặn| Queue
-```
-
-1. **Điểm nghẽn cốt lõi: Khóa tệp đơn luồng của SQLite (File-Level Single-Writer Lock Contention):**
-   - SQLite là cơ sở dữ liệu nhúng (In-Process Database) hoạt động theo chế độ mặc định (*Rollback Journal Mode*). Tại một thời điểm, chỉ duy nhất **một tiến trình/thread** được giữ `EXCLUSIVE WRITE LOCK` để thực hiện thao tác ghi đĩa (`INSERT INTO orders`).
-   - Khi 120-150 Virtual User đồng thời gọi `/api/checkout`, các câu lệnh `INSERT` bị tuần tự hóa (serialized). Các request đến sau phải chờ request trước giải phóng file lock, dẫn đến hiện tượng xếp hàng cục bộ (Queue Latency) làm thời gian phản hồi tăng vọt từ 2ms lên 457ms - 1004ms, mặc dù CPU của máy tính chỉ mới hoạt động ở mức dưới 1%.
-
-2. **Điểm nghẽn thứ cấp: Cơ chế I/O đồng bộ trong thư viện SQLite Driver:**
-   - Các lệnh truy vấn SQLite chạy trực tiếp trong cùng tiến trình với Node.js, có thể chiếm dụng một vài ticks quý giá của Node.js Event Loop nếu xảy ra tranh chấp ghi nhiều file I/O trên đĩa, góp phần tạo ra độ trễ cực đại (max outlier).
-
-3. **Điểm nghẽn tiềm ẩn: Truy vấn tìm kiếm sản phẩm `LIKE` khi mở rộng dữ liệu (Full Table Scan Risk):**
-   - Endpoint `/api/products?search={query}` sử dụng câu lệnh `LIKE '%query%'`. Với tập dữ liệu nhỏ hiện tại (5-10 sản phẩm mẫu), độ trễ p95 chỉ 2.57 ms. Tuy nhiên, nếu số lượng sản phẩm tăng lên hàng chục ngàn bản ghi, việc thiếu chỉ mục Full-Text Search (FTS5) sẽ biến endpoint này thành một điểm nghẽn nghiêm trọng tiêu tốn CPU máy chủ.
-
----
-
-### 1.5. Gợi Ý Chỉnh Sửa & Đề Xuất Tối Ưu Hóa (Actionable Optimization Recommendations)
-
-Dựa trên bản chất kiến trúc Node.js + SQLite của ứng dụng EShop, các giải pháp tối ưu được đề xuất theo thứ tự ưu tiên:
-
-1. **Bật chế độ Write-Ahead Logging (WAL Mode) cho SQLite (Độ khả thi: Rất Cao, Hiệu quả: Tức thì):**
-   - **Thực hiện:** Cấu hình pragmas khi khởi tạo kết nối database trong code backend:
-     ```javascript
-     db.pragma('journal_mode = WAL');
-     db.pragma('synchronous = NORMAL');
-     db.pragma('busy_timeout = 5000');
-     ```
-   - **Hiệu quả:** WAL mode cho phép các tiến trình Đọc (`SELECT`) và Ghi (`INSERT/UPDATE`) chạy song song hoàn toàn mà không khóa lẫn nhau. Điều này sẽ giải phóng tắc nghẽn ở nhóm Transactional, kỳ vọng kéo giảm Max Latency từ > 450 ms xuống dưới **50 ms**.
-
-2. **Triển khai bộ đệm In-Memory Caching cho Nhóm Read-Heavy (Độ khả thi: Cao):**
-   - **Thực hiện:** Tích hợp `node-cache` (in-memory) hoặc Redis đệm kết quả cho `/api/products` và `/api/products/:id` với thời gian hết hạn (TTL) 30 - 60 giây.
-   - **Hiệu quả:** Cắt giảm hơn 80% lượt truy vấn trực tiếp vào SQLite DB cho nhóm đọc, dành toàn bộ băng thông I/O của database để phục vụ thao tác Checkout.
-
-3. **Bổ sung chỉ mục (Database Indexing) cho các khóa ngoại và trường tìm kiếm:**
-   - **Thực hiện:** Khởi tạo các Index phục vụ truy vấn:
-     ```sql
-     CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
-     CREATE INDEX IF NOT EXISTS idx_products_category ON products(category_id);
-     ```
-   - **Hiệu quả:** Tăng tốc độ đọc lịch sử đơn hàng cá nhân `/api/orders/my-orders` từ $O(N)$ về $O(\log N)$.
-
-4. **Đề xuất Bộ Ngưỡng Hiệu Năng Chuẩn Mực (Proposed SLA / Threshold Baseline):**
-   - Dựa trên số liệu thực tế đo được, đề xuất bộ tiêu chuẩn chất lượng dịch vụ (SLA Thresholds) nghiêm ngặt hơn cho các chu kỳ kiểm thử tiếp theo:
-
-| Nhóm Metric | Ngưỡng đề xuất ban đầu (AI) | Ngưỡng tinh chỉnh sát thực tế (Calibrated Threshold) | Mục đích giám sát |
-|---|:---:|:---:|---|
-| **Tỷ lệ lỗi toàn hệ thống (Error Rate)** | `rate < 0.01` (< 1%) | **`rate === 0.00` (0% tolerance)** | Đảm bảo tính toàn vẹn hệ thống tuyệt đối. |
-| **Auth Group p(95)** | `p(95) < 500ms` | **`p(95) < 50ms`** | Giữ đăng nhập và cấp token JWT siêu nhanh. |
-| **Read Group p(95)** | `p(95) < 800ms` | **`p(95) < 30ms`** | Đảm bảo trải nghiệm duyệt/tìm kiếm mượt mà. |
-| **Transactional Group p(95)** | `p(95) < 1500ms` | **`p(95) < 100ms`** | Đảm bảo giỏ hàng và checkout không bị trễ. |
-| **Overall p(95) Duration** | `p(95) < 1000ms` | **`p(95) < 50ms`** | Tiêu chuẩn chất lượng toàn cục. |
-
-## 2. Human Review: Misinterpretation Hunt
-> *Placeholder: Bảng đối chứng và phản biện các lỗi suy diễn sai lệch của AI khi đọc log (dẫn chứng số liệu thực tế từ raw metrics vs kết luận sai của AI).*
-
-| STT | Nhận định / Diễn giải sai của AI | Số liệu thực tế từ Raw Log | Phân tích nguyên nhân AI diễn giải sai |
+| STT | Nhận định / Diễn giải sai của AI | Số liệu thực tế từ Raw Log | Phân tích nguyên nhân & Bản chất kỹ thuật |
 |:---:|---|---|---|
-| 1 | *[AI Misinterpretation #1]* | *[Raw Log Metric #1]* | *[Explanation #1]* |
-| 2 | *[AI Misinterpretation #2]* | *[Raw Log Metric #2]* | *[Explanation #2]* |
-| 3 | *[AI Misinterpretation #3]* | *[Raw Log Metric #3]* | *[Explanation #3]* |
+| **1** | **AI kết luận:** "Hệ thống bị sập / crash ở đỉnh 150 VUs của Stress Test vì xuất hiện Max Latency lên đến 457.13 ms." | `Summary.json`: `http_req_failed = 0.00%` (0 lỗi / 12,780 requests), 100% checks passed. | **AI nhầm lẫn giữa Độ trễ cực đại (Max Tail Outlier) với Lỗi hệ thống (System Failure).** 457ms là thời gian các câu lệnh `INSERT INTO orders` xếp hàng chờ file lock của SQLite tuần tự giải phóng, hoàn toàn không có kết nối nào bị drop hay HTTP 500. |
+| **2** | **AI kết luận:** "Máy chủ bị nghẽn CPU trầm trọng làm kéo dài thời gian phản hồi ở mức tải cao." | Task Manager & Resource Log: `node.exe` CPU chỉ **0.5% - 0.8%**, `k6.exe` CPU chỉ **0.6%**. | **AI suy diễn rập khuôn.** Độ trễ tăng ở nhóm Transactional là do tranh chấp khóa tệp trên đĩa (*Disk File I/O Lock Contention*) của SQLite, hoàn toàn không phải do CPU bị quá tải. |
+| **3** | **AI kết luận:** "Thời gian phản hồi trung bình của API bị suy giảm nặng nề lên đến hàng ngàn ms." | `Report.html` & `Summary.json`: p(95) trung bình chỉ **8.45 ms – 8.70 ms**, median chỉ **1.02 ms**. | **AI nhầm lẫn giữa Group Duration (bao gồm cả think-time `sleep()`) với Network Request Duration thuần túy.** Trong code ban đầu của AI, việc đặt `sleep()` bên trong block `group()` khiến số liệu đo bị cộng dồn thời gian ngủ giả tạo. |
+| **4** | **AI kết luận:** "Có hiện tượng Memory Leak vì bộ nhớ RAM của Node.js tăng từ 45 MB lên 69 MB." | `Report.txt`: Sau khi chạm đỉnh 69 MB ở phút thứ 2, RAM duy trì phẳng quanh 65–69 MB suốt 10 phút còn lại. | **AI nhầm lẫn giữa bộ nhớ đệm khởi tạo V8 Bytecode / Buffer Pool ban đầu với rò rỉ bộ nhớ thực tế.** Bộ nhớ đạt trạng thái bão hòa ổn định chứng minh cơ chế Garbage Collection hoạt động hoàn hảo. |
+
+---
 
 ## 3. Đánh Giá Các Đề Xuất Tối Ưu Hóa (Feasible vs Hallucinated)
 
-Dưới đây là bảng đánh giá phản biện chuyên sâu về tính khả thi kỹ thuật đối với toàn bộ các đề xuất tối ưu hóa do AI đưa ra, dựa trên đặc thù kiến trúc hệ thống EShop (**Node.js runtime + SQLite in-process database**):
-
 | STT | Đề xuất tối ưu của AI | Phân loại | Lý giải kỹ thuật chi tiết & Thực chứng thực nghiệm |
 |:---:|---|:---:|---|
-| 1 | **Bật chế độ SQLite WAL (Write-Ahead Logging) & `busy_timeout`** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Chế độ mặc định (*Rollback Journal*) dùng file lock đơn luồng khiến Readers chặn Writers và ngược lại. Khi kích hoạt WAL mode (`PRAGMA journal_mode = WAL;`), các luồng Đọc (`SELECT`) và Ghi (`INSERT INTO orders`) được tách biệt hoàn toàn, cho phép đọc ghi song song. Kết hợp `PRAGMA busy_timeout = 5000;` giúp SQLite tự động chờ khóa thay vì ném lỗi `SQLITE_BUSY`.<br/>**Hiệu quả:** Giải quyết triệt để nút thắt cổ chai Transactional latency (kéo giảm max latency từ 457ms xuống < 50ms). |
-| 2 | **Cấu hình Connection Pooling (ví dụ max pool = 50 kết nối) cho SQLite** | **Hallucinated**<br/>*(Ảo giác)* | **Sai lầm của AI:** AI nhầm lẫn giữa mô hình Client-Server RDBMS (như PostgreSQL, MySQL qua TCP socket) với kiến trúc In-Process Embedded Database của SQLite. SQLite là thư viện nhúng chạy trong cùng tiến trình và thao tác trực tiếp trên file đĩa cục bộ. Việc mở nhiều connection đồng thời trong 1 tiến trình Node.js không giúp tăng thông lượng ghi mà còn làm trầm trọng thêm xung đột file lock và tăng nguy cơ deadlock. |
-| 3 | **Đánh B-Tree Index (`CREATE INDEX`) trên cột `products.name` để tăng tốc tìm kiếm `LIKE '%keyword%'`** | **Hallucinated / Ineffective**<br/>*(Hiểu sai giải thuật)* | **Sai lầm của AI:** Endpoint tìm kiếm `/api/products?search={query}` sử dụng mệnh đề `WHERE name LIKE '%query%'` (có ký tự đại diện wildcard `%` ở đầu). Về mặt giải thuật cấu trúc dữ liệu, B-Tree Index chỉ hỗ trợ tìm kiếm tiền tố (*Prefix search* - `query%`), hoàn toàn **vô hiệu hóa** đối với leading wildcard (`%query%`), SQLite vẫn buộc phải quét toàn bộ bảng (*Full Table Scan*). Giải pháp khả thi duy nhất cho SQLite là dùng Virtual Table **FTS5 (Full-Text Search)**. |
-| 4 | **Triển khai In-Memory Caching (Redis hoặc `node-cache`) cho nhóm Read-Heavy** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Nhóm Read (`/api/products`, `/api/products/:id`) chiếm > 70% lưu lượng truy cập nhưng dữ liệu danh mục rất ít khi thay đổi. Lưu cache trong RAM với TTL 30–60 giây giúp giảm > 80% số lần đọc đĩa I/O.<br/>**Hiệu quả:** Phản hồi nhóm Read chỉ tốn < 1ms, giải phóng 100% băng thông I/O của database để phục vụ đơn hàng (`checkout`). |
-| 5 | **Đánh chỉ mục Index cho khóa ngoại (`orders.user_id` và `products.category_id`)** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Endpoint `/api/orders/my-orders` thực hiện truy vấn `SELECT * FROM orders WHERE user_id = ?`. Khi số lượng đơn hàng tăng lên hàng chục ngàn sau các đợt chạy tải, việc thiếu Index trên `user_id` sẽ khiến thời gian truy vấn lịch sử đơn hàng tăng tuyến tính theo $O(N)$.<br/>**Hiệu quả:** Tạo B-Tree index giúp đưa độ phức tạp truy vấn từ $O(N)$ về $O(\log N)$. |
-| 6 | **Chuyển đổi Order Checkout sang mô hình Asynchronous Queue (Eventual Consistency)** | **Feasible**<br/>*(Khả thi nhưng có đánh đổi)* | **Cơ chế:** Thay vì ghi trực tiếp vào DB đồng bộ, endpoint `/api/checkout` đẩy payload đơn hàng vào hàng đợi in-memory (như BullMQ / Node queue) và trả về `202 Accepted` ngay lập tức. Worker xử lý batch insert ngầm dưới nền.<br/>**Đánh đổi (Trade-off):** Triệt tiêu hoàn toàn độ trễ cho người dùng nhưng tăng độ phức tạp hệ thống, đòi hỏi cơ chế thông báo trạng thái đơn hàng (Polling/WebSocket) và xử lý lỗi bù trừ (compensation logic) nếu đơn hàng thất bại. |
+| 1 | **Bật chế độ SQLite WAL (Write-Ahead Logging) & `busy_timeout`** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Chế độ mặc định (*Rollback Journal*) dùng file lock đơn luồng khiến Readers chặn Writers. Khi kích hoạt WAL mode (`PRAGMA journal_mode = WAL;`), các luồng Đọc (`SELECT`) và Ghi (`INSERT`) chạy song song hoàn toàn. Kết hợp `busy_timeout = 5000;` giúp SQLite tự động chờ khóa thay vì ném lỗi `SQLITE_BUSY`.<br/>**Hiệu quả:** Kéo giảm max latency từ 457ms xuống < 50ms. |
+| 2 | **Cấu hình Connection Pooling (ví dụ max pool = 50 kết nối) cho SQLite** | **Hallucinated**<br/>*(Ảo giác)* | **Sai lầm của AI:** AI nhầm lẫn giữa RDBMS Client-Server (PostgreSQL, MySQL qua TCP) với Embedded In-Process Database của SQLite. SQLite thao tác trực tiếp trên file đĩa cục bộ. Việc mở nhiều connection đồng thời trong 1 tiến trình Node.js không tăng thông lượng ghi mà còn làm trầm trọng xung đột file lock và tăng nguy cơ deadlock. |
+| 3 | **Đánh B-Tree Index (`CREATE INDEX`) trên cột `products.name` để tăng tốc tìm kiếm `LIKE '%keyword%'`** | **Hallucinated / Ineffective**<br/>*(Hiểu sai giải thuật)* | **Sai lầm của AI:** Endpoint tìm kiếm `/api/products?search={query}` sử dụng mệnh đề `WHERE name LIKE '%query%'` (có ký tự wildcard `%` ở đầu). Về mặt giải thuật, B-Tree Index chỉ hỗ trợ Prefix search (`query%`), hoàn toàn **vô hiệu hóa** với leading wildcard (`%query%`), SQLite vẫn buộc phải quét Full Table Scan. Giải pháp đúng là dùng **FTS5 (Full-Text Search)**. |
+| 4 | **Triển khai In-Memory Caching (Redis hoặc `node-cache`) cho nhóm Read-Heavy** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Nhóm Read (`/api/products`, `/api/products/:id`) chiếm > 70% lưu lượng nhưng ít thay đổi. Lưu cache trong RAM với TTL 30–60 giây giúp giảm > 80% số lần đọc đĩa I/O, giải phóng băng thông database để phục vụ đơn hàng (`checkout`). |
+| 5 | **Đánh chỉ mục Index cho khóa ngoại (`orders.user_id` và `products.category_id`)** | **Feasible**<br/>*(Khả thi cao)* | **Cơ chế:** Endpoint `/api/orders/my-orders` thực hiện `SELECT * FROM orders WHERE user_id = ?`. Khi số đơn hàng tăng lên hàng vạn, tạo B-Tree index giúp đưa độ phức tạp truy vấn từ $O(N)$ về $O(\log N)$. |
+| 6 | **Chuyển đổi Order Checkout sang mô hình Asynchronous Queue (Eventual Consistency)** | **Feasible**<br/>*(Khả thi nhưng có đánh đổi)* | **Cơ chế:** Endpoint `/api/checkout` đẩy payload vào hàng đợi in-memory (BullMQ / Node queue) và trả về `202 Accepted` ngay lập tức. Worker xử lý batch insert ngầm.<br/>**Đánh đổi (Trade-off):** Triệt tiêu hoàn toàn độ trễ cho người dùng nhưng tăng độ phức tạp hệ thống (cần WebSocket/Polling cập nhật trạng thái). |
 
 ---
 
 # TASK 3: Continuous Performance Testing Proposal (G9.6 Disrupt)
 
+---
+
 ## 1. Mô Hình Pipeline Kiểm Thử Hiệu Năng Tự Động (Continuous Performance Pipeline)
-> *Placeholder: Đề xuất kiến trúc CI/CD tự động kích hoạt kiểm thử hiệu năng dựa trên phân loại commit (Smart Triggering).*
 
 ```mermaid
 flowchart TD
@@ -393,7 +308,7 @@ flowchart TD
 
 ## 2. Cơ Chế Phát Hiện Hồi Quy Hiệu Năng (Regression Detection & Gating)
 - **Baseline Comparison:** So sánh chỉ số p95 của commit mới với baseline của nhánh `main` trước đó.
-- **Threshold Gating:** Tự động fail pipeline nếu p95 tăng vượt quá 15% (Latency Degradation Alert).
+- **Threshold Gating:** Tự động fail pipeline nếu p95 tăng vượt quá 15% (Latency Degradation Alert) hoặc Error Rate > 1%.
 
 ## 3. Phân Tích Đánh Đổi (Trade-Off Analysis)
 
@@ -402,3 +317,25 @@ flowchart TD
 | **Chi phí hạ tầng (Cost)** | Phát hiện sớm lỗi hiệu năng trước khi release lên production, giảm chi phí sửa lỗi. | Tốn tài nguyên tính toán CI/CD nếu chạy full load test trên mọi commit. | Chỉ chạy Smoke Perf Test ngắn (1-2 phút) trên PR; dời Full Stress/Soak Test vào lịch chạy ban đêm (Nightly Cron). |
 | **Tốc độ phản hồi (Developer Loop)** | Developer nhận phản hồi hiệu năng ngay trong quá trình review code. | Tăng thời gian chờ merge PR nếu bài test kéo dài. | Tối ưu kịch bản test gọn gàng, chạy song song container độc lập. |
 | **Cảnh báo giả (False Alarms)** | Đảm bảo tính nghiêm ngặt cho SLA hệ thống. | Môi trường CI Runner dùng chung (shared runner) có thể biến thiên CPU/RAM gây nhiễu kết quả đo. | Thiết lập dải dung sai (tolerance margin ~10-15%) và hỗ trợ lệnh rerun xác thực trước khi block hoàn toàn. |
+
+# AI Critique
+
+Trong bài kiểm thử hiệu năng này, nhóm sử dụng Gemini để hỗ trợ dựng khung kịch bản k6 và xử lý sơ bộ log kết quả. Dù giúp đẩy nhanh tiến độ ban đầu, AI vẫn bộc lộ nhiều sai sót do đưa ra các giả định thiếu thực tế.
+
+Cụ thể, AI cấu hình dùng chung một tài khoản cho toàn bộ Virtual Users, dẫn đến race condition kích hoạt cơ chế khóa tài khoản và làm thất bại 100% request tiếp theo. Bên cạnh đó, mô hình đặt think-time cố định gây hiệu ứng dồn tải nhân tạo, bỏ qua pha đo lường tự phục hồi trong kịch bản Spike, và xuất hiện ảo giác khi đề xuất thiết lập Connection Pooling cho SQLite.
+
+Nguyên nhân chính là mô hình chỉ tổng hợp code mẫu phổ biến thay vì hiểu sâu về ràng buộc trạng thái nghiệp vụ, cũng như đặc thù khóa file đơn luồng của SQLite trên nền runtime Node.js.
+
+Bài học lớn nhất rút ra là AI chỉ đóng vai trò trợ lực tăng tốc, con người bắt buộc phải giữ vai trò thẩm định kỹ thuật. Mọi kịch bản do AI sinh ra cần được rà soát từng dòng mã, tham số tải phải bám sát thực tế, và mọi đề xuất tối ưu đều phải được đối chứng trực tiếp qua số liệu thực nghiệm thay vì phụ thuộc hoàn toàn vào kết quả của mô hình.
+
+
+# AI Audit Report
+
+I use AI tools for the following tasks:
+
+| # | Agent | Date & Time (UTC+7) | Assignment | Your Prompt | AI Output (summary) | Verdict | Student Fix |
+|---|-------|---------------------|------------|-------------|---------------------|:-------:|-------------|
+| 1 | Gemini 3.7 | 2026-08-15 18:48 | HW05 – Performance Testing | đọc skill và thực hiện các phần tự động được, đảm bảo Read-heavy, Auth-heavy, Transactional, và Task 1 — AI-assisted test design and execution... | Designed and generated 3 k6 test plans (Load, Stress, Spike), shared data-driven CSV workflow covering 3 endpoint groups, account lockout handler, 3 report views, and AI critique review report. | INCOMPLETE | Hiệu chỉnh khắc phục lỗi account lockout bằng pool 500 users CSV độc lập; phân hóa randomized think-time theo 3 nhóm; bổ sung Phase 5 đo độ trễ phục hồi trong Spike test; thắt chặt assertions sâu trên payload JSON. |
+| 2 | Gemini 3.7 | 2026-08-15 21:11 | HW05 – Performance Testing | Từ những file report tạo báo cáo đánh giá những tốt, xấu, điểm nghẽn, gợi ý chỉnh sửa vào report, không làm các phần khác của task 2 | Extracted empirical metrics across 4 test reports, generated comprehensive analysis in Task 2 Section 1 covering Strengths, Weaknesses, Bottlenecks, and Optimization recommendations without touching other Task 2 sections. | INCOMPLETE | Bổ sung bảng đối chứng Misinterpretation Hunt từ raw logs; phân loại phản biện Feasible vs Hallucinated (vạch trần ảo giác Connection Pool và B-Tree Index trên SQLite LIKE query); hiệu chỉnh SLA thresholds sát thực tế. |
+
+

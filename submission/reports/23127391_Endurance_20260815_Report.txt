@@ -1,6 +1,6 @@
-================================================================================
+﻿================================================================================
 EShop Performance Test — ENDURANCE / SOAK TEST THRESHOLD REPORT
-Scenario: 23127031_Endurance_20260815
+Scenario: 23127391_Endurance_20260815
 Execution Time: 2026-08-15T12:41:26.292Z
 Sustained Duration: 12 minutes (10 minutes steady load @ 30 Virtual Users)
 ================================================================================

@@ -1,9 +1,9 @@
-import { runEShopWorkflow } from './k6-eshop-workflow.js';
+﻿import { runEShopWorkflow } from './k6-eshop-workflow.js';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 /**
  * SCENARIO 2: STRESS TEST
- * Name: 23127031_Stress_20260815
+ * Name: 23127391_Stress_20260815
  * Objective: Find breaking point, degradation limits, and observe SQLite lock contention under extreme concurrency.
  * Report View: Summary / Aggregated JSON Metric Export (Listener 2)
  */
@@ -33,7 +33,7 @@ export default function () {
 export function handleSummary(data) {
   // Extract custom aggregated summary metrics
   const customSummary = {
-    testName: '23127031_Stress_20260815',
+    testName: '23127391_Stress_20260815',
     timestamp: new Date().toISOString(),
     scenarios: data.metrics,
     rootGroup: data.root_group,
@@ -48,7 +48,7 @@ export function handleSummary(data) {
   };
 
   return {
-    'reports/23127031_Stress_20260815_Summary.json': JSON.stringify(customSummary, null, 2),
+    'reports/23127391_Stress_20260815_Summary.json': JSON.stringify(customSummary, null, 2),
     stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }

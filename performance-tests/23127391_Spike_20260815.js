@@ -1,9 +1,9 @@
-import { runEShopWorkflow } from './k6-eshop-workflow.js';
+﻿import { runEShopWorkflow } from './k6-eshop-workflow.js';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 /**
  * SCENARIO 3: SPIKE TEST
- * Name: 23127031_Spike_20260815
+ * Name: 23127391_Spike_20260815
  * Objective: Verify system behavior during an abrupt traffic surge (flash sale) and measure recovery latency back to baseline.
  * Report View: Detailed Text-Formatted Log & Console View (Listener 3)
  */
@@ -33,13 +33,13 @@ export function handleSummary(data) {
   
   const header = `========================================================================
 EShop Performance Test - SPIKE TEST RUN REPORT
-Scenario: 23127031_Spike_20260815
+Scenario: 23127391_Spike_20260815
 Executed At: ${timestamp}
 Report Format: Raw Console & Metric Summary Log (Listener Type 3)
 ========================================================================\n\n`;
 
   return {
-    'reports/23127031_Spike_20260815_Console.txt': header + summaryOutput,
+    'reports/23127391_Spike_20260815_Console.txt': header + summaryOutput,
     stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }

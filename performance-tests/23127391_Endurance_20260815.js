@@ -1,9 +1,9 @@
-import { runEShopWorkflow } from './k6-eshop-workflow.js';
+﻿import { runEShopWorkflow } from './k6-eshop-workflow.js';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 /**
  * SCENARIO 4: ENDURANCE / SOAK TEST
- * Name: 23127031_Endurance_20260815
+ * Name: 23127391_Endurance_20260815
  * Objective: Run a 12-minute sustained load test (10m steady @ 30 VUs) to empirically find
  * hardware capacity limits: Maximum Stable RPS, Memory Ceiling, Error Thresholds, and Degradation Drift.
  */
@@ -39,7 +39,7 @@ export function handleSummary(data) {
 
   const enduranceReport = `================================================================================
 EShop Performance Test — ENDURANCE / SOAK TEST THRESHOLD REPORT
-Scenario: 23127031_Endurance_20260815
+Scenario: 23127391_Endurance_20260815
 Execution Time: ${timestamp}
 Sustained Duration: 12 minutes (10 minutes steady load @ 30 Virtual Users)
 ================================================================================
@@ -64,8 +64,8 @@ ${summaryText}
 `;
 
   return {
-    'reports/23127031_Endurance_20260815_Report.txt': enduranceReport,
-    'reports/23127031_Endurance_20260815_Summary.json': JSON.stringify(data, null, 2),
+    'reports/23127391_Endurance_20260815_Report.txt': enduranceReport,
+    'reports/23127391_Endurance_20260815_Summary.json': JSON.stringify(data, null, 2),
     stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }

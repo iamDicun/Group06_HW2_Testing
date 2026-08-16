@@ -1,4 +1,4 @@
-# Prompt Log
+﻿# Prompt Log
 Verbatim record of all AI sessions for academic audit purposes.
 
 ---
@@ -100,10 +100,10 @@ flowchart LR
 
 | Kịch bản | Tệp script k6 | Profile tải | Định dạng báo cáo (Listener View) | Tệp báo cáo xuất ra |
 |---|---|---|---|---|
-| **Load Test** | [`23127031_Load_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127031_Load_20260815.js) | Ramp 20 VUs $\rightarrow$ Peak 40 VUs | **Interactive HTML Dashboard** (Đồ họa trực quan qua `k6-reporter`) | [`23127031_Load_20260815_Report.html`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127031_Load_20260815_Report.html) |
-| **Stress Test** | [`23127031_Stress_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127031_Stress_20260815.js) | Bậc thang 20 $\rightarrow$ 50 $\rightarrow$ 80 $\rightarrow$ 120 $\rightarrow$ 150 VUs | **Aggregated JSON Metrics Export** (Chi tiết p90, p95, p99, error rate) | [`23127031_Stress_20260815_Summary.json`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127031_Stress_20260815_Summary.json) |
-| **Spike Test** | [`23127031_Spike_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127031_Spike_20260815.js) | 15 VUs $\rightarrow$ Vọt 120 VUs (15s) $\rightarrow$ Giảm về 15 VUs đo Recovery | **Formatted Text Console & Metric Stream Log** | [`23127031_Spike_20260815_Console.txt`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127031_Spike_20260815_Console.txt) |
-| **Endurance Test** | [`23127031_Endurance_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127031_Endurance_20260815.js) | Duy trì 30 VUs liên tục 10–15 phút | **Endurance Stability Summary** (Khảo sát memory leak & RPS trần) | [`23127031_Endurance_20260815_Summary.json`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127031_Endurance_20260815_Summary.json) |
+| **Load Test** | [`23127391_Load_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127391_Load_20260815.js) | Ramp 20 VUs $\rightarrow$ Peak 40 VUs | **Interactive HTML Dashboard** (Đồ họa trực quan qua `k6-reporter`) | [`23127391_Load_20260815_Report.html`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127391_Load_20260815_Report.html) |
+| **Stress Test** | [`23127391_Stress_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127391_Stress_20260815.js) | Bậc thang 20 $\rightarrow$ 50 $\rightarrow$ 80 $\rightarrow$ 120 $\rightarrow$ 150 VUs | **Aggregated JSON Metrics Export** (Chi tiết p90, p95, p99, error rate) | [`23127391_Stress_20260815_Summary.json`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127391_Stress_20260815_Summary.json) |
+| **Spike Test** | [`23127391_Spike_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127391_Spike_20260815.js) | 15 VUs $\rightarrow$ Vọt 120 VUs (15s) $\rightarrow$ Giảm về 15 VUs đo Recovery | **Formatted Text Console & Metric Stream Log** | [`23127391_Spike_20260815_Console.txt`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127391_Spike_20260815_Console.txt) |
+| **Endurance Test** | [`23127391_Endurance_20260815.js`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/23127391_Endurance_20260815.js) | Duy trì 30 VUs liên tục 10–15 phút | **Endurance Stability Summary** (Khảo sát memory leak & RPS trần) | [`23127391_Endurance_20260815_Summary.json`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/reports/23127391_Endurance_20260815_Summary.json) |
 
 - **Think-time thực tế**: Auth (1-2s), Read (2-4s), Transactional (3-5s) đặt ngoài block `group()` để đo chính xác thời gian phản hồi thực tế của server.
 
@@ -112,9 +112,9 @@ flowchart LR
 ### 4. Danh Mục Tài Liệu Đã Tạo
 
 1. **Test Plans (Markdown)**:
-   - [`23127031_Load_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127031_Load_20260815_TestPlan.md)
-   - [`23127031_Stress_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127031_Stress_20260815_TestPlan.md)
-   - [`23127031_Spike_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127031_Spike_20260815_TestPlan.md)
+   - [`23127391_Load_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127391_Load_20260815_TestPlan.md)
+   - [`23127391_Stress_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127391_Stress_20260815_TestPlan.md)
+   - [`23127391_Spike_20260815_TestPlan.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/test-plans/23127391_Spike_20260815_TestPlan.md)
 2. **Báo Cáo Phân Tích & Phản Biện AI (Human Review & AI Critique)**:
    - [`eshop-perf-analysis.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/analysis/eshop-perf-analysis.md)
    - [`ai_critique_review.md`](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/performance-tests/analysis/ai_critique_review.md): Ghi nhận chi tiết những điểm AI đã làm sai/bỏ sót (hardcoded 1 user gây lockout collision, think-time cố định gây đỉnh tải nhân tạo, thiếu Recovery Phase trong Spike, weak assertions, SQLite single-writer lock contention) và giải pháp khắc phục.
@@ -132,10 +132,10 @@ Bạn có thể chạy toàn bộ kịch bản và gom báo cáo tự động b�
 .\performance-tests\run_tests.ps1 -Scenario all
 
 # Hoặc chạy riêng từng kịch bản:
-k6 run performance-tests/23127031_Load_20260815.js
-k6 run performance-tests/23127031_Stress_20260815.js
-k6 run performance-tests/23127031_Spike_20260815.js
-k6 run performance-tests/23127031_Endurance_20260815.js
+k6 run performance-tests/23127391_Load_20260815.js
+k6 run performance-tests/23127391_Stress_20260815.js
+k6 run performance-tests/23127391_Spike_20260815.js
+k6 run performance-tests/23127391_Endurance_20260815.js
 ```
 
 ### Turn 2
@@ -144,7 +144,7 @@ k6 run performance-tests/23127031_Endurance_20260815.js
 Từ những file report tạo báo cáo đánh giá những tốt, xấu, điểm nghẽn, gợi ý chỉnh sửa vào report, không làm các phần khác của task 2
 
 **[Assistant]**
-Đã hoàn tất phân tích toàn bộ các tệp báo cáo kiểm thử thực tế (`23127031_Load_20260815_Report.html`, `23127031_Stress_20260815_Summary.json`, `23127031_Spike_20260815_Console.txt`, `23127031_Endurance_20260815_Report.txt`) và cập nhật trực tiếp báo cáo đánh giá vào mục **TASK 2 (Section 1: AI Log Analysis & Initial Threshold Proposals)** trong cả hai tệp [submission/report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/submission/report.md) và [report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/report.md). Các phần khác của Task 2 được giữ nguyên theo đúng yêu cầu.
+Đã hoàn tất phân tích toàn bộ các tệp báo cáo kiểm thử thực tế (`23127391_Load_20260815_Report.html`, `23127391_Stress_20260815_Summary.json`, `23127391_Spike_20260815_Console.txt`, `23127391_Endurance_20260815_Report.txt`) và cập nhật trực tiếp báo cáo đánh giá vào mục **TASK 2 (Section 1: AI Log Analysis & Initial Threshold Proposals)** trong cả hai tệp [submission/report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/submission/report.md) và [report.md](file:///e:/Users/Admin/Documents/GitHub/Group06_HW2_Testing/report.md). Các phần khác của Task 2 được giữ nguyên theo đúng yêu cầu.
 
 ---
 

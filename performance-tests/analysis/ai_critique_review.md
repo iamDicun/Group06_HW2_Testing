@@ -1,4 +1,4 @@
-# Báo Cáo Phản Biện & Hiệu Chỉnh Thiết Kế Test (AI Critique & Human Review)
+﻿# Báo Cáo Phản Biện & Hiệu Chỉnh Thiết Kế Test (AI Critique & Human Review)
 
 ## 1. Giới Thiệu & Bối Cảnh
 
@@ -38,4 +38,4 @@ Tài liệu này ghi nhận chi tiết những điểm **AI đã làm sai hoặc
 
 ## 4. Kết Luận & Trách Nhiệm Của Tester
 
-Bộ 3 kịch bản kiểm thử (`23127031_Load_20260815.js`, `23127031_Stress_20260815.js`, `23127031_Spike_20260815.js`) đã được rà soát toàn diện, hiệu chỉnh 100% các điểm yếu trên để đảm bảo tính thực tế, độ tin cậy và sự sẵn sàng cho quá trình thực thi có đối chứng.
+Bộ 3 kịch bản kiểm thử (`23127391_Load_20260815.js`, `23127391_Stress_20260815.js`, `23127391_Spike_20260815.js`) đã được rà soát toàn diện, hiệu chỉnh 100% các điểm yếu trên để đảm bảo tính thực tế, độ tin cậy và sự sẵn sàng cho quá trình thực thi có đối chứng.
