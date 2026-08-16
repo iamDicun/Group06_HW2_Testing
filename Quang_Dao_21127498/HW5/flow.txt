@@ -1,0 +1,1 @@
+Login ->Product Search -> Product Detail -> Add to Cart -> Checkout

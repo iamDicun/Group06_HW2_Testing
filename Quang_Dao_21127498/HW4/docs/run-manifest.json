@@ -1,0 +1,29 @@
+[
+  {
+    "feature": "FR-01 Register",
+    "browser": "chromium",
+    "status": "failed",
+    "exitCode": null,
+    "reportDir": "reports\\html\\register\\chromium",
+    "reportGenerated": false,
+    "timestamp": "2026-08-10T04:48:45.175Z"
+  },
+  {
+    "feature": "FR-01 Register",
+    "browser": "firefox",
+    "status": "failed",
+    "exitCode": null,
+    "reportDir": "reports\\html\\register\\firefox",
+    "reportGenerated": false,
+    "timestamp": "2026-08-10T04:48:45.180Z"
+  },
+  {
+    "feature": "FR-01 Register",
+    "browser": "webkit",
+    "status": "failed",
+    "exitCode": null,
+    "reportDir": "reports\\html\\register\\webkit",
+    "reportGenerated": false,
+    "timestamp": "2026-08-10T04:48:45.184Z"
+  }
+]

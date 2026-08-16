@@ -306,4 +306,126 @@ I use AI tools for the following tasks:
 
 ---
 
+## Interaction 10
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> Output cuộc trò chuyện này ra file .md cho tôi với đúng yêu cầu: "Attach the AI Audit Report as an appendix... [assignment's AI Audit Report requirements, quoted from the PDF]... To simplify this process, you are encouraged to create a skill or rule that extracts the information above automatically after an AI session."
+
+- **The AI output:**
+
+> [The assistant generated and delivered a Markdown file, `AI-Audit-Report.md`, containing a declaration ("I use AI tools for the following tasks,") followed by a structured entry for each prior interaction in the conversation up to that point (interactions 1–9 above), each with AI tool name, date, prompt, and AI output, plus a note explaining that exact per-message timestamps are not available in this environment and that the student should fill them in from their own chat export if the rubric requires exact clock times. This file is the same document now being updated with the interactions below.]
+
+---
+
+## Interaction 11
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> [Uploaded files: `2026_HW04_Automation_Testing_En.pdf` (the assignment brief) and `playwright-skill_prompt.md` (the same `build-playwright-assignment` skill content as before)]
+> Theo tôi hiểu là tạo test case -> rồi automation script -> rồi playwright mới chạy phải không? Không hiểu sao, khi tôi đính kèm skill này rồi, với context bao gồm file README.md của Eshop rồi nhưng agent lại tự ghi file, tạo phiên bản Eshop mini? Tôi cần skill làm sao mà agent có thể tạo test case, rồi chuyển test case đó thành automation script, rồi thực thi bằng playwright. Skill hiện tại tôi gửi bạn đang bị lỗi gì sao mà không thực hiện được flow tôi vừa ghi? Xin cảm ơn.
+
+- **The AI output:**
+
+> Xác nhận luồng bạn hiểu (test case → automation script → Playwright chạy) là đúng và đầy đủ, khớp với Task 1 của đề bài.
+>
+> Chẩn đoán nguyên nhân agent tự tạo "EShop mini": mục "Establish the contract" trong skill có câu "If the application cannot run, continue with design and implementation where possible, but clearly mark execution and report generation as blocked" — câu này không nói rõ "implementation" chỉ nghĩa là viết script chờ sẵn, và không hề cấm rõ ràng việc tự dựng hệ thống thay thế. Kết hợp với các câu nhấn mạnh "Produce working, evidence-backed automation" và "Aim for the suite to execute end to end", agent bị áp lực phải "có cái chạy được" nên khi không tiếp cận được EShop thật (do workspace không có quyền truy cập source, và có thể chưa có URL thật), nó chọn nhầm hướng tự chế app thay vì dừng lại báo lỗi.
+>
+> Đây là lỗi cấu trúc của skill (thiếu nguyên tắc phương pháp), nên cần sửa trực tiếp vào skill — khác với việc thêm URL/đặc tả (là dữ liệu ngữ cảnh, nên để ngoài skill). Đề xuất thêm đoạn "Never fabricate a substitute SUT" vào ngay dưới mục "Establish the contract", yêu cầu agent dừng lại và báo cáo chính xác thứ đang thiếu (quyền truy cập workspace, URL, lệnh khởi động) thay vì tự dựng ứng dụng/trang/backend thay thế, và xác minh ứng dụng thật có phản hồi được trước khi viết bất kỳ test nào.
+>
+> Ngoài sửa skill, học sinh cần: xác nhận EShop đang chạy thật trước khi gọi skill; cho agent quyền đọc source thật (gộp workspace hoặc cung cấp `docs/eshop-feature-specs.md`); và nhắc lại rõ trong prompt "KHÔNG được tạo phiên bản thay thế nào của EShop".
+
+---
+
+## Interaction 12
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> [Uploaded file: a Playwright-generated `error-context.md` for a failed test `FR-07 F2-TC-006 positive`, containing the failure's test info, error details, an accessibility-tree snapshot of the real EShop cart page, and the relevant test source code]
+> Tôi nghĩ chắc file skill có vấn đề hay sao, vì tôi thấy agent inspect code và output file này bảo là data. Tôi không chắc automation testing có audit source code phần mềm và xem file trên là data. Bạn nghĩ là do file skill chưa bám sát yêu cầu hay có vấn đề gì?
+
+- **The AI output:**
+
+> Xác nhận file này không phải "test data" (theo nghĩa CSV/JSON data-driven) và không liên quan tới việc audit source code EShop. Đây là `error-context.md` — một artifact debug **do chính Playwright tự động sinh ra khi test fail**, gắn với tính năng "Fix with AI" của VS Code Playwright extension/Copilot, được thiết kế sẵn để đưa cho AI đọc và giải thích/sửa lỗi (đã xác nhận qua tra cứu tài liệu Playwright chính thức).
+>
+> Điểm tích cực: accessibility snapshot trong file cho thấy nội dung tiếng Việt thật ("Giỏ hàng của bạn đang trống", footer "© 2026 EShop SUT...") — tức test đã chạy trên EShop thật, không phải bản giả agent tự dựng như lo ngại trước đó.
+>
+> Phân tích lỗi thật trong automation script: dòng `await expect(page.locator('table')).toBeVisible()` fail vì (1) test case này giả định giỏ hàng có sản phẩm nhưng thực tế giỏ trống — thiếu bước setup/precondition thêm sản phẩm trước khi kiểm tra; (2) locator `table` quá chung chung, vi phạm nguyên tắc ưu tiên locator mà chính skill quy định (`getByRole` trước, CSS thô là lựa chọn cuối); (3) nhánh `else` không có tên category rõ ràng, khó debug. Đây chính xác là loại lỗi bước "Review and fix (human review)" của skill yêu cầu học sinh phát hiện và sửa, đồng thời là nguyên liệu tốt cho phần "AI Critique" bắt buộc của đề bài.
+
+---
+
+## Interaction 13
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> Tôi chưa hiểu, bản chất automation test có được đọc code như tôi đang làm không? Hãy chỉ tạo test case, rồi tạo automation script rồi dùng playwright chạy trên đường link thật, rồi report kết quả thôi?
+
+- **The AI output:**
+
+> Xác nhận luồng người dùng mô tả (test case → automation script → Playwright chạy trên URL thật → report) là định nghĩa đầy đủ, đúng chuẩn của automation testing — không thiếu bước nào.
+>
+> Làm rõ: đọc source code KHÔNG phải bước bắt buộc của automation testing, chỉ là kỹ thuật tùy chọn hỗ trợ giai đoạn thiết kế test case (gray-box), còn automation testing khi thực thi luôn là black-box — Playwright tương tác qua trình duyệt giống người dùng thật, không "nhìn vào" code lúc chạy. Lời khuyên đọc source trước đó chỉ nhằm bù thông tin do tài liệu EShop sơ sài, không phải điều kiện bắt buộc, và thực tế đã gây rủi ro (agent tự chế app khi bí).
+>
+> Khuyến nghị: chuyển hẳn sang black-box thuần túy — học sinh tự mô tả acceptance criteria ở mức UI dựa trên thao tác thử thật, cung cấp cho agent chỉ URL + mô tả chức năng (không cấp quyền source), và thêm hẳn một nguyên tắc "Black-box only" vào skill để cấm tuyệt đối việc đọc/tham chiếu source hoặc tạo file thay thế cho SUT. Đánh đổi: có thể bỏ sót một số rule ẩn không lộ rõ trên UI, nhưng đây là đánh đổi chuẩn mực, được công nhận trong ISTQB Syllabus (tài liệu tham khảo chính của đề bài).
+
+---
+
+## Interaction 14
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> [Uploaded file: `HW4.zip`, the student's in-progress Playwright project for the assignment]
+> Cấu hình playwright.config.ts với 3 project Chromium/Firefox/WebKit, viết runner script chạy 9 ô, report title chứa "Run by: 21127498".
+
+- **The AI output:**
+
+> [The assistant extracted and inspected the uploaded project (playwright.config.ts, tests/register.spec.ts, tests/cart.spec.ts, test-data/register.csv, test-data/cart.csv, context/personal.md) before writing any code. It confirmed via a targeted web search that Playwright's built-in HTML reporter has no supported "title" config option, so it could not simply set a `title` field in the reporter config to satisfy the "Run by: {StudentID}" requirement.
+>
+> It then delivered two files:
+> 1. An updated `playwright.config.ts` — keeping the 3 existing browser projects (chromium/firefox/webkit), adding a dynamic HTML reporter `outputFolder` driven by a `PW_REPORT_DIR` environment variable (so each matrix cell writes to its own report folder), and adding a `metadata` block recording student ID/feature/browser for the raw run data.
+> 2. A new `scripts/run-matrix.js` — a Node.js runner that iterates every feature x browser cell sequentially (explaining why sequential, not parallel, given shared EShop backend state), invokes `npx playwright test --project=<browser> --grep <pattern>` per cell, and — since the HTML reporter has no title option — directly stamps each generated `index.html`'s `<title>` tag and injects a fixed banner div reading "Run by: 21127498 | <Feature> | <Browser>" plus an ISO timestamp. It writes a JSON run manifest to `docs/run-manifest.json` and exits non-zero if any cell did not pass. The assistant verified the script's syntax and unit-tested the HTML-stamping logic in isolation before delivering it.
+>
+> The assistant also flagged three pre-existing issues found while inspecting the zip, unrelated to the requested config/runner but blocking a full 9-cell run: `tests/cart.spec.ts` contains only a `CartPage` page-object class with no actual `test()` calls; there is no spec file yet for FR-12 (Access Control); and `test-data/register.csv` has only 11 data rows versus the 12 test cases documented in `test_case_FR01.md`. It stated explicitly that the runner would not fabricate placeholder tests to hide these gaps, and would instead honestly report a "blocked_no_tests" status for any cell without real tests.]
+
+---
+
+## Interaction 15
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> Do mình mới làm xong 1 ô à, bạn hãy chỉnh lại cho còn 3 ô (1 chức năng x 3 browser) đi
+
+- **The AI output:**
+
+> The assistant edited `scripts/run-matrix.js` so the `FEATURES` array contains only the one feature with a real, working spec (FR-01 Register), commenting out — rather than deleting — the `cart` and `access-control` entries, with an inline comment explaining that they should be uncommented once real spec files exist for those features. It re-verified the script's syntax and confirmed the matrix now runs 1 feature × 3 browsers = 3 cells instead of 9, while leaving all other runner logic (report stamping, manifest writing, exit code) unchanged. It reminded the student that before final submission the assignment requires the full 9-cell matrix (at least 9 browser runs across all 3 features), so the commented-out entries need to be restored once FR-07 and FR-12 have real specs.
+
+---
+
+## Interaction 16
+
+- **Name of the AI tool:** Claude (Claude.ai, Claude Sonnet 5)
+- **Date and time:** 2026-08-10 (exact time not available — see note above)
+- **Your prompt:**
+
+> [Uploaded file: `AI-Audit-Report.md`, the report produced in Interaction 10]
+> Cập nhật file này, thêm những thông tin trong cuộc trò chuyện vào file này.
+
+- **The AI output:**
+
+> [The assistant read the uploaded report, confirmed it already covered Interactions 1–9, and appended Interactions 10–16 (documenting the interactions that occurred after the report was first generated) in the same format, producing this updated `AI-Audit-Report.md`.]
+
+---
+
 *End of AI Audit Report.*

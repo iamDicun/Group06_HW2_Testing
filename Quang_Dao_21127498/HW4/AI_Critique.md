@@ -1,0 +1,1 @@
+File skill.md là file general, phải guide từng bước mới kiểm soát chất lượng tốt hơn, còn không thì agent có thể tự vượt ra ngoài scope, tạo file riêng,... và bị mơ hồ sẽ khiến agent hoàn thành công việc không như ý muốn. Quan trọng là người sử dụng agent nắm quy trình, hướng dẫn agent đi từng bước, kiểm soát chất lượng output từng bước sẽ tốt hơn.

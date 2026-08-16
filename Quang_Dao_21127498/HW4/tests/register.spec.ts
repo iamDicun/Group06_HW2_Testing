@@ -209,7 +209,7 @@ test.describe('FR-01 - Đăng ký tài khoản', () => {
 
       await expect(page).toHaveURL(/\/register(?:\?.*)?$/);
       await expect(page.getByRole('heading', { name: /Đăng Ký Tài Khoản/i })).toBeVisible();
-      await expect(page.getByText(/Mật khẩu yếu!/i)).toBeVisible();
+      await expect(page.getByText(/Mật khẩu quá yếu!/i)).toBeVisible();
     });
   }
 });

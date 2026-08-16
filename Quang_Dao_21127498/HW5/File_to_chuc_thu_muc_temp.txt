@@ -1,0 +1,9 @@
+stress-test/
+  ├── test-plan.md
+  ├── stress-test.js
+  ├── evidence/
+  │   ├── resource-log-stress.csv       (từ PowerShell script)
+  │   ├── screenshot-taskmanager-peak.png
+  │   ├── stress-test-raw.json          (từ k6 --out json)
+  │   ├── stress-test-console.txt       (log console k6)
+  │   └── stress-test-report.html       (từ K6_WEB_DASHBOARD)
