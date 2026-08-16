@@ -2,7 +2,7 @@
 
 **Họ và tên:** Bùi Dương Duy Cường  
 **MSSV:** 23127033  
-**Repository:** https://github.com/iamDicun/Group06_HW2_Testing  
+**Repository (Branch 23127033-HW4-HW5):** https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5  
 **Demo Video (YouTube Unlisted):** https://youtu.be/OF2CyW1RrgY  
 
 ---

@@ -5,7 +5,7 @@
 **Hệ thống được kiểm thử (SUT):** EShop Demo E-commerce Application (`application/backend`)  
 **Công cụ kiểm thử hiệu năng:** k6  
 **Công cụ AI hỗ trợ:** Gemini 3.6 Flash (Antigravity) & Claude 3.7 Sonnet  
-**Public GitHub Repository:** https://github.com/iamDicun/Group06_HW2_Testing  
+**Public GitHub Repository (Branch 23127033-HW4-HW5):** https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5  
 **Link Unlisted Demo Video:** https://youtu.be/OF2CyW1RrgY
 
 ---
@@ -67,7 +67,7 @@ $$\text{Login (Auth-heavy)} \rightarrow \text{View Profile (Auth-heavy)} \righta
 ### 3.1 AI Misinterpretation (Chỉ Ra Điểm AI Phân Tích Sai & Cách Người Điều Chỉnh)
 
 #### 🔴 Lỗi AI Đọc Sai Log (AI Misinterpretation):
-Khi đưa file raw log `23127033_Load_20260816.summary.json` cho AI phân tích, AI đã đưa ra kết luận: *"Kịch bản Load Test bị thất bại nghiêm trọng với Error Rate 16.67% và Checks Rate chỉ đạt 90% (Threshold fail), nguyên nhân do Server EShop không chịu nổi 10 VU nên bị từ chối dịch vụ."*
+Khi đưa file raw log `23127033_Load_20260816.summary.jtl` cho AI phân tích, AI đã đưa ra kết luận: *"Kịch bản Load Test bị thất bại nghiêm trọng với Error Rate 16.67% và Checks Rate chỉ đạt 90% (Threshold fail), nguyên nhân do Server EShop không chịu nổi 10 VU nên bị từ chối dịch vụ."*
 
 #### 🟢 Phân Tích Thực Tế & Cách Người Điều Chỉnh (Human Review):
 - **Phát hiện sai lầm của AI:** AI đã nhìn vào chỉ số `http_req_failed: 16.67%` một cách máy móc mà không phân tích từng nhóm request thô. 

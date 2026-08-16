@@ -138,7 +138,7 @@ export function handleSummary(data) {
   const out = {};
   out['stdout'] = summaryText;
   out[`${REPORT_DIR}/${TEST_NAME}.html`] = htmlContent;
-  out[`${RESULTS_DIR}/${TEST_NAME}.summary.json`] = JSON.stringify(data, null, 2);
+  out[`${RESULTS_DIR}/${TEST_NAME}.summary.jtl`] = JSON.stringify(data, null, 2);
   return out;
 }
 
