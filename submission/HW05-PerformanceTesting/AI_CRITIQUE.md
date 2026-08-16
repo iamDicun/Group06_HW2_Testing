@@ -18,7 +18,7 @@ AI đã đặt thread group Setup (login lấy token) và thread group chính (c
 Các HTTP Request trong JMX không có `HTTPSampler.responseTimeout` set. Khi server bị chậm hoặc deadlock (đặc biệt với SQLite concurrent writes), thread sẽ bị kẹt vô hạn, không release resources.
 
 **Lỗi 4: Thiếu request verify lockout (Stress Test)**
-AI ban đầu chỉ tạo test cases cho login失败, nhưng không có request thứ 4 để verify rằng account đã bị lockout thực sự (expect 403 response khi login đúng password sau 3 lần sai).
+AI ban đầu chỉ tạo test cases cho login thất bại, nhưng không có request thứ 4 để verify rằng account đã bị lockout thực sự (expect 403 response khi login đúng password sau 3 lần sai).
 
 ---
 
@@ -57,14 +57,14 @@ Khi test fail, phải đọc `.jtl` log files và `jmeter.log` để hiểu root
 AI giúp generate code nhanh, nhưng responsibility vẫn thuộc về người dùng. Phải luôn:
 - Review code output trước khi dùng
 - Test trong môi trường thật (staging) trước khi production
-- Understand每一个 configuration parameter的意义
+- Hiểu rõ ý nghĩa của từng configuration parameter
 
 **4. Iterative refinement**
 Lần đầu AI tạo code thường có bugs. Cần có quy trình: Generate → Test → Debug → Fix → Verify, thay vì tin rằng output lần đầu đã hoàn hảo.
 
 ---
 
-##附录: Danh sách commits fix
+## Phụ lục: Danh sách commits fix
 
 | Commit | Message | Files Changed |
 |--------|---------|---------------|
