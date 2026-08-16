@@ -1,60 +1,62 @@
-# AI Audit Report
+# Nhật Ký Sử Dụng AI (AI Audit Report)
 
-**Student:** 23127459 - Huynh Vuong Thuy Quan
-
----
-
-## Tong quan su dung AI
-
-Trong qua trinh lam bai tap HW05 - Performance Testing, toi da su dung AI (opencode/mimo-v2.5-free) de ho tro cac cong viec:
-- Quet ma nguon EShop de lay API endpoints
-- Tao file JMeter JMX cho 3 scenario (Load, Stress, Spike)
-- Tao file CSV input data
-- Tao workflow GitHub Actions CI/CD
-- Viet bao cao README.md va AI Critique
+**Sinh viên:** 23127459 - Huỳnh Vương Thụy Quân
 
 ---
 
-## Nhat ky hop tac voi AI (Audit Log)
+## Tổng Quan
 
-| # | AI Tool | Thoi gian | Prompt | Danh gia |
-|---|---------|-----------|--------|----------|
-| 1 | opencode | 16/08/2026 14:00 | "Quet ma nguon EShop tai D:\DATA_D\ProjectGitHub\eshop-sut\ de lay API endpoints, HTTP methods, headers, payload structure" | AI tra ve danh sach 31 API endpoints chinh xac, bao gom login, products, cart, checkout. Rat huu ich. |
-| 2 | opencode | 16/08/2026 14:30 | "Thiet ke 3 ky ban kiem thu (Load/Stress/Spike) voi thong so VUs, ramp-up, think-time phu hop voi EShop" | AI de xuat 3 scenario hop ly: Load (50 VUs), Stress (100 VUs), Spike (200 VUs). Co phan tich chi tiet. |
-| 3 | opencode | 16/08/2026 15:00 | "Tao 3 file JMX JMeter cho Load Test, Stress Test, Spike Test" | AI tao file JMX nhung bi loi: URL duplication (http://http://...), cross-thread token scope. Can fix sau. |
-| 4 | opencode | 16/08/2026 15:30 | "Tao file CSV input data cho 3 scenario" | AI tao dung 3 file CSV voi du lieu mau phu hop voi database schema EShop. |
-| 5 | opencode | 16/08/2026 16:00 | "Sua loi URL duplication trong JMX files" | AI sua thanh cong, loai bo prefix http:// trung lap. |
-| 6 | opencode | 16/08/2026 16:30 | "Sua loi cross-thread auth token scope trong Spike Test" | AI sua bang cach them Setup Thread Group de login lay token truoc. |
-| 7 | opencode | 16/08/2026 17:00 | "Tao workflow GitHub Actions CI/CD cho performance testing" | AI tao file YAML ho chinh, nhung can sua lai trigger va cac step cho phu hop. |
-| 8 | opencode | 16/08/2026 18:00 | "Viet bao cao README.md voi du lieu that tu reports" | AI doc statistics.json va viet bao cao chi tiet, dung du lieu thuc te. |
-| 9 | opencode | 16/08/2026 19:00 | "Viet AI Critique phan tich loi AI da mac phai" | AI viet chi tiet 3 loi chinh va bai hoc hoc tap. Rat can than. |
-| 10 | opencode | 16/08/2026 20:00 | "Sua workflow CI/CD theo yeu cau moi" | AI sua lai trigger on push, them Spike Test, xoa step analyze_results.py. |
-| 11 | opencode | 16/08/2026 21:00 | "Tao bug-report.md va ai_audit.md" | AI tao 2 file theo mau template. |
+Trong quá trình thực hiện bài tập HW05 - Performance Testing, tôi đã sử dụng AI (opencode/mimo-v2.5-free) để hỗ trợ các công việc sau:
+- Quét mã nguồn EShop để lấy API endpoints
+- Tạo file JMeter JMX cho 3 kịch bản (Load, Stress, Spike)
+- Tạo file CSV input data
+- Tạo workflow GitHub Actions CI/CD
+- Viết báo cáo README.md và AI Critique
 
 ---
 
-## Danh gia ket qua AI
+## Nhật Ký Hợp Tác Với AI
 
-### Da ap dung thanh cong:
-- Quet ma nguon EShop de lay API endpoints
-- Tao file CSV input data
-- Viet bao cao README.md voi du lieu that
-- Viet AI Critique phan tich loi
-- Tao git log
-
-### Can sua loi:
-- File JMX bi loi URL duplication → da fix
-- File JMX bi loi cross-thread token scope → da fix
-- Workflow CI/CD can sua lai nhieu step → da fix
-
-### Khong ap dung:
-- Script analyze_results.py (khong can thiet cho bai nop)
+| # | Công Cụ AI | Thời Gian | Prompt | Đánh Giá |
+|---|------------|-----------|--------|----------|
+| 1 | opencode | 16/08/2026 14:00 | "Quét mã nguồn EShop tại `D:\DATA_D\ProjectGitHub\eshop-sut\` để lấy API endpoints, HTTP methods, headers, payload structure" | AI trả về danh sách 31 API endpoints chính xác, bao gồm login, products, cart, checkout. Rất hữu ích. |
+| 2 | opencode | 16/08/2026 14:30 | "Thiết kế 3 kịch bản kiểm thử (Load/Stress/Spike) với thông số VUs, ramp-up, think-time phù hợp với EShop" | AI đề xuất 3 kịch bản hợp lý: Load (50 VUs), Stress (100 VUs), Spike (200 VUs). Có phân tích chi tiết. |
+| 3 | opencode | 16/08/2026 15:00 | "Tạo 3 file JMX JMeter cho Load Test, Stress Test, Spike Test" | AI tạo file JMX nhưng bị lỗi: URL duplication (`http://http://...`), cross-thread token scope. Cần fix sau. |
+| 4 | opencode | 16/08/2026 15:30 | "Tạo file CSV input data cho 3 kịch bản" | AI tạo đúng 3 file CSV với dữ liệu mẫu phù hợp với database schema EShop. |
+| 5 | opencode | 16/08/2026 16:00 | "Sửa lỗi URL duplication trong JMX files" | AI sửa thành công, loại bỏ prefix `http://` trùng lặp. |
+| 6 | opencode | 16/08/2026 16:30 | "Sửa lỗi cross-thread auth token scope trong Spike Test" | AI sửa bằng cách thêm Setup Thread Group để login lấy token trước. |
+| 7 | opencode | 16/08/2026 17:00 | "Tạo workflow GitHub Actions CI/CD cho performance testing" | AI tạo file YAML hoàn chỉnh, nhưng cần sửa lại trigger và các step cho phù hợp. |
+| 8 | opencode | 16/08/2026 18:00 | "Viết báo cáo README.md với dữ liệu thật từ reports" | AI đọc `statistics.json` và viết báo cáo chi tiết, dùng dữ liệu thực tế. |
+| 9 | opencode | 16/08/2026 19:00 | "Viết AI Critique phân tích lỗi AI đã mắc phải" | AI viết chi tiết 3 lỗi chính và bài học học tập. Rất cẩn thận. |
+| 10 | opencode | 16/08/2026 20:00 | "Sửa workflow CI/CD theo yêu cầu mới" | AI sửa lại trigger `on: push`, thêm Spike Test, xóa step `analyze_results.py`. |
+| 11 | opencode | 16/08/2026 21:00 | "Tạo bug-report.md và ai_audit.md" | AI tạo 2 file theo mẫu template. |
+| 12 | opencode | 16/08/2026 22:00 | "Fix lỗi No such file or directory trong workflow - sửa working-directory" | AI sửa `working-directory` từ `eshop-sut/backend` thành `application/backend`, sửa `npm start` thành `node server.js`. |
 
 ---
 
-## Bai hoc hoc tap
+## Đánh Giá Kết Quả AI
 
-1. **Trust but Verify:** Luon validate output cua AI truoc khi su dung
-2. **Debug by logs:** Doc JTL log de hieu root cause, khong chi nhin pass/fail
-3. **AI la tool:** AI giup generate code nhanh, nhung responsibility thuoc ve nguoi dung
-4. **Iterative refinement:** Lan dau AI tao code thuong co bugs, can quy trinh Generate → Test → Debug → Fix
+### Đã Áp Dụng Thành Công:
+- Quét mã nguồn EShop để lấy API endpoints
+- Tạo file CSV input data
+- Viết báo cáo README.md với dữ liệu thật
+- Viết AI Critique phân tích lỗi
+- Tạo git log
+
+### Cần Sửa Lỗi:
+- File JMX bị lỗi URL duplication → đã fix
+- File JMX bị lỗi cross-thread token scope → đã fix
+- Workflow CI/CD cần sửa lại nhiều step → đã fix
+- Sai đường dẫn `working-directory` trong workflow → đã fix
+
+### Không Áp Dụng:
+- Script `analyze_results.py` (không cần thiết cho bài nộp)
+
+---
+
+## Bài Học Học Tập
+
+1. **Trust but Verify:** Luôn validate output của AI trước khi sử dụng
+2. **Debug by logs:** Đọc JTL log để hiểu root cause, không chỉ nhìn pass/fail
+3. **AI là tool:** AI giúp generate code nhanh, nhưng responsibility thuộc về người dùng
+4. **Iterative refinement:** Lần đầu AI tạo code thường có bugs, cần quy trình Generate → Test → Debug → Fix

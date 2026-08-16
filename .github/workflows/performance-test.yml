@@ -28,10 +28,10 @@ jobs:
           echo "$PWD/apache-jmeter-${{ env.JMETER_VERSION }}/bin" >> $GITHUB_PATH
 
       - name: Start Backend Server
-        working-directory: ./eshop-sut/backend
+        working-directory: ./application/backend
         run: |
-          npm start &
-          sleep 15
+          node server.js &
+          sleep 20
 
       - name: Run JMeter Load Test
         run: |
