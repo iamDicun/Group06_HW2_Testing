@@ -278,7 +278,7 @@ Ngày tạo: 2026-08-16</stringProp>
             <assertions>true</assertions>
             <subresults>true</subresults>
             <responseData>false</responseData>
-            <samplerData>false</stringProp>
+            <samplerData>false</samplerData>
             <xml>false</xml>
             <fieldNames>true</fieldNames>
             <responseHeaders>false</responseHeaders>
