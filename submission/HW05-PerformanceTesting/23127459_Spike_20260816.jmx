@@ -3,7 +3,8 @@
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="EShop Spike Test - Cart &amp; Checkout (Transactional)" enabled="true">
       <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <!-- Fix #4: Chạy xong Thread Group 1 (Lấy Token) rồi mới chạy Thread Group 2 (Spike) -->
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
@@ -12,18 +13,35 @@ MSSV: 23127459
 Ngày tạo: 2026-08-16</stringProp>
     </TestPlan>
     <hashTree>
+
+      <!-- Fix #1: Cấu hình Host & Port chuẩn, không bị trùng http:// -->
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="BASE_URL" elementType="Argument">
-            <stringProp name="Argument.name">BASE_URL</stringProp>
-            <stringProp name="Argument.value">http://localhost:3000</stringProp>
+          <elementProp name="HOST" elementType="Argument">
+            <stringProp name="Argument.name">HOST</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PORT" elementType="Argument">
+            <stringProp name="Argument.name">PORT</stringProp>
+            <stringProp name="Argument.value">3000</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
 
-      <!-- Thread Group 1: Login to get token -->
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${HOST}</stringProp>
+        <stringProp name="HTTPSampler.port">${PORT}</stringProp>
+        <stringProp name="HTTPSampler.protocol">http</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+
+      <!-- Thread Group 1: Login to get global token -->
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Setup - Login for Token" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -33,15 +51,10 @@ Ngày tạo: 2026-08-16</stringProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay">0</stringProp>
       </ThreadGroup>
       <hashTree>
 
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /api/login" enabled="true">
-          <stringProp name="HTTPSampler.domain">${BASE_URL}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /api/login (Setup Token)" enabled="true">
           <stringProp name="HTTPSampler.path">/api/login</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -67,17 +80,26 @@ Ngày tạo: 2026-08-16</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-        </hashTree>
 
-        <!-- JSON Extractor: Extract Token -->
-        <PostProcessor guiclass="JsonExtractor" testclass="JsonExtractor" testname="Extract JWT Token" enabled="true">
-          <stringProp name="jsonPath">$.token</stringProp>
-          <stringProp name="variableNames">auth_token</stringProp>
-          <stringProp name="inputFormat">0</stringProp>
-          <stringProp name="outputFormat">0</stringProp>
-          <stringProp name="defaultValue"></stringProp>
-        </PostProcessor>
-        <hashTree/>
+          <!-- Fix #3: JSON Extractor lồng đúng bên trong Sampler -->
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract JWT Token" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">temp_token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+
+          <!-- Fix #2: Chuyển Local Token thành Global Property để Thread Group 2 dùng được -->
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Set Global Property auth_token" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">props.put("global_auth_token", vars.get("temp_token"));</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
 
       </hashTree>
 
@@ -92,11 +114,10 @@ Ngày tạo: 2026-08-16</stringProp>
         <stringProp name="ThreadGroup.ramp_time">10</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">120</stringProp>
-        <stringProp name="ThreadGroup.delay">5</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
       </ThreadGroup>
       <hashTree>
 
-        <!-- CSV Data Source Config for Checkout -->
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Checkout Data" enabled="true">
           <stringProp name="filename">23127459_checkout.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
@@ -110,18 +131,6 @@ Ngày tạo: 2026-08-16</stringProp>
         </CSVDataSet>
         <hashTree/>
 
-        <!-- HTTP Request Default -->
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">3000</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-        </ConfigTestElement>
-        <hashTree/>
-
-        <!-- Transaction Controller: Full Cart & Checkout Flow -->
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction: Add to Cart + Checkout" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">true</boolProp>
@@ -130,9 +139,6 @@ Ngày tạo: 2026-08-16</stringProp>
 
           <!-- Step 1: Add to Cart -->
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /api/cart" enabled="true">
-            <stringProp name="HTTPSampler.domain">${BASE_URL}</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.path">/api/cart</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -157,14 +163,14 @@ Ngày tạo: 2026-08-16</stringProp>
                 </elementProp>
                 <elementProp name="" elementType="Header">
                   <stringProp name="Header.name">Authorization</stringProp>
-                  <stringProp name="Header.value">Bearer ${auth_token}</stringProp>
+                  <!-- Gọi Global Property bằng __P -->
+                  <stringProp name="Header.value">Bearer ${__P(global_auth_token)}</stringProp>
                 </elementProp>
               </collectionProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
 
-          <!-- Think Time: 0.5-1s -->
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time Cart" enabled="true">
             <stringProp name="ConstantTimer.delay">500</stringProp>
             <stringProp name="RandomTimer.range">500</stringProp>
@@ -173,9 +179,6 @@ Ngày tạo: 2026-08-16</stringProp>
 
           <!-- Step 2: Checkout -->
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /api/checkout" enabled="true">
-            <stringProp name="HTTPSampler.domain">${BASE_URL}</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.path">/api/checkout</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -200,7 +203,8 @@ Ngày tạo: 2026-08-16</stringProp>
                 </elementProp>
                 <elementProp name="" elementType="Header">
                   <stringProp name="Header.name">Authorization</stringProp>
-                  <stringProp name="Header.value">Bearer ${auth_token}</stringProp>
+                  <!-- Gọi Global Property bằng __P -->
+                  <stringProp name="Header.value">Bearer ${__P(global_auth_token)}</stringProp>
                 </elementProp>
               </collectionProp>
             </HeaderManager>
@@ -209,7 +213,6 @@ Ngày tạo: 2026-08-16</stringProp>
 
         </hashTree>
 
-        <!-- Think Time between transactions: 1-2s -->
         <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time Between Transactions" enabled="true">
           <stringProp name="ConstantTimer.delay">1000</stringProp>
           <stringProp name="RandomTimer.range">1000</stringProp>
@@ -218,46 +221,7 @@ Ngày tạo: 2026-08-16</stringProp>
 
       </hashTree>
 
-      <!-- View Results Tree -->
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>true</responseData>
-            <samplerData>true</samplerData>
-            <xml>false</xml>
-            <fieldNames>true</fieldNames>
-            <responseHeaders>true</responseHeaders>
-            <requestHeaders>true</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <sentBytes>true</sentBytes>
-            <url>true</url>
-            <threadCounts>true</threadCounts>
-            <idleTime>true</idleTime>
-            <connectTime>true</connectTime>
-          </value>
-        </objProp>
-        <stringProp name="filename">23127459_Spike_20260816_tree.jtl</stringProp>
-      </ResultCollector>
-      <hashTree/>
-
-      <!-- Summary Report -->
+      <!-- Listeners -->
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
@@ -296,7 +260,6 @@ Ngày tạo: 2026-08-16</stringProp>
       </ResultCollector>
       <hashTree/>
 
-      <!-- Aggregate Report -->
       <ResultCollector guiclass="AggregateReportGui" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
@@ -315,7 +278,7 @@ Ngày tạo: 2026-08-16</stringProp>
             <assertions>true</assertions>
             <subresults>true</subresults>
             <responseData>false</responseData>
-            <samplerData>false</samplerData>
+            <samplerData>false</stringProp>
             <xml>false</xml>
             <fieldNames>true</fieldNames>
             <responseHeaders>false</responseHeaders>
