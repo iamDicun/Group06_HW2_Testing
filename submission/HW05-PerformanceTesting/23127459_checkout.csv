@@ -1,0 +1,11 @@
+product_id,product_name,price,quantity,total_amount,shipping_address
+1,iPhone 15 Pro Max,30000000,1,30000000,123 Le Loi Q1 TP.HCM
+2,Samsung Galaxy S24 Ultra,32000000,1,32000000,456 Hai Ba Trung Q3 TP.HCM
+3,MacBook Pro M3,45000000,1,45000000,789 Nguyen Hue Q1 TP.HCM
+4,AirPods Pro 2,5000000,2,10000000,321 Tran Hung Dao Q5 TP.HCM
+5,Keychron Q1,3500000,1,3500000,654 Le Thi Hong Gam Q1 TP.HCM
+1,iPhone 15 Pro Max,30000000,2,60000000,111 Dien Bien Phu Q1 TP.HCM
+2,Samsung Galaxy S24 Ultra,32000000,1,32000000,222 Vo Van Tan Q3 TP.HCM
+3,MacBook Pro M3,45000000,1,45000000,333 Hai Ba Trung Q1 TP.HCM
+4,AirPods Pro 2,5000000,3,15000000,444 Nguyen Dinh Chieu Q1 TP.HCM
+5,Keychron Q1,3500000,2,7000000,555 Mac Thi Buoi Q1 TP.HCM
