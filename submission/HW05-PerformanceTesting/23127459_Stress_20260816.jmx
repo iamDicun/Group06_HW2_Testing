@@ -121,7 +121,7 @@ Ngày tạo: 2026-08-16</stringProp>
             </JSONPostProcessor>
             <hashTree/>
           </hashTree>
-        </TransactionController>
+        </hashTree>
 
         <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Think Time Login" enabled="true">
           <stringProp name="ConstantTimer.delay">500</stringProp>
