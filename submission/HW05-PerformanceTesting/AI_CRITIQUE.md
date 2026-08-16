@@ -62,12 +62,3 @@ AI giúp generate code nhanh, nhưng responsibility vẫn thuộc về người 
 **4. Iterative refinement**
 Lần đầu AI tạo code thường có bugs. Cần có quy trình: Generate → Test → Debug → Fix → Verify, thay vì tin rằng output lần đầu đã hoàn hảo.
 
----
-
-## Phụ lục: Danh sách commits fix
-
-| Commit | Message | Files Changed |
-|--------|---------|---------------|
-| `d7bbc0e` | fix(Load.jmx): fix URL protocol duplication | 1 |
-| `d051860` | fix(Spike.jmx): resolve URL protocol duplication and cross-thread auth token scoping | 1 |
-| `63a2066` | fix(Stress.jmx): add 4th request to verify the account lockout | 1 |
