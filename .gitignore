@@ -38,3 +38,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+
+# -raw.json
+load-test-raw.json
+spike-test-raw.json
