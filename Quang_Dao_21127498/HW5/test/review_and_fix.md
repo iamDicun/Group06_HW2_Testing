@@ -7,7 +7,12 @@ Sau khi chạy Spike test thì file monitor resource laptop đang ghi nhận CPU
 
 Tương tự load test, Spike Test AI gợi ý chỉ lên đỉnh là 400VUs, sau khi chạy, mình thấy tỷ lệ lỗi khá thấp, nên mình tin rằng có thể tăng đỉnh spike lên thành 500VUs, thậm chí 600VUs.
 
-## Monitoring system PowerShell
+## Stress test
+Vẫn chưa xác định được rằng máy mạnh hay do 800VUs vẫn còn ít. Tuy nhiên, điều đó cho thấy tiềm năng của 1 chiếc laptop bình thường, có thể hơn AI nghĩ.
+
+## Endurance
+
+## Monitoring system PowerShell (khác test script nhưng có tác động vào bài)
 Sau khi chạy script Powershell Monitoring CPU và RAM cũ, nhận ra một vấn đề là PID không cố định, nên script cũ lấy process node đứng đầu (Select-Object -First 1), nhưng có thể lần này chạy hệ thống, ở node chạy ở PID này, lần sau chạy hệ thống in ra $proc.Id (đã thêm ở trên) và đối chiếu bằng tay với tasklist | findstr node hoặc Task Manager > Details để chắc chắn đúng PID của server đang test. Ngay cả AI fix cho tôi script cũ cũng nói rằng: "Cách cũ (Get-Counter "\Process(node)\...") chỉ an toàn khi bạn chắc chắn 100% máy chỉ có đúng 1 node.exe tại thời điểm chạy — điều này rủi ro trong môi trường thực tế, nên cách theo PID ở trên đáng tin cậy hơn nhiều cho việc thu thập evidence phục vụ báo cáo."
 
 
