@@ -27,9 +27,9 @@ Trong quá trình thực hiện bài tập HW05 - Performance Testing, tôi đã
 | 6 | opencode | 16/08/2026 16:30 | "Sửa lỗi cross-thread auth token scope trong Spike Test" | AI sửa bằng cách thêm Setup Thread Group để login lấy token trước. |
 | 7 | opencode | 16/08/2026 17:00 | "Tạo workflow GitHub Actions CI/CD cho performance testing" | AI tạo file YAML hoàn chỉnh, nhưng cần sửa lại trigger và các step cho phù hợp. |
 | 8 | opencode | 16/08/2026 18:00 | "Viết báo cáo README.md với dữ liệu thật từ reports" | AI đọc `statistics.json` và viết báo cáo chi tiết, dùng dữ liệu thực tế. |
-| 10 | opencode | 16/08/2026 20:00 | "Sửa workflow CI/CD theo yêu cầu mới" | AI sửa lại trigger `on: push`, thêm Spike Test, xóa step `analyze_results.py`. |
-| 11 | opencode | 16/08/2026 21:00 | "Tạo bug-report.md và ai_audit.md" | AI tạo 2 file theo mẫu template. |
-| 12 | opencode | 16/08/2026 22:00 | "Fix lỗi No such file or directory trong workflow - sửa working-directory" | AI sửa `working-directory` từ `eshop-sut/backend` thành `application/backend`, sửa `npm start` thành `node server.js`. |
+| 9 | opencode | 16/08/2026 20:00 | "Sửa workflow CI/CD theo yêu cầu mới" | AI sửa lại trigger `on: push`, thêm Spike Test, xóa step `analyze_results.py`. |
+| 10 | opencode | 16/08/2026 21:00 | "Tạo bug-report.md và ai_audit.md" | AI tạo 2 file theo mẫu template. |
+| 11 | opencode | 16/08/2026 22:00 | "Fix lỗi No such file or directory trong workflow - sửa working-directory" | AI sửa `working-directory` từ `eshop-sut/backend` thành `application/backend`, sửa `npm start` thành `node server.js`. |
 
 ---
 

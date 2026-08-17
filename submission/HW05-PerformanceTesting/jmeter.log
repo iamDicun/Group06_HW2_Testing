@@ -1,0 +1,29 @@
+2026-08-17 06:32:17,742 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-08-17 06:32:17,801 INFO o.a.j.JMeter: Loading user properties from: D:\DATA_D\apache-jmeter-5.6.3\bin\user.properties
+2026-08-17 06:32:17,826 INFO o.a.j.JMeter: Loading system properties from: D:\DATA_D\apache-jmeter-5.6.3\bin\system.properties
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: Version 5.6.3
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: java.version=21.0.10
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: os.name=Windows 11
+2026-08-17 06:32:17,837 INFO o.a.j.JMeter: os.arch=amd64
+2026-08-17 06:32:17,838 INFO o.a.j.JMeter: os.version=10.0
+2026-08-17 06:32:17,838 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-08-17 06:32:17,838 INFO o.a.j.JMeter: java.awt.headless=true
+2026-08-17 06:32:17,838 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-08-17 06:32:17,838 INFO o.a.j.JMeter: Available Processors =20
+2026-08-17 06:32:17,859 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-08-17 06:32:17,860 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-08-17 06:32:17,860 INFO o.a.j.JMeter: JMeterHome=D:\DATA_D\apache-jmeter-5.6.3
+2026-08-17 06:32:17,860 INFO o.a.j.JMeter: user.dir  =D:\DATA_D\ProjectGitHub\Group06_HW2_Testing\submission\HW05-PerformanceTesting
+2026-08-17 06:32:17,861 INFO o.a.j.JMeter: PWD       =D:\DATA_D\ProjectGitHub\Group06_HW2_Testing\submission\HW05-PerformanceTesting
+2026-08-17 06:32:17,869 INFO o.a.j.JMeter: IP: 192.168.0.108 Name: DESKTOP-UTCT965 FullName: DESKTOP-UTCT965
+2026-08-17 06:32:17,899 INFO o.a.j.JMeter: Setting property 'jmeter.reportgenerator.outputdir' to:'D:\DATA_D\ProjectGitHub\Group06_HW2_Testing\submission\HW05-PerformanceTesting\.\Report_Load'
+2026-08-17 06:32:17,900 ERROR o.a.j.JMeter: An error occurred: 
+org.apache.jmeter.report.config.ConfigurationException: The file D:\DATA_D\ProjectGitHub\Group06_HW2_Testing\submission\HW05-PerformanceTesting\23127459_Load_20260816.jmx doesn't exist or can't be opened
+	at org.apache.jmeter.JMeter.runNonGui(JMeter.java:950) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.JMeter.startNonGui(JMeter.java:940) ~[ApacheJMeter_core.jar:5.6.3]
+	at org.apache.jmeter.JMeter.start(JMeter.java:508) [ApacheJMeter_core.jar:5.6.3]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:259) [ApacheJMeter.jar:5.6.3]

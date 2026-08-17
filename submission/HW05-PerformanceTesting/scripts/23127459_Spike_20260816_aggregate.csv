@@ -15183,3 +15183,4 @@ timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success
 1786886504619,1,POST /api/cart,200,OK,Spike Test - Cart & Checkout 2-195,text,true,,294,395,2,2,http://localhost:3000/api/cart,1,0,0
 1786886502258,2365,Transaction: Add to Cart + Checkout,200,,Spike Test - Cart & Checkout 2-154,,true,,294,395,1,1,null,0,0,0
 1786886504623,0,POST /api/cart,200,OK,Spike Test - Cart & Checkout 2-154,text,true,,294,395,1,1,http://localhost:3000/api/cart,0,0,0
+1786923213897,627,POST /api/login (Setup Token),200,OK,Setup - Login for Token 1-1,text,true,,635,228,1,1,http://localhost:3000/api/login,619,0,30

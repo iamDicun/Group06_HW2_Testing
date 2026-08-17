@@ -33001,3 +33001,5 @@ timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success
 
 /",342,232,1,1,http://localhost:3000/api/login,1,0,0
 1786889524669,0,POST /api/login (Verify Account Lockout - Correct Password),403,Forbidden,Lockout Verification - 3 Failures + 1 Verification 2-1,text,false,Test failed: code expected to match /429/,342,228,1,1,http://localhost:3000/api/login,0,0,0
+1786923228363,28,Transaction: Login Attempt,200,"Number of samples in transaction : 1, number of failing samples : 1",Stress Test - Login Load 1-1,,false,,635,228,3,3,null,0,760,21
+1786923229100,28,POST /api/login,200,OK,Stress Test - Login Load 1-1,text,false,Test failed: code expected to match /401/,635,228,3,3,http://localhost:3000/api/login,28,0,21
