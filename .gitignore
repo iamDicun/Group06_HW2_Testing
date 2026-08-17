@@ -43,3 +43,6 @@ node_modules/
 # -raw.json
 load-test-raw.json
 spike-test-raw.json
+stress-test-raw.json
+endurance-test-raw.json
+view_result_tree.html
