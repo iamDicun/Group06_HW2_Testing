@@ -1,74 +1,13 @@
 # BÁO CÁO LỖI (BUG REPORT)
 
 **Sinh viên:** 23127459 - Huỳnh Vương Thụy Quân  
-**Ngày tạo:** 16/08/2026
+**Ngày tạo:** 16/08/2026  
+**Link Repository:** https://github.com/iamDicun/Group06_HW2_Testing/ (Nhánh: HW05-23127459)  
+**Link Video Demo:** https://youtu.be/-wdLgk_BLq0
 
 ---
 
-## BUG-01: Server nghẽn luồng và treo thread khi dội Spike Test 200 VUs
-
-### Found by Test Case
-TC-PERF-001
-
-### Requirement Related
-FR-PERF-01: Hệ thống phải xử lý ổn định với 200 VUs đồng thời
-
-### Severity / Priority
-Critical / P1
-
-### Environment
-- **Browser:** JMeter GUI 5.6.3
-- **OS:** Windows 11 Pro
-- **URL:** http://localhost:3000
-- **Version/Commit:** HW05-23127459 (commit edf89d6)
-- **Test Account:** test@eshop.com / Test1234!
-
-### Steps to Reproduce
-1. Khởi động EShop Backend Server tại port 3000
-2. Mở JMeter và tải file `23127459_Spike_20260816.jmx`
-3. Chạy JMeter Non-GUI mode: `jmeter -n -t 23127459_Spike_20260816.jmx -l results.jtl`
-4. Đợi quá trình test hoàn tất (khoảng 2 phút)
-5. Kiểm tra file `results.jtl` và report HTML
-
-### Expected Result
-- Tất cả requests hoàn thành trong thời gian hợp lý (< 1000ms)
-- Không có request bị timeout hay treo
-- Error rate < 5%
-- p99 response time < 1000ms
-
-### Actual Result
-- **p99 response time = 2,075ms** (vượt ngưỡng 1000ms gấp 2 lần)
-- **Max response time = 2,961ms** (gần 3 giây)
-- **p99 từ 29ms (median) tăng lên 2,075ms** - tăng gấp 71 lần
-- Server bị nghẽn luồng khi 200 VUs cùng thực thi checkout
-- SQLite database bị "database locked" vì chỉ hỗ trợ 1 writer
-
-### Evidence
-- File JTL: `scripts/23127459_Spike_results.jtl`
-- Report HTML: `reports/Report_Spike/index.html`
-- Statistics: `reports/Report_Spike/statistics.json`
-
-```
-Total Samples: 10,234
-Avg Response Time: 53.82ms
-p95: 29.00ms
-p99: 2,075.45ms
-Max: 2,961.00ms
-Error Rate: 0.00%
-Throughput: 84.74 req/s
-```
-
-### Labels
-- `type: bug`
-- `module: performance`
-- `severity: critical`
-- `priority: p1`
-- `status: new`
-- `found-by: test-case`
-
----
-
-## BUG-02: [Logic/Security] Thời gian khóa tài khoản khi đăng nhập sai vượt quá đặc tả (180s thay vì 30s)
+## BUG-01: [Logic/Security] Thời gian khóa tài khoản khi đăng nhập sai vượt quá đặc tả (180s thay vì 30s)
 
 ### Found by Test Case
 TC-STRESS-001
@@ -166,6 +105,9 @@ Error Rate: 99.40%
 |--------|------|---------|------------|
 | Lockout threshold | 3 lần sai | 2 lần sai | -1 lần |
 | Lockout duration | 30s | 180s | +150s (x6) |
+
+**Hình ảnh minh chứng:**
+![Lock Account Bug](image.png)
 
 ### Fix Suggestion
 ```javascript

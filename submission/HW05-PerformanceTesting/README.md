@@ -146,12 +146,12 @@ Khi dui Spike Test 200 VUs, xay ra cac hien tuong:
 
 | # | Van de | Mo ta | Muc do |
 |---|--------|-------|--------|
-| 1 | **URL Protocol Duplication** | URL bi trung: `http://http://localhost:3000` | Critical |
-| 2 | **Cross-thread Token Scope** | JWT token khong share duoc giua Thread Groups | Critical |
-| 3 | **Thieu Response Timeout** | HTTP Request khong co timeout → thread bi ket | High |
-| 4 | **SQLite Single Writer** | Khong co Connection Pooling → write contention | High |
-| 5 | **Thieu Rate Limiting** | Khong gioi han so request → DDoS vulnerability | Medium |
-| 6 | **Cart In-Memory** | Cart chi luu trong RAM, mat khi restart server | Medium |
+| 1 | **Lock Account 180s** | Thoi gian khoa tai khoan 180s thay vi 30s (Spec) | High |
+| 2 | **Login Increment +2** | login_attempts +2 thay vi +1 (khoa sau 2 lan sai) | High |
+| 3 | **URL Protocol Duplication** | URL bi trung: `http://http://localhost:3000` | Critical |
+| 4 | **Cross-thread Token Scope** | JWT token khong share duoc giua Thread Groups | Critical |
+| 5 | **Thieu Response Timeout** | HTTP Request khong co timeout → thread bi ket | High |
+| 6 | **SQLite Single Writer** | Khong co Connection Pooling → write contention | High |
 
 ### 4.3 Giai phap toi uu
 
@@ -167,8 +167,8 @@ Khi dui Spike Test 200 VUs, xay ra cac hien tuong:
 
 ## 5. Link Lien Ket
 
-- **Link Repository Du An:** [Link Repo GitHub](DÁN_LINK_PROJECT_REPO_VÀO_ĐÂY)
-- **Link Video Minh Chung:** [Video Demo Youtube/Loom](DÁN_LINK_YOUTUBE_MINH_CHỨNG_VÀO_ĐÂY)
+- **Link Repository Du An:** https://github.com/iamDicun/Group06_HW2_Testing/ (Nhanh: HW05-23127459)
+- **Link Video Minh Chung:** https://youtu.be/-wdLgk_BLq0
 
 ---
 
@@ -184,6 +184,8 @@ Trong qua trinh thuc hanh, AI da mac mot so loi chinh:
 **Bai hoc hoc tap:** Nguyen tac "Trust but Verify" - luon validate output cua AI truoc khi su dung.
 
 **Xem chi tiet:** [AI_CRITIQUE.md](AI_CRITIQUE.md)
+
+**Xem bao cao loi:** [bug-report.md](bug-report.md)
 
 ---
 

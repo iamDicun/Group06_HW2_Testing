@@ -4,7 +4,9 @@
 **MSSV:** 23127459  
 **Ngày tạo:** 16/08/2026  
 **SUT:** EShop - API Backend (Node.js + Express + SQLite)  
-**Port:** localhost:3000
+**Port:** localhost:3000  
+**Link Repository:** https://github.com/iamDicun/Group06_HW2_Testing/ (Nhánh: HW05-23127459)  
+**Link Video Demo:** https://youtu.be/-wdLgk_BLq0
 
 ---
 
@@ -442,6 +444,32 @@ Các HTTP Request trong JMX không có `HTTPSampler.responseTimeout` set. Khi se
 > - Không có rate limiting để bảo vệ server
 >
 > **Hậu quả:** 1% users trải nghiệm thời gian chờ > 2 giây, rất tệ cho UX. Trong production, điều này có thể gây mất customers.
+
+---
+
+#### Nhận Định Sai #4: "Lock Account 180s là đúng spec"
+
+**AI nhận định:**
+> "Thời gian khóa tài khoản 180 giây là phù hợp với đặc tả hệ thống."
+
+**Phản biện (Human Review):**
+> **SAI!** Phân tích mã nguồn `server.js` dòng 54-57:
+>
+> ```javascript
+> const newAttempts = user.login_attempts + 2;  // BUG: +2 thay vì +1
+> if (newAttempts >= 3) {
+>   lockedUntil = new Date(Date.now() + 180000).toISOString();  // BUG: 180s thay vì 30s
+> }
+> ```
+>
+> **So sánh với Spec:**
+> | Thông số | Spec | Thực tế | Chênh lệch |
+> |----------|------|---------|------------|
+> | Login increment | +1 | +2 | +1 |
+> | Lockout threshold | 3 lần sai | 2 lần sai | -1 lần |
+> | Lockout duration | 30s | 180s | +150s (x6) |
+>
+> **Kết luận:** Hệ thống khóa tài khoản quá lâu (180s thay vì 30s), vi phạm đặc tả. Xem chi tiết tại [bug-report.md](bug-report.md).
 
 ---
 
