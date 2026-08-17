@@ -1,0 +1,43 @@
+===============================================================================
+GIT COMMIT LOG HISTORY - HW05 PERFORMANCE TESTING (K6)
+Sinh viên: Bùi Dương Duy Cường (MSSV: 23127033)
+Repository: https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW4-HW5
+===============================================================================
+
+1. INCREMENTAL COMMITS LOG:
+
+* 58292d7 - Dicun : hw5 update
+* e117f19 - Dicun : hw5
+* 7d328b0 - Dicun : docs: export main-report.pdf
+* 43ac18d - Dicun : docs: update GitHub repository branch link to 23127033-HW4-HW5 branch
+* c77372a - Dicun : docs: update git_commit_log.txt and git_log.txt with full latest commit history
+* ca6c56b - Dicun : update structrure & folder organization
+* b268ae0 - Dicun : docs: double-check all files and complete folder structure for HW04 submission
+* b7d7d1b - Dicun : update report
+* e1e8364 - Dicun : docs: add main-report.pdf exported file
+* 3b8120d - Dicun : docs: finalize git_commit_log.txt and relative paths
+* 076e395 - Dicun : docs: update all paths to relative paths, set HTML report link to github, and update git_commit_log.txt
+* 3572253 - Dicun : docs: sync git_log.md
+* 4a9101d - Dicun : docs: final HW04 submission update with video links, git_log, code fixes comparison, and GitHub issue links
+* c91284a - Dicun : update report
+* d5d2a95 - Dicun : kiểm tra giá sản phẩm = 0
+
+-------------------------------------------------------------------------------
+2. DETAILED COMMIT BREAKDOWN FOR HW05:
+
+[Commit 58292d7] - hw5 update
+- Đổi định dạng các file log thô từ .json sang .jtl chuẩn quy định đề bài (23127033_Load_20260816.jtl, 23127033_Stress_20260816.jtl, 23127033_Spike_20260816.jtl, 23127033_Endurance_20260816.jtl).
+- Cập nhật link repository chính thức dẫn tới nhánh `23127033-HW4-HW5` trong tất cả báo cáo.
+- Re-export các file PDF báo cáo chuẩn (`main-report.pdf`, `ai_audit.pdf`, `ai_critique.pdf`).
+
+[Commit e117f19] - hw5
+- Khởi tạo bộ k6 test script (Load, Stress, Spike, Endurance) tại `23127033-HW5/scripts/`.
+- Thực thi k6 performance test, thu thập dữ liệu thô và xuất báo cáo HTML.
+- Thêm link YouTube Unlisted demo video (https://youtu.be/OF2CyW1RrgY).
+- Tạo 2 GitHub Issues báo lỗi hiệu năng & bảo mật (#153, #154) và chụp ảnh minh chứng tại `evidence/github_issues/`.
+
+[Commit 7d328b0] - docs: export main-report.pdf
+- Chuyển đổi báo cáo main-report.md sang file PDF chính thức.
+
+[Commit 43ac18d] - docs: update GitHub repository branch link to 23127033-HW4-HW5 branch
+- Cập nhật nhánh làm việc chính thức `23127033-HW4-HW5`.

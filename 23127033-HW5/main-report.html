@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 2rem; line-height: 1.6; color: #24292e; }
+h1, h2, h3 { border-bottom: 1px solid #eaecef; padding-bottom: .3em; color: #0366d6; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border: 1px solid #dfe2e5; padding: 6px 13px; text-align: left; }
+th { background-color: #f6f8fa; font-weight: 600; }
+tr:nth-child(2n) { background-color: #f8f9fa; }
+code { background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; font-size: 85%; padding: .2em .4em; }
+pre { background-color: #f6f8fa; border-radius: 3px; font-size: 85%; line-height: 1.45; overflow: auto; padding: 16px; }
+pre code { background-color: transparent; padding: 0; }
+blockquote { border-left: .25em solid #dfe2e5; color: #6a737d; padding: 0 1em; }
+</style>
+</head>
+<body>
+<h1>BÁO CÁO CHÍNH - HW05 PERFORMANCE TESTING (K6)</h1>
+<p><strong>Sinh viên:</strong> Bùi Dương Duy Cường — <code>MSSV: 23127033</code><br />
+<strong>Lớp:</strong> Kiểm thử Phần mềm (Software Testing)<br />
+<strong>Hệ thống được kiểm thử (SUT):</strong> EShop Demo E-commerce Application (<code>application/backend</code>)<br />
+<strong>Công cụ kiểm thử hiệu năng:</strong> k6<br />
+<strong>Công cụ AI hỗ trợ:</strong> Gemini 3.6 Flash (Antigravity) &amp; Claude 3.7 Sonnet<br />
+<strong>Public GitHub Repository:</strong> https://github.com/iamDicun/Group06_HW2_Testing<br />
+<strong>Link Unlisted Demo Video:</strong> https://youtu.be/OF2CyW1RrgY</p>
+<hr />
+<h2>1. GIỚI THIỆU &amp; MỤC TIÊU WORKFLOW KIỂM THỬ</h2>
+<h3>1.1 Workflow Kiểm Thử Được Chọn (Workflow Độc Quyền)</h3>
+<p>Theo yêu cầu đề bài, kịch bản kiểm thử hiệu năng End-to-End phải bao phủ đủ 3 nhóm Endpoint của ứng dụng EShop:</p>
+<p>$$\text{Login (Auth-heavy)} \rightarrow \text{View Profile (Auth-heavy)} \rightarrow \text{Search Product (Read-heavy)} \rightarrow \text{Apply Coupon (Transactional)} \rightarrow \text{Add to Cart (Transactional)} \rightarrow \text{Checkout (Transactional)}$$</p>
+<ul>
+<li><strong>Auth-heavy Endpoints:</strong></li>
+<li><code>POST /api/login</code>: Đăng nhập lấy JWT Token, tự động reset <code>login_attempts = 0</code> nếu đúng pass hoặc khóa 180s nếu sai quá 3 lần.</li>
+<li><code>GET /api/users/me</code>: Kiểm tra thông tin cá nhân với Bearer Authorization Token.</li>
+<li><strong>Read-heavy Endpoints:</strong></li>
+<li><code>GET /api/products?search={keyword}</code>: Tìm kiếm danh sách sản phẩm theo từ khóa đọc từ CSV.</li>
+<li><strong>Transactional Endpoints:</strong></li>
+<li><code>POST /api/apply-coupon</code>: Kiểm tra tính toán giảm giá đơn hàng (<code>DISCOUNT10</code>).</li>
+<li><code>POST /api/cart</code>: Thêm sản phẩm vào giỏ hàng cá nhân.</li>
+<li><code>POST /api/checkout</code>: Khởi tạo đơn hàng thanh toán.</li>
+</ul>
+<hr />
+<h2>2. KẾT QUẢ THỰC THI THỰC TẾ TRÊN 4 KỊCH BẢN K6</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Thông số Metric</th>
+<th style="text-align: center;">1. Load Test (10 VUs)</th>
+<th style="text-align: center;">2. Stress Test (100 VUs)</th>
+<th style="text-align: center;">3. Spike Test (80 VUs)</th>
+<th style="text-align: center;">4. Endurance Test (15 VUs - 10m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Tổng số Requests</strong></td>
+<td style="text-align: center;">8,460 reqs</td>
+<td style="text-align: center;">70,842 reqs</td>
+<td style="text-align: center;">24,132 reqs</td>
+<td style="text-align: center;">55,854 reqs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Throughput (RPS)</strong></td>
+<td style="text-align: center;"><strong>51.17 req/s</strong></td>
+<td style="text-align: center;"><strong>393.28 req/s</strong></td>
+<td style="text-align: center;"><strong>300.93 req/s</strong></td>
+<td style="text-align: center;"><strong>84.56 req/s</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>p50 Latency (Median)</strong></td>
+<td style="text-align: center;">1.58 ms</td>
+<td style="text-align: center;">17.73 ms</td>
+<td style="text-align: center;">34.48 ms</td>
+<td style="text-align: center;">1.23 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>p90 Latency</strong></td>
+<td style="text-align: center;">8.62 ms</td>
+<td style="text-align: center;">93.65 ms</td>
+<td style="text-align: center;">290.85 ms</td>
+<td style="text-align: center;">7.68 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>p95 Latency</strong></td>
+<td style="text-align: center;"><strong>10.40 ms</strong></td>
+<td style="text-align: center;"><strong>130.64 ms</strong></td>
+<td style="text-align: center;"><strong>348.56 ms</strong></td>
+<td style="text-align: center;"><strong>8.98 ms</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max Latency</strong></td>
+<td style="text-align: center;">35.21 ms</td>
+<td style="text-align: center;">432.77 ms</td>
+<td style="text-align: center;">582.39 ms</td>
+<td style="text-align: center;">36.46 ms</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Checks Passing Rate</strong></td>
+<td style="text-align: center;">90.0%</td>
+<td style="text-align: center;">100%</td>
+<td style="text-align: center;">100%</td>
+<td style="text-align: center;">100%</td>
+</tr>
+</tbody>
+</table>
+<h3>2.1 Đánh Giá Kịch Bản 1: Load Testing (<code>scripts/23127033_Load_20260816.js</code>)</h3>
+<ul>
+<li><strong>Cấu hình:</strong> Ramp-up 5 VU (30s) $\rightarrow$ Duy trì 10 VU (2 phút) $\rightarrow$ Ramp-down 0 VU (15s).</li>
+<li><strong>Đánh giá:</strong> Hệ thống hoạt động cực kỳ mượt mà ở tải tiêu chuẩn 10 VUs. Thông lượng đạt <strong>51.17 req/s</strong>, latency p95 rất nhỏ chỉ <strong>10.40 ms</strong>.</li>
+</ul>
+<h3>2.2 Đánh Giá Kịch Bản 2: Stress Testing (<code>scripts/23127033_Stress_20260816.js</code>)</h3>
+<ul>
+<li><strong>Cấu hình:</strong> Ramp 20 VU (30s) $\rightarrow$ Tăng lên 50 VU (1m) $\rightarrow$ Đỉnh tải 100 VU (1m) $\rightarrow$ Ramp down (30s).</li>
+<li><strong>Đánh giá:</strong> Hệ thống chịu tải ấn tượng với thông lượng đỉnh đạt <strong>393.28 req/s</strong>. Latency p95 tăng lên <strong>130.64 ms</strong> (vẫn nằm trong mức cho phép &lt; 2500ms). Không có bất kỳ request nào bị 500 Internal Server Error.</li>
+</ul>
+<h3>2.3 Đánh Giá Kịch Bản 3: Spike Testing (<code>scripts/23127033_Spike_20260816.js</code>)</h3>
+<ul>
+<li><strong>Cấu hình:</strong> Low load 5 VU (10s) $\rightarrow$ <strong>BẬT TĂNG ĐỘT NGỘT 80 VU (10s)</strong> $\rightarrow$ Giữ 80 VU (30s) $\rightarrow$ Giảm về 5 VU $\rightarrow$ Hồi phục.</li>
+<li><strong>Đánh giá:</strong> Thời gian phản hồi p95 tăng lên <strong>348.56 ms</strong> tại điểm spike nhưng hệ thống hồi phục ngay lập tức khi tải giảm xuống mà không xảy ra nghẽn tiến trình (deadlock).</li>
+</ul>
+<h3>2.4 Xác Định Ngưỡng Endurance / Soak Threshold Của Phần Cứng</h3>
+<ul>
+<li><strong>Cấu hình:</strong> Duy trì tải liên tục 15 Virtual Users trong 10 phút.</li>
+<li><strong>Kết quả thu được:</strong></li>
+<li><strong>Maximum Stable Throughput (RPS):</strong> <strong>84.56 req/s</strong> (được duy trì liên tục trong suốt 10 phút).</li>
+<li><strong>Trạng thái Latency:</strong> p95 cực kỳ ổn định ở mức <strong>8.98 ms</strong>, không bị hiện tượng tích tụ bộ nhớ (Memory Leak) hay nghẽn I/O SQLite.</li>
+<li><strong>Memory Ceiling:</strong> Tiến trình <code>node.exe</code> chiếm dụng bộ nhớ RAM duy trì ổn định dưới <strong>85 MB</strong>.</li>
+</ul>
+<hr />
+<h2>3. PHÂN TÍCH LỖI SAI CỦA AI (MISINTERPRETATION HUNT) &amp; ĐÁNH GIÁ TỐI ƯU HÓA</h2>
+<h3>3.1 AI Misinterpretation (Chỉ Ra Điểm AI Phân Tích Sai &amp; Cách Người Điều Chỉnh)</h3>
+<h4>🔴 Lỗi AI Đọc Sai Log (AI Misinterpretation):</h4>
+<p>Khi đưa file raw log <code>23127033_Load_20260816.summary.json</code> cho AI phân tích, AI đã đưa ra kết luận: <em>"Kịch bản Load Test bị thất bại nghiêm trọng với Error Rate 16.67% và Checks Rate chỉ đạt 90% (Threshold fail), nguyên nhân do Server EShop không chịu nổi 10 VU nên bị từ chối dịch vụ."</em></p>
+<h4>🟢 Phân Tích Thực Tế &amp; Cách Người Điều Chỉnh (Human Review):</h4>
+<ul>
+<li><strong>Phát hiện sai lầm của AI:</strong> AI đã nhìn vào chỉ số <code>http_req_failed: 16.67%</code> một cách máy móc mà không phân tích từng nhóm request thô. </li>
+<li><strong>Nguyên nhân thực sự:</strong> Trong kịch bản End-to-End, bước 4 <code>POST /api/apply-coupon</code> gửi mã giảm giá <code>DISCOUNT10</code>. Trong backend EShop, logic mã coupon quy định mỗi user chỉ được dùng mã 1 lần (<code>max_uses_per_user: 1</code>). Tất cả các kịch bản (Load, Stress, Spike, Endurance) đều nhận trả về <code>HTTP 400 Bad Request</code> ở step Coupon từ lượt lặp (iteration) thứ 2 trở đi. Vì status $\ge 400$ nên k6 luôn ghi nhận tỉ lệ $1/6 \approx 16.67\%$ cho chỉ số hệ thống <code>http_req_failed</code>.</li>
+<li><strong>Sự khác biệt giữa Load Test và các test khác:</strong></li>
+<li>Ở <strong>Load Test</strong>, k6 script khai báo hàm <code>check()</code> kiểm tra status <code>200 hoặc 400</code> cho step Coupon. Vì vậy, mặc dù <code>checks rate</code> đạt 90% PASS nhưng do threshold mặc định cài đặt <code>http_req_failed &lt; 0.05</code>, k6 đã báo FAIL threshold (dẫn đến việc AI đọc nhầm thành lỗi sập server).</li>
+<li>Ở các script <strong>Stress, Spike, Endurance</strong>, hàm <code>check()</code> chỉ tập trung vào 5 step cốt lõi (Login, Profile, Search, Cart, Checkout) mà bỏ qua <code>check()</code> ở step Coupon. Do đó <code>checks rate</code> ở 3 kịch bản này hiển thị <strong>100% PASS</strong>.</li>
+<li><strong>Điều chỉnh của người:</strong> Sinh viên khẳng định $100\%$ các request Login, Profile, Search, Add Cart và Checkout đều trả về <code>HTTP 200 OK</code>. Lỗi HTTP 400 ở step Coupon là <strong>logic nghiệp vụ đúng của sản phẩm (Business rule)</strong> chứ không phải lỗi quá tải phần cứng. AI đã thiếu ngữ cảnh nghiệp vụ nên đánh giá sai.</li>
+</ul>
+<hr />
+<h3>3.2 Đánh Giá Đề Xuất Tối Ưu Hóa Của AI</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Đề Xuất Của AI</th>
+<th style="text-align: center;">Phân Loại</th>
+<th style="text-align: left;">Lý Do Đánh Giá Chi Tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mở rộng Connection Pool DB</strong></td>
+<td style="text-align: center;"><strong>Hallucinated (Ảo giác)</strong></td>
+<td style="text-align: left;">SQLite trong EShop là embedded file-based database, không phải DB dạng Client-Server như MySQL/Postgres nên không có khái niệm Connection Pool.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bật SQLite WAL Mode</strong></td>
+<td style="text-align: center;"><strong>Feasible (Khả thi &amp; Đề xuất chính)</strong></td>
+<td style="text-align: left;">Thực thi <code>PRAGMA journal_mode = WAL;</code> giúp SQLite cho phép luồng Đọc và Ghi hoạt động song song, tăng mạnh throughput ở bài Stress Test.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tích hợp Redis Caching</strong></td>
+<td style="text-align: center;"><strong>Feasible (Khả thi)</strong></td>
+<td style="text-align: left;">Giúp giảm tải disk I/O cho API Read-heavy <code>/api/products?search=</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. ĐỀ XUẤT MÔ HÌNH CONTINUOUS PERFORMANCE TESTING (DISRUPT - G9.6)</h2>
+<p>Đề xuất mô hình tích hợp CI/CD tự động phát hiện suy giảm hiệu năng (P95 Regression Detection Pipeline) khi có Git Commit mới:</p>
+<pre><code class="language-mermaid">graph TD
+    Commit[Git Push / PR Commit] --&gt; Trigger[CI/CD Pipeline Trigger]
+    Trigger --&gt; DeployStaging[Deploy SUT to Staging Env]
+    DeployStaging --&gt; RunK6[Run k6 Automated Smoke Performance Test]
+    RunK6 --&gt; CheckThreshold{Check P95 Latency &amp; Error Rate vs Baseline?}
+    CheckThreshold -- &quot;Pass (p95 &lt;= Baseline + 10%)&quot; --&gt; Approve[Approve Merge &amp; Deploy Prod]
+    CheckThreshold -- &quot;Fail (Degradation Detected)&quot; --&gt; Block[Block Pipeline &amp; Alert Slack/GitHub]
+</code></pre>
+<hr />
+<h2>5. KẾT LUẬN &amp; CHỈ MỤC BẰNG CHỨNG</h2>
+<ul>
+<li><strong>Danh sách Performance &amp; Security Bugs:</strong></li>
+<li><code>BUG-PERF-01-001</code>: SQLITE_BUSY Database Lock Error on Checkout API (<a href="https://github.com/iamDicun/Group06_HW2_Testing/issues/153">GitHub Issue #153</a>)</li>
+<li><code>BUG-PERF-01-002</code>: SQL Injection &amp; Unindexed Full-Table Scan on Product Search API (<a href="https://github.com/iamDicun/Group06_HW2_Testing/issues/154">GitHub Issue #154</a>)</li>
+<li><strong>Raw Logs thô &amp; Báo cáo JSON/HTML:</strong> Nằm tại thư mục <a href="./reports/raw_logs/"><code>reports/raw_logs/</code></a> và <a href="./reports/html_reports/"><code>reports/html_reports/</code></a>.</li>
+<li><strong>AI Audit Report &amp; Critique:</strong> Nằm tại <a href="./ai_reports/ai_audit.md"><code>ai_reports/ai_audit.md</code></a> và <a href="./ai_reports/ai_critique.md"><code>ai_reports/ai_critique.md</code></a>.</li>
+<li><strong>Lịch sử Git commit:</strong> Nằm tại file <a href="./git_commit_log.txt"><code>git_commit_log.txt</code></a>.</li>
+</ul>
+</body>
+</html>

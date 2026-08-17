@@ -1,0 +1,224 @@
+[
+  {
+    "tcId": "TC_PM_01",
+    "category": "positive",
+    "description": "Create new product with valid data",
+    "input": {
+      "name": "iPhone 16 Pro Max",
+      "price": 34990000,
+      "imageUrl": "https://placehold.co/300",
+      "description": "Smartphone cao cấp Apple",
+      "category_id": 1
+    },
+    "expected": {
+      "success": true,
+      "productInList": true
+    }
+  },
+  {
+    "tcId": "TC_PM_02",
+    "category": "positive",
+    "description": "Update product name and price",
+    "input": {
+      "targetProductName": "iPhone 16 Pro Max",
+      "newName": "iPhone 16 Pro Max 512GB",
+      "newPrice": 39990000
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
+  },
+  {
+    "tcId": "TC_PM_03",
+    "category": "positive",
+    "description": "Delete existing product with confirm dialog validation (Detect BUG-FR15-004)",
+    "input": {
+      "targetProductName": "iPhone 16 Pro Max 512GB"
+    },
+    "expected": {
+      "confirmDialogTriggered": true,
+      "expectedBugId": "BUG-FR15-004"
+    }
+  },
+  {
+    "tcId": "TC_PM_04",
+    "category": "positive",
+    "description": "Cancel edit mode resets product form",
+    "input": {
+      "targetProductName": "MacBook Pro M3"
+    },
+    "expected": {
+      "formHeader": "Thêm sản phẩm mới"
+    }
+  },
+  {
+    "tcId": "TC_PM_05",
+    "category": "negative",
+    "description": "Create product with empty product name",
+    "input": {
+      "name": "",
+      "price": 100000
+    },
+    "expected": {
+      "validationTriggered": true
+    }
+  },
+  {
+    "tcId": "TC_PM_06",
+    "category": "negative",
+    "description": "Create product with negative price",
+    "input": {
+      "name": "Invalid Price Product",
+      "price": -50000
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm"
+    }
+  },
+  {
+    "tcId": "TC_PM_07",
+    "category": "negative",
+    "description": "Create product with non-existent category_id",
+    "input": {
+      "name": "No Category Product",
+      "price": 100000,
+      "category_id": 9999
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm"
+    }
+  },
+  {
+    "tcId": "TC_PM_08",
+    "category": "negative",
+    "description": "Access admin product management without authentication token",
+    "input": {},
+    "expected": {
+      "showLoginPrompt": true,
+      "loginButtonVisible": true
+    }
+  },
+  {
+    "tcId": "TC_PM_09",
+    "category": "negative",
+    "description": "Attempt login to admin portal with standard customer role account",
+    "input": {
+      "email": "user@example.com",
+      "password": "User123!"
+    },
+    "expected": {
+      "alertMessage": "Bạn không phải là admin!"
+    }
+  },
+  {
+    "tcId": "TC_PM_10",
+    "category": "edge",
+    "description": "Create product with extremely long product name (300 chars)",
+    "input": {
+      "name": "Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test Super Long Product Name Test",
+      "price": 150000
+    },
+    "expected": {
+      "success": true
+    }
+  },
+  {
+    "tcId": "TC_PM_11",
+    "category": "edge",
+    "description": "Create product with XSS script injection string in name",
+    "input": {
+      "name": "<script>alert('XSS')</script> Tablet",
+      "price": 5000000
+    },
+    "expected": {
+      "renderedAsPlaintext": true
+    }
+  },
+  {
+    "tcId": "TC_PM_12",
+    "category": "edge",
+    "description": "Detect SUT bug: Mass update of all product names when editing single product",
+    "input": {
+      "targetProductName": "AirPods Pro",
+      "newName": "AirPods Pro Gen 2"
+    },
+    "expected": {
+      "isBugDetected": true
+    }
+  },
+  {
+    "tcId": "TC_PM_13",
+    "category": "positive",
+    "description": "Cancel deletion action via confirm dialog keeps product intact (Detect BUG-FR15-004)",
+    "input": {
+      "targetProductName": "iPad Air"
+    },
+    "expected": {
+      "productRetained": true,
+      "expectedBugId": "BUG-FR15-004"
+    }
+  },
+  {
+    "tcId": "TC_PM_14",
+    "category": "negative",
+    "description": "BVA Create product with price = 0 VND (Detect BUG-FR15-002)",
+    "input": {
+      "name": "Zero Price Item Test",
+      "price": 0
+    },
+    "expected": {
+      "errorText": "Lỗi lưu sản phẩm",
+      "expectedBugId": "BUG-FR15-002"
+    }
+  },
+  {
+    "tcId": "TC_PM_15",
+    "category": "positive",
+    "description": "BVA Create product with price = 1 VND (Min valid price)",
+    "input": {
+      "name": "One Dong Item Test",
+      "price": 1
+    },
+    "expected": {
+      "success": true,
+      "productInList": true
+    }
+  },
+  {
+    "tcId": "TC_PM_16",
+    "category": "positive",
+    "description": "Edit product price field specifically (Detect BUG-FR15-003)",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newPrice": 24990000
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!",
+      "expectedBugId": "BUG-FR15-003"
+    }
+  },
+  {
+    "tcId": "TC_PM_17",
+    "category": "positive",
+    "description": "Edit product description field specifically",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newDescription": "Updated product description text"
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
+  },
+  {
+    "tcId": "TC_PM_18",
+    "category": "positive",
+    "description": "Edit product category field specifically",
+    "input": {
+      "targetProductName": "iPhone 15",
+      "newCategoryId": 2
+    },
+    "expected": {
+      "alertMessage": "Cập nhật thành công!"
+    }
+  }
+]
