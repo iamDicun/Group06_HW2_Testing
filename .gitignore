@@ -44,5 +44,8 @@ node_modules/
 load-test-raw.json
 spike-test-raw.json
 stress-test-raw.json
+<<<<<<< HEAD
 endurance-test-raw.json
 view_result_tree.html
+=======
+>>>>>>> 0d0c9f7f20ef35afc191989df66f013ce18a299d
