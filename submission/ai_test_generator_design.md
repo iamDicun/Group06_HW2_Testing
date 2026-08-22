@@ -1,53 +1,47 @@
-# Thiết Kế Hệ Thống AI-Driven API Test Generator (HW06 — Create Level G9.5)
+# Thiết Kế Hệ Thống Sinh Ca Kiểm Thử API Tự Động Bằng AI
 
-**Sinh viên thực hiện:** 22127001  
-**Môn học:** Kiểm thử Phần mềm (Software Testing)  
-**Đề bài:** Thiết kế bộ sinh ca kiểm thử API tự động điều khiển bởi AI (AI-Driven API Test Generator) cho hệ thống EShop SUT. Đầu vào là đặc tả API (API Specification, State Transition Rules, Security Checklist), đầu ra là bộ ca kiểm thử tự động, Postman Collection và kịch bản thực thi.
+## 1. Kiến Trúc Tổng Quan Hệ Thống
 
----
-
-## 1. Kiến Trúc Tổng Quan Hệ Thống (Architecture Overview)
-
-Hệ thống **AI-Driven API Test Generator** được thiết kế theo kiến trúc đường ống nhiều giai đoạn (Multi-stage Pipeline Architecture) với cơ chế kiểm soát chất lượng nghiêm ngặt (Quality Gate) và sự tham gia của con người (Human-in-the-Loop):
+Hệ thống sinh ca kiểm thử API tự động bằng AI được thiết kế theo mô hình đường ống tuần tự nhiều giai đoạn, kết hợp giữa khả năng sinh nhanh của mô hình ngôn ngữ lớn và các chốt chặn kiểm soát chất lượng của kỹ sư kiểm thử:
 
 ```mermaid
 flowchart TD
-    subgraph INPUT ["1. LỚP ĐẦU VÀO (INPUT INGESTION)"]
-        A1["OpenAPI / Swagger Spec / Endpoints"]
-        A2["Resource State Rules (5 States)"]
-        A3["RBAC Matrix (Guest / User / Admin)"]
-        A4["Security Checklist (SEC-01 .. SEC-07)"]
+    subgraph INPUT ["1. Lớp đầu vào"]
+        A1["Đặc tả OpenAPI, Swagger hoặc danh sách endpoint"]
+        A2["Quy tắc chuyển trạng thái của tài nguyên"]
+        A3["Ma trận phân quyền các vai trò"]
+        A4["Danh mục kiểm tra bảo mật từ SEC-01 đến SEC-07"]
     end
 
-    subgraph DECOMPOSITION ["2. ĐỘNG CƠ PHÂN RÃ & PHÂN TÍCH (ANALYSIS ENGINE)"]
-        B1["Parameter Equivalence & Boundary Analyzer<br/>(Min-1, Min, Max, Max+1, Types)"]
-        B2["State Transition Matrix Builder<br/>(Valid Paths + 9 Invalid Branches)"]
-        B3["Security Vulnerability Policy Injector<br/>(SQLi, IDOR, Role Escalation, XSS, Leak)"]
-        B4["Response Schema Constraint Generator<br/>(Types, Required fields, Status codes)"]
+    subgraph DECOMPOSITION ["2. Phân tích và sinh test condition"]
+        B1["Phân vùng tương đương và phân tích giá trị biên"]
+        B2["Dựng ma trận chuyển trạng thái hợp lệ và bất hợp lệ"]
+        B3["Sinh payload kiểm thử bảo mật"]
+        B4["Ràng buộc schema response và status code"]
     end
 
-    subgraph ORCHESTRATION ["3. ĐIỀU PHỐI & TỔNG HỢP (AI PROMPT ORCHESTRATOR)"]
-        C1["Structured Step-by-Step Prompting"]
-        C2["Technical Analysis File<br/>[API]-test-analysis.md"]
-        C3{"Coverage Gate<br/>Count >= 35 TCs?"}
-        C4["Iterative Boundary Deepening<br/>(Bổ sung điều kiện biên)"]
+    subgraph ORCHESTRATION ["3. Điều phối prompt và kiểm soát độ phủ"]
+        C1["Quy trình prompt từng bước có cấu trúc"]
+        C2["Tổng hợp file phân tích kỹ thuật"]
+        C3{"Kiểm tra số lượng test condition >= 35?"}
+        C4["Bổ sung thêm giá trị biên và ca phủ định"]
     end
 
-    subgraph EXPORT ["4. XUẤT BẢN CA KIỂM THỬ (TEST CASE GENERATION)"]
-        D1["Markdown Test Case Generator"]
-        D2["TC-[API]-[GROUP]-[NNN].md<br/>(50+ Files / Feature)"]
-        D3["Human Audit & Quality Review<br/>(VALID / INVALID / Human Extension)"]
+    subgraph EXPORT ["4. Xuất file test case markdown"]
+        D1["Sinh từng file test case markdown riêng biệt"]
+        D2["Bộ file test case theo định danh chuẩn"]
+        D3["Audit và bổ sung test case mở rộng"]
     end
 
-    subgraph PACKAGING ["5. ĐÓNG GÓI & THỰC THI (POSTMAN & NEWMAN COMPILER)"]
-        E1["Postman Collection Compiler"]
-        E2["Collection Pre-request Script<br/>(Auto inject X-Student-Id)"]
-        E3["Dynamic Auth Setup & Token Chaining<br/>(Login -> Extract JWT -> Pass Token)"]
-        E4["Newman CLI Runner + HTML Extra Reporter"]
-        E5["Automated Bug Report & GitHub Issue Generator"]
+    subgraph PACKAGING ["5. Đóng gói Postman và thực thi"]
+        E1["Đóng gói Postman Collection JSON"]
+        E2["Pre-request script tự động gắn header X-Student-Id"]
+        E3["Đăng nhập lấy token và gán biến môi trường"]
+        E4["Chạy Newman tự động và xuất báo cáo HTML"]
+        E5["Tổng hợp báo cáo lỗi và tạo GitHub issue"]
     end
 
-    %% Flow connections
+    %% Luồng liên kết giữa các thành phần
     A1 --> B1
     A1 --> B4
     A2 --> B2
@@ -61,9 +55,9 @@ flowchart TD
 
     C1 --> C2
     C2 --> C3
-    C3 -- Chưa đạt (< 35) --> C4
+    C3 -- Chưa đủ 35 ca --> C4
     C4 --> C1
-    C3 -- Đạt (>= 35) --> D1
+    C3 -- Đã đủ 35 ca --> D1
 
     D1 --> D2
     D2 --> D3
@@ -77,17 +71,11 @@ flowchart TD
 
 ---
 
-## 2. Mã Giả Thuật Toán Thiết Kế (Design Pseudocode)
+## 2. Mã Giả Thuật Toán Thiết Kế
 
-Dưới đây là mã giả chi tiết của toàn bộ thuật toán sinh ca kiểm thử và đóng gói thực thi tự động:
+Mã giả mô tả chi tiết logic hoạt động của bộ sinh ca kiểm thử và đóng gói thực thi:
 
 ```python
-"""
-AI-Driven API Test Generator Algorithm
-Author: Student 22127001
-Target: EShop API SUT (FR-04, FR-10, FR-16)
-"""
-
 class APITestGenerator:
     def __init__(self, api_spec, state_rules, rbac_matrix, security_rules, min_tc_threshold=35):
         self.api_spec = api_spec
@@ -99,41 +87,29 @@ class APITestGenerator:
         self.generated_test_cases = []
 
     def run_pipeline(self):
-        # ==========================================
-        # GIAI ĐOẠN 1: PHÂN RÃ & SINH TEST CONDITIONS
-        # ==========================================
-        
-        # Bước 1: Domain Partitioning & Boundary Value Analysis (DP)
+        # Giai đoạn 1: Phân tích kỹ thuật và sinh các test condition
         dp_conditions = self.generate_domain_partitions()
         self.test_conditions.extend(dp_conditions)
         
-        # Bước 2: State Transition Matrix (ST)
         if self.state_rules.has_state_machine:
             st_conditions = self.generate_state_transition_matrix()
             self.test_conditions.extend(st_conditions)
             
-        # Bước 3: Security Testing (SEC-01 đến SEC-07)
         sec_conditions = self.generate_security_conditions()
         self.test_conditions.extend(sec_conditions)
         
-        # Bước 4: Schema Validation (SCH)
         sch_conditions = self.generate_schema_validation_conditions()
         self.test_conditions.extend(sch_conditions)
 
-        # ==========================================
-        # GIAI ĐOẠN 2: KIỂM SOÁT ĐỘ PHỦ (QUALITY GATE)
-        # ==========================================
+        # Giai đoạn 2: Kiểm tra ngưỡng độ phủ tối thiểu
         while len(self.test_conditions) < self.min_tc_threshold:
-            print(f"[WARN] Coverage insufficient: {len(self.test_conditions)}/{self.min_tc_threshold}. Deepening boundary exploration...")
             supplementary = self.deepen_boundary_and_negative_conditions()
             self.test_conditions.extend(supplementary)
 
         # Xuất file tổng hợp phân tích kỹ thuật
         analysis_doc = self.export_analysis_document(self.test_conditions)
 
-        # ==========================================
-        # GIAI ĐOẠN 3: SINH TỪNG FILE TEST CASE MARKDOWN
-        # ==========================================
+        # Giai đoạn 3: Sinh từng file test case markdown chi tiết
         for idx, condition in enumerate(self.test_conditions, start=1):
             tc_file = self.build_markdown_test_case(condition, tc_index=idx)
             self.generated_test_cases.append(tc_file)
@@ -144,28 +120,28 @@ class APITestGenerator:
         conditions = []
         for endpoint in self.api_spec.endpoints:
             for param in endpoint.parameters:
-                # Phân vùng tương đương hợp lệ (Valid Partition)
+                # Phân vùng tương đương hợp lệ
                 conditions.append({
                     "id": f"DP-{len(conditions)+1:03d}",
                     "group": "DP",
                     "endpoint": endpoint.path,
                     "param": param.name,
-                    "type": "VALID_EQUIVALENCE",
+                    "type": "VALID",
                     "input": param.get_valid_sample(),
                     "expected_status": 200
                 })
-                # Phân vùng tương đương không hợp lệ (Invalid Partition: Empty, Whitespace, Missing, Null, Wrong Type)
+                # Phân vùng tương đương không hợp lệ: rỗng, khoảng trắng, thiếu field, sai kiểu dữ liệu
                 for invalid_val in param.get_invalid_samples():
                     conditions.append({
                         "id": f"DP-{len(conditions)+1:03d}",
                         "group": "DP",
                         "endpoint": endpoint.path,
                         "param": param.name,
-                        "type": "INVALID_EQUIVALENCE",
+                        "type": "INVALID",
                         "input": invalid_val,
                         "expected_status": 400
                     })
-                # Phân tích giá trị biên (Boundary Value Analysis: min-1, min, max, max+1)
+                # Phân tích giá trị biên: min-1, min, max, max+1
                 if param.has_boundaries:
                     for b_val, is_valid in param.get_boundary_samples():
                         conditions.append({
@@ -181,8 +157,8 @@ class APITestGenerator:
 
     def generate_state_transition_matrix(self):
         conditions = []
-        states = self.state_rules.all_states  # [pending, confirmed, shipping, delivered, canceled]
-        events = self.state_rules.all_events  # [confirm, ship, deliver, cancel_user, cancel_admin]
+        states = self.state_rules.all_states
+        events = self.state_rules.all_events
 
         for s_from in states:
             for event in events:
@@ -227,7 +203,6 @@ class APITestGenerator:
     def generate_schema_validation_conditions(self):
         conditions = []
         for endpoint in self.api_spec.endpoints:
-            # 200 Schema Check
             conditions.append({
                 "id": f"SCH-{len(conditions)+1:03d}",
                 "group": "SCH",
@@ -235,7 +210,6 @@ class APITestGenerator:
                 "status": 200,
                 "schema_asserts": endpoint.response_schema_200
             })
-            # 400 Error Schema Check
             conditions.append({
                 "id": f"SCH-{len(conditions)+1:03d}",
                 "group": "SCH",
@@ -246,9 +220,7 @@ class APITestGenerator:
         return conditions
 
     def compile_postman_collection(self, test_cases, student_id="22127001"):
-        # ==========================================
-        # GIAI ĐOẠN 4: ĐÓNG GÓI THỰC THI (POSTMAN)
-        # ==========================================
+        # Giai đoạn 4: Đóng gói thành Postman Collection JSON
         collection = {
             "info": {
                 "name": "EShop_API_Testing_Suite",
@@ -259,7 +231,6 @@ class APITestGenerator:
                     "listen": "prerequest",
                     "script": {
                         "exec": [
-                            f"// Global Student Header Injection",
                             f"pm.request.headers.add({{ key: 'X-Student-Id', value: '{student_id}' }});"
                         ]
                     }
@@ -268,10 +239,8 @@ class APITestGenerator:
             "item": []
         }
 
-        # Auth Setup Folder for Dynamic Chaining
         collection["item"].append(self.create_auth_setup_folder())
 
-        # Compile test cases into folders by feature & group
         for tc in test_cases:
             folder = self.get_or_create_folder(collection, tc.feature_name, tc.group_name)
             postman_request = self.convert_tc_to_postman_item(tc)
@@ -282,15 +251,15 @@ class APITestGenerator:
 
 ---
 
-## 3. Các Điểm Sáng Tạo & Nguyên Tắc Thiết Kế (Key Design Principles)
+## 3. Các Điểm Nổi Bật Trong Thiết Kế
 
-1. **Phân Tách Trách Nhiệm (Separation of Concerns)**:
-   - AI chịu trách nhiệm sinh lập nhanh và rộng (High-speed generation).
-   - Động cơ luật (Rule Engine) và Quality Gate đảm bảo đạt đủ ngưỡng tối thiểu $\ge 35$ TCs/tính năng.
-   - Con người đóng vai trò Audit và mở rộng các ca kiểm thử phức tạp (Human Extensions `EXT-001` → `EXT-005`).
+1. **Phân tách trách nhiệm rõ ràng**:
+   - AI thực hiện việc phân rã và sinh test case với tốc độ cao.
+   - Bộ lọc điều kiện đảm bảo độ phủ đạt ít nhất 35 ca kiểm thử cho mỗi tính năng.
+   - Kỹ sư kiểm thử thực hiện bước audit để loại bỏ ca sai và bổ sung các ca kiểm thử chuyên sâu về tương tranh hoặc bảo mật nâng cao.
 
-2. **Cơ Chế Dynamic Request Chaining**:
-   - Thư mục `00. Auth Setup` tự động đăng nhập tài khoản User và Admin, trích xuất chuỗi JWT token lưu vào Environment variables để toàn bộ 155 test cases phía sau kế thừa tự động.
+2. **Cơ chế chuyển tiếp token tự động**:
+   - Thư mục thiết lập xác thực thực hiện đăng nhập trước, tự động trích xuất chuỗi JWT token và lưu vào biến môi trường để toàn bộ các ca kiểm thử phía sau kế thừa tự động.
 
-3. **Tự Động Inject Header Định Danh**:
-   - Header `X-Student-Id: 22127001` được quản lý và inject tại tầng **Collection Pre-request Script**, tránh lặp lại mã nguồn ở từng request riêng lẻ.
+3. **Gắn header định danh tập trung**:
+   - Header định danh sinh viên được xử lý tự động trong pre-request script ở cấp bộ sưu tập, không cần cấu hình lặp lại ở từng ca kiểm thử đơn lẻ.
