@@ -4,16 +4,7 @@
 
 Hệ thống sinh ca kiểm thử API tự động bằng AI được thiết kế theo quy trình đường ống 5 giai đoạn:
 
-```mermaid
-flowchart TD
-    A["1. Đầu vào<br/>Đặc tả API, Quy tắc trạng thái, Phân quyền, Checklist an ninh"] --> B["2. Sinh điều kiện kiểm thử<br/>Phân vùng biên, Chuyển trạng thái, Bảo mật SEC-01..07, Schema"]
-    B --> C{"3. Kiểm tra độ phủ<br/>Đạt ít nhất 35 ca / tính năng?"}
-    C -- Chưa đạt --> B
-    C -- Đã đạt --> D["4. Xuất file Test Case Markdown"]
-    D --> E["5. Audit con người & Bổ sung ca mở rộng"]
-    E --> F["6. Đóng gói Postman Collection & Chạy Newman"]
-    F --> G["7. Báo cáo HTML & Tạo GitHub Bug Issue"]
-```
+![alt text](design.png)
 
 ---
 
