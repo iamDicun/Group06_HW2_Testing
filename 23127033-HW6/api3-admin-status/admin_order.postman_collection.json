@@ -645,8 +645,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-10] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -676,7 +676,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/32/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -684,7 +684,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "32",
             "status"
           ]
         },
@@ -714,8 +714,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-11] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -745,7 +745,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/33/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -753,7 +753,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "33",
             "status"
           ]
         },
@@ -783,8 +783,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-12] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -814,7 +814,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/34/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -822,7 +822,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "34",
             "status"
           ]
         },
@@ -852,8 +852,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-13] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -883,7 +883,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/5/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -891,7 +891,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "5",
             "status"
           ]
         },
@@ -921,8 +921,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-14] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -952,7 +952,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/46/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -960,7 +960,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "46",
             "status"
           ]
         },
@@ -990,8 +990,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-15] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1021,7 +1021,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/41/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1029,7 +1029,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "41",
             "status"
           ]
         },
@@ -1059,8 +1059,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-16] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1090,7 +1090,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/-1/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1098,7 +1098,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "-1",
             "status"
           ]
         },
@@ -1128,8 +1128,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-17] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1159,7 +1159,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/0/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1167,7 +1167,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "0",
             "status"
           ]
         },
@@ -1197,8 +1197,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-18] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1228,7 +1228,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/6/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1236,7 +1236,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "6",
             "status"
           ]
         },
@@ -1266,8 +1266,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-01] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-19] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1297,7 +1297,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/7/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1305,7 +1305,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "7",
             "status"
           ]
         },
@@ -1335,8 +1335,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-20] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1366,7 +1366,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/8/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1374,7 +1374,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "8",
             "status"
           ]
         },
@@ -1404,8 +1404,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-21] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1435,7 +1435,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/42/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1443,7 +1443,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "42",
             "status"
           ]
         },
@@ -1473,8 +1473,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-22] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1504,7 +1504,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/47/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1512,7 +1512,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "47",
             "status"
           ]
         },
@@ -1542,8 +1542,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-23] Status code is 403\", function () {",
+              "    pm.response.to.have.status(403);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1568,12 +1568,12 @@
           },
           {
             "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
+            "value": "Bearer {{userToken}}",
             "type": "text"
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/9/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1581,7 +1581,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "9",
             "status"
           ]
         },
@@ -1611,8 +1611,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-24] Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1634,15 +1634,10 @@
             "key": "Content-Type",
             "value": "application/json",
             "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/10/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1650,7 +1645,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "10",
             "status"
           ]
         },
@@ -1680,7 +1675,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
+              "pm.test(\"[TC-ADMIN-25] Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "",
@@ -1711,7 +1706,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/11/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1719,7 +1714,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "11",
             "status"
           ]
         },
@@ -1749,8 +1744,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-26] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1780,7 +1775,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/12/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1788,7 +1783,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "12",
             "status"
           ]
         },
@@ -1818,8 +1813,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-27] Status code is 403\", function () {",
+              "    pm.response.to.have.status(403);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1844,12 +1839,12 @@
           },
           {
             "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
+            "value": "Bearer invalid_jwt_token",
             "type": "text"
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/13/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1857,7 +1852,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "13",
             "status"
           ]
         },
@@ -1887,7 +1882,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
+              "pm.test(\"[TC-ADMIN-28] Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "",
@@ -1918,7 +1913,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/14/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1926,7 +1921,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "14",
             "status"
           ]
         },
@@ -1956,8 +1951,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-02] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-29] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1987,7 +1982,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/21/status",
+          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1995,7 +1990,7 @@
             "api",
             "admin",
             "orders",
-            "21",
+            "99999",
             "status"
           ]
         },
@@ -2025,8 +2020,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-30] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2056,7 +2051,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/15/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2064,7 +2059,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "15",
             "status"
           ]
         },
@@ -2094,8 +2089,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-31] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2125,7 +2120,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/invalid_id/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2133,7 +2128,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "invalid_id",
             "status"
           ]
         },
@@ -2163,8 +2158,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-32] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2194,7 +2189,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/16/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2202,7 +2197,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "16",
             "status"
           ]
         },
@@ -2232,8 +2227,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-33] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2263,7 +2258,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/17/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2271,7 +2266,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "17",
             "status"
           ]
         },
@@ -2301,8 +2296,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-34] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2332,7 +2327,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/18/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2340,7 +2335,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "18",
             "status"
           ]
         },
@@ -2370,8 +2365,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-03] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-ADMIN-35] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2401,7 +2396,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/31/status",
+          "raw": "{{baseUrl}}/api/admin/orders/19/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2409,7 +2404,7 @@
             "api",
             "admin",
             "orders",
-            "31",
+            "19",
             "status"
           ]
         },
