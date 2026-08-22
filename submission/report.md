@@ -176,6 +176,12 @@ Bộ kiểm thử đã khai thác toàn diện các tính năng nâng cao của 
 - **Sample Run 1 (All-Passing Run)**: Thực thi bộ kiểm thử baseline trên các nhánh chuẩn (Happy Path) — 100% assertions thành công, pipeline báo xanh (Green).
 - **Sample Run 2 (Failing Run - Bug Detection)**: Thực thi toàn bộ bộ kiểm thử chuyên sâu bao gồm Security & Boundary — Pipeline phát hiện các điểm vi phạm bảo mật và lỗi State Machine của Backend (Role Escalation, Final State violation), đánh dấu các ca kiểm thử thất bại và lưu báo cáo chi tiết để đội phát triển sửa lỗi.
 
+### 5.3 Minh chứng thực thi trên GitHub Actions CI/CD
+
+Toàn bộ quy trình khởi động server, nạp biến môi trường, inject header và chạy Newman test suite đã được thực thi và xác nhận thành công trên GitHub Actions:
+
+![GitHub Actions CI Pipeline](./gitub-ci.png)
+
 ---
 
 ## 6. Thiết Kế Agent Skill
