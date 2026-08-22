@@ -5,6 +5,8 @@
 **Branch:** `HW6_23127391`  
 
 ```text
+* ee396d1 - docs(design): clean English annotations in ai_test_generator_design.md (2026-08-22)
+* 229314a - docs(git): update git commit log history in submission/git_log.md (2026-08-22)
 * 6783f3b - docs(submission): finalize HW06 API testing report, GitHub bug issues, and README (2026-08-22)
 * 60b2b50 - feat(automation): configure Postman collection runner, Newman reports, and CI/CD (2026-08-22)
 * 5c210f3 - docs(design): add AI test generator architecture (G9.5) and human audit report (2026-08-22)
@@ -13,6 +15,4 @@
 * 39484d0 - Update .gitignore (2026-08-22)
 * 93d2f62 - Update .gitignore (2026-08-22)
 * 83e0ca7 - Update Quang Dao's work (2026-08-03)
-* f26bdc7 - add eshop-sut (2026-06-29)
-* 1951c14 - Update README.md (2026-06-27)
 ```

@@ -73,180 +73,54 @@ flowchart TD
 
 ## 2. Mã Giả Thuật Toán Thiết Kế
 
-Mã giả mô tả chi tiết logic hoạt động của bộ sinh ca kiểm thử và đóng gói thực thi:
+```text
+THUẬT TOÁN: AITestGenerator(api_spec, state_rules, rbac_matrix, security_rules)
+ĐẦU VÀO:
+    api_spec: Danh sách endpoint, method, param, schema mong đợi
+    state_rules: Tập trạng thái và ma trận chuyển đổi hợp lệ
+    rbac_matrix: Quyền hạn các vai trò (guest, user, admin)
+    security_rules: Danh mục checklist từ SEC-01 đến SEC-07
+ĐẦU RA:
+    test_suite: Tập hợp các file ca kiểm thử markdown và Postman Collection JSON
 
-```python
-class APITestGenerator:
-    def __init__(self, api_spec, state_rules, rbac_matrix, security_rules, min_tc_threshold=35):
-        self.api_spec = api_spec
-        self.state_rules = state_rules
-        self.rbac_matrix = rbac_matrix
-        self.security_rules = security_rules
-        self.min_tc_threshold = min_tc_threshold
-        self.test_conditions = []
-        self.generated_test_cases = []
+BƯỚC 1: Khởi tạo danh sách test_conditions = []
 
-    def run_pipeline(self):
-        # Giai đoạn 1: Phân tích kỹ thuật và sinh các test condition
-        dp_conditions = self.generate_domain_partitions()
-        self.test_conditions.extend(dp_conditions)
-        
-        if self.state_rules.has_state_machine:
-            st_conditions = self.generate_state_transition_matrix()
-            self.test_conditions.extend(st_conditions)
-            
-        sec_conditions = self.generate_security_conditions()
-        self.test_conditions.extend(sec_conditions)
-        
-        sch_conditions = self.generate_schema_validation_conditions()
-        self.test_conditions.extend(sch_conditions)
+BƯỚC 2: Phân vùng tương đương và phân tích giá trị biên
+    CHO MỖI endpoint TRONG api_spec:
+        CHO MỖI param TRONG endpoint.parameters:
+            test_conditions.THÊM(PhânVùngHợpLệ(param))
+            test_conditions.THÊM(PhânVùngKhôngHợpLệ(param, [Rỗng, SaiKiểu, Null, Thiếu]))
+            NẾU param có giới hạn biên:
+                test_conditions.THÊM(GiáTrịBiên(param, [min-1, min, max, max+1]))
 
-        # Giai đoạn 2: Kiểm tra ngưỡng độ phủ tối thiểu
-        while len(self.test_conditions) < self.min_tc_threshold:
-            supplementary = self.deepen_boundary_and_negative_conditions()
-            self.test_conditions.extend(supplementary)
+BƯỚC 3: Dựng ma trận chuyển trạng thái
+    NẾU state_rules có định nghĩa vòng đời tài nguyên:
+        CHO MỖI s_current TRONG state_rules.states:
+            CHO MỖI event TRONG state_rules.events:
+                transition = ĐánhGiáChuyểnTrạngThái(s_current, event)
+                test_conditions.THÊM(transition)  // Bao gồm cả nhánh hợp lệ và bất hợp lệ
 
-        # Xuất file tổng hợp phân tích kỹ thuật
-        analysis_doc = self.export_analysis_document(self.test_conditions)
+BƯỚC 4: Thiết kế kiểm thử an ninh (SEC-01 đến SEC-07)
+    CHO MỖI sec_type TRONG [SQLi, IDOR, NângQuyền, VượtXácThực, StoredXSS, RateLimit, LộDữLiệu]:
+        CHO MỖI endpoint TRONG api_spec:
+            payloads = TạoPayloadBảoMật(sec_type, endpoint)
+            test_conditions.THÊM(KiểmTraBảoMật(sec_type, endpoint, payloads))
 
-        # Giai đoạn 3: Sinh từng file test case markdown chi tiết
-        for idx, condition in enumerate(self.test_conditions, start=1):
-            tc_file = self.build_markdown_test_case(condition, tc_index=idx)
-            self.generated_test_cases.append(tc_file)
+BƯỚC 5: Thiết kế kiểm tra schema
+    CHO MỖI endpoint TRONG api_spec:
+        test_conditions.THÊM(RàngBuộcSchema(endpoint, MãTrạngThái=200, Schema=endpoint.schema_200))
+        test_conditions.THÊM(RàngBuộcSchema(endpoint, MãTrạngThái=400, Schema=endpoint.schema_lỗi))
 
-        return self.generated_test_cases
+BƯỚC 6: Kiểm soát ngưỡng độ phủ tối thiểu (Quality Gate)
+    TRONG KHI ĐỘ_DÀI(test_conditions) < 35:
+        test_conditions.THÊM(ĐàoSâuGiáTrịBiênVàPhủĐịnh(api_spec))
 
-    def generate_domain_partitions(self):
-        conditions = []
-        for endpoint in self.api_spec.endpoints:
-            for param in endpoint.parameters:
-                # Phân vùng tương đương hợp lệ
-                conditions.append({
-                    "id": f"DP-{len(conditions)+1:03d}",
-                    "group": "DP",
-                    "endpoint": endpoint.path,
-                    "param": param.name,
-                    "type": "VALID",
-                    "input": param.get_valid_sample(),
-                    "expected_status": 200
-                })
-                # Phân vùng tương đương không hợp lệ: rỗng, khoảng trắng, thiếu field, sai kiểu dữ liệu
-                for invalid_val in param.get_invalid_samples():
-                    conditions.append({
-                        "id": f"DP-{len(conditions)+1:03d}",
-                        "group": "DP",
-                        "endpoint": endpoint.path,
-                        "param": param.name,
-                        "type": "INVALID",
-                        "input": invalid_val,
-                        "expected_status": 400
-                    })
-                # Phân tích giá trị biên: min-1, min, max, max+1
-                if param.has_boundaries:
-                    for b_val, is_valid in param.get_boundary_samples():
-                        conditions.append({
-                            "id": f"DP-{len(conditions)+1:03d}",
-                            "group": "DP",
-                            "endpoint": endpoint.path,
-                            "param": param.name,
-                            "type": "BOUNDARY",
-                            "input": b_val,
-                            "expected_status": 200 if is_valid else 400
-                        })
-        return conditions
+BƯỚC 7: Xuất bản và đóng gói thực thi
+    test_cases = XuấtFileMarkdown(test_conditions)
+    audit_cases = KiểmDuyệtConNgười(test_cases)  // Audit VALID/INVALID và bổ sung ca mở rộng
+    collection = ĐóngGóiPostmanCollection(audit_cases, TựĐộngGắnHeader="X-Student-Id")
 
-    def generate_state_transition_matrix(self):
-        conditions = []
-        states = self.state_rules.all_states
-        events = self.state_rules.all_events
-
-        for s_from in states:
-            for event in events:
-                is_valid, s_to, rule_desc = self.state_rules.evaluate_transition(s_from, event)
-                conditions.append({
-                    "id": f"ST-{len(conditions)+1:03d}",
-                    "group": "ST",
-                    "endpoint": event.target_endpoint,
-                    "from_state": s_from,
-                    "event": event.name,
-                    "to_state": s_to if is_valid else s_from,
-                    "is_valid_transition": is_valid,
-                    "expected_status": 200 if is_valid else 400,
-                    "rule": rule_desc
-                })
-        return conditions
-
-    def generate_security_conditions(self):
-        conditions = []
-        sec_categories = [
-            ("SEC-01", "SQL_INJECTION", ["' OR '1'='1", "'; DROP TABLE users; --", "' UNION SELECT..."]),
-            ("SEC-02", "IDOR_ACCESS", ["tamper_id_with_other_user_id"]),
-            ("SEC-03", "ROLE_ESCALATION", [{"role": "admin"}, {"isAdmin": True}]),
-            ("SEC-04", "AUTH_BYPASS", ["missing_token", "invalid_jwt_signature", "expired_token"]),
-            ("SEC-05", "STORED_XSS", ["<script>alert(1)</script>", "<img src=x onerror=alert(1)>"]),
-            ("SEC-06", "RATE_LIMIT_RACE", ["50_requests_per_sec", "concurrent_cancel"]),
-            ("SEC-07", "DATA_EXPOSURE", ["check_response_for_password_and_token"])
-        ]
-        for sec_code, sec_name, payloads in sec_categories:
-            for endpoint in self.api_spec.endpoints:
-                for payload in payloads:
-                    conditions.append({
-                        "id": f"{sec_code}-{len(conditions)+1:03d}",
-                        "group": "SEC",
-                        "endpoint": endpoint.path,
-                        "category": sec_name,
-                        "payload": payload,
-                        "expected_status": 400 if sec_code in ["SEC-01", "SEC-05"] else 401 if sec_code == "SEC-04" else 403
-                    })
-        return conditions
-
-    def generate_schema_validation_conditions(self):
-        conditions = []
-        for endpoint in self.api_spec.endpoints:
-            conditions.append({
-                "id": f"SCH-{len(conditions)+1:03d}",
-                "group": "SCH",
-                "endpoint": endpoint.path,
-                "status": 200,
-                "schema_asserts": endpoint.response_schema_200
-            })
-            conditions.append({
-                "id": f"SCH-{len(conditions)+1:03d}",
-                "group": "SCH",
-                "endpoint": endpoint.path,
-                "status": 400,
-                "schema_asserts": {"error": "string"}
-            })
-        return conditions
-
-    def compile_postman_collection(self, test_cases, student_id="22127001"):
-        # Giai đoạn 4: Đóng gói thành Postman Collection JSON
-        collection = {
-            "info": {
-                "name": "EShop_API_Testing_Suite",
-                "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-            },
-            "event": [
-                {
-                    "listen": "prerequest",
-                    "script": {
-                        "exec": [
-                            f"pm.request.headers.add({{ key: 'X-Student-Id', value: '{student_id}' }});"
-                        ]
-                    }
-                }
-            ],
-            "item": []
-        }
-
-        collection["item"].append(self.create_auth_setup_folder())
-
-        for tc in test_cases:
-            folder = self.get_or_create_folder(collection, tc.feature_name, tc.group_name)
-            postman_request = self.convert_tc_to_postman_item(tc)
-            folder["item"].append(postman_request)
-
-        return collection
+TRẢ VỀ collection, test_cases
 ```
 
 ---
