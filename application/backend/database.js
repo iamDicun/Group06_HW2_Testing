@@ -110,13 +110,16 @@ function initDatabase() {
         insertCoupon.run('EXPIRED', 'percent', 20, 100000, '2020-01-01', 1, 1);  // 20% off, EXPIRED
         insertCoupon.finalize();
 
-        // Seed Orders for API Testing
-        const insertOrder = db.prepare('INSERT INTO orders (user_id, total_amount, status, shipping_address) VALUES (?, ?, ?, ?)');
-        insertOrder.run(2, 500000, 'pending', '123 Nguyen Trai, Q5, TP.HCM');
-        insertOrder.run(2, 600000, 'confirmed', '456 Le Duan, Q1, TP.HCM');
-        insertOrder.run(2, 700000, 'shipping', '789 Tran Hung Dao, Q5, TP.HCM');
-        insertOrder.run(2, 800000, 'delivered', '101 Vo Van Tan, Q3, TP.HCM');
-        insertOrder.run(2, 900000, 'canceled', '202 Dien Bien Phu, Binh Thanh, TP.HCM');
+        // Seed 50 Orders for Isolated API Testing
+        const insertOrder = db.prepare('INSERT INTO orders (id, user_id, total_amount, status, shipping_address) VALUES (?, ?, ?, ?, ?)');
+        for (let i = 1; i <= 50; i++) {
+            let st = 'pending';
+            if (i >= 21 && i <= 30) st = 'confirmed';
+            else if (i >= 31 && i <= 40) st = 'shipping';
+            else if (i >= 41 && i <= 45) st = 'delivered';
+            else if (i >= 46 && i <= 50) st = 'canceled';
+            insertOrder.run(i, 2, 500000 + i * 10000, st, `${i} Nguyen Trai, Q5, TP.HCM`);
+        }
         insertOrder.finalize();
 
         console.log('Database initialized and seeded (Phase 2).');
