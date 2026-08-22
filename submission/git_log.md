@@ -5,6 +5,7 @@
 **Branch:** `HW6_23127391`  
 
 ```text
+* 3101818 - docs(design): rewrite pseudocode into concise algorithmic format (2026-08-22)
 * ee396d1 - docs(design): clean English annotations in ai_test_generator_design.md (2026-08-22)
 * 229314a - docs(git): update git commit log history in submission/git_log.md (2026-08-22)
 * 6783f3b - docs(submission): finalize HW06 API testing report, GitHub bug issues, and README (2026-08-22)
