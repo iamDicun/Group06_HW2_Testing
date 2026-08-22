@@ -2,71 +2,17 @@
 
 ## 1. Kiến Trúc Tổng Quan Hệ Thống
 
-Hệ thống sinh ca kiểm thử API tự động bằng AI được thiết kế theo mô hình đường ống tuần tự nhiều giai đoạn, kết hợp giữa khả năng sinh nhanh của mô hình ngôn ngữ lớn và các chốt chặn kiểm soát chất lượng của kỹ sư kiểm thử:
+Hệ thống sinh ca kiểm thử API tự động bằng AI được thiết kế theo quy trình đường ống 5 giai đoạn:
 
 ```mermaid
 flowchart TD
-    subgraph INPUT ["1. Lớp đầu vào"]
-        A1["Đặc tả OpenAPI, Swagger hoặc danh sách endpoint"]
-        A2["Quy tắc chuyển trạng thái của tài nguyên"]
-        A3["Ma trận phân quyền các vai trò"]
-        A4["Danh mục kiểm tra bảo mật từ SEC-01 đến SEC-07"]
-    end
-
-    subgraph DECOMPOSITION ["2. Phân tích và sinh test condition"]
-        B1["Phân vùng tương đương và phân tích giá trị biên"]
-        B2["Dựng ma trận chuyển trạng thái hợp lệ và bất hợp lệ"]
-        B3["Sinh payload kiểm thử bảo mật"]
-        B4["Ràng buộc schema response và status code"]
-    end
-
-    subgraph ORCHESTRATION ["3. Điều phối prompt và kiểm soát độ phủ"]
-        C1["Quy trình prompt từng bước có cấu trúc"]
-        C2["Tổng hợp file phân tích kỹ thuật"]
-        C3{"Kiểm tra số lượng test condition >= 35?"}
-        C4["Bổ sung thêm giá trị biên và ca phủ định"]
-    end
-
-    subgraph EXPORT ["4. Xuất file test case markdown"]
-        D1["Sinh từng file test case markdown riêng biệt"]
-        D2["Bộ file test case theo định danh chuẩn"]
-        D3["Audit và bổ sung test case mở rộng"]
-    end
-
-    subgraph PACKAGING ["5. Đóng gói Postman và thực thi"]
-        E1["Đóng gói Postman Collection JSON"]
-        E2["Pre-request script tự động gắn header X-Student-Id"]
-        E3["Đăng nhập lấy token và gán biến môi trường"]
-        E4["Chạy Newman tự động và xuất báo cáo HTML"]
-        E5["Tổng hợp báo cáo lỗi và tạo GitHub issue"]
-    end
-
-    %% Luồng liên kết giữa các thành phần
-    A1 --> B1
-    A1 --> B4
-    A2 --> B2
-    A3 --> B3
-    A4 --> B3
-
-    B1 --> C1
-    B2 --> C1
-    B3 --> C1
-    B4 --> C1
-
-    C1 --> C2
-    C2 --> C3
-    C3 -- Chưa đủ 35 ca --> C4
-    C4 --> C1
-    C3 -- Đã đủ 35 ca --> D1
-
-    D1 --> D2
-    D2 --> D3
-    D3 --> E1
-
-    E1 --> E2
-    E2 --> E3
-    E3 --> E4
-    E4 --> E5
+    A["1. Đầu vào<br/>Đặc tả API, Quy tắc trạng thái, Phân quyền, Checklist an ninh"] --> B["2. Sinh điều kiện kiểm thử<br/>Phân vùng biên, Chuyển trạng thái, Bảo mật SEC-01..07, Schema"]
+    B --> C{"3. Kiểm tra độ phủ<br/>Đạt ít nhất 35 ca / tính năng?"}
+    C -- Chưa đạt --> B
+    C -- Đã đạt --> D["4. Xuất file Test Case Markdown"]
+    D --> E["5. Audit con người & Bổ sung ca mở rộng"]
+    E --> F["6. Đóng gói Postman Collection & Chạy Newman"]
+    F --> G["7. Báo cáo HTML & Tạo GitHub Bug Issue"]
 ```
 
 ---
