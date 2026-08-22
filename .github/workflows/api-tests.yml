@@ -2,9 +2,9 @@ name: EShop API Automated Testing (Newman)
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ "**" ]
   workflow_dispatch:
 
 jobs:
@@ -40,8 +40,18 @@ jobs:
       - name: Run Newman Test Suite
         run: |
           mkdir -p ./submission/reports
-          newman run ./tests/test-runs/EShop_API_Testing.postman_collection.json \
-            -e ./tests/test-runs/eshop-api.postman_environment.json \
+          COLLECTION_FILE="./submission/tests/test-runs/EShop_API_Testing.postman_collection.json"
+          ENV_FILE="./submission/tests/test-runs/eshop-api.postman_environment.json"
+          
+          if [ ! -f "$COLLECTION_FILE" ]; then
+            COLLECTION_FILE="./tests/test-runs/EShop_API_Testing.postman_collection.json"
+          fi
+          if [ ! -f "$ENV_FILE" ]; then
+            ENV_FILE="./tests/test-runs/eshop-api.postman_environment.json"
+          fi
+
+          newman run "$COLLECTION_FILE" \
+            -e "$ENV_FILE" \
             -r cli,htmlextra \
             --reporter-htmlextra-export ./submission/reports/EShop_API_Test_Report.html \
             --reporter-htmlextra-title "EShop API Test Report (CI/CD Pipeline)" \
