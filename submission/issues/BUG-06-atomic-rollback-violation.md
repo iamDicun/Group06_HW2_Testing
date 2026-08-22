@@ -20,7 +20,7 @@ P1
 - **Runtime**: Node.js v18.19.0 / Express.js
 - **Database**: SQLite3
 - **Target URL**: `http://localhost:3000/api/admin/import-products`
-- **Test Account**: `admin@test.com` (Role: `admin`, Student ID: `22127001`)
+- **Test Account**: `admin@test.com` (Role: `admin`, Student ID: `23127391`)
 
 ### Steps to Reproduce
 1. Đăng nhập với tài khoản Admin để lấy token.
@@ -55,7 +55,7 @@ POST /api/admin/import-products HTTP/1.1
 Host: localhost:3000
 Authorization: Bearer <admin_token>
 Content-Type: application/json
-X-Student-Id: 22127001
+X-Student-Id: 23127391
 
 {
   "products": [

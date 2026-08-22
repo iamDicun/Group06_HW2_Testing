@@ -1,6 +1,5 @@
 # AI Critique
 
----
 
 Trong quá trình thực hiện kiểm thử API, AI hỗ trợ rất nhanh ở khâu sinh test case cơ bản, chia domain partition, phân tích boundary value và dựng ma trận state transition. AI cũng viết sẵn script test cho Postman và cấu hình Newman chạy tự động khá tiện. Tuy nhiên, nếu phụ thuộc hoàn toàn vào AI thì bộ test vẫn còn nhiều thiếu sót quan trọng.
 

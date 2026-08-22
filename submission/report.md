@@ -1,3 +1,7 @@
+# Báo Cáo Kiểm Thử API - HW06 (API Testing)
+
+**Sinh viên thực hiện:** Nguyễn Anh Khoa  
+**MSSV:** 23127391  
 **Repository GitHub:** `https://github.com/iamDicun/Group06_HW2_Testing`  
 
 ---
@@ -13,7 +17,7 @@ Theo yêu cầu của bài tập HW06, nhóm đã lựa chọn 3 API độc lậ
 | **Pool C** | **FR-16** | Import Sản phẩm từ CSV | `/api/admin/import-products` | `POST` |
 
 Tất cả các request khi gửi tới Backend API đều tuân thủ nguyên tắc bắt buộc:
-- Gắn Header định danh sinh viên: `X-Student-Id: 22127001` qua Pre-request script cấp Collection.
+- Gắn Header định danh sinh viên: `X-Student-Id: 23127391` qua Pre-request script cấp Collection.
 - Base URL kiểm thử: `http://localhost:3000`.
 
 ---
@@ -146,7 +150,7 @@ Dưới đây là danh sách 7 lỗi thực tế được phát hiện thông qu
 Bộ kiểm thử đã khai thác toàn diện các tính năng nâng cao của Postman:
 
 1. **Workspaces & Collections**: Đóng gói toàn bộ 155 requests vào một Collection duy nhất có cấu trúc Folder phân cấp theo Feature và Nhóm kiểm thử.
-2. **Collection-Level Pre-request Scripts**: Tự động inject header `X-Student-Id: 22127001` cho tất cả các request trong collection mà không cần cấu hình thủ công từng request.
+2. **Collection-Level Pre-request Scripts**: Tự động inject header `X-Student-Id: 23127391` cho tất cả các request trong collection mà không cần cấu hình thủ công từng request.
 3. **Environment & Collection Variables**: Quản lý tập trung `base_url`, `student_id`, `user_token`, `admin_token`, `order_id`.
 4. **Dynamic Request Chaining**: Tạo folder `00. Auth Setup` gồm 2 requests đăng nhập Admin & User, tự động trích xuất chuỗi JWT token từ response và gán vào Environment variables để các requests phía sau sử dụng.
 5. **Test Scripts & Assertions (`pm.test`, `pm.expect`)**:
@@ -184,79 +188,78 @@ Toàn bộ quy trình khởi động server, nạp biến môi trường, inject
 
 ---
 
-## 6. Thiết Kế Agent Skill
+## 6. Thiết Kế Agent Skill (AI-Driven Test Generator - Create Level G9.5)
 
-### 6.1 Kiến trúc & Sơ đồ luồng
+### 6.1 Kiến Trúc Tổng Quan Hệ Thống
 
-```mermaid
-graph TD
-    A[Input: API Spec + State Rules + Security Checklist] --> B[Bước 0: Thu thập & Chuẩn hóa Input]
-    B --> C[Bước 1: Domain Partition Generator]
-    B --> D[Bước 2: State Transition Matrix Generator]
-    B --> E[Bước 3: Security SEC-01..07 Generator]
-    B --> F[Bước 4: Schema Validation Generator]
-    
-    C --> G[Tổng hợp File Phân tích: API-test-analysis.md]
-    D --> G
-    E --> G
-    F --> G
-    
-    G --> H{Kiểm tra Coverage >= 35 TC?}
-    H -- Chưa đủ --> B
-    H -- Đạt --> I[Bước 6: Sinh Test Case Files: TC-API-NHOM-NNN.md]
-    
-    I --> J[Human Review & Audit: VALID / INVALID / EXTEND]
-    J --> K[Giai đoạn 2: Package Postman Collection JSON]
-    K --> L[Inject Pre-request X-Student-Id + Environment Variables]
-    L --> M[Newman Automated Runner + HTML Extra Reporter]
+Hệ thống sinh ca kiểm thử API tự động bằng AI được thiết kế theo quy trình đường ống 5 giai đoạn:
+
+![Kiến trúc Hệ thống Sinh Ca Kiểm thử Tự động](./design.png)
+
+### 6.2 Mã Giả Thuật Toán Thiết Kế
+
+```text
+THUẬT TOÁN: AITestGenerator(api_spec, state_rules, rbac_matrix, security_rules)
+ĐẦU VÀO:
+    api_spec: Danh sách endpoint, method, param, schema mong đợi
+    state_rules: Tập trạng thái và ma trận chuyển đổi hợp lệ
+    rbac_matrix: Quyền hạn các vai trò (guest, user, admin)
+    security_rules: Danh mục checklist từ SEC-01 đến SEC-07
+ĐẦU RA:
+    test_suite: Tập hợp các file ca kiểm thử markdown và Postman Collection JSON
+
+BƯỚC 1: Khởi tạo danh sách test_conditions = []
+
+BƯỚC 2: Phân vùng tương đương và phân tích giá trị biên
+    CHO MỖI endpoint TRONG api_spec:
+        CHO MỖI param TRONG endpoint.parameters:
+            test_conditions.THÊM(PhânVùngHợpLệ(param))
+            test_conditions.THÊM(PhânVùngKhôngHợpLệ(param, [Rỗng, SaiKiểu, Null, Thiếu]))
+            NẾU param có giới hạn biên:
+                test_conditions.THÊM(GiáTrịBiên(param, [min-1, min, max, max+1]))
+
+BƯỚC 3: Dựng ma trận chuyển trạng thái
+    NẾU state_rules có định nghĩa vòng đời tài nguyên:
+        CHO MỖI s_current TRONG state_rules.states:
+            CHO MỖI event TRONG state_rules.events:
+                transition = ĐánhGiáChuyểnTrạngThái(s_current, event)
+                test_conditions.THÊM(transition)  // Bao gồm cả nhánh hợp lệ và bất hợp lệ
+
+BƯỚC 4: Thiết kế kiểm thử an ninh (SEC-01 đến SEC-07)
+    CHO MỖI sec_type TRONG [SQLi, IDOR, NângQuyền, VượtXácThực, StoredXSS, RateLimit, LộDữLiệu]:
+        CHO MỖI endpoint TRONG api_spec:
+            payloads = TạoPayloadBảoMật(sec_type, endpoint)
+            test_conditions.THÊM(KiểmTraBảoMật(sec_type, endpoint, payloads))
+
+BƯỚC 5: Thiết kế kiểm tra schema
+    CHO MỖI endpoint TRONG api_spec:
+        test_conditions.THÊM(RàngBuộcSchema(endpoint, MãTrạngThái=200, Schema=endpoint.schema_200))
+        test_conditions.THÊM(RàngBuộcSchema(endpoint, MãTrạngThái=400, Schema=endpoint.schema_lỗi))
+
+BƯỚC 6: Kiểm soát ngưỡng độ phủ tối thiểu (Quality Gate)
+    TRONG KHI ĐỘ_DÀI(test_conditions) < 35:
+        test_conditions.THÊM(ĐàoSâuGiáTrịBiênVàPhủĐịnh(api_spec))
+
+BƯỚC 7: Xuất bản và đóng gói thực thi
+    test_cases = XuấtFileMarkdown(test_conditions)
+    audit_cases = KiểmDuyệtConNgười(test_cases)  // Audit VALID/INVALID và bổ sung ca mở rộng
+    collection = ĐóngGóiPostmanCollection(audit_cases, TựĐộngGắnHeader="X-Student-Id")
+
+TRẢ VỀ collection, test_cases
 ```
 
-### 6.2 Mã giả thuật toán sinh ca kiểm thử
+### 6.3 Các Điểm Nổi Bật Trong Thiết Kế
 
-```python
-def generate_api_test_suite(api_spec, state_rules, security_checklist):
-    """
-    Quy trình sinh ca kiểm thử API theo phương pháp có cấu trúc từng bước
-    """
-    test_conditions = []
-    
-    # Bước 1: Domain Partition & Boundary Analysis
-    for endpoint in api_spec.endpoints:
-        for param in endpoint.parameters:
-            test_conditions.extend(generate_equivalence_partitions(param))
-            if param.has_boundaries:
-                test_conditions.extend(generate_boundary_values(param))
-                
-    # Bước 2: State Transition Matrix
-    if state_rules.has_state_machine:
-        states = state_rules.states
-        events = state_rules.events
-        for s_current in states:
-            for event in events:
-                transition = evaluate_transition(s_current, event)
-                test_conditions.append(transition) # Cả Valid và Invalid
-                
-    # Bước 3: Security Testing (SEC-01 đến SEC-07)
-    for sec_group in ["SEC-01", "SEC-02", "SEC-03", "SEC-04", "SEC-05", "SEC-06", "SEC-07"]:
-        for endpoint in api_spec.endpoints:
-            test_conditions.extend(design_security_condition(sec_group, endpoint))
-            
-    # Bước 4: Schema Validation
-    for endpoint in api_spec.endpoints:
-        test_conditions.extend(design_schema_checks(endpoint.expected_schemas))
-        
-    # Bước 5: Kiểm tra ngưỡng coverage tối thiểu (>= 35 TCs / API)
-    if len(test_conditions) < 35:
-        raise CoverageInsufficientException("Cần bổ sung thêm test conditions để đạt >= 35")
-        
-    # Bước 6: Xuất file Markdown chi tiết cho từng Test Case
-    test_case_files = []
-    for tc in test_conditions:
-        tc_file = export_test_case_markdown(tc)
-        test_case_files.append(tc_file)
-        
-    return test_case_files
-```
+1. **Phân tách trách nhiệm rõ ràng**:
+   - AI thực hiện việc phân rã và sinh test case với tốc độ cao.
+   - Bộ lọc điều kiện đảm bảo độ phủ đạt ít nhất 35 ca kiểm thử cho mỗi tính năng.
+   - Kỹ sư kiểm thử thực hiện bước audit để loại bỏ ca sai và bổ sung các ca kiểm thử chuyên sâu về tương tranh hoặc bảo mật nâng cao.
+
+2. **Cơ chế chuyển tiếp token tự động**:
+   - Thư mục thiết lập xác thực thực hiện đăng nhập trước, tự động trích xuất chuỗi JWT token và lưu vào biến môi trường để toàn bộ các ca kiểm thử phía sau kế thừa tự động.
+
+3. **Gắn header định danh tập trung**:
+   - Header định danh sinh viên được xử lý tự động trong pre-request script ở cấp bộ sưu tập, không cần cấu hình lặp lại ở từng ca kiểm thử đơn lẻ.
 
 ---
 
@@ -299,3 +302,31 @@ def generate_api_test_suite(api_spec, state_rules, security_checklist):
 - Postman Environment JSON: [`submission/tests/test-runs/eshop-api.postman_environment.json`](./tests/test-runs/eshop-api.postman_environment.json)
 - CI/CD Workflow: [`.github/workflows/api-tests.yml`](../.github/workflows/api-tests.yml)
 - Báo cáo Pipeline chi tiết: [`submission/test-summary/api-test-pipeline-summary.md`](./test-summary/api-test-pipeline-summary.md)
+
+## 9. AI Critique
+
+Trong quá trình thực hiện kiểm thử API, AI hỗ trợ rất nhanh ở khâu sinh test case cơ bản, chia domain partition, phân tích boundary value và dựng ma trận state transition. AI cũng viết sẵn script test cho Postman và cấu hình Newman chạy tự động khá tiện. Tuy nhiên, nếu phụ thuộc hoàn toàn vào AI thì bộ test vẫn còn nhiều thiếu sót quan trọng.
+
+Điểm yếu dễ thấy nhất là AI thường bị rập khuôn theo các pattern quen thuộc. Về mảng security, AI chủ yếu tạo các payload kinh điển như SQL injection dạng `' OR '1'='1` hay XSS `<script>`, mà bỏ quên những case gắn liền với nghiệp vụ thực tế như CSV formula injection khi import sản phẩm (FR-16) hoặc lỗi xử lý ký tự unicode 4-byte UTF-8 emoji ở profile (FR-04). Với state transition, AI chỉ sinh các bước chuyển trạng thái đơn luồng tuần tự, không lường trước được race condition và idempotency khi client gửi nhiều request cancel đồng thời (FR-10), cũng như không kiểm tra tính toàn vẹn transaction rollback khi import batch gặp lỗi giữa chừng.
+
+Nguyên nhân là do AI chỉ dự đoán dựa trên dữ liệu mẫu có sẵn chứ không thực sự phân tích sâu về runtime environment hay cơ chế của database SQLite và ứng dụng bên thứ ba như Excel.
+
+Bài học rút ra là AI chỉ nên đóng vai trò hỗ trợ sinh khung test case ban đầu để tiết kiệm thời gian thao tác. Người kiểm thử bắt buộc phải giữ vai trò audit, rà soát lại toàn bộ kịch bản và tự tay thiết kế thêm các test case chuyên sâu về an ninh, tính toàn vẹn dữ liệu và tương tranh thì mới đảm bảo chất lượng cho hệ thống.
+
+---
+
+## 10. AI Audit Report 
+
+**Sinh viên:** 23127391 - Nguyễn Anh Khoa  
+**Exercise:** HW06 — API Testing  
+**Repository:** `https://github.com/iamDicun/Group06_HW2_Testing`  
+
+### 10.1 Bảng Đánh Giá & Kiểm Định Toàn Bộ Tương Tác AI (AI Audit Table)
+
+| # | AI Tool | Date & Time | Prompt | AI Output | Verdict | Reasoning |
+|---|---|---|---|---|---|---|
+| 1 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 13:30 | `Thực hiện skill api test trên các`<br>`tính năng fr4, fr10, fr16; tạo plan`<br>`trước, sau đó từ plan implement các script` | Sinh kế hoạch kiểm thử API, 3 file phân tích kỹ thuật (51, 53, 49 test conditions), 153 files ca kiểm thử Markdown độc lập, bộ Postman Collection + Environment (155 requests với pre-request script inject `X-Student-Id`), runner scripts và báo cáo HTML Newman. | **INCOMPLETE** | AI bao phủ tốt các phân vùng tương đương (Domain Partition) và schema validation, nhưng bị rập khuôn và bỏ sót 5 ca kiểm thử chuyên sâu quan trọng (Race condition khi hủy đơn song song, CSV Formula Injection khi xuất Excel, lỗi tràn bộ đệm Unicode 4-byte UTF-8, chuyển trạng thái đơn hàng của user đã xóa, và xung đột trùng tên sản phẩm trong cùng batch). Người kiểm thử đã audit và bổ sung 5 TCs mở rộng (`EXT-001` → `EXT-005`). |
+| 2 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 14:58 | `dựa vào các bug trong sumary/report,`<br>`tạo github issue kèm bằng chứng`<br>`(nhớ dùng đúng template) và báo cáo`<br>`lại trong file submission/readme.md` | Phân tích 7 lỗi thực tế từ mã nguồn Backend `server.js` và kết quả chạy Newman, đóng gói thành 7 file GitHub Bug Report Issues theo chuẩn template `.github/ISSUE_TEMPLATE/bug-report.yml` với đầy đủ bằng chứng (HTTP logs, vị trí dòng code, assertion failure), cập nhật bảng tổng hợp vào `submission/README.md` và `submission/report.md`. | **INCOMPLETE** | AI đã phân tích chính xác nguyên nhân gốc rễ và vị trí mã nguồn của 7 lỗi thực tế (`BUG-01` đến `BUG-07`), mô tả các bước tái hiện và bằng chứng thuyết phục. Tuy nhiên, AI ban đầu tự động chèn đường dẫn tuyệt đối local (`file:///c:/Users/...`) vào các liên kết trong markdown thay vì dùng relative path chuẩn của Git repository, dẫn đến lỗi hiển thị khi xem trực tiếp trên GitHub. Người dùng đã phải yêu cầu sửa lại. |
+| 3 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 15:06 | `ý là đẩy lên trang issue của repo,`<br>`dùng github cli` | Kiểm tra vị trí thực thi của GitHub CLI (`C:\Program Files\GitHub CLI\gh.exe`), phát hiện trạng thái chưa xác thực tài khoản (`gh auth status`), tạo script PowerShell `push_issues_to_github.ps1` và script Node.js `push_issues_to_github.js` để tự động hóa việc đẩy 7 issues lên GitHub sau khi đăng nhập hoặc qua token. | **VALID** | AI đã kiểm tra môi trường hệ thống chính xác, bắt đúng lỗi chưa đăng nhập của GitHub CLI, cung cấp hướng dẫn xác thực từng bước (`gh auth login`) kèm theo các scripts tự động hóa giúp tạo toàn bộ 7 Issues lên GitHub nhanh chóng và chính xác mà không cần tạo thủ công từng issue. |
+| 4 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 15:10 | `ko đề cập các đường dẫn local`<br>`vào các file md` | Quét toàn bộ repository bằng công cụ tìm kiếm, loại bỏ hoàn toàn tất cả các đường dẫn tuyệt đối local (`file:///...` và đường dẫn ổ đĩa cá nhân) trong `submission/README.md`, `submission/report.md`, `submission/issues/*.md`, `.github/issues/*.md` và `tests/test-summary/api-test-pipeline-summary.md`, chuyển sang đường dẫn tương đối chuẩn của Git. | **VALID** | AI đã thực hiện rà soát triệt để bằng grep search xác nhận không còn đường dẫn local nào sót lại, chuyển đổi chính xác toàn bộ liên kết sang relative path tương thích 100% khi xem trên GitHub web và clone về bất kỳ máy tính nào khác. |
+

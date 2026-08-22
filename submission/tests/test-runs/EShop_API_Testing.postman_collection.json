@@ -11,7 +11,7 @@
         "type": "text/javascript",
         "exec": [
           "// Pre-request Script: Tự động gắn header X-Student-Id cho mọi request",
-          "const studentId = pm.environment.get('student_id') || pm.collectionVariables.get('student_id') || '22127001';",
+          "const studentId = pm.environment.get('student_id') || pm.collectionVariables.get('student_id') || '23127391';",
           "pm.request.headers.upsert({",
           "    key: 'X-Student-Id',",
           "    value: studentId",
@@ -27,7 +27,7 @@
     },
     {
       "key": "student_id",
-      "value": "22127001"
+      "value": "23127391"
     },
     {
       "key": "user_token",

@@ -1,6 +1,6 @@
 # Git Commit Log
 
-**Student:** 22127001  
+**Student:** 23127391 - Nguyễn Anh Khoa  
 **Repository:** `https://github.com/iamDicun/Group06_HW2_Testing`  
 **Branch:** `HW6_23127391`  
 

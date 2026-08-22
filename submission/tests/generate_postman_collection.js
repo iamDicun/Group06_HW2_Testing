@@ -206,7 +206,7 @@ const collection = {
                 type: "text/javascript",
                 exec: [
                     "// Pre-request Script: Tự động gắn header X-Student-Id cho mọi request",
-                    "const studentId = pm.environment.get('student_id') || pm.collectionVariables.get('student_id') || '22127001';",
+                    "const studentId = pm.environment.get('student_id') || pm.collectionVariables.get('student_id') || '23127391';",
                     "pm.request.headers.upsert({",
                     "    key: 'X-Student-Id',",
                     "    value: studentId",
@@ -217,7 +217,7 @@ const collection = {
     ],
     variable: [
         { key: "base_url", value: "http://localhost:3000" },
-        { key: "student_id", value: "22127001" },
+        { key: "student_id", value: "23127391" },
         { key: "user_token", value: "" },
         { key: "admin_token", value: "" },
         { key: "order_id", value: "1" }
@@ -314,7 +314,7 @@ const environment = {
     name: "EShop Local Environment",
     values: [
         { key: "base_url", value: "http://localhost:3000", enabled: true },
-        { key: "student_id", value: "22127001", enabled: true },
+        { key: "student_id", value: "23127391", enabled: true },
         { key: "user_token", value: "", enabled: true },
         { key: "admin_token", value: "", enabled: true },
         { key: "order_id", value: "1", enabled: true }

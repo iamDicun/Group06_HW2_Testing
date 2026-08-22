@@ -1,4 +1,9 @@
-# 22127001 — HW06 API Testing Submission
+# 23127391 - Nguyễn Anh Khoa — HW06 API Testing Submission
+
+**Student Info:**
+- **Họ và tên:** Nguyễn Anh Khoa
+- **MSSV:** 23127391
+- **Lớp / Khóa:** K23 - CNTT
 
 **Selected Features:**
 - **Pool A**: `FR-04` (Personal Profile Management)

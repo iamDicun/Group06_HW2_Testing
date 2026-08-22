@@ -20,7 +20,7 @@ P1
 - **Runtime**: Node.js v18.19.0 / Express.js
 - **Database**: SQLite3
 - **Target URL**: `http://localhost:3000/api/orders/:id/cancel`
-- **Test Account**: `user@test.com` (Role: `user`, Student ID: `22127001`)
+- **Test Account**: `user@test.com` (Role: `user`, Student ID: `23127391`)
 
 ### Steps to Reproduce
 1. Chuẩn bị một đơn hàng thuộc sở hữu của `user@test.com` đang ở trạng thái `shipping` (hàng đang được bên vận chuyển giao).
@@ -46,7 +46,7 @@ P1
 PUT /api/orders/3/cancel HTTP/1.1
 Host: localhost:3000
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-X-Student-Id: 22127001
+X-Student-Id: 23127391
 ```
 
 ```http

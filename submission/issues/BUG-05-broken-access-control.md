@@ -20,7 +20,7 @@ P0
 - **Runtime**: Node.js v18.19.0 / Express.js
 - **Database**: SQLite3
 - **Target URL**: `http://localhost:3000/api/admin/*`
-- **Test Account**: `user@test.com` (Role: `user`, Student ID: `22127001`)
+- **Test Account**: `user@test.com` (Role: `user`, Student ID: `23127391`)
 
 ### Steps to Reproduce
 1. Đăng nhập với tài khoản User thông thường (`user@test.com` / `123456`) để lấy JWT Bearer token của User.
@@ -46,7 +46,7 @@ PUT /api/admin/orders/1/status HTTP/1.1
 Host: localhost:3000
 Authorization: Bearer <regular_user_token>
 Content-Type: application/json
-X-Student-Id: 22127001
+X-Student-Id: 23127391
 
 {
   "status": "delivered"
