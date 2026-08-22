@@ -9,7 +9,7 @@
 * **Pool C:** `FR-18` (Order Management Admin) / `FR-15` (Product Management) — `PUT /api/admin/orders/:id/status`
 * **Pool D:** `Mobile #3`
 **Repository (Branch 23127033-HW6):** https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW6  
-**Demo Video (YouTube Unlisted):** (Sẽ cập nhật sau khi quay)  
+**Demo Video (Agent Skill & HW06 Testing):** https://youtu.be/q2iYMeq9mrg  
 
 ---
 

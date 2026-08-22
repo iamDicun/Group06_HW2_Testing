@@ -6,7 +6,7 @@
 **Công cụ kiểm thử API:** Postman Desktop & Newman CLI  
 **Công cụ AI hỗ trợ:** Claude 3.7 Sonnet & Gemini 3.7 Flash  
 **Public GitHub Repository (Branch 23127033-HW6):** https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW6  
-**Link Unlisted Demo Video:** (Sẽ cập nhật sau khi quay)  
+**Demo Video (Agent Skill & HW06 Testing):** https://youtu.be/q2iYMeq9mrg  
 
 ---
 
@@ -141,6 +141,10 @@ graph TD
 
 ### 5.2 Mã Giả / Implementation
 Mã nguồn của Agent Skill được xây dựng dạng module Python có khả năng tái sử dụng độc lập tại thư mục [`agent-skill/api_test_generator.py`](./agent-skill/api_test_generator.py).
+
+### 5.3 Video Demo Agent Skill & Test Execution
+* **YouTube Video Link:** https://youtu.be/q2iYMeq9mrg
+* **Nội dung demo:** Trình diễn cách thức Agent Skill nhận file đặc tả `api_specification.md`, tự động phân tích và sinh ra ma trận 120 Test Cases cùng 3 Postman Collections với đầy đủ Assertions, Pre-request script và chạy tự động với Newman.
 
 ---
 
