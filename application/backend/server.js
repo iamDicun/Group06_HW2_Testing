@@ -376,7 +376,7 @@ app.post("/api/apply-coupon", (req, res) => {
           .json({ error: "Mã giảm giá không tồn tại hoặc đã bị vô hiệu hóa" });
       }
 
-      if (total_amount > coupon.min_order_amount) {
+      if (total_amount >= coupon.min_order_amount) {
         const now = new Date();
         const expiry = new Date(coupon.expired_at);
         if (expiry < now) {
@@ -397,7 +397,7 @@ app.post("/api/apply-coupon", (req, res) => {
               let discount_amount = 0;
               if (coupon.type === "percent") {
                 discount_amount = Math.floor(
-                  total_amount * (1 - coupon.discount_value),
+                  total_amount * (coupon.discount_value / 100),
                 );
               } else {
                 discount_amount = coupon.discount_value;
@@ -417,7 +417,7 @@ app.post("/api/apply-coupon", (req, res) => {
           let discount_amount = 0;
           if (coupon.type === "percent") {
             discount_amount = Math.floor(
-              total_amount * (1 - coupon.discount_value),
+              total_amount * (coupon.discount_value / 100),
             );
           } else {
             discount_amount = coupon.discount_value;
@@ -433,7 +433,7 @@ app.post("/api/apply-coupon", (req, res) => {
         }
       } else {
         return res.status(400).json({
-          error: `Đơn hàng chưa đủ giá trị tối thiểu ${coupon.min_order_amount.toLocaleString()} ₫ để áp dụng mã này`,
+          error: `Đơn hàng chưa đạt giá trị tối thiểu ${coupon.min_order_amount.toLocaleString()} ₫`,
         });
       }
     },
@@ -523,6 +523,10 @@ app.get("/api/admin/orders", authenticateToken, (req, res) => {
 });
 
 app.put("/api/admin/orders/:id/status", authenticateToken, (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Forbidden: Admin role required" });
+  }
+
   const { status } = req.body; // pending, confirmed, shipping, delivered, canceled
 
   db.get(
@@ -545,9 +549,6 @@ app.put("/api/admin/orders/:id/status", authenticateToken, (req, res) => {
       )
         isValidTransition = true;
       if (currentStatus === "shipping" && status === "delivered")
-        isValidTransition = true;
-
-      if (currentStatus === "canceled" && status === "delivered")
         isValidTransition = true;
 
       if (!isValidTransition) {
