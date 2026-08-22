@@ -6,7 +6,7 @@
   },
   "item": [
     {
-      "name": "TC-ADMIN-01: Chuyen trang thai hop le: pending -> confirmed",
+      "name": "TC-ADMIN-01: Chuyen hop le pending -> confirmed",
       "event": [
         {
           "listen": "prerequest",
@@ -75,7 +75,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-02: Chuyen trang thai hop le: confirmed -> shipping",
+      "name": "TC-ADMIN-02: Chuyen hop le confirmed -> shipping",
       "event": [
         {
           "listen": "prerequest",
@@ -144,7 +144,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-03: Chuyen trang thai hop le: shipping -> delivered",
+      "name": "TC-ADMIN-03: Chuyen hop le shipping -> delivered",
       "event": [
         {
           "listen": "prerequest",
@@ -213,7 +213,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-04: Huy don hang hop le tu pending -> canceled",
+      "name": "TC-ADMIN-04: Huy don hop le pending -> canceled",
       "event": [
         {
           "listen": "prerequest",
@@ -231,76 +231,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-04] Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "99999",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"canceled\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-05: Huy don hang hop le tu confirmed -> canceled",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-05] Status code is 200\", function () {",
+              "pm.test(\"[TC-ADMIN-04] Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "",
@@ -351,7 +282,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-06: Chuyen bat hop phap: delivered -> pending (khong cho phep qu",
+      "name": "TC-ADMIN-05: Huy don hop le confirmed -> canceled",
       "event": [
         {
           "listen": "prerequest",
@@ -369,7 +300,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-06] Status code is 200\", function () {",
+              "pm.test(\"[TC-ADMIN-05] Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "",
@@ -414,13 +345,82 @@
         },
         "body": {
           "mode": "raw",
+          "raw": "{\n  \"status\": \"canceled\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-06: Chuyen bat hop phap delivered -> pending",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-06] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/41/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "41",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
           "raw": "{\n  \"status\": \"pending\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-07: Chuyen bat hop phap: canceled -> shipping",
+      "name": "TC-ADMIN-07: Chuyen bat hop phap canceled -> shipping",
       "event": [
         {
           "listen": "prerequest",
@@ -439,6 +439,144 @@
           "script": {
             "exec": [
               "pm.test(\"[TC-ADMIN-07] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/46/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "46",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"shipping\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-08: Chuyen bat hop phap canceled -> delivered",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-08] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/47/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "47",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"delivered\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-09: Chuyen bat hop phap pending -> shipping (nhay coc)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-09] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -489,7 +627,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-08: Backend co BUG nghiem trong: cho phep canceled -> delivered ",
+      "name": "TC-ADMIN-010: Chuyen bat hop phap pending -> delivered (nhay coc)",
       "event": [
         {
           "listen": "prerequest",
@@ -507,7 +645,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-08] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-010] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -558,7 +696,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-09: Chuyen bat hop phap: pending -> shipping (nhay coc buoc)",
+      "name": "TC-ADMIN-011: Chuyen bat hop phap confirmed -> delivered (nhay coc)",
       "event": [
         {
           "listen": "prerequest",
@@ -576,7 +714,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-09] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-011] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -621,144 +759,6 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"shipping\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-010: Chuyen bat hop phap: pending -> delivered (nhay coc buoc)",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-10] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/32/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "32",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"delivered\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-011: Chuyen bat hop phap: confirmed -> delivered (nhay coc buoc)",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-11] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/33/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "33",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
           "raw": "{\n  \"status\": \"delivered\"\n}"
         }
       },
@@ -783,76 +783,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-12] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/34/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "34",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"invalid_status\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-013: Trang thai de chuoi rong",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-13] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-012] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -897,13 +828,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"\"\n}"
+          "raw": "{\n  \"status\": \"invalid_status\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-014: Thieu field status trong body",
+      "name": "TC-ADMIN-013: Trang thai de chuoi rong",
       "event": [
         {
           "listen": "prerequest",
@@ -921,283 +852,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-14] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/46/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "46",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-015: Status truyen kieu so integer",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-15] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/41/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "41",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": 12345\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-016: Khong truyen Authorization header (Unauthenticated -> 401)",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-16] Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/-1/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "-1",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-017: Truyen Bearer Token khong hop le / het han -> 403",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-17] Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/0/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "0",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-018: AI du doan 403 cho User thuong, nhung backend co BUG BAC: au",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-18] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-013] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -1242,13 +897,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
+          "raw": "{\n  \"status\": \"\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-019: Cap nhat don hang co ID khong ton tai -> 404 Not Found",
+      "name": "TC-ADMIN-014: Thieu field status trong body",
       "event": [
         {
           "listen": "prerequest",
@@ -1266,7 +921,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-19] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-014] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -1308,16 +963,12 @@
             "7",
             "status"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-020: Order ID la so am",
+      "name": "TC-ADMIN-015: Status truyen kieu so integer",
       "event": [
         {
           "listen": "prerequest",
@@ -1335,7 +986,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-20] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-015] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -1380,13 +1031,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
+          "raw": "{\n  \"status\": 12345\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-021: SQL Injection tren URL path parameter",
+      "name": "TC-ADMIN-016: Khong truyen Authorization header",
       "event": [
         {
           "listen": "prerequest",
@@ -1404,8 +1055,72 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-21] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
+              "pm.test(\"[TC-ADMIN-016] Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/9/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "9",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-017: Truyen Bearer Token khong hop le",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-017] Status code is 403\", function () {",
+              "    pm.response.to.have.status(403);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1430,12 +1145,12 @@
           },
           {
             "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
+            "value": "Bearer invalid_token",
             "type": "text"
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/42/status",
+          "raw": "{{baseUrl}}/api/admin/orders/10/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1443,7 +1158,7 @@
             "api",
             "admin",
             "orders",
-            "42",
+            "10",
             "status"
           ]
         },
@@ -1455,7 +1170,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-022: SQL Injection trong status body",
+      "name": "TC-ADMIN-018: User thuong goi API admin (BAC SEC-03)",
       "event": [
         {
           "listen": "prerequest",
@@ -1473,76 +1188,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-22] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/47/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "47",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"' OR '1'='1\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-023: XSS payload trong status body",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-23] Status code is 403\", function () {",
+              "pm.test(\"[TC-ADMIN-018] Status code is 403\", function () {",
               "    pm.response.to.have.status(403);",
               "});",
               "",
@@ -1573,139 +1219,6 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/9/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "9",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"<script>alert(1)</script>\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-024: Su dung Admin Token hop le -> 200 OK",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-24] Status code is 401\", function () {",
-              "    pm.response.to.have.status(401);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/10/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "10",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-025: Gui kem truong total_amount khong hop le",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-25] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
           "raw": "{{baseUrl}}/api/admin/orders/11/status",
           "host": [
             "{{baseUrl}}"
@@ -1720,151 +1233,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\",\n  \"total_amount\": 0\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-026: Null byte injection trong status",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-26] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/12/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "12",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\\u0000\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-027: Header Authorization chi ghi Bearer khong co token chuoi",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-27] Status code is 403\", function () {",
-              "    pm.response.to.have.status(403);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer invalid_jwt_token",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/13/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "13",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
           "raw": "{\n  \"status\": \"confirmed\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-028: Response body tra ve message xac nhan thanh cong",
+      "name": "TC-ADMIN-019: Don hang ID khong ton tai -> 404",
       "event": [
         {
           "listen": "prerequest",
@@ -1882,76 +1257,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-28] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/14/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "14",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-029: Error schema 404 chua field error: Order not found",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-29] Status code is 404\", function () {",
+              "pm.test(\"[TC-ADMIN-019] Status code is 404\", function () {",
               "    pm.response.to.have.status(404);",
               "});",
               "",
@@ -2002,7 +1308,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-030: Error schema 400 chua chi tiet Invalid state transition",
+      "name": "TC-ADMIN-020: Order ID la so am -> 404",
       "event": [
         {
           "listen": "prerequest",
@@ -2020,8 +1326,353 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-30] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-020] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/-1/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "-1",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-021: SQL Injection tren URL path parameter",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-021] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/1' OR '1'='1/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "1' OR '1'='1",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-022: SQL Injection trong status body",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-022] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/12/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "12",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"' OR '1'='1\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-023: XSS payload trong status body",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-023] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/13/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "13",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"<script>alert(1)</script>\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-024: Su dung Admin Token hop le -> 200 OK",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-024] Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/14/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "14",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-025: Gui kem truong total_amount ngoai spec",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-025] Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2065,13 +1716,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
+          "raw": "{\n  \"status\": \"confirmed\",\n  \"total_amount\": 0\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-031: Order ID la chuoi chu khong the parse thanh so",
+      "name": "TC-ADMIN-026: Null byte injection trong status",
       "event": [
         {
           "listen": "prerequest",
@@ -2089,76 +1740,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-31] Status code is 404\", function () {",
-              "    pm.response.to.have.status(404);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/invalid_id/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "invalid_id",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"confirmed\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-032: Status truyen dang boolean",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-32] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-026] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -2203,13 +1785,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": true\n}"
+          "raw": "{\n  \"status\": \"confirmed\\u0000\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-033: Status truyen dang array",
+      "name": "TC-ADMIN-027: Header Authorization malformed Bearer",
       "event": [
         {
           "listen": "prerequest",
@@ -2227,8 +1809,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-33] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
+              "pm.test(\"[TC-ADMIN-027] Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2250,11 +1832,6 @@
             "key": "Content-Type",
             "value": "application/json",
             "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
           }
         ],
         "url": {
@@ -2272,13 +1849,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": [\n    \"confirmed\"\n  ]\n}"
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-034: Status truyen gia tri null",
+      "name": "TC-ADMIN-028: Response body tra ve message xac nhan",
       "event": [
         {
           "listen": "prerequest",
@@ -2296,8 +1873,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-34] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
+              "pm.test(\"[TC-ADMIN-028] Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2341,13 +1918,13 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"status\": null\n}"
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
         }
       },
       "response": []
     },
     {
-      "name": "TC-ADMIN-035: Trang thai chu HOA (he thong yeu cau chu thuong)",
+      "name": "TC-ADMIN-029: Error schema 404 Order not found",
       "event": [
         {
           "listen": "prerequest",
@@ -2365,7 +1942,76 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-ADMIN-35] Status code is 400\", function () {",
+              "pm.test(\"[TC-ADMIN-029] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "99999",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-030: Error schema 400 Invalid state transition",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-030] Status code is 400\", function () {",
               "    pm.response.to.have.status(400);",
               "});",
               "",
@@ -2396,7 +2042,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/19/status",
+          "raw": "{{baseUrl}}/api/admin/orders/42/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2404,7 +2050,352 @@
             "api",
             "admin",
             "orders",
-            "19",
+            "42",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"pending\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-031: Order ID la chuoi abc khong parse duoc",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-031] Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/abc/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "abc",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-032: Status truyen dang boolean",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-032] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/35/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "35",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": true\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-033: Status truyen dang array",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-033] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/36/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "36",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": [\n    \"confirmed\"\n  ]\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-034: Status truyen gia tri null",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-034] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/37/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "37",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": null\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-035: Trang thai chu HOA CONFIRMED",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-035] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/38/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "38",
             "status"
           ]
         },
@@ -2465,7 +2456,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/20/status",
+          "raw": "{{baseUrl}}/api/admin/orders/19/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2473,7 +2464,7 @@
             "api",
             "admin",
             "orders",
-            "20",
+            "19",
             "status"
           ]
         },
@@ -2534,7 +2525,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/24/status",
+          "raw": "{{baseUrl}}/api/admin/orders/20/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2542,7 +2533,7 @@
             "api",
             "admin",
             "orders",
-            "24",
+            "20",
             "status"
           ]
         },
@@ -2554,7 +2545,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-EXT-03: Kiem tra chuoi chuyen trang thai lien tiep pending -> confir",
+      "name": "TC-ADMIN-EXT-03: Kiem tra chuyen trang thai confirmed -> shipping",
       "event": [
         {
           "listen": "prerequest",
@@ -2574,6 +2565,75 @@
             "exec": [
               "pm.test(\"[TC-ADMIN-EXT-03] Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+              "});",
+              "",
+              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/orders/24/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "orders",
+            "24",
+            "status"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"shipping\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-ADMIN-EXT-04: Chuyen sang dung trang thai hien tai (confirmed -> confirmed)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.request.headers.upsert({",
+              "    key: \"X-Student-Id\",",
+              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"[TC-ADMIN-EXT-04] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2623,76 +2683,7 @@
       "response": []
     },
     {
-      "name": "TC-ADMIN-EXT-04: Chuyen sang dung trang thai hien tai (pending -> pending)",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "pm.request.headers.upsert({",
-              "    key: \"X-Student-Id\",",
-              "    value: pm.environment.get(\"studentId\") || \"23127033\"",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"[TC-ADMIN-EXT-04] Status code is 400\", function () {",
-              "    pm.response.to.have.status(400);",
-              "});",
-              "",
-              "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
-              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
-              "});",
-              "",
-              "pm.test(\"[LATENCY] Response time is under 1000ms\", function () {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/26/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "admin",
-            "orders",
-            "26",
-            "status"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"pending\"\n}"
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-ADMIN-EXT-05: Kiem tra chan triet de user thuong khong the doi trang thai ",
+      "name": "TC-ADMIN-EXT-05: Kiem tra chan triet de user thuong khong the doi trang thai",
       "event": [
         {
           "listen": "prerequest",
@@ -2741,7 +2732,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/27/status",
+          "raw": "{{baseUrl}}/api/admin/orders/26/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2749,7 +2740,7 @@
             "api",
             "admin",
             "orders",
-            "27",
+            "26",
             "status"
           ]
         },
