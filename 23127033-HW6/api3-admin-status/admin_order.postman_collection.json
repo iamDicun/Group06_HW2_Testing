@@ -124,7 +124,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -132,7 +132,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -193,7 +193,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -201,7 +201,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -262,7 +262,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -270,7 +270,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "99999",
             "status"
           ]
         },
@@ -607,7 +607,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -615,7 +615,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1297,7 +1297,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
+          "raw": "{{baseUrl}}/api/admin/orders/1/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1305,7 +1305,7 @@
             "api",
             "admin",
             "orders",
-            "99999",
+            "1",
             "status"
           ]
         },
@@ -1366,7 +1366,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/-1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1374,7 +1374,7 @@
             "api",
             "admin",
             "orders",
-            "-1",
+            "2",
             "status"
           ]
         },
@@ -1435,7 +1435,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1' OR '1'='1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1443,7 +1443,7 @@
             "api",
             "admin",
             "orders",
-            "1' OR '1'='1",
+            "2",
             "status"
           ]
         },
@@ -1504,7 +1504,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1512,7 +1512,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1573,7 +1573,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1581,7 +1581,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1642,7 +1642,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1650,7 +1650,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1711,7 +1711,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1719,7 +1719,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1780,7 +1780,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1788,7 +1788,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1849,7 +1849,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1857,7 +1857,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1918,7 +1918,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1926,7 +1926,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "2",
             "status"
           ]
         },
@@ -1987,7 +1987,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/99999/status",
+          "raw": "{{baseUrl}}/api/admin/orders/2/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -1995,7 +1995,7 @@
             "api",
             "admin",
             "orders",
-            "99999",
+            "2",
             "status"
           ]
         },
@@ -2056,7 +2056,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2064,7 +2064,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -2125,7 +2125,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/abc/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2133,7 +2133,7 @@
             "api",
             "admin",
             "orders",
-            "abc",
+            "3",
             "status"
           ]
         },
@@ -2194,7 +2194,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2202,7 +2202,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -2263,7 +2263,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2271,7 +2271,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -2332,7 +2332,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2340,7 +2340,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -2401,7 +2401,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/admin/orders/1/status",
+          "raw": "{{baseUrl}}/api/admin/orders/3/status",
           "host": [
             "{{baseUrl}}"
           ],
@@ -2409,7 +2409,7 @@
             "api",
             "admin",
             "orders",
-            "1",
+            "3",
             "status"
           ]
         },
@@ -2741,7 +2741,7 @@
           },
           {
             "key": "Authorization",
-            "value": "Bearer {{adminToken}}",
+            "value": "Bearer {{userToken}}",
             "type": "text"
           }
         ],

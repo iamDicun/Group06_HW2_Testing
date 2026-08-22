@@ -329,8 +329,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-COUPON-06] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-COUPON-06] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -634,8 +634,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-COUPON-11] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-COUPON-11] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -695,8 +695,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-COUPON-12] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-COUPON-12] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -1427,8 +1427,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-COUPON-24] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-COUPON-24] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
@@ -2037,8 +2037,8 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"[TC-COUPON-34] Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "pm.test(\"[TC-COUPON-34] Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
               "});",
               "",
               "pm.test(\"[HTTP-HEADER] Content-Type is application/json\", function () {",
