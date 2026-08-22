@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "[API-NAME] Test Collection",
+    "description": "Sinh tu skill api-postman-tester. Bao phu Domain Partition, State Transition, Security (SEC-01-SEC-07), Schema Validation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.request.headers.upsert({",
+          "    key: \"X-Student-Id\",",
+          "    value: pm.collectionVariables.get(\"student_id\")",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "student_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Domain Partition",
+      "item": []
+    },
+    {
+      "name": "State Transition",
+      "item": []
+    },
+    {
+      "name": "Security",
+      "item": []
+    },
+    {
+      "name": "Schema Validation",
+      "item": []
+    }
+  ]
+}
