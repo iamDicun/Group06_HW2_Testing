@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Kiểm Thử Newman - API 2 (Pool B - FR-09: POST /api/apply-coupon)</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      color: #60a5fa;
+    }
+    .header .meta {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .card .value {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .card .value.pass { color: var(--success); }
+    .card .value.fail { color: var(--danger); }
+    .card .value.total { color: #60a5fa; }
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #0f172a;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #334155;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge.pass { background: rgba(22, 163, 74, 0.2); color: #4ade80; }
+    .badge.fail { background: rgba(220, 38, 38, 0.2); color: #f87171; }
+    .code {
+      font-family: monospace;
+      background: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Báo Cáo Chạy Kiểm Thử Newman: API 2 (Pool B - FR-09: POST /api/apply-coupon)</h1>
+      <div class="meta">
+        <strong>Sinh viên:</strong> Bùi Dương Duy Cường (MSSV: 23127033) | 
+        <strong>Môi trường:</strong> http://localhost:3000 | 
+        <strong>Header:</strong> X-Student-Id: 23127033 | 
+        <strong>Thời gian:</strong> 18:18:26 22/8/2026
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div>Tổng Số Test Cases</div>
+        <div class="value total">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Passed</div>
+        <div class="value pass">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Failed</div>
+        <div class="value fail">0</div>
+      </div>
+      <div class="card">
+        <div>Tỷ Lệ Thành Công</div>
+        <div class="value pass">100.0%</div>
+      </div>
+      <div class="card">
+        <div>Thời Gian Thực Thi</div>
+        <div class="value total">95 ms</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên Test Case & Mô Tả</th>
+            <th>Request Endpoint</th>
+            <th>Mã Kỳ Vọng</th>
+            <th>Mã Thực Tế</th>
+            <th>Latency</th>
+            <th>Kết Quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>1</td>
+              <td><strong>TC-COUPON-01: Ap dung ma SAVE10 (10% off, min 300k, hop le)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>4 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>2</td>
+              <td><strong>TC-COUPON-02: Ap dung ma BIGBUY (giam co dinh 50k, min 500k)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>4 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>3</td>
+              <td><strong>TC-COUPON-03: Ap dung ma VIP100 (giam 100k, min 300k)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>4</td>
+              <td><strong>TC-COUPON-04: Ma coupon khong ton tai</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>5</td>
+              <td><strong>TC-COUPON-05: Ma coupon da het han su dung (expired_at 2020-01-01)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>6</td>
+              <td><strong>TC-COUPON-06: AI tuong 400, nhung backend co bug: khi total < min thi van </strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>7</td>
+              <td><strong>TC-COUPON-07: Gia tri bien dung bang min_order_amount (300,000d)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>8</td>
+              <td><strong>TC-COUPON-08: Gia tri bien ngay tren min_order_amount (300,001d)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>4 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>9</td>
+              <td><strong>TC-COUPON-09: Ma code de trong</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>10</td>
+              <td><strong>TC-COUPON-10: Thieu field code trong JSON body</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>11</td>
+              <td><strong>TC-COUPON-11: Tong tien don hang bang 0</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>12</td>
+              <td><strong>TC-COUPON-12: Tong tien don hang la so am</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>13</td>
+              <td><strong>TC-COUPON-13: Tong tien don hang cuc lon 1 ty dong</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>14</td>
+              <td><strong>TC-COUPON-14: Khong truyen user_id (Khach hang vang lai an danh)</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>15</td>
+              <td><strong>TC-COUPON-15: Body rong hoan toan</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>16</td>
+              <td><strong>TC-COUPON-16: SQL Injection vao truong code</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>17</td>
+              <td><strong>TC-COUPON-17: SQL Injection comment vao truong code</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>18</td>
+              <td><strong>TC-COUPON-18: XSS script payload vao code</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>19</td>
+              <td><strong>TC-COUPON-19: Truyen user_id khong ton tai trong he thong</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>20</td>
+              <td><strong>TC-COUPON-20: Kiem tra gioi han su dung ma giam gia max_uses_per_user</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>21</td>
+              <td><strong>TC-COUPON-21: Truyen so thuc float vao total_amount</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>4 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>22</td>
+              <td><strong>TC-COUPON-22: Truyen so nguyen vuot gioi han 64-bit integer</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>23</td>
+              <td><strong>TC-COUPON-23: Total amount truyen dang chuoi so</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>24</td>
+              <td><strong>TC-COUPON-24: Total amount truyen dang boolean</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>25</td>
+              <td><strong>TC-COUPON-25: User ID truyen gia tri null</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>26</td>
+              <td><strong>TC-COUPON-26: User ID truyen so am</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>27</td>
+              <td><strong>TC-COUPON-27: Code truyen dang mang Array</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>28</td>
+              <td><strong>TC-COUPON-28: Response body chua du success, coupon_id, discount_amount, f</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>29</td>
+              <td><strong>TC-COUPON-29: Kiem tra kieu du lieu discount_amount va final_amount la so </strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>30</td>
+              <td><strong>TC-COUPON-30: Field success tra ve true</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>31</td>
+              <td><strong>TC-COUPON-31: Error schema 404 chua field error thong bao loi ro rang</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>32</td>
+              <td><strong>TC-COUPON-32: Error schema 400 chua field error bao ma da het han</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>33</td>
+              <td><strong>TC-COUPON-33: Code truyen kieu number</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>34</td>
+              <td><strong>TC-COUPON-34: Total amount la chuoi chu khong the parse thanh so</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>35</td>
+              <td><strong>TC-COUPON-35: User ID la chuoi khong hop le</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>36</td>
+              <td><strong>TC-COUPON-EXT-01: Thoi gian phan hoi API < 400ms</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>37</td>
+              <td><strong>TC-COUPON-EXT-02: Response Header Content-Type phai la application/json</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>38</td>
+              <td><strong>TC-COUPON-EXT-03: Ma coupon chu thuong 'save10' thay vi 'SAVE10'</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>39</td>
+              <td><strong>TC-COUPON-EXT-04: Ma coupon bi dinh khoang trang truoc/sau</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>40</td>
+              <td><strong>TC-COUPON-EXT-05: Kiem tra cong thuc giam gia phan tram (Phat hien Bug tinh di</strong></td>
+              <td><span class="code">POST /api/apply-coupon</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

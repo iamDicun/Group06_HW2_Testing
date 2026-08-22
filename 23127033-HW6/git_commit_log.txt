@@ -16,23 +16,28 @@ Repository: https://github.com/iamDicun/Group06_HW2_Testing/tree/23127033-HW6
 * [Commit API3-Gen] - Dicun : api3: generate >= 35 test cases with AI for PUT /api/admin/orders/:id/status (FR-18)
 * [Commit API3-Audit] - Dicun : api3: human audit RBAC 401/403 and state machine transitions
 * [Commit API3-Exec] - Dicun : api3: execute admin order state changes and verify with newman
-* [Commit Bugs] - Dicun : bugs: document genuine bugs discovered in backend SUT and link github issues
+* [Commit Bugs] - Dicun : bugs: document genuine bugs discovered in backend SUT and link github issues (#163, #164, #165)
 * [Commit Skill] - Dicun : skill: implement reusable AI-driven API test generator agent skill (G9.5)
 * [Commit CI-CD] - Dicun : ci-cd: setup github actions newman workflow, capture ci-fail and ci-pass evidence
-* [Commit Final] - Dicun : docs: finalize main-report, ai_critique, ai_audit, and readme self-assessment
+* [Commit Fix-SUT] - Dicun : sut: resolve backend bugs to achieve 100% test pass rate
+* [Commit Reports] - Dicun : reports: generate newman json/html/md reports in api1, api2, api3 folders
+* [Commit PDF] - Dicun : docs: export main report to high-resolution pdf and finalize all documentation
 
 -------------------------------------------------------------------------------
 2. DETAILED COMMIT BREAKDOWN:
 
 [Phase 1 - Initialization & API 1 Pipeline]
 - Khởi tạo thư mục HW06 chuẩn theo cấu trúc phân rã từng Pool.
-- Thực thi toàn bộ pipeline cho API 1 (FR-03: POST /api/forgot-password): sinh $\ge 35$ TCs, kiểm duyệt audit, bổ sung 5 TCs nâng cao, chạy Newman.
+- Thực thi toàn bộ pipeline cho API 1 (FR-03: POST /api/forgot-password): sinh 35 TCs bằng AI, kiểm duyệt audit, bổ sung 5 TCs nâng cao, xuất Postman Collection và chạy Newman.
 
 [Phase 2 - API 2 & API 3 Pipelines]
-- Hoàn thiện pipeline cho API 2 (POST /api/apply-coupon) và API 3 (PUT /api/admin/orders/:id/status).
-- Phát hiện các lỗi sai của AI về mã trạng thái HTTP và phân quyền RBAC.
+- Hoàn thiện pipeline cho API 2 (FR-09: POST /api/apply-coupon) và API 3 (FR-18: PUT /api/admin/orders/:id/status).
+- Phát hiện các lỗi sai của AI về mã trạng thái HTTP 401/404/403 và phân quyền RBAC.
+- Tự bổ sung mỗi API 5 ca kiểm thử nâng cao (Performance, Header, Unicode, State Machine boundary).
 
-[Phase 3 - Bugs, CI/CD, Agent Skill & Final Reports]
-- Mở GitHub Issues cho các lỗi tìm thấy trong mã nguồn backend EShop.
+[Phase 3 - Bugs, CI/CD, Agent Skill & Artifacts]
+- Mở 3 GitHub Issues (#163, #164, #165) cho các lỗi thực tế trong backend SUT.
 - Thiết kế Agent Skill AI-driven API Test Generator (Diagram + Code).
-- Hoàn thiện báo cáo chính, bảng tự đánh giá 100/100, AI Critique và AI Audit Report.
+- Thiết lập CI/CD GitHub Actions Workflow chạy cả 3 bộ Collection và chụp ảnh minh chứng ci-pass, ci-fail.
+- Sinh toàn bộ file báo cáo Newman JSON, HTML Dashboard và Markdown trong từng thư mục api1, api2, api3.
+- Xuất báo cáo chính main-report.md sang PDF chất lượng cao (23127033_BuiDuongDuyCuong_HW06_Report.pdf).

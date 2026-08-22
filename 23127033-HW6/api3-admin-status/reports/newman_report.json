@@ -1,0 +1,939 @@
+{
+  "info": {
+    "name": "API 3 (Pool C - FR-18: PUT /api/admin/orders/:id/status)",
+    "studentId": "23127033",
+    "timestamp": "2026-08-22T11:18:26.231Z"
+  },
+  "stats": {
+    "total": 40,
+    "passed": 40,
+    "failed": 0,
+    "passRate": "100.0",
+    "totalAssertions": 120,
+    "passedAssertions": 120,
+    "failedAssertions": 0,
+    "durationMs": 157
+  },
+  "executions": [
+    {
+      "name": "TC-ADMIN-01: Chuyen hop le pending -> confirmed",
+      "method": "PUT",
+      "path": "/api/admin/orders/1/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 12,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-02: Chuyen hop le confirmed -> shipping",
+      "method": "PUT",
+      "path": "/api/admin/orders/21/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 11,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-03: Chuyen hop le shipping -> delivered",
+      "method": "PUT",
+      "path": "/api/admin/orders/31/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 10,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-04: Huy don hop le pending -> canceled",
+      "method": "PUT",
+      "path": "/api/admin/orders/2/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 9,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-05: Huy don hop le confirmed -> canceled",
+      "method": "PUT",
+      "path": "/api/admin/orders/22/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 10,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-06: Chuyen bat hop phap delivered -> pending",
+      "method": "PUT",
+      "path": "/api/admin/orders/41/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-07: Chuyen bat hop phap canceled -> shipping",
+      "method": "PUT",
+      "path": "/api/admin/orders/46/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-08: Chuyen bat hop phap canceled -> delivered",
+      "method": "PUT",
+      "path": "/api/admin/orders/47/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-09: Chuyen bat hop phap pending -> shipping (nhay coc)",
+      "method": "PUT",
+      "path": "/api/admin/orders/3/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-010: Chuyen bat hop phap pending -> delivered (nhay coc)",
+      "method": "PUT",
+      "path": "/api/admin/orders/4/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-011: Chuyen bat hop phap confirmed -> delivered (nhay coc)",
+      "method": "PUT",
+      "path": "/api/admin/orders/23/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-012: Trang thai khong nam trong enum cho phep",
+      "method": "PUT",
+      "path": "/api/admin/orders/5/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-013: Trang thai de chuoi rong",
+      "method": "PUT",
+      "path": "/api/admin/orders/6/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 3,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-014: Thieu field status trong body",
+      "method": "PUT",
+      "path": "/api/admin/orders/7/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 3,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-015: Status truyen kieu so integer",
+      "method": "PUT",
+      "path": "/api/admin/orders/8/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-016: Khong truyen Authorization header",
+      "method": "PUT",
+      "path": "/api/admin/orders/9/status",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 401",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-017: Truyen Bearer Token khong hop le",
+      "method": "PUT",
+      "path": "/api/admin/orders/10/status",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 403",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-018: User thuong goi API admin (BAC SEC-03)",
+      "method": "PUT",
+      "path": "/api/admin/orders/11/status",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 403",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-019: Don hang ID khong ton tai -> 404",
+      "method": "PUT",
+      "path": "/api/admin/orders/99999/status",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-020: Order ID la so am -> 404",
+      "method": "PUT",
+      "path": "/api/admin/orders/-1/status",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-021: SQL Injection tren URL path parameter",
+      "method": "PUT",
+      "path": "/api/admin/orders/1'%20OR%20'1'='1/status",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-022: SQL Injection trong status body",
+      "method": "PUT",
+      "path": "/api/admin/orders/12/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-023: XSS payload trong status body",
+      "method": "PUT",
+      "path": "/api/admin/orders/13/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-024: Su dung Admin Token hop le -> 200 OK",
+      "method": "PUT",
+      "path": "/api/admin/orders/14/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-025: Gui kem truong total_amount ngoai spec",
+      "method": "PUT",
+      "path": "/api/admin/orders/15/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 12,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-026: Null byte injection trong status",
+      "method": "PUT",
+      "path": "/api/admin/orders/16/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-027: Header Authorization malformed Bearer",
+      "method": "PUT",
+      "path": "/api/admin/orders/17/status",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 401",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-028: Response body tra ve message xac nhan",
+      "method": "PUT",
+      "path": "/api/admin/orders/18/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-029: Error schema 404 Order not found",
+      "method": "PUT",
+      "path": "/api/admin/orders/99999/status",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 3,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-030: Error schema 400 Invalid state transition",
+      "method": "PUT",
+      "path": "/api/admin/orders/42/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-031: Order ID la chuoi abc khong parse duoc",
+      "method": "PUT",
+      "path": "/api/admin/orders/abc/status",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-032: Status truyen dang boolean",
+      "method": "PUT",
+      "path": "/api/admin/orders/35/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-033: Status truyen dang array",
+      "method": "PUT",
+      "path": "/api/admin/orders/36/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-034: Status truyen gia tri null",
+      "method": "PUT",
+      "path": "/api/admin/orders/37/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-035: Trang thai chu HOA CONFIRMED",
+      "method": "PUT",
+      "path": "/api/admin/orders/38/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-EXT-01: Thoi gian cap nhat trang thai phai < 300ms",
+      "method": "PUT",
+      "path": "/api/admin/orders/19/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-EXT-02: Header Content-Type tra ve phai la application/json",
+      "method": "PUT",
+      "path": "/api/admin/orders/20/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-EXT-03: Kiem tra chuyen trang thai confirmed -> shipping",
+      "method": "PUT",
+      "path": "/api/admin/orders/24/status",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-EXT-04: Chuyen sang dung trang thai hien tai (confirmed -> confirmed)",
+      "method": "PUT",
+      "path": "/api/admin/orders/25/status",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 400",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-ADMIN-EXT-05: Kiem tra chan triet de user thuong khong the doi trang thai",
+      "method": "PUT",
+      "path": "/api/admin/orders/26/status",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 403",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

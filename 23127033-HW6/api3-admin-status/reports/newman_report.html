@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Kiểm Thử Newman - API 3 (Pool C - FR-18: PUT /api/admin/orders/:id/status)</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      color: #60a5fa;
+    }
+    .header .meta {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .card .value {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .card .value.pass { color: var(--success); }
+    .card .value.fail { color: var(--danger); }
+    .card .value.total { color: #60a5fa; }
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #0f172a;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #334155;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge.pass { background: rgba(22, 163, 74, 0.2); color: #4ade80; }
+    .badge.fail { background: rgba(220, 38, 38, 0.2); color: #f87171; }
+    .code {
+      font-family: monospace;
+      background: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Báo Cáo Chạy Kiểm Thử Newman: API 3 (Pool C - FR-18: PUT /api/admin/orders/:id/status)</h1>
+      <div class="meta">
+        <strong>Sinh viên:</strong> Bùi Dương Duy Cường (MSSV: 23127033) | 
+        <strong>Môi trường:</strong> http://localhost:3000 | 
+        <strong>Header:</strong> X-Student-Id: 23127033 | 
+        <strong>Thời gian:</strong> 18:18:26 22/8/2026
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div>Tổng Số Test Cases</div>
+        <div class="value total">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Passed</div>
+        <div class="value pass">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Failed</div>
+        <div class="value fail">0</div>
+      </div>
+      <div class="card">
+        <div>Tỷ Lệ Thành Công</div>
+        <div class="value pass">100.0%</div>
+      </div>
+      <div class="card">
+        <div>Thời Gian Thực Thi</div>
+        <div class="value total">157 ms</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên Test Case & Mô Tả</th>
+            <th>Request Endpoint</th>
+            <th>Mã Kỳ Vọng</th>
+            <th>Mã Thực Tế</th>
+            <th>Latency</th>
+            <th>Kết Quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>1</td>
+              <td><strong>TC-ADMIN-01: Chuyen hop le pending -> confirmed</strong></td>
+              <td><span class="code">PUT /api/admin/orders/1/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>12 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>2</td>
+              <td><strong>TC-ADMIN-02: Chuyen hop le confirmed -> shipping</strong></td>
+              <td><span class="code">PUT /api/admin/orders/21/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>11 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>3</td>
+              <td><strong>TC-ADMIN-03: Chuyen hop le shipping -> delivered</strong></td>
+              <td><span class="code">PUT /api/admin/orders/31/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>10 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>4</td>
+              <td><strong>TC-ADMIN-04: Huy don hop le pending -> canceled</strong></td>
+              <td><span class="code">PUT /api/admin/orders/2/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>9 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>5</td>
+              <td><strong>TC-ADMIN-05: Huy don hop le confirmed -> canceled</strong></td>
+              <td><span class="code">PUT /api/admin/orders/22/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>10 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>6</td>
+              <td><strong>TC-ADMIN-06: Chuyen bat hop phap delivered -> pending</strong></td>
+              <td><span class="code">PUT /api/admin/orders/41/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>7</td>
+              <td><strong>TC-ADMIN-07: Chuyen bat hop phap canceled -> shipping</strong></td>
+              <td><span class="code">PUT /api/admin/orders/46/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>8</td>
+              <td><strong>TC-ADMIN-08: Chuyen bat hop phap canceled -> delivered</strong></td>
+              <td><span class="code">PUT /api/admin/orders/47/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>9</td>
+              <td><strong>TC-ADMIN-09: Chuyen bat hop phap pending -> shipping (nhay coc)</strong></td>
+              <td><span class="code">PUT /api/admin/orders/3/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>10</td>
+              <td><strong>TC-ADMIN-010: Chuyen bat hop phap pending -> delivered (nhay coc)</strong></td>
+              <td><span class="code">PUT /api/admin/orders/4/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>11</td>
+              <td><strong>TC-ADMIN-011: Chuyen bat hop phap confirmed -> delivered (nhay coc)</strong></td>
+              <td><span class="code">PUT /api/admin/orders/23/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>12</td>
+              <td><strong>TC-ADMIN-012: Trang thai khong nam trong enum cho phep</strong></td>
+              <td><span class="code">PUT /api/admin/orders/5/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>13</td>
+              <td><strong>TC-ADMIN-013: Trang thai de chuoi rong</strong></td>
+              <td><span class="code">PUT /api/admin/orders/6/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>14</td>
+              <td><strong>TC-ADMIN-014: Thieu field status trong body</strong></td>
+              <td><span class="code">PUT /api/admin/orders/7/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>15</td>
+              <td><strong>TC-ADMIN-015: Status truyen kieu so integer</strong></td>
+              <td><span class="code">PUT /api/admin/orders/8/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>16</td>
+              <td><strong>TC-ADMIN-016: Khong truyen Authorization header</strong></td>
+              <td><span class="code">PUT /api/admin/orders/9/status</span></td>
+              <td><span class="code">401</span></td>
+              <td><span class="code">401</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>17</td>
+              <td><strong>TC-ADMIN-017: Truyen Bearer Token khong hop le</strong></td>
+              <td><span class="code">PUT /api/admin/orders/10/status</span></td>
+              <td><span class="code">403</span></td>
+              <td><span class="code">403</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>18</td>
+              <td><strong>TC-ADMIN-018: User thuong goi API admin (BAC SEC-03)</strong></td>
+              <td><span class="code">PUT /api/admin/orders/11/status</span></td>
+              <td><span class="code">403</span></td>
+              <td><span class="code">403</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>19</td>
+              <td><strong>TC-ADMIN-019: Don hang ID khong ton tai -> 404</strong></td>
+              <td><span class="code">PUT /api/admin/orders/99999/status</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>20</td>
+              <td><strong>TC-ADMIN-020: Order ID la so am -> 404</strong></td>
+              <td><span class="code">PUT /api/admin/orders/-1/status</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>21</td>
+              <td><strong>TC-ADMIN-021: SQL Injection tren URL path parameter</strong></td>
+              <td><span class="code">PUT /api/admin/orders/1'%20OR%20'1'='1/status</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>22</td>
+              <td><strong>TC-ADMIN-022: SQL Injection trong status body</strong></td>
+              <td><span class="code">PUT /api/admin/orders/12/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>23</td>
+              <td><strong>TC-ADMIN-023: XSS payload trong status body</strong></td>
+              <td><span class="code">PUT /api/admin/orders/13/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>24</td>
+              <td><strong>TC-ADMIN-024: Su dung Admin Token hop le -> 200 OK</strong></td>
+              <td><span class="code">PUT /api/admin/orders/14/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>25</td>
+              <td><strong>TC-ADMIN-025: Gui kem truong total_amount ngoai spec</strong></td>
+              <td><span class="code">PUT /api/admin/orders/15/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>12 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>26</td>
+              <td><strong>TC-ADMIN-026: Null byte injection trong status</strong></td>
+              <td><span class="code">PUT /api/admin/orders/16/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>27</td>
+              <td><strong>TC-ADMIN-027: Header Authorization malformed Bearer</strong></td>
+              <td><span class="code">PUT /api/admin/orders/17/status</span></td>
+              <td><span class="code">401</span></td>
+              <td><span class="code">401</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>28</td>
+              <td><strong>TC-ADMIN-028: Response body tra ve message xac nhan</strong></td>
+              <td><span class="code">PUT /api/admin/orders/18/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>29</td>
+              <td><strong>TC-ADMIN-029: Error schema 404 Order not found</strong></td>
+              <td><span class="code">PUT /api/admin/orders/99999/status</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>3 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>30</td>
+              <td><strong>TC-ADMIN-030: Error schema 400 Invalid state transition</strong></td>
+              <td><span class="code">PUT /api/admin/orders/42/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>31</td>
+              <td><strong>TC-ADMIN-031: Order ID la chuoi abc khong parse duoc</strong></td>
+              <td><span class="code">PUT /api/admin/orders/abc/status</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>32</td>
+              <td><strong>TC-ADMIN-032: Status truyen dang boolean</strong></td>
+              <td><span class="code">PUT /api/admin/orders/35/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>33</td>
+              <td><strong>TC-ADMIN-033: Status truyen dang array</strong></td>
+              <td><span class="code">PUT /api/admin/orders/36/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>34</td>
+              <td><strong>TC-ADMIN-034: Status truyen gia tri null</strong></td>
+              <td><span class="code">PUT /api/admin/orders/37/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>35</td>
+              <td><strong>TC-ADMIN-035: Trang thai chu HOA CONFIRMED</strong></td>
+              <td><span class="code">PUT /api/admin/orders/38/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>36</td>
+              <td><strong>TC-ADMIN-EXT-01: Thoi gian cap nhat trang thai phai < 300ms</strong></td>
+              <td><span class="code">PUT /api/admin/orders/19/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>37</td>
+              <td><strong>TC-ADMIN-EXT-02: Header Content-Type tra ve phai la application/json</strong></td>
+              <td><span class="code">PUT /api/admin/orders/20/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>38</td>
+              <td><strong>TC-ADMIN-EXT-03: Kiem tra chuyen trang thai confirmed -> shipping</strong></td>
+              <td><span class="code">PUT /api/admin/orders/24/status</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>39</td>
+              <td><strong>TC-ADMIN-EXT-04: Chuyen sang dung trang thai hien tai (confirmed -> confirmed)</strong></td>
+              <td><span class="code">PUT /api/admin/orders/25/status</span></td>
+              <td><span class="code">400</span></td>
+              <td><span class="code">400</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>40</td>
+              <td><strong>TC-ADMIN-EXT-05: Kiem tra chan triet de user thuong khong the doi trang thai</strong></td>
+              <td><span class="code">PUT /api/admin/orders/26/status</span></td>
+              <td><span class="code">403</span></td>
+              <td><span class="code">403</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

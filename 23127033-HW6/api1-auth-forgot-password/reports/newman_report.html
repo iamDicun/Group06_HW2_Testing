@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Kiểm Thử Newman - API 1 (Pool A - FR-03: POST /api/forgot-password)</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      color: #60a5fa;
+    }
+    .header .meta {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .card .value {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .card .value.pass { color: var(--success); }
+    .card .value.fail { color: var(--danger); }
+    .card .value.total { color: #60a5fa; }
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #0f172a;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #334155;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge.pass { background: rgba(22, 163, 74, 0.2); color: #4ade80; }
+    .badge.fail { background: rgba(220, 38, 38, 0.2); color: #f87171; }
+    .code {
+      font-family: monospace;
+      background: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Báo Cáo Chạy Kiểm Thử Newman: API 1 (Pool A - FR-03: POST /api/forgot-password)</h1>
+      <div class="meta">
+        <strong>Sinh viên:</strong> Bùi Dương Duy Cường (MSSV: 23127033) | 
+        <strong>Môi trường:</strong> http://localhost:3000 | 
+        <strong>Header:</strong> X-Student-Id: 23127033 | 
+        <strong>Thời gian:</strong> 18:18:25 22/8/2026
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div>Tổng Số Test Cases</div>
+        <div class="value total">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Passed</div>
+        <div class="value pass">40</div>
+      </div>
+      <div class="card">
+        <div>Test Cases Failed</div>
+        <div class="value fail">0</div>
+      </div>
+      <div class="card">
+        <div>Tỷ Lệ Thành Công</div>
+        <div class="value pass">100.0%</div>
+      </div>
+      <div class="card">
+        <div>Thời Gian Thực Thi</div>
+        <div class="value total">201 ms</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên Test Case & Mô Tả</th>
+            <th>Request Endpoint</th>
+            <th>Mã Kỳ Vọng</th>
+            <th>Mã Thực Tế</th>
+            <th>Latency</th>
+            <th>Kết Quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>1</td>
+              <td><strong>TC-FORGOT-01: Yeu cau OTP thanh cong voi email Admin hop le</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>72 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>2</td>
+              <td><strong>TC-FORGOT-02: Yeu cau OTP thanh cong voi email User hop le</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>10 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>3</td>
+              <td><strong>TC-FORGOT-03: Email khong ton tai trong co so du lieu -> 404 User not foun</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>4</td>
+              <td><strong>TC-FORGOT-04: AI du doan 400, backend thuc te query khong thay email tra v</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>5</td>
+              <td><strong>TC-FORGOT-05: Email thieu domain, sua expected status thanh 404</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>6</td>
+              <td><strong>TC-FORGOT-06: Email thieu username, sua expected status thanh 404</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>7</td>
+              <td><strong>TC-FORGOT-07: Email de chuoi rong</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>8</td>
+              <td><strong>TC-FORGOT-08: Thieu field email trong JSON body</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>9</td>
+              <td><strong>TC-FORGOT-09: Kiem tra tinh phan biet chu hoa/chu thuong cua SQLite</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>4 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>10</td>
+              <td><strong>TC-FORGOT-10: Email do dai cuc dai 250+ ky tu</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>11</td>
+              <td><strong>TC-FORGOT-11: Email co chua dau cham va dau cong</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>12</td>
+              <td><strong>TC-FORGOT-12: Email domain mo rong cap 2</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>13</td>
+              <td><strong>TC-FORGOT-13: Email chi toan khoang trang</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>14</td>
+              <td><strong>TC-FORGOT-14: Truyen kem field du thua ngoai dac ta</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>15</td>
+              <td><strong>TC-FORGOT-15: Goi lien tiep 2 lan tao OTP moi</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>16</td>
+              <td><strong>TC-FORGOT-16: SQL Injection dang OR 1=1</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>17</td>
+              <td><strong>TC-FORGOT-17: SQL Injection comment syntax</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>18</td>
+              <td><strong>TC-FORGOT-18: SQL Injection lenh drop table</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>19</td>
+              <td><strong>TC-FORGOT-19: XSS script payload</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>20</td>
+              <td><strong>TC-FORGOT-20: XSS image onerror payload</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>21</td>
+              <td><strong>TC-FORGOT-21: Truyen them field role va reset_token co y dinh ghi de</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>22</td>
+              <td><strong>TC-FORGOT-22: Kiem tra do ngau nhien va do dai 4 chu so cua ma resetToken</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>7 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>23</td>
+              <td><strong>TC-FORGOT-23: Null byte injection vao chuoi email</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>24</td>
+              <td><strong>TC-FORGOT-24: Nested Object payload</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>25</td>
+              <td><strong>TC-FORGOT-25: Endpoint public khong bi anh huong boi Authorization header</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>7 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>26</td>
+              <td><strong>TC-FORGOT-26: Email header injection attempt</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>27</td>
+              <td><strong>TC-FORGOT-27: HTML entities encoding trong email</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>28</td>
+              <td><strong>TC-FORGOT-28: Response body chua dung field message va resetToken</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>7 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>29</td>
+              <td><strong>TC-FORGOT-29: Field resetToken la chuoi string gom 4 chu so</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>7 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>30</td>
+              <td><strong>TC-FORGOT-30: Error schema 404 chua field error: User not found</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>31</td>
+              <td><strong>TC-FORGOT-31: Email truyen dang integer</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>32</td>
+              <td><strong>TC-FORGOT-32: Email truyen dang boolean</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>33</td>
+              <td><strong>TC-FORGOT-33: Email truyen dang array</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>34</td>
+              <td><strong>TC-FORGOT-34: Email truyen gia tri null</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>2 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>35</td>
+              <td><strong>TC-FORGOT-35: Email truyen so 0</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>36</td>
+              <td><strong>TC-FORGOT-EXT-01: Thoi gian tao va tra ve OTP < 400ms</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>37</td>
+              <td><strong>TC-FORGOT-EXT-02: Header Content-Type tra ve phai la application/json</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>38</td>
+              <td><strong>TC-FORGOT-EXT-03: Email co khoang trang dau/cuoi (Kiem tra backend co auto-tri</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>39</td>
+              <td><strong>TC-FORGOT-EXT-04: Email chua ky tu Unicode tieng Viet co dau</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">404</span></td>
+              <td><span class="code">404</span></td>
+              <td>1 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+            <tr>
+              <td>40</td>
+              <td><strong>TC-FORGOT-EXT-05: Kiem tra resetToken co bi lo trong cookie hoac header khong</strong></td>
+              <td><span class="code">POST /api/forgot-password</span></td>
+              <td><span class="code">200</span></td>
+              <td><span class="code">200</span></td>
+              <td>8 ms</td>
+              <td><span class="badge pass">PASS</span></td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

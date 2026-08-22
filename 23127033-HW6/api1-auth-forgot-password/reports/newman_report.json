@@ -1,0 +1,939 @@
+{
+  "info": {
+    "name": "API 1 (Pool A - FR-03: POST /api/forgot-password)",
+    "studentId": "23127033",
+    "timestamp": "2026-08-22T11:18:25.960Z"
+  },
+  "stats": {
+    "total": 40,
+    "passed": 40,
+    "failed": 0,
+    "passRate": "100.0",
+    "totalAssertions": 120,
+    "passedAssertions": 120,
+    "failedAssertions": 0,
+    "durationMs": 201
+  },
+  "executions": [
+    {
+      "name": "TC-FORGOT-01: Yeu cau OTP thanh cong voi email Admin hop le",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 72,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-02: Yeu cau OTP thanh cong voi email User hop le",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 10,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-03: Email khong ton tai trong co so du lieu -> 404 User not foun",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-04: AI du doan 400, backend thuc te query khong thay email tra v",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-05: Email thieu domain, sua expected status thanh 404",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-06: Email thieu username, sua expected status thanh 404",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-07: Email de chuoi rong",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-08: Thieu field email trong JSON body",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-09: Kiem tra tinh phan biet chu hoa/chu thuong cua SQLite",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 4,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-10: Email do dai cuc dai 250+ ky tu",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-11: Email co chua dau cham va dau cong",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-12: Email domain mo rong cap 2",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-13: Email chi toan khoang trang",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-14: Truyen kem field du thua ngoai dac ta",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-15: Goi lien tiep 2 lan tao OTP moi",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-16: SQL Injection dang OR 1=1",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-17: SQL Injection comment syntax",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-18: SQL Injection lenh drop table",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-19: XSS script payload",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-20: XSS image onerror payload",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-21: Truyen them field role va reset_token co y dinh ghi de",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-22: Kiem tra do ngau nhien va do dai 4 chu so cua ma resetToken",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 7,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-23: Null byte injection vao chuoi email",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-24: Nested Object payload",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-25: Endpoint public khong bi anh huong boi Authorization header",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 7,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-26: Email header injection attempt",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-27: HTML entities encoding trong email",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-28: Response body chua dung field message va resetToken",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 7,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-29: Field resetToken la chuoi string gom 4 chu so",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 7,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-30: Error schema 404 chua field error: User not found",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-31: Email truyen dang integer",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-32: Email truyen dang boolean",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-33: Email truyen dang array",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-34: Email truyen gia tri null",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 2,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-35: Email truyen so 0",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-EXT-01: Thoi gian tao va tra ve OTP < 400ms",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-EXT-02: Header Content-Type tra ve phai la application/json",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-EXT-03: Email co khoang trang dau/cuoi (Kiem tra backend co auto-tri",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-EXT-04: Email chua ky tu Unicode tieng Viet co dau",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 404,
+      "actualStatus": 404,
+      "responseTime": 1,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 404",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "TC-FORGOT-EXT-05: Kiem tra resetToken co bi lo trong cookie hoac header khong",
+      "method": "POST",
+      "path": "/api/forgot-password",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "responseTime": 8,
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "Status code is 200",
+          "passed": true
+        },
+        {
+          "name": "Content-Type is application/json",
+          "passed": true
+        },
+        {
+          "name": "Response time under 1000ms",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}
