@@ -36,21 +36,21 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-htmlextra
 
-      - name: Run API 1 (Pool A - FR-03: POST /api/forgot-password) Tests
+      - name: "Run API 1 (Pool A - FR-03: POST /api/forgot-password) Tests"
         run: |
           newman run 23127033-HW6/api1-auth-forgot-password/forgot_password.postman_collection.json \
             --environment 23127033-HW6/postman/local.postman_environment.json \
             --reporters cli,json \
             --reporter-json-export 23127033-HW6/api1-auth-forgot-password/reports/newman_report.json
 
-      - name: Run API 2 (Pool B - POST /api/apply-coupon) Tests
+      - name: "Run API 2 (Pool B - FR-09: POST /api/apply-coupon) Tests"
         run: |
           newman run 23127033-HW6/api2-coupon-apply/coupon.postman_collection.json \
             --environment 23127033-HW6/postman/local.postman_environment.json \
             --reporters cli,json \
             --reporter-json-export 23127033-HW6/api2-coupon-apply/reports/newman_report.json
 
-      - name: Run API 3 (Pool C - PUT /api/admin/orders/:id/status) Tests
+      - name: "Run API 3 (Pool C - FR-18: PUT /api/admin/orders/:id/status) Tests"
         run: |
           newman run 23127033-HW6/api3-admin-status/admin_order.postman_collection.json \
             --environment 23127033-HW6/postman/local.postman_environment.json \
