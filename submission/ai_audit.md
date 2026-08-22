@@ -1,17 +1,16 @@
 # AI Audit Report
 
-**Student:** <MSSV> - <Name>
-
-> Nếu KHÔNG dùng AI, ghi: "I do not use any AI help in this exercise."
->
-> Nếu CÓ dùng AI, điền bảng bên dưới cho mỗi lần tương tác.
+**Exercise:** HW06 — API Testing  
+**Repository:** `https://github.com/iamDicun/Group06_HW2_Testing`  
 
 ---
 
-| # | AI Tool | Date & Time | Prompt | AI Output (summary/link) |
-|---|---------|-------------|--------|--------------------------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+## Bảng Đánh Giá & Kiểm Định Toàn Bộ Tương Tác AI (AI Audit Table)
+
+| # | AI Tool | Date & Time | Prompt | AI Output | Verdict | Reasoning |
+|---|---|---|---|---|---|---|
+| 1 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 13:30 | `Thực hiện skill api test trên các tính năng fr4, fr10, fr16; tạo plan trước, sau đó từ plan implement các script` | Sinh kế hoạch kiểm thử API, 3 file phân tích kỹ thuật (51, 53, 49 test conditions), 153 files ca kiểm thử Markdown độc lập, bộ Postman Collection + Environment (155 requests với pre-request script inject `X-Student-Id`), runner scripts và báo cáo HTML Newman. | **INCOMPLETE** | AI bao phủ tốt các phân vùng tương đương (Domain Partition) và schema validation, nhưng bị rập khuôn và bỏ sót 5 ca kiểm thử chuyên sâu quan trọng (Race condition khi hủy đơn song song, CSV Formula Injection khi xuất Excel, lỗi tràn bộ đệm Unicode 4-byte UTF-8, chuyển trạng thái đơn hàng của user đã xóa, và xung đột trùng tên sản phẩm trong cùng batch). Người kiểm thử đã audit và bổ sung 5 TCs mở rộng (`EXT-001` → `EXT-005`). |
+| 2 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 14:58 | `dựa vào các bug trong sumary/report, tạo github issue kèm bằng chứng (nhớ dùng đúng template) và báo cáo lại trong file submission/readme.md` | Phân tích 7 lỗi thực tế từ mã nguồn Backend `server.js` và kết quả chạy Newman, đóng gói thành 7 file GitHub Bug Report Issues theo chuẩn template `.github/ISSUE_TEMPLATE/bug-report.yml` với đầy đủ bằng chứng (HTTP logs, vị trí dòng code, assertion failure), cập nhật bảng tổng hợp vào `submission/README.md` và `submission/report.md`. | **INCOMPLETE** | AI đã phân tích chính xác nguyên nhân gốc rễ và vị trí mã nguồn của 7 lỗi thực tế (`BUG-01` đến `BUG-07`), mô tả các bước tái hiện và bằng chứng thuyết phục. Tuy nhiên, AI ban đầu tự động chèn đường dẫn tuyệt đối local (`file:///c:/Users/...`) vào các liên kết trong markdown thay vì dùng relative path chuẩn của Git repository, dẫn đến lỗi hiển thị khi xem trực tiếp trên GitHub. Người dùng đã phải yêu cầu sửa lại. |
+| 3 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 15:06 | `ý là đẩy lên trang issue của repo, dùng github cli` | Kiểm tra vị trí thực thi của GitHub CLI (`C:\Program Files\GitHub CLI\gh.exe`), phát hiện trạng thái chưa xác thực tài khoản (`gh auth status`), tạo script PowerShell `push_issues_to_github.ps1` và script Node.js `push_issues_to_github.js` để tự động hóa việc đẩy 7 issues lên GitHub sau khi đăng nhập hoặc qua token. | **VALID** | AI đã kiểm tra môi trường hệ thống chính xác, bắt đúng lỗi chưa đăng nhập của GitHub CLI, cung cấp hướng dẫn xác thực từng bước (`gh auth login`) kèm theo các scripts tự động hóa giúp tạo toàn bộ 7 Issues lên GitHub nhanh chóng và chính xác mà không cần tạo thủ công từng issue. |
+| 4 | Google Antigravity (Gemini 3.7 Flash) | 2026-08-22 15:10 | `ko đề cập các đường dẫn local vào các file md` | Quét toàn bộ repository bằng công cụ tìm kiếm, loại bỏ hoàn toàn tất cả các đường dẫn tuyệt đối local (`file:///...` và đường dẫn ổ đĩa cá nhân) trong `submission/README.md`, `submission/report.md`, `submission/issues/*.md`, `.github/issues/*.md` và `tests/test-summary/api-test-pipeline-summary.md`, chuyển sang đường dẫn tương đối chuẩn của Git. | **VALID** | AI đã thực hiện rà soát triệt để bằng grep search xác nhận không còn đường dẫn local nào sót lại, chuyển đổi chính xác toàn bộ liên kết sang relative path tương thích 100% khi xem trên GitHub web và clone về bất kỳ máy tính nào khác. |
+
