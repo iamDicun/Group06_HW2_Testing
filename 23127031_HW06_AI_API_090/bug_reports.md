@@ -5,7 +5,7 @@
 **SUT:** eShop Backend (Node.js/Express/SQLite) — `http://localhost:3000`
 **Execution Date:** 2026-08-24
 **Newman Report:** `newman-report/report.html`
-**Total Assertions:** 77 (executed: 77, failed: 40)
+**Total Assertions:** 138 (executed: 138, failed: 78)
 
 ---
 
@@ -178,17 +178,17 @@ Critical / P0
 
 ### Steps to Reproduce
 1. POST `/api/login` → nhận JWT
-2. Decode JWT payload (dùng jwt.io hoặc base64)
-3. Kiểm tra JWT không có field "exp" (expiration)
+2. Decode JWT header (dùng jwt.io hoặc base64)
+3. Kiểm tra algorithm và secret
 
 ### Expected Result
-JWT payload chứa field `exp` (expiration time).
+Secret key được lưu trong environment variable (`.env`), không hardcode trong source code.
 
 ### Actual Result
-JWT payload chỉ chứa `id`, `role`, `iat`. **Không có `exp`** → token sống mãi.
+Secret key `super_secret_key_that_should_not_be_here` được hardcode trực tiếp trong file `server.js`.
 
 ### Impact
-Token có thể bị sử dụng vô hạn nếu bị đánh cắp.
+Ai cũng có thể đọc được secret key và forge JWT token giả mạo.
 
 ### Evidence
 ![Bug 6](screenshots/bug_6.png)
@@ -287,39 +287,6 @@ User role thực hiện được cả POST và DELETE.
 
 ### Evidence
 ![Bug 9](screenshots/bug_9.png)
-
----
-
-## [BUG-API-10][FR-02] SQL Injection trong products search
-
-### Found by Test Case
-TC-FR02-SEC-01 (Security testing - SQL Injection)
-
-### Requirement Related
-FR-02 — Bảo mật SQL Injection
-
-### Severity / Priority
-Critical / P0
-
-### Environment
-- **Tool:** Newman CLI 6.2.2
-- **OS:** Windows 11
-
-### Steps to Reproduce
-1. GET `/api/products?search=' UNION SELECT id,name,email,password FROM users --`
-2. Hoặc GET `/api/products?search=' OR '1'='1`
-
-### Expected Result
-Server xử lý an toàn, trả về kết quả rỗng hoặc lỗi.
-
-### Actual Result
-Cần test trên API để xác nhận. Nếu có SQL injection, server có thể trả về dữ liệu từ bảng users.
-
-### Impact
-Attacker có thể truy cập dữ liệu nhạy cảm (password, email) qua API.
-
-### Evidence
-![Bug 10](screenshots/bug_10.png)
 
 ---
 
@@ -442,17 +409,17 @@ Lần 2 trả về `200 OK` — tạo thành công category trùng tên.
 
 ## Tổng kết
 
-| Loại bug | Số lượng | Severity |
-|----------|---------|----------|
-| Critical (P0) | 7 | BUG-API-01, 03, 04, 05, 06, 09, 10 |
-| Major (P1) | 4 | BUG-API-02, 07, 08, 14 |
-| Minor (P2) | 3 | BUG-API-11, 12, 13 |
-| **Tổng** | **14** | |
+| Loại bug | Số lượng | Issue Numbers |
+|----------|---------|---------------|
+| Critical (P0) | 6 | #166, #168, #169, #170, #171, #174 |
+| Major (P1) | 4 | #167, #172, #173, #179 |
+| Minor (P2) | 3 | #176, #177, #178 |
+| **Tổng** | **13** | |
 
 ### Bugs phân theo FR
 
 | FR | Bugs |
 |----|------|
-| FR-02 (Login) | BUG-API-01, 02, 03, 04, 05, 06, 10 |
+| FR-02 (Login) | BUG-API-01, 02, 03, 04, 05, 06 |
 | FR-08 (Checkout) | BUG-API-07 |
 | FR-14 (Category) | BUG-API-08, 09, 11, 12, 13, 14 |

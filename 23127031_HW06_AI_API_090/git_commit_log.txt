@@ -1,0 +1,20 @@
+﻿7dbde68 feat(HW06): update main report - add Postman features and evidence
+564813d feat(HW06): add bug screenshots to bug reports
+3ebd235 feat(HW06): add AI audit summary to Test Summary sheet
+1bbfe52 fix(HW06): clean up TC-FR14-DP-05 - remove strikethrough
+ecb4c27 fix(HW06): update bug reports to black-box testing style
+2f94a5a feat(HW06): update test results in Excel - 120 test cases
+85b6111 feat(HW06): add test summary Excel + CI/CD pipeline
+993f2bc valid all test cases and add 5 extend cases for each FR
+a43cc2e generation test cases, audit a little bit and add some extension
+1b5dd89 add Continuous Performance Testing proposal
+2b881aa Update performance test results and add AI analysis
+781ee0c Add soak/endurance test (15 min, 15 threads): stable ~28.5 RPS, 0% error
+5352fc0 Add hardware spec report (dxdiag)
+b7a8b3d Add Spike test results: raw jtl, HTML report
+217dc11 Add Spike test evidence
+c9dfda1 Add Spike test plan: 100 threads, ramp-up 2s, View Results Tree
+16585ae Add Stress test evidence
+801208e Add Stress test plan: 100 threads ramped up 20s, Summary Report
+fd04a9b Add Load test evidence: Aggregate Report + resource monitor screenshots
+d6bb47f Add Load test plan: 5 threads, ramp-up 10s, Aggregate Report

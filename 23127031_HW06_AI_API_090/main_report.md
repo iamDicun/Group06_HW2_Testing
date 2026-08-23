@@ -20,10 +20,10 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 |--------|---------|
 | Tổng test cases | 120 (40 + 40 + 40) |
 | Requests chạy thành công | 151 |
-| Assertions | 77 |
-| Assertions pass | 37 (48.1%) |
-| Assertions fail | 40 (51.9%) |
-| Bugs tìm thấy | 14 (7 Critical, 4 Major, 3 Minor) |
+| Assertions | 138 |
+| Assertions pass | 60 (43.5%) |
+| Assertions fail | 78 (56.5%) |
+| Bugs tìm thấy | 13 (6 Critical, 4 Major, 3 Minor) |
 | Thời gian chạy | 12.7 giây |
 
 ### 1.3 Công cụ sử dụng
@@ -72,7 +72,7 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 | Extended (EXT) | 5 | 2 | 3 |
 | **Tổng** | **40** | **16** | **24** |
 
-**Bugs chính:** login_attempts +2 (BUG-API-01), lock time 3 phút (BUG-API-02), server crash 500 (BUG-API-03), password lộ (BUG-API-04), JWT không có exp (BUG-API-05), secret hardcode (BUG-API-06), SQL injection (BUG-API-10)
+**Bugs chính:** login_attempts +2 (BUG-API-01), lock time 3 phút (BUG-API-02), server crash 500 (BUG-API-03), password lộ (BUG-API-04), JWT không có exp (BUG-API-05), secret hardcode (BUG-API-06)
 
 ### 3.2 FR-08: Checkout
 
@@ -115,7 +115,6 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 | **Test Script (`pm.environment.set`)** | Lưu token từ response vào environment | FR-02 Login |
 | **Console Log** | Bằng chứng header X-Student-Id trong console | Tất cả |
 | **Collection Runner** | Chạy toàn bộ collection từ Postman GUI | Test execution |
-| **Data-driven Runs** | Collection Runner với data file JSON (login tests) | FR-02 |
 | **Newman CLI** | Chạy collection từ dòng lệnh | CI/CD |
 | **Newman HTML Reporter** | Xuất báo cáo HTML chi tiết | Evidence |
 | **Monitors** | Tự động chạy collection theo schedule (Postman Cloud) | Optional |
