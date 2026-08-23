@@ -164,7 +164,7 @@ JWT payload chỉ chứa `id`, `role`, `iat`. **Không có `exp`** → token s�
 ## [BUG-API-06][FR-02] Secret key hardcode trong source code
 
 ### Found by Test Case
-TC-FR02-SEC-01, SEC-02, SEC-03 (Security testing)
+Security testing - Phân tích JWT token
 
 ### Requirement Related
 FR-02 — Bảo mật JWT
@@ -177,9 +177,9 @@ Critical / P0
 - **OS:** Windows 11
 
 ### Steps to Reproduce
-1. POST `/api/login` → nhận JWT
-2. Decode JWT header (dùng jwt.io hoặc base64)
-3. Kiểm tra algorithm và secret
+1. POST `/api/login` với valid credentials → nhận JWT
+2. Decode JWT header (base64)
+3. Kiểm tra secret key
 
 ### Expected Result
 Secret key được lưu trong environment variable (`.env`), không hardcode trong source code.
