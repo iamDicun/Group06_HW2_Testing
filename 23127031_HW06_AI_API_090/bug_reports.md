@@ -5,7 +5,7 @@
 **SUT:** eShop Backend (Node.js/Express/SQLite) — `http://localhost:3000`
 **Execution Date:** 2026-08-24
 **Newman Report:** `newman-report/report.html`
-**Total Assertions:** 138 (executed: 138, failed: 78)
+**Total Assertions:** 138 (executed: 138, failed: 77, passed: 61) + 15 test-script errors (JSONError)
 
 ---
 
@@ -407,19 +407,51 @@ Lần 2 trả về `200 OK` — tạo thành công category trùng tên.
 
 ---
 
+## [BUG-API-15][FR-02/FR-08/FR-14] Server trả 500 kèm trang lỗi HTML thay vì JSON ở nhiều endpoint
+
+### Found by Test Case
+Lặp lại 15 lần trong lần chạy Newman gần nhất, ví dụ: TC-FR02-SCHEMA-01→07, TC-FR02-SEC-08, TC-FR08-ST-04, TC-FR08-SEC-03, TC-FR14-ST-04/05/06, TC-FR14-EXT-05
+
+### Requirement Related
+FR-02, FR-08, FR-14 — API luôn phải trả về JSON hợp lệ, kể cả khi lỗi
+
+### Severity / Priority
+Major / P1
+
+### Environment
+- **Tool:** Newman CLI 6.2.2
+- **OS:** Windows 11
+
+### Steps to Reproduce
+1. Gửi các request nằm trong chuỗi bị ảnh hưởng bởi trạng thái trước đó (ví dụ tài khoản đã bị khóa do BUG-API-01, hoặc request phụ thuộc token/dữ liệu từ bước trước)
+2. Server trả về `500 Internal Server Error` với body là trang HTML mặc định của Express (`<!DOCTYPE html>...`) thay vì JSON
+
+### Expected Result
+Mọi response, kể cả lỗi 500, phải trả về JSON có cấu trúc rõ ràng (vd `{"error": "..."}`), để client (và test script) có thể parse được.
+
+### Actual Result
+Test script gọi `pm.response.json()` gặp lỗi `JSONError: Unexpected token '<' at 1:1` vì body là HTML, không phải JSON — làm gãy toàn bộ chuỗi test phụ thuộc vào response đó (ví dụ các bước GET tiếp theo trong cùng một luồng nhiều bước).
+
+### Note
+Bug này thường xuất hiện đi kèm/là hệ quả của các bug trạng thái khác (BUG-API-01, token hết hạn giữa chừng...), nhưng bản thân việc trả HTML thay vì JSON khi lỗi là một vấn đề độc lập cần được server xử lý bằng error-handling middleware chuẩn (trả JSON ở mọi nhánh lỗi).
+
+---
+
 ## Tổng kết
 
 | Loại bug | Số lượng | Issue Numbers |
 |----------|---------|---------------|
 | Critical (P0) | 6 | #166, #168, #169, #170, #171, #174 |
-| Major (P1) | 4 | #167, #172, #173, #179 |
+| Major (P1) | 6 | #167, #172, #173, #179, #180 |
 | Minor (P2) | 3 | #176, #177, #178 |
-| **Tổng** | **13** | |
+| **Tổng** | **15** | |
 
 ### Bugs phân theo FR
 
 | FR | Bugs |
 |----|------|
-| FR-02 (Login) | BUG-API-01, 02, 03, 04, 05, 06 |
-| FR-08 (Checkout) | BUG-API-07 |
-| FR-14 (Category) | BUG-API-08, 09, 11, 12, 13, 14 |
+| FR-02 (Login) | BUG-API-01, 02, 03, 04, 05, 06, 15 |
+| FR-08 (Checkout) | BUG-API-07, 15 |
+| FR-14 (Category) | BUG-API-08, 09, 11, 12, 13, 14, 15 |
+
+> **Lưu ý:** BUG-API-15 đã được tạo tại #180.
