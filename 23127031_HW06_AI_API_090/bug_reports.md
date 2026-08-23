@@ -35,14 +35,8 @@ Sau 1 lần đăng nhập sai: `login_attempts = 1`. Sau 3 lần: `login_attempt
 ### Actual Result
 Sau 1 lần đăng nhập sai: `login_attempts = 2`. Chỉ cần 2 lần sai là đã khóa (2 × 2 = 4 ≥ 3).
 
-### Root Cause
-```javascript
-// server.js dòng 54
-const newAttempts = user.login_attempts + 2; // BUG: phải là + 1
-```
-
 ### Evidence
-Newman output: TC-FR02-ST-02 trả về 403 (locked) thay vì 401 (chưa khóa), vì sau 2 lần sai liên tiếp bộ đếm đã = 4.
+![Bug 1](screenshots/bug_1.png)
 
 ---
 
@@ -72,15 +66,8 @@ Sau 30 giây, tài khoản hết khóa → đăng nhập thành công (200 OK).
 ### Actual Result
 Sau 30 giây vẫn trả về 403 Forbidden. Phải chờ 3 phút.
 
-### Root Cause
-```javascript
-// server.js dòng 57
-lockedUntil = new Date(Date.now() + 180000).toISOString(); // 180000ms = 3 phút
-// Phải là: new Date(Date.now() + 30000) — 30 giây
-```
-
 ### Evidence
-Newman output: TC-FR02-ST-06 trả về `403 Forbidden` thay vì `200 OK`.
+![Bug 2](screenshots/bug_2.png)
 
 ---
 
@@ -109,11 +96,8 @@ Server trả về 400 Bad Request hoặc 401 Unauthorized với thông báo lỗ
 ### Actual Result
 Server trả về **500 Internal Server Error** với thông báo SQL/stack trace.
 
-### Root Cause
-`body-parser` không parse được body → `req.body` = `undefined` → `email`/`password` = `undefined` → SQL query lỗi → crash không được bắt.
-
 ### Evidence
-Newman output: 4 requests trả về `500 Internal Server Error` thay vì `401 Unauthorized`.
+![Bug 3](screenshots/bug_3.png)
 
 ---
 
@@ -142,25 +126,8 @@ Response chứa `token` và `user` object, nhưng `user` object **KHÔNG** chứ
 ### Actual Result
 Response trả về `user` object đầy đủ包括 `password: "Test123!"` — mật khẩu hiển thị plain text.
 
-### Root Cause
-```javascript
-// server.js dòng 52
-res.json({ message: "Login successful", token, user });
-// 'user' object chứa toàn bộ fields từ DB, bao gồm password
-```
-
 ### Evidence
-```json
-{
-  "user": {
-    "id": 2,
-    "name": "Test User",
-    "email": "test@eshop.com",
-    "password": "Test123!",  // ← LỘ MẬT KHẨU
-    "role": "user"
-  }
-}
-```
+![Bug 4](screenshots/bug_4.png)
 
 ---
 
@@ -189,19 +156,8 @@ JWT payload chứa field `exp` (expiration time).
 ### Actual Result
 JWT payload chỉ chứa `id`, `role`, `iat`. **Không có `exp`** → token sống mãi.
 
-### Root Cause
-```javascript
-// server.js dòng 51
-const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY);
-// Thiếu expiresIn option: jwt.sign({...}, SECRET_KEY, { expiresIn: '1h' })
-```
-
 ### Evidence
-```json
-// JWT payload decoded:
-{"id":2,"role":"user","iat":1787507067}
-// Không có field "exp"
-```
+![Bug 5](screenshots/bug_5.png)
 
 ---
 
@@ -234,6 +190,9 @@ JWT payload chỉ chứa `id`, `role`, `iat`. **Không có `exp`** → token s�
 ### Impact
 Token có thể bị sử dụng vô hạn nếu bị đánh cắp.
 
+### Evidence
+![Bug 6](screenshots/bug_6.png)
+
 ---
 
 ## [BUG-API-07][FR-08] Checkout không validate body — chấp nhận thiếu field, sai kiểu
@@ -263,11 +222,8 @@ Server trả về 400 Bad Request cho mỗi trường hợp trên.
 ### Actual Result
 Server chấp nhận tất cả, inserts `null`/`undefined` vào DB.
 
-### Root Cause
-Route `POST /api/checkout` không có validation logic — chấp nhận mọi giá trị.
-
 ### Evidence
-Newman output: Tất cả requests trả về `200 OK` thay vì `400 Bad Request`.
+![Bug 7](screenshots/bug_7.png)
 
 ---
 
@@ -298,11 +254,8 @@ Server trả về 400 Bad Request cho tên rỗng/null/special characters.
 ### Actual Result
 Server chấp nhận tất cả, insert vào DB.
 
-### Root Cause
-Route `POST /api/categories` không validate field `name`.
-
 ### Evidence
-Newman output: 4 requests trả về `200 OK` thay vì `400 Bad Request`.
+![Bug 8](screenshots/bug_8.png)
 
 ---
 
@@ -332,21 +285,8 @@ User role không được tạo/xóa category → trả về 403 Forbidden.
 ### Actual Result
 User role thực hiện được cả POST và DELETE.
 
-### Root Cause
-Middleware `authenticateToken` chỉ kiểm tra JWT hợp lệ, **không kiểm tra role**:
-```javascript
-// server.js dòng 100-110
-const authenticateToken = (req, res, next) => {
-  // Chỉ verify JWT, không check role
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-    req.user = user;
-    next(); // Bỏ qua role check
-  });
-};
-```
-
 ### Evidence
-Newman output: TC-FR14-SEC-06 tạo category thành công với userToken (200 OK thay vì 403).
+![Bug 9](screenshots/bug_9.png)
 
 ---
 
@@ -378,6 +318,9 @@ Cần test trên API để xác nhận. Nếu có SQL injection, server có th�
 ### Impact
 Attacker có thể truy cập dữ liệu nhạy cảm (password, email) qua API.
 
+### Evidence
+![Bug 10](screenshots/bug_10.png)
+
 ---
 
 ## [BUG-API-11][FR-14] DELETE category không tồn tại trả về 200 thay vì 404
@@ -404,19 +347,8 @@ Trả về 404 Not Found.
 ### Actual Result
 Trả về `200 OK` với message `"Category deleted"`.
 
-### Root Cause
-```javascript
-// server.js dòng 269-277
-app.delete("/api/categories/:id", authenticateToken, (req, res) => {
-  db.run("DELETE FROM categories WHERE id = ?", [req.params.id], function (err) {
-    res.json({ message: "Category deleted" });
-    // Không kiểm tra this.changes === 0
-  });
-});
-```
-
 ### Evidence
-Newman output: `DELETE /api/categories/99999` trả về `200 OK`.
+![Bug 11](screenshots/bug_11.png)
 
 ---
 
@@ -444,15 +376,8 @@ Trả về `201 Created`.
 ### Actual Result
 Trả về `200 OK`.
 
-### Root Cause
-```javascript
-// server.js dòng 249-255
-res.json({ message: "Category created", id: this.lastID });
-// Không set status 201: res.status(201).json(...)
-```
-
 ### Evidence
-Newman output: `POST /api/categories` trả về `200 OK`.
+![Bug 12](screenshots/bug_12.png)
 
 ---
 
@@ -480,11 +405,8 @@ Trả về `204 No Content` (không có body).
 ### Actual Result
 Trả về `200 OK` với body `{"message":"Category deleted"}`.
 
-### Root Cause
-Route không set `res.status(204).end()`.
-
 ### Evidence
-Newman output: `DELETE /api/categories/:id` trả về `200 OK`.
+![Bug 13](screenshots/bug_13.png)
 
 ---
 
@@ -513,11 +435,8 @@ Lần 2 trả về 409 Conflict.
 ### Actual Result
 Lần 2 trả về `200 OK` — tạo thành công category trùng tên.
 
-### Root Cause
-Table `categories` không có UNIQUE constraint trên `name`.
-
 ### Evidence
-Newman output: Cả 2 requests đều trả về `200 OK`.
+![Bug 14](screenshots/bug_14.png)
 
 ---
 
@@ -525,7 +444,7 @@ Newman output: Cả 2 requests đều trả về `200 OK`.
 
 | Loại bug | Số lượng | Severity |
 |----------|---------|----------|
-| Critical (P0) | 6 | BUG-API-01, 03, 04, 05, 06, 09, 10 |
+| Critical (P0) | 7 | BUG-API-01, 03, 04, 05, 06, 09, 10 |
 | Major (P1) | 4 | BUG-API-02, 07, 08, 14 |
 | Minor (P2) | 3 | BUG-API-11, 12, 13 |
 | **Tổng** | **14** | |
