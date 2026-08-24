@@ -435,6 +435,9 @@ Test script gọi `pm.response.json()` gặp lỗi `JSONError: Unexpected token 
 ### Note
 Bug này thường xuất hiện đi kèm/là hệ quả của các bug trạng thái khác (BUG-API-01, token hết hạn giữa chừng...), nhưng bản thân việc trả HTML thay vì JSON khi lỗi là một vấn đề độc lập cần được server xử lý bằng error-handling middleware chuẩn (trả JSON ở mọi nhánh lỗi).
 
+### Evidence
+![Bug 15](screenshots/bug_15.png)
+
 ---
 
 ## Tổng kết
@@ -442,9 +445,11 @@ Bug này thường xuất hiện đi kèm/là hệ quả của các bug trạng 
 | Loại bug | Số lượng | Issue Numbers |
 |----------|---------|---------------|
 | Critical (P0) | 6 | #166, #168, #169, #170, #171, #174 |
-| Major (P1) | 6 | #167, #172, #173, #179, #180 |
+| Major (P1) | 5 | #167, #172, #173, #179, #180 |
 | Minor (P2) | 3 | #176, #177, #178 |
-| **Tổng** | **15** | |
+| **Tổng** | **14** | |
+
+> **Lưu ý:** BUG-API-10 không tồn tại (đánh số nhảy từ 09 sang 11). Tổng cộng 14 bugs, khớp với 14 GitHub Issue (#166–#180, thiếu #175).
 
 ### Bugs phân theo FR
 
@@ -453,5 +458,3 @@ Bug này thường xuất hiện đi kèm/là hệ quả của các bug trạng 
 | FR-02 (Login) | BUG-API-01, 02, 03, 04, 05, 06, 15 |
 | FR-08 (Checkout) | BUG-API-07, 15 |
 | FR-14 (Category) | BUG-API-08, 09, 11, 12, 13, 14, 15 |
-
-> **Lưu ý:** BUG-API-15 đã được tạo tại #180.

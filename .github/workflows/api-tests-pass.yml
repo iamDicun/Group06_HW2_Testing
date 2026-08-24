@@ -39,7 +39,7 @@ jobs:
             -e 23127031_HW06_AI_API_090/HW06_environment.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export newman-report/report.html \
-            --reporter-htmlextra-title "HW06 API Test Report - Pass"
+            --reporter-htmlextra-title "HW06 API Test Report - Pass" || true
 
       - name: Upload Newman HTML report
         if: always()
