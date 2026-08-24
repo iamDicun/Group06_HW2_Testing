@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "EShop_Cart_Testing",
+    "_postman_id": "c7890123-abcd-ef01-2345-6789abcdef01",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01_Login_Get_Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "if (jsonData.token) {",
+              "    pm.environment.set('user_token', jsonData.token);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@eshop.com\",\n  \"password\": \"Test1234!\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/login",
+          "host": ["{{base_url}}"],
+          "path": ["api", "login"]
+        }
+      }
+    },
+    {
+      "name": "02_POST_Add_To_Cart_FR07",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Dynamically handle Token",
+              "var useToken = pm.iterationData.get('use_valid_token');",
+              "var customToken = pm.iterationData.get('custom_token');",
+              "if (customToken) {",
+              "    pm.variables.set('auth_header', customToken);",
+              "} else if (useToken) {",
+              "    pm.variables.set('auth_header', 'Bearer ' + pm.environment.get('user_token'));",
+              "} else {",
+              "    pm.variables.set('auth_header', '');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var expectedStatus = pm.iterationData.get('expected_status');",
+              "var testId = pm.iterationData.get('test_id');",
+              "var description = pm.iterationData.get('description');",
+              "",
+              "pm.test(`[${testId}] ${description} - Check Status Code ${expectedStatus}`, function () {",
+              "    pm.response.to.have.status(expectedStatus);",
+              "});",
+              "",
+              "pm.test(`[${testId}] - Verify Content-Type Header`, function () {",
+              "    pm.response.to.have.header('content-type');",
+              "});",
+              "",
+              "pm.test(`[${testId}] - Verify SLA Response Time < 500ms`, function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "{{auth_header}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": {{#if id}}{{id}}{{else}}null{{/if}},\n  \"name\": \"{{name}}\",\n  \"price\": {{#if price}}{{price}}{{else}}null{{/if}},\n  \"quantity\": {{#if quantity}}{{quantity}}{{else}}null{{/if}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/cart",
+          "host": ["{{base_url}}"],
+          "path": ["api", "cart"]
+        }
+      }
+    }
+  ]
+}
