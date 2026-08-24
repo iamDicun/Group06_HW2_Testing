@@ -8,29 +8,31 @@
 | Test cases được tạo (AI) | 120 |
 | Test cases thêm (tự) | 15 |
 | Test cases chạy thành công | 151 requests |
-| Assertions pass | 60/138 (43.5%) |
-| Assertions fail | 78/138 (56.5%) |
-| Bugs tìm thấy | 13 |
+| Assertions pass | 61/138 (44.2%) |
+| Assertions fail | 77/138 (55.8%) + 15 test-script errors (JSONError) |
+| Bugs tìm thấy | 14 |
 
 ### Phân loại bugs
 
 | Severity | Số lượng |
 |----------|----------|
 | Critical | 6 |
-| Major | 4 |
+| Major | 5 |
 | Minor | 3 |
-| **Tổng** | **13** |
+| **Tổng** | **14** |
 
 ## Files
 
 ```
-23127031_HW06_AI_API_094/
-├── HW06_collection.json          # Postman collection (121 requests)
+23127031_HW06_AI_API_090/
+├── HW06_collection.json          # Postman collection (151 requests)
 ├── HW06_environment.json         # Postman environment
-├── api-tests.yml                 # GitHub Actions CI/CD
+├── .github/workflows/
+│   ├── api-tests-pass.yml        # CI: pass (SUT hw06-pass fixed)
+│   └── api-tests-fail.yml        # CI: fail (SUT main bugs)
 ├── CI_CD_report.md               # Báo cáo CI/CD
 ├── main_report.md                # Báo cáo chính
-├── bug_reports.md                # 14 bug reports
+├── bug_reports.md                # 14 bug reports (BUG-API-01~09, 11~15)
 ├── ai_audit_report.md            # AI Audit Report
 ├── ai_critique.md                # AI Critique
 ├── testcases_testsummary.xlsx    # Excel test cases
@@ -40,7 +42,9 @@
 ├── screenshots/                  # Screenshots evidence
 │   ├── cicd_pass.png
 │   ├── cicd_fail.png
-│   └── bug_01.png → bug_14.png
+│   ├── newman_run_output.png
+│   ├── xstudentid_console.png
+│   └── bug_1.png → bug_15.png
 └── newman-report/
     └── report.html               # Newman HTML report
 ```

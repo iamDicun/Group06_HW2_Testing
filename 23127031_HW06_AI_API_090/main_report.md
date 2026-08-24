@@ -21,9 +21,9 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 | Tổng test cases | 120 (40 + 40 + 40) |
 | Requests chạy thành công | 151 |
 | Assertions | 138 |
-| Assertions pass | 60 (43.5%) |
-| Assertions fail | 78 (56.5%) |
-| Bugs tìm thấy | 13 (6 Critical, 4 Major, 3 Minor) |
+| Assertions pass | 61 (44.2%) |
+| Assertions fail | 77 (55.8%) + 15 test-script errors (JSONError) |
+| Bugs tìm thấy | 14 (6 Critical, 5 Major, 3 Minor) |
 | Thời gian chạy | 12.7 giây |
 
 ### 1.3 Công cụ sử dụng
@@ -106,32 +106,30 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 
 | Feature | Mô tả | Sử dụng |
 |---------|-------|---------|
-| **Collection (v2.1)** | Tổ chức 121 requests theo 4 folders (Login, Checkout, Category, Auth) | FR-02, FR-08, FR-14 |
+| **Collection (v2.1)** | Tổ chức 151 requests theo folders (Login, Checkout, Category, Setup) | FR-02, FR-08, FR-14 |
 | **Environment** | Biến `baseUrl`, `adminEmail`, `adminPassword`, `adminToken`, `userToken`, `userTokenB` | Tất cả |
 | **Collection Variables** | Lưu token sau login để dùng cho request sau | FR-02, FR-08, FR-14 |
 | **Pre-request Script (Collection-level)** | Tự gắn header `X-Student-Id: 23127031` vào mọi request | Tất cả |
-| **Pre-request Script (Request-level)** | Thực hiện login trước khi checkout/category | FR-08, FR-14 |
+| **Pre-request Script (Request-level)** | Reset environment, setup variables trước khi chạy request | FR-02, FR-08, FR-14 |
 | **Test Script (`pm.test`)** | Assert status code, response body, validate JSON schema | Tất cả |
 | **Test Script (`pm.environment.set`)** | Lưu token từ response vào environment | FR-02 Login |
+| **Test Script (`pm.response.json()`)** | Parse response JSON để validate | Tất cả |
 | **Console Log** | Bằng chứng header X-Student-Id trong console | Tất cả |
-| **Collection Runner** | Chạy toàn bộ collection từ Postman GUI | Test execution |
-| **Newman CLI** | Chạy collection từ dòng lệnh | CI/CD |
-| **Newman HTML Reporter** | Xuất báo cáo HTML chi tiết | Evidence |
-| **Monitors** | Tự động chạy collection theo schedule (Postman Cloud) | Optional |
-| **Workspaces** | Tổ chức collections trong Postman workspace | Management |
-| **Mock Servers** | Tạo mock API để test offline (optional) | Not used |
-| **Visualizer** | Hiển thị response dưới dạng table/HTML | Debug |
+| **Newman CLI** | Chạy collection từ dòng lệnh, xuất HTML report | CI/CD pipeline |
+| **Newman HTML Reporter** | Xuất báo cáo HTML chi tiết (`newman-reporter-htmlextra`) | Evidence |
 
 ---
 
 ## 5. CI/CD Pipeline
 
-File `api-tests.yml` cấu hình:
-- **Trigger:** push đến branch `HW6-23127031`
-- **Steps:** Clone SUT → Install dependencies → Start server → Install Newman → Run tests → Upload report
-- **Artifact:** `newman-report.html`
+Hai workflow riêng biệt:
 
-Xem chi tiết trong `CI_CD_report.md`.
+| Workflow | File | SUT Branch | Kết quả |
+|----------|------|------------|---------|
+| API Tests - Pass | `api-tests-pass.yml` | `hw06-pass` (fixed) | ✅ Success |
+| API Tests - Fail | `api-tests-fail.yml` | `main` (bugs) | ❌ Failure |
+
+Chi tiết trong `CI_CD_report.md`.
 
 ---
 
@@ -152,6 +150,8 @@ pm.request.headers.add({
 - **Hostname:** localhost:3000
 - **Duration:** ~12.7s
 - **Total Requests:** 151
+- **Assertions:** 138 executed, 61 passed, 77 failed
+- **Test-script errors:** 15 (JSONError — do response HTML thay vì JSON)
 - **Report:** `newman-report/report.html`
 
 ### 6.3 Bug Screenshots
@@ -164,11 +164,12 @@ https://github.com/iamDicun/Group06_HW2_Testing/issues
 
 | File | Mô tả |
 |------|-------|
-| `HW06_collection.json` | Postman collection (121 requests) |
+| `HW06_collection.json` | Postman collection (151 requests) |
 | `HW06_environment.json` | Postman environment |
+| `.github/workflows/api-tests-pass.yml` | CI workflow pass (SUT fixed) |
+| `.github/workflows/api-tests-fail.yml` | CI workflow fail (SUT bugs) |
 | `newman-report/report.html` | Newman HTML report |
-| `bug_reports.md` | 14 bug reports chi tiết |
+| `bug_reports.md` | 14 bug reports (BUG-API-01~09, 11~15) |
 | `testcases_testsummary.xlsx` | Excel test cases + summary |
-| `api-tests.yml` | GitHub Actions workflow |
 | `ai_audit_report.md` | AI Audit Report |
-| `ai_critique.md` | AI Critique (200-300 words) |
+| `ai_critique.md` | AI Critique |
