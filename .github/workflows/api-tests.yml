@@ -1,0 +1,79 @@
+name: HW06 AI API Tests - EShop (FR-05/FR-11/FR-17)
+
+on:
+  push:
+    branches: [ "HW06-23127459" ]
+  pull_request:
+    branches: [ "HW06-23127459" ]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cài đặt Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: |
+            application/package-lock.json
+            application/backend/package-lock.json
+
+      - name: Cài đặt dependencies backend
+        working-directory: application/backend
+        run: npm ci || npm install
+
+      - name: Khởi động backend SUT ở background
+        working-directory: application/backend
+        run: |
+          nohup npm run dev > ../../backend.log 2>&1 &
+          echo $! > ../../backend.pid
+          cat ../../backend.pid
+        env:
+          PORT: 3000
+
+      - name: Đợi server sẵn sàng ở localhost:3000
+        run: |
+          echo "Đợi backend khởi động..."
+          npx --yes wait-on http://localhost:3000/api/products --timeout 60000 --interval 1000 --verbose || \
+          (echo "wait-on thất bại, thử curl retry loop..." && \
+           for i in $(seq 1 30); do \
+             if curl -sSf http://localhost:3000/api/products > /dev/null; then echo "Server sẵn sàng sau $i giây"; break; fi; \
+             echo "Chờ $i/30..."; sleep 2; \
+           done; \
+           curl -sSf http://localhost:3000/api/products || (echo "Server không sẵn sàng" && cat backend.log && exit 1))
+
+      - name: Cài Newman và reporter htmlextra
+        run: |
+          npm install -g newman newman-reporter-htmlextra
+          newman --version
+          # Cài thêm wait-on nếu cần (đã dùng npx ở trên)
+
+      - name: Chạy kiểm thử API với Newman
+        run: |
+          npx newman run application/postman/EShop_API_Tests.postman_collection.json \
+            -e application/postman/EShop_23127459.postman_environment.json \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman-report.html \
+            --reporter-htmlextra-title "EShop HW06 - FR05/FR11/FR17 - MSSV 23127459" \
+            --bail
+          echo "Newman exit code: $?"
+
+      - name: Tải báo cáo HTML làm artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report-23127459
+          path: newman-report.html
+          retention-days: 7
+
+      - name: Hiển thị tóm tắt
+        if: always()
+        run: |
+          echo "=== Kiểm tra báo cáo ==="
+          ls -lh newman-report.html || echo "Không tìm thấy report"
+          echo "Pipeline sẽ FAIL (đỏ) nếu có test case fail nhờ --bail và exit code của newman"
