@@ -24,7 +24,7 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
 | Assertions pass | 61 (44.2%) |
 | Assertions fail | 77 (55.8%) + 15 test-script errors (JSONError) |
 | Bugs tìm thấy | 14 (6 Critical, 5 Major, 3 Minor) |
-| Thời gian chạy | 12.7 giây |
+| Thời gian chạy | 13.7 giây |
 
 ### 1.3 Công cụ sử dụng
 - **Postman:** Tạo collection, environment, pre-request scripts
@@ -53,7 +53,7 @@ Thực hiện pipeline API testing đầy đủ cho 3 API của eShop Backend:
   - FR-14: EXT-01 (extra fields), EXT-02 (race condition), EXT-03 (unsupported HTTP method), EXT-04 (wrong Content-Type), EXT-05 (Unicode/emoji)
 
 ### 2.4 Execute
-- Newman chạy 151 requests trong 12.7s
+- Newman chạy 151 requests trong 13.7s
 - Header `X-Student-Id: 23127031` tự động gắn qua pre-request script
 - HTML report xuất tại `newman-report/report.html`
 
@@ -148,7 +148,7 @@ pm.request.headers.add({
 
 ### 6.2 Newman Execution
 - **Hostname:** localhost:3000
-- **Duration:** ~12.7s
+- **Duration:** ~13.7s
 - **Total Requests:** 151
 - **Assertions:** 138 executed, 61 passed, 77 failed
 - **Test-script errors:** 15 (JSONError — do response HTML thay vì JSON)
