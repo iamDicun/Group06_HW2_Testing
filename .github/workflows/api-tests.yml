@@ -5,66 +5,101 @@ on:
     branches: [ "HW06-23127459" ]
   pull_request:
     branches: [ "HW06-23127459" ]
+  workflow_dispatch:
 
 jobs:
   api-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cài đặt Node.js LTS
+      - name: Cài đặt Node.js 20 LTS (ổn định cho sqlite3)
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: '20'
           cache: 'npm'
-          cache-dependency-path: |
-            application/package-lock.json
-            application/backend/package-lock.json
+          cache-dependency-path: application/backend/package-lock.json
+
+      - name: Kiểm tra files collection & environment
+        run: |
+          echo "=== Kiểm tra cấu trúc application ==="
+          ls -R application | head -80
+          echo "=== Kiểm tra Postman files ==="
+          ls -lh application/postman/
+          test -f application/postman/EShop_API_Tests.postman_collection.json || (echo "Không tìm thấy collection!" && exit 1)
+          test -f application/postman/EShop_23127459.postman_environment.json || (echo "Không tìm thấy environment!" && exit 1)
+          echo "Collection và environment OK"
 
       - name: Cài đặt dependencies backend
         working-directory: application/backend
-        run: npm ci || npm install
+        run: |
+          echo "Node: $(node --version) | npm: $(npm --version)"
+          npm ci || npm install
+          echo "=== Kiểm tra sqlite3 binding ==="
+          ls -lh node_modules/sqlite3/lib/binding/ 2>&1 || true
+          ls -lh node_modules/sqlite3/build/Release/ 2>&1 || true
+          # npm v11+ chặn install scripts nên prebuild-install có thể chưa chạy -> rebuild thủ công
+          if [ ! -f "node_modules/sqlite3/lib/binding/node-v115-linux-x64/node_sqlite3.node" ] && [ ! -f "node_modules/sqlite3/build/Release/node_sqlite3.node" ]; then
+            echo "Binding thiếu, tiến hành rebuild sqlite3..."
+            npm rebuild sqlite3 --build-from-source 2>&1 | tail -20 || npm rebuild 2>&1 | tail -20 || npx --yes node-gyp rebuild 2>&1 | tail -20 || true
+            echo "=== Sau rebuild ==="
+            ls -lh node_modules/sqlite3/lib/binding/ 2>&1 || ls -R node_modules/sqlite3/build 2>&1 | head -30 || true
+          else
+            echo "Binding đã tồn tại"
+          fi
 
       - name: Khởi động backend SUT ở background
         working-directory: application/backend
         run: |
-          echo "Khởi tạo cơ sở dữ liệu và khởi động server..."
-          nohup sh -c "node database.js && node server.js" > ../../backend.log 2>&1 &
+          echo "Khởi động server (database sẽ tự init khi server require database.js)..."
+          pkill -f "node server.js" || true
+          rm -f ../../backend.log ../../backend.pid
+          # Chỉ chạy node server.js - file database.js được require bên trong server.js và sẽ tự seed DB
+          # Không dùng "node database.js && node server.js" vì database.js giữ connection mở sẽ không bao giờ exit
+          nohup node server.js > ../../backend.log 2>&1 &
           echo $! > ../../backend.pid
-          cat ../../backend.pid
-          sleep 3
-          echo "Xem log khởi động (20 dòng đầu):"
-          head -20 ../../backend.log || cat ../../backend.log | head -20
-          echo "Kiểm tra tiến trình:"
-          ps aux | grep -E "node.*(server|database)" | grep -v grep || ps -ef | grep node | head -5
+          echo "PID: $(cat ../../backend.pid)"
+          sleep 4
+          echo "=== 30 dòng log đầu ==="
+          cat ../../backend.log | head -30 || true
+          echo "=== Tiến trình Node ==="
+          ps aux | grep -E "node.*server" | grep -v grep || ps -ef | grep node | head -10 || true
+          ls -lh database.sqlite 2>&1 || echo "database.sqlite sẽ được tạo khi server khởi động xong"
         env:
           PORT: 3000
 
       - name: Đợi server sẵn sàng ở localhost:3000
         run: |
-          echo "Đợi backend khởi động (tối đa 90 giây)..."
-          # Thử wait-on với http-get (GET thay vì HEAD) để tránh lỗi với endpoint chỉ hỗ trợ GET
+          echo "Đợi backend khởi động (tối đa 90s)..."
+          # Cài wait-on global để npx không phải tải lại
+          npm install -g wait-on 2>&1 | tail -5 || true
           npx --yes wait-on http-get://localhost:3000/api/products --timeout 60000 --interval 1000 --verbose && echo "wait-on thành công" || \
-          (echo "wait-on thất bại hoặc timeout, chuyển sang curl retry loop..." && \
+          (echo "wait-on thất bại, chuyển sang curl retry..." && \
            for i in $(seq 1 45); do \
              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api/products || echo "000"); \
-             if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "401" ] || [ "$HTTP_CODE" = "403" ]; then echo "Server đã phản hồi với mã $HTTP_CODE sau $i lần thử - coi như sẵn sàng"; break; fi; \
+             if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "401" ] || [ "$HTTP_CODE" = "403" ]; then echo "Server đã phản hồi với mã $HTTP_CODE sau $i lần thử"; break; fi; \
              echo "Chờ $i/45... (mã: $HTTP_CODE)"; sleep 2; \
-             if [ $i -eq 15 ]; then echo "--- Log backend sau 30s ---"; cat backend.log | head -50; echo "--- Tiến trình Node ---"; ps aux | grep node | grep -v grep || true; fi; \
+             if [ $i -eq 15 ]; then echo "--- Log backend sau 30s ---"; cat backend.log | head -100 || true; echo "--- ps ---"; ps aux | grep node | grep -v grep || true; fi; \
            done; \
            FINAL_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api/products || echo "000"); \
-           if [ "$FINAL_CODE" = "000" ]; then echo "Server không phản hồi sau 90s"; echo "=== backend.log ==="; cat backend.log; echo "=== ps ==="; ps aux | grep node | grep -v grep || true; exit 1; else echo "Server sẵn sàng với mã $FINAL_CODE"; fi)
+           echo "FINAL_CODE=$FINAL_CODE"; \
+           if [ "$FINAL_CODE" = "000" ]; then echo "Server không phản hồi sau 90s"; echo "=== backend.log ==="; cat backend.log || true; echo "=== ps ==="; ps aux | grep node || true; exit 1; else echo "Server sẵn sàng với mã $FINAL_CODE"; fi)
+          echo "=== Kiểm tra nhanh API ==="
+          curl -s http://localhost:3000/api/products | head -c 800; echo ""
+          echo "=== Kiểm tra search ==="
+          curl -s "http://localhost:3000/api/products?search=iPhone" | head -c 500; echo ""
 
       - name: Cài Newman và reporter htmlextra
         run: |
           npm install -g newman newman-reporter-htmlextra
           newman --version
-          # Cài thêm wait-on nếu cần (đã dùng npx ở trên)
 
       - name: Chạy kiểm thử API với Newman
         run: |
+          echo "Chạy Newman..."
           npx newman run application/postman/EShop_API_Tests.postman_collection.json \
             -e application/postman/EShop_23127459.postman_environment.json \
             -r cli,htmlextra \
@@ -80,10 +115,13 @@ jobs:
           name: newman-report-23127459
           path: newman-report.html
           retention-days: 7
+          if-no-files-found: warn
 
       - name: Hiển thị tóm tắt
         if: always()
         run: |
           echo "=== Kiểm tra báo cáo ==="
           ls -lh newman-report.html || echo "Không tìm thấy report"
+          echo "=== backend.log (50 dòng cuối) ==="
+          tail -50 backend.log || echo "Không có log"
           echo "Pipeline sẽ FAIL (đỏ) nếu có test case fail nhờ --bail và exit code của newman"

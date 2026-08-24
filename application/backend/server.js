@@ -5,7 +5,7 @@ const db = require("./database");
 const jwt = require("jsonwebtoken");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const SECRET_KEY = "super_secret_key_that_should_not_be_here";
 
 app.use(cors());
@@ -141,16 +141,13 @@ app.put("/api/users/me", authenticateToken, (req, res) => {
 app.get("/api/products", (req, res) => {
   const searchQuery = req.query.search;
   if (searchQuery) {
-    const query = `SELECT * FROM products WHERE name LIKE '%${searchQuery}%'`;
-    db.all(query, [], (err, rows) => {
-      if (err)
-        return res
-          .status(500)
-          .send(`<h1>Database Error</h1><p>${err.message}</p>`);
+    db.all("SELECT * FROM products WHERE name LIKE ?", [`%${searchQuery}%`], (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
       res.json(rows);
     });
   } else {
     db.all("SELECT * FROM products", [], (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
       res.json(rows);
     });
   }
@@ -462,7 +459,11 @@ app.post("/api/admin/coupons", authenticateToken, (req, res) => {
     min_order_amount,
     expired_at,
     max_uses_per_user,
-  } = req.body;
+  } = req.body || {};
+  if (!code) {
+    // Allow empty code for testing but log
+    console.log("Coupon create with missing code:", req.body);
+  }
   db.run(
     "INSERT INTO coupons (code, type, discount_value, min_order_amount, expired_at, max_uses_per_user) VALUES (?, ?, ?, ?, ?, ?)",
     [
@@ -474,7 +475,10 @@ app.post("/api/admin/coupons", authenticateToken, (req, res) => {
       max_uses_per_user || 1,
     ],
     function (err) {
-      if (err) return res.status(500).json({ error: err.message });
+      if (err) {
+        console.log("Coupon insert error for code", code, ":", err.message);
+        return res.status(500).json({ error: err.message });
+      }
       res.json({ message: "Coupon created", id: this.lastID });
     },
   );
