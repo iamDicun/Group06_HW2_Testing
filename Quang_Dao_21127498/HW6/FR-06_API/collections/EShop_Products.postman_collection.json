@@ -1,0 +1,56 @@
+{
+  "info": {
+    "_postman_id": "0e9db359-b3c8-498a-9173-87673cc6186a",
+    "name": "EShop_Products",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50968443",
+    "_collection_link": "https://go.postman.co/collection/50968443-0e9db359-b3c8-498a-9173-87673cc6186a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "FR06 - Get Product Detail",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Kiểm tra Status Code theo dữ liệu nạp từ file JSON\r\nconst expectedStatus = pm.iterationData.get(\"expected_status\") || 200;\r\nconst tcId = pm.iterationData.get(\"tc_id\") || \"MANUAL\";\r\n\r\npm.test(`[${tcId}] Status code is ${expectedStatus}`, function () {\r\n    pm.response.to.have.status(expectedStatus);\r\n});\r\n\r\n// 2. Kiểm tra bắt buộc sự tồn tại của Header X-Student-Id\r\npm.test(`[${tcId}] Request carried Header X-Student-Id`, function () {\r\n    pm.expect(pm.request.headers.get(\"X-Student-Id\")).to.exist;\r\n});\r\n\r\n// 3. Schema Validation cho kịch bản thành công (200 OK)\r\nif (pm.response.code === 200 && pm.iterationData.get(\"check_schema\") === true) {\r\n    const productSchema = {\r\n        \"type\": \"object\",\r\n        \"required\": [\"id\", \"name\", \"price\", \"description\", \"imageUrl\", \"category_id\"],\r\n        \"properties\": {\r\n            \"id\": { \"type\": \"number\" },\r\n            \"name\": { \"type\": \"string\" },\r\n            \"price\": { \"type\": \"number\", \"minimum\": 0 },\r\n            \"description\": { \"type\": \"string\" },\r\n            \"imageUrl\": { \"type\": \"string\" },\r\n            \"category_id\": { \"type\": \"number\" }\r\n        }\r\n    };\r\n\r\n    pm.test(`[${tcId}] JSON Schema matches API Spec strictly`, function () {\r\n        pm.response.to.have.jsonSchema(productSchema);\r\n    });\r\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/products/{{product_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "{{product_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "const studentId = pm.environment.get(\"student_id\") || \"DEFAULT_STD_ID\";\r",
+          "pm.request.headers.upsert({\r",
+          "    key: \"X-Student-Id\",\r",
+          "    value: studentId\r",
+          "});"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+}
