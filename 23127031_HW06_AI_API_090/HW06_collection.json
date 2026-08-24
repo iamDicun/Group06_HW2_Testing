@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "3cc0ffc9-6f5c-485b-8a58-bdd3e13866a2",
     "name": "HW06 API Testing - 23127031",
-    "description": "Auto-generated tu file Excel test case (FR-02 Login, FR-08 Checkout, FR-14 Category CRUD). StudentID: 23127031",
+    "description": "Dựa vào file Excel test case (FR-02 Login, FR-08 Checkout, FR-14 Category CRUD). StudentID: 23127031",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "event": [
