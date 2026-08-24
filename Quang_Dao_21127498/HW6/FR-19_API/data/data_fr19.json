@@ -1,0 +1,352 @@
+[
+  {
+    "tc_id": "TC_FR19_01",
+    "tc_title": "Lấy danh sách người dùng thành công với quyền Admin",
+    "category": "Schema Validation",
+    "postman_feature": "Collections, Environment Variables, Assertions (pm.test)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Admin gửi request GET /api/admin/users hợp lệ, nhận status 200 OK và JSON body dạng mảng."
+  },
+  {
+    "tc_id": "TC_FR19_02",
+    "tc_title": "Kiểm tra cấu trúc Schema chi tiết từng đối tượng User",
+    "category": "Schema Validation",
+    "postman_feature": "Data-driven Runs (Collection Runner), Ajv JSON Schema Validator",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Xác minh mỗi phần tử user chứa đủ id (int), name (string), email (string), role (string)."
+  },
+  {
+    "tc_id": "TC_FR19_03",
+    "tc_title": "Kiểm tra Tuyệt đối Không để lộ trường Password/Password Hash (SEC-01)",
+    "category": "Security (SEC-01)",
+    "postman_feature": "Tests Script (pm.expect), Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Quét toàn bộ response JSON để đảm bảo không tồn tại key 'password' hoặc 'password_hash'."
+  },
+  {
+    "tc_id": "TC_FR19_04",
+    "tc_title": "Kiểm tra Không để lộ trường OTP / Reset Token trong danh sách (SEC-01, SEC-07)",
+    "category": "Security (SEC-01, SEC-07)",
+    "postman_feature": "Tests Script, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Đảm bảo thông tin khôi phục mật khẩu nhạy cảm không bị rò rỉ qua API công khai của Admin."
+  },
+  {
+    "tc_id": "TC_FR19_05",
+    "tc_title": "Truy vấn không gửi Header Authorization (SEC-02)",
+    "category": "Security (SEC-02)",
+    "postman_feature": "Collections, Pre-request Script (xóa Header Authorization)",
+    "auth_header_type": "NONE",
+    "query_params": "",
+    "expected_status": 401,
+    "description": "Yêu cầu không kèm Token bị hệ thống từ chối truy cập với status code 401 Unauthorized."
+  },
+  {
+    "tc_id": "TC_FR19_06",
+    "tc_title": "Truy vấn với JWT Token của User thường (SEC-03 - Privilege Escalation)",
+    "category": "Security (SEC-03)",
+    "postman_feature": "Variables (user_token), Collections",
+    "auth_header_type": "USER_TOKEN",
+    "query_params": "",
+    "expected_status": 403,
+    "description": "User thường có Token hợp lệ nhưng không có role Admin bị từ chối với status code 403 Forbidden."
+  },
+  {
+    "tc_id": "TC_FR19_07",
+    "tc_title": "Truy vấn với Token sai định dạng (Malformed JWT)",
+    "category": "Security (SEC-02)",
+    "postman_feature": "Data-driven Runs, Environment Variables",
+    "auth_header_type": "MALFORMED",
+    "query_params": "",
+    "expected_status": 401,
+    "description": "Gửi chuỗi Token lỗi cú pháp nhận về status code 401 Unauthorized."
+  },
+  {
+    "tc_id": "TC_FR19_08",
+    "tc_title": "Truy vấn với Token đã hết hạn (Expired JWT)",
+    "category": "Security (SEC-02)",
+    "postman_feature": "Pre-request Script (Tạo Expired Token), Variables",
+    "auth_header_type": "EXPIRED",
+    "query_params": "",
+    "expected_status": 401,
+    "description": "Token hết hạn bị hệ thống từ chối xác thực 401."
+  },
+  {
+    "tc_id": "TC_FR19_09",
+    "tc_title": "Truy vấn với Token bị sửa đổi Signature",
+    "category": "Security (SEC-02)",
+    "postman_feature": "Pre-request Script, Security Testing",
+    "auth_header_type": "TAMPERED",
+    "query_params": "",
+    "expected_status": 401,
+    "description": "Token bị giả mạo payload hoặc chữ ký không đúng bị từ chối 401."
+  },
+  {
+    "tc_id": "TC_FR19_10",
+    "tc_title": "Tấn công SQL Injection qua query parameter 'search' (SEC-05)",
+    "category": "Security (SEC-05)",
+    "postman_feature": "Data-driven Runs (data_fr19.json), Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=' OR '1'='1",
+    "expected_status": 200,
+    "description": "Truyền payload SQLi vào tham số search, backend dùng Parameterized Query xử lý an toàn."
+  },
+  {
+    "tc_id": "TC_FR19_11",
+    "tc_title": "Tấn công XSS qua query parameter 'search' (SEC-04)",
+    "category": "Security (SEC-04)",
+    "postman_feature": "Data-driven Runs, Tests Script",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=<script>alert('xss')</script>",
+    "expected_status": 200,
+    "description": "Payload XSS trong tham số search được escape đúng cách, không gây lỗi hệ thống."
+  },
+  {
+    "tc_id": "TC_FR19_12",
+    "tc_title": "Lọc người dùng theo từ khóa tìm kiếm hợp lệ (?search=test)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=test",
+    "expected_status": 200,
+    "description": "Trả về danh sách các user có thông tin trùng khớp từ khóa 'test'."
+  },
+  {
+    "tc_id": "TC_FR19_13",
+    "tc_title": "Tìm kiếm với từ khóa không tồn tại (?search=nonexistent_user_xyz)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=nonexistent_user_xyz",
+    "expected_status": 200,
+    "description": "Tìm kiếm không thấy kết quả trả về mảng rỗng [] hợp lệ."
+  },
+  {
+    "tc_id": "TC_FR19_14",
+    "tc_title": "Tìm kiếm với ký tự đặc biệt trong email (?search=@eshop.com)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=@eshop.com",
+    "expected_status": 200,
+    "description": "Tìm kiếm theo domain email chứa ký tự đặc biệt '@' hoạt động chính xác."
+  },
+  {
+    "tc_id": "TC_FR19_15",
+    "tc_title": "Phân trang hợp lệ trang 1 (?page=1&limit=5)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Pre-request Script",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?page=1&limit=5",
+    "expected_status": 200,
+    "description": "Trả về tối đa 5 người dùng đầu tiên."
+  },
+  {
+    "tc_id": "TC_FR19_16",
+    "tc_title": "Phân trang trang tiếp theo (?page=2&limit=5)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Tests Script",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?page=2&limit=5",
+    "expected_status": 200,
+    "description": "Trả về danh sách trang 2, không trùng ID với trang 1."
+  },
+  {
+    "tc_id": "TC_FR19_17",
+    "tc_title": "Phân trang với limit=0 (Boundary Test)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?limit=0",
+    "expected_status": 200,
+    "description": "Xử lý giá trị biên limit=0 an toàn không gây crash server."
+  },
+  {
+    "tc_id": "TC_FR19_18",
+    "tc_title": "Phân trang với limit âm (?limit=-10)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?limit=-10",
+    "expected_status": 400,
+    "description": "Hệ thống báo lỗi 400 Bad Request hoặc tự động chuyển về limit dương mặc định."
+  },
+  {
+    "tc_id": "TC_FR19_19",
+    "tc_title": "Phân trang với page không phải số (?page=abc)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?page=abc",
+    "expected_status": 400,
+    "description": "Tham số sai kiểu dữ liệu bị từ chối 400 hoặc fallback về page=1."
+  },
+  {
+    "tc_id": "TC_FR19_20",
+    "tc_title": "Lọc danh sách người dùng theo Vai trò Admin (?role=admin)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?role=admin",
+    "expected_status": 200,
+    "description": "Toàn bộ danh sách người dùng trả về đều có thuộc tính role == 'admin'."
+  },
+  {
+    "tc_id": "TC_FR19_21",
+    "tc_title": "Lọc danh sách người dùng theo Vai trò User (?role=user)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?role=user",
+    "expected_status": 200,
+    "description": "Toàn bộ danh sách người dùng trả về đều có thuộc tính role == 'user'."
+  },
+  {
+    "tc_id": "TC_FR19_22",
+    "tc_title": "Lọc danh sách theo Vai trò không tồn tại (?role=superman)",
+    "category": "Domain Partitions",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?role=superman",
+    "expected_status": 200,
+    "description": "Giá trị role không khớp enum hệ thống trả về mảng rỗng []."
+  },
+  {
+    "tc_id": "TC_FR19_23",
+    "tc_title": "Kiểm tra trạng thái tài khoản bị khóa sau 3 lần đăng nhập sai (FR-02 & FR-19)",
+    "category": "State Transitions",
+    "postman_feature": "Collections Workflow, Pre-request Scripts",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=test@eshop.com",
+    "expected_status": 200,
+    "description": "Sau khi giả lập đăng nhập sai 3 lần, Admin lấy danh sách thấy trạng thái locked được phản ánh đúng."
+  },
+  {
+    "tc_id": "TC_FR19_24",
+    "tc_title": "Cập nhật danh sách sau khi Đăng ký tài khoản mới (FR-01 & FR-19)",
+    "category": "State Transitions",
+    "postman_feature": "Collections Workflow (POST /api/register -> GET /api/admin/users)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=newregistered",
+    "expected_status": 200,
+    "description": "Tạo người dùng mới chuyển trạng thái DB, Admin lấy danh sách xuất hiện ngay tài khoản mới."
+  },
+  {
+    "tc_id": "TC_FR19_25",
+    "tc_title": "Cập nhật danh sách sau khi Admin Xóa người dùng (FR-19 Delete -> GET)",
+    "category": "State Transitions",
+    "postman_feature": "Collections Workflow (DELETE /api/admin/users/:id -> GET)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=deleteduser",
+    "expected_status": 200,
+    "description": "Xóa thành công tài khoản, danh sách Admin GET trả về không còn chứa tài khoản này."
+  },
+  {
+    "tc_id": "TC_FR19_26",
+    "tc_title": "Cập nhật thông tin trong danh sách sau khi User sửa Profile (FR-04 & FR-19)",
+    "category": "State Transitions",
+    "postman_feature": "Collections Workflow (PUT /api/users/me -> GET /api/admin/users)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=updatedname",
+    "expected_status": 200,
+    "description": "User cập nhật thông tin cá nhân, Admin lấy danh sách hiển thị dữ liệu đã cập nhật."
+  },
+  {
+    "tc_id": "TC_FR19_27",
+    "tc_title": "Kiểm tra Header Content-Type của Phản hồi",
+    "category": "Schema Validation",
+    "postman_feature": "Assertions (pm.response.to.have.header)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Header Content-Type của API trả về phải chứa 'application/json'."
+  },
+  {
+    "tc_id": "TC_FR19_28",
+    "tc_title": "Kiểm tra Thời gian Phản hồi API (Response Time SLA)",
+    "category": "Schema Validation",
+    "postman_feature": "Assertions (pm.expect(pm.response.responseTime))",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Thời gian phản hồi API phải nhỏ hơn 500ms."
+  },
+  {
+    "tc_id": "TC_FR19_29",
+    "tc_title": "Giả lập Backend lỗi hệ thống bằng Mock Server",
+    "category": "Mock Servers",
+    "postman_feature": "Mock Servers",
+    "auth_header_type": "MOCK_SERVER",
+    "query_params": "",
+    "expected_status": 500,
+    "description": "Mock Server trả về 500 Internal Error để kiểm tra khả năng bắt lỗi của UI Admin."
+  },
+  {
+    "tc_id": "TC_FR19_30",
+    "tc_title": "Giám sát Tự động Độ sẵn sàng API Admin hàng giờ",
+    "category": "Monitors",
+    "postman_feature": "Monitors",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Cấu hình Postman Monitor kiểm tra Uptime của API Admin tự động."
+  },
+  {
+    "tc_id": "TC_FR19_31",
+    "tc_title": "Chạy Tải trọng Đồng thời / Lặp lại nhiều lần (Stress Check)",
+    "category": "Data-driven Runs",
+    "postman_feature": "Data-driven Runs (Collection Runner & Newman)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?page=1&limit=10",
+    "expected_status": 200,
+    "description": "Thực thi 35 iterations liên tục để đảm bảo backend không bị rò rỉ bộ nhớ hoặc gián đoạn."
+  },
+  {
+    "tc_id": "TC_FR19_32",
+    "tc_title": "Gửi Authorization Header thiếu từ khóa Bearer",
+    "category": "Security (SEC-02)",
+    "postman_feature": "Pre-request Script, Data-driven Runs",
+    "auth_header_type": "NO_BEARER_PREFIX",
+    "query_params": "",
+    "expected_status": 401,
+    "description": "Thiếu từ khóa Bearer trong Header Authorization bị từ chối 401."
+  },
+  {
+    "tc_id": "TC_FR19_33",
+    "tc_title": "Tấn công Parameter Pollution (?search=admin&search=user)",
+    "category": "Security (SEC-05)",
+    "postman_feature": "Data-driven Runs, Assertions",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=admin&search=user",
+    "expected_status": 200,
+    "description": "Xử lý tham số tìm kiếm trùng lặp an toàn, không bị crash server."
+  },
+  {
+    "tc_id": "TC_FR19_34",
+    "tc_title": "Kiểm tra Mã hóa UTF-8 đối với Tên Tiếng Việt có dấu",
+    "category": "Schema Validation",
+    "postman_feature": "Assertions, Tests Script",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "?search=Nguyễn",
+    "expected_status": 200,
+    "description": "Dữ liệu tiếng Việt có dấu hiển thị đúng định dạng Unicode UTF-8."
+  },
+  {
+    "tc_id": "TC_FR19_35",
+    "tc_title": "Kiểm tra Kích thước Gói tin Phản hồi (Response Size Boundary)",
+    "category": "Schema Validation",
+    "postman_feature": "Assertions (pm.response.responseSize)",
+    "auth_header_type": "VALID_ADMIN",
+    "query_params": "",
+    "expected_status": 200,
+    "description": "Kích thước response body hợp lý nhỏ hơn 2MB."
+  }
+]

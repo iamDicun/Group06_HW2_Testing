@@ -1,0 +1,203 @@
+{
+  "info": {
+    "_postman_id": "eshop-admin-users-collection-id",
+    "name": "EShop_Admin_Users_FR19",
+    "description": "Collection kiểm thử API GET /api/admin/users (FR-19) thuộc hệ thống EShop. Bao gồm 35 test cases cover Schema, Security, Domain Partitions, State Transitions, Data-driven Runs, Mock Servers, và Uptime Monitoring.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01_Setup_Admin_Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "if (jsonData.token) {",
+              "    pm.environment.set('admin_token', jsonData.token);",
+              "    console.log('Admin token saved successfully.');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02_Setup_User_Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "if (jsonData.token) {",
+              "    pm.environment.set('user_token', jsonData.token);",
+              "    console.log('User token saved successfully.');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03_GET_Admin_Users_Data_Driven",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Dynamic Auth Header setup based on iteration data or defaults",
+              "var authType = pm.iterationData.get('auth_header_type') || 'VALID_ADMIN';",
+              "var token = '';",
+              "",
+              "if (authType === 'VALID_ADMIN') {",
+              "    token = 'Bearer ' + pm.environment.get('admin_token');",
+              "} else if (authType === 'USER_TOKEN') {",
+              "    token = 'Bearer ' + pm.environment.get('user_token');",
+              "} else if (authType === 'MALFORMED') {",
+              "    token = 'Bearer malformed.jwt.token.string';",
+              "} else if (authType === 'EXPIRED') {",
+              "    token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTAwMDAwMDAwfQ.invalid_sig';",
+              "} else if (authType === 'TAMPERED') {",
+              "    token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6ImFkbWluIn0.tampered_signature';",
+              "} else if (authType === 'NO_BEARER_PREFIX') {",
+              "    token = pm.environment.get('admin_token');",
+              "} else if (authType === 'NONE') {",
+              "    token = '';",
+              "}",
+              "",
+              "if (token) {",
+              "    pm.request.headers.upsert({ key: 'Authorization', value: token });",
+              "} else {",
+              "    pm.request.headers.remove('Authorization');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var expectedStatus = pm.iterationData.get('expected_status') || 200;",
+              "var tcId = pm.iterationData.get('tc_id') || 'TC_DEFAULT';",
+              "var category = pm.iterationData.get('category') || 'General';",
+              "",
+              "pm.test('[' + tcId + '] Status code is ' + expectedStatus, function () {",
+              "    pm.response.to.have.status(expectedStatus);",
+              "});",
+              "",
+              "if (expectedStatus === 200) {",
+              "    pm.test('[' + tcId + '] Content-Type is application/json', function () {",
+              "        pm.response.to.have.header('Content-Type');",
+              "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "    });",
+              "",
+              "    pm.test('[' + tcId + '] SEC-01 & SEC-07: No sensitive fields (password/password_hash/resetToken) exposed', function () {",
+              "        var responseText = pm.response.text();",
+              "        pm.expect(responseText).to.not.include('\"password\"');",
+              "        pm.expect(responseText).to.not.include('\"password_hash\"');",
+              "        pm.expect(responseText).to.not.include('\"resetToken\"');",
+              "    });",
+              "",
+              "    pm.test('[' + tcId + '] Schema Validation: Response is an array/object containing users', function () {",
+              "        var jsonData = pm.response.json();",
+              "        var userList = Array.isArray(jsonData) ? jsonData : (jsonData.users || []);",
+              "        pm.expect(userList).to.be.an('array');",
+              "        if (userList.length > 0) {",
+              "            var sampleUser = userList[0];",
+              "            pm.expect(sampleUser).to.have.property('id');",
+              "            pm.expect(sampleUser).to.have.property('email');",
+              "            pm.expect(sampleUser).to.have.property('name');",
+              "            pm.expect(sampleUser).to.have.property('role');",
+              "        }",
+              "    });",
+              "",
+              "    pm.test('[' + tcId + '] Response time is within SLA (< 500ms)', function () {",
+              "        pm.expect(pm.response.responseTime).to.be.below(500);",
+              "    });",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/admin/users{{query_params}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ],
+          "query": []
+        }
+      }
+    }
+  ]
+}
