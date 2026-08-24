@@ -1,10 +1,8 @@
-name: API Tests (Newman)
+name: API Tests - Fail (With failing tests)
 
 on:
   push:
-    branches: [ main, master, HW6-23127031 ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ HW6-23127031 ]
 
 jobs:
   newman:
@@ -21,9 +19,9 @@ jobs:
       - name: Install Newman + HTML reporter
         run: npm install -g newman newman-reporter-htmlextra
 
-      - name: Clone SUT (eShop backend)
+      - name: Clone SUT (eShop backend - original with bugs)
         run: |
-          git clone https://github.com/nguyenngoc-minhchau/eshop-sut.git /tmp/eshop-sut
+          git clone -b main https://github.com/nguyenngoc-minhchau/eshop-sut.git /tmp/eshop-sut
           cd /tmp/eshop-sut/backend
           npm install
 
@@ -41,11 +39,11 @@ jobs:
             -e 23127031_HW06_AI_API_090/HW06_environment.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export newman-report/report.html \
-            --reporter-htmlextra-title "HW06 API Test Report - 23127031"
+            --reporter-htmlextra-title "HW06 API Test Report - Fail"
 
       - name: Upload Newman HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: newman-html-report
+          name: newman-html-report-fail
           path: newman-report/
