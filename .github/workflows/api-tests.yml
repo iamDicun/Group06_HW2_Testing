@@ -30,24 +30,15 @@ jobs:
       - name: Khởi động backend SUT ở background
         working-directory: application/backend
         run: |
-          echo "Kiểm tra lệnh khởi động có sẵn..."
-          if npm run | grep -q " dev"; then
-            echo "Dùng npm run dev"
-            nohup npm run dev > ../../backend.log 2>&1 &
-          elif [ -f "server.js" ]; then
-            echo "Không có npm run dev, dùng node server.js trực tiếp"
-            nohup node server.js > ../../backend.log 2>&1 &
-          else
-            echo "Không tìm thấy server.js, thử npm start"
-            nohup npm start > ../../backend.log 2>&1 &
-          fi
+          echo "Khởi tạo cơ sở dữ liệu và khởi động server..."
+          nohup sh -c "node database.js && node server.js" > ../../backend.log 2>&1 &
           echo $! > ../../backend.pid
           cat ../../backend.pid
-          sleep 2
-          echo "Xem log khởi động (10 dòng đầu):"
+          sleep 3
+          echo "Xem log khởi động (20 dòng đầu):"
           head -20 ../../backend.log || cat ../../backend.log | head -20
           echo "Kiểm tra tiến trình:"
-          ps aux | grep -E "node.*server" | grep -v grep || ps -ef | grep node | head -5
+          ps aux | grep -E "node.*(server|database)" | grep -v grep || ps -ef | grep node | head -5
         env:
           PORT: 3000
 
