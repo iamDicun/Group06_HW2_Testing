@@ -3,7 +3,7 @@
 **MSSV:** 23127459
 **Hệ Thống Đang Kiểm Thử:** Backend API EShop (http://localhost:3000)
 **Chức Năng:** FR-11 — Xem lịch sử đơn hàng (Người dùng)
-**Các Endpoint API:** GET /api/orders/my-orders, GET /api/orders/:id, PUT /api/orders/:id/cancel
+**Các Endpoint API:** GET /api/orders/my-orders, GET /api/orders/:id
 
 ---
 
@@ -83,16 +83,109 @@
 
 | Mã Trường Hợp Kiểm Tra | Nhãn | Lý Do |
 |---|---|---|
-| TC_FR11_001 | HỢP LỆ | Đường đi hạnh phúc — lấy đơn hàng cơ bản khi đã xác thực |
-| TC_FR11_002 | HỢP LỆ | Trường hợp biên quan trọng — trạng thái rỗng cho người dùng mới |
-| TC_FR11_005 | HỢP LỆ | Xác thực tất cả 5 trạng thái đơn hàng theo máy trạng thái FR-10 |
-| TC_FR11_016 | HỢP LỆ | Phát hiện lỗi — người dùng có thể hủy đơn hàng đang shipping (vi phạm FR-10) |
-| TC_FR11_017 | HỢP LỆ | Giới hạn trạng thái cuối — đơn hàng đã giao không thể bị hủy |
-| TC_FR11_034 | HỢP LỆ | Kiểm tra IDOR quan trọng — đảm bảo cách ly người dùng |
-| TC_FR11_035 | HỢP LỆ | Phát hiện lỗi IDOR — GET /api/orders/:id không có kiểm tra sở hữu |
-| TC_FR11_026 | HỢP LỆ | Xác thực máy trạng thái — delivered là trạng thái cuối |
-| TC_FR11_040 | HỢP LỆ | Kiểm tra schema cơ bản cho định dạng phản hồi |
-| TC_FR11_029 | HỢP LỆ | Lỗi chuyển đổi trạng thái quan trọng — vi phạm thông số FR-10 |
+| TC_FR11_001 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_002 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_003 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_004 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_005 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_006 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_007 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_008 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_009 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_010 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_011 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_012 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_013 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_014 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_015 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_016 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_017 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_018 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_019 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_020 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_021 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_022 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_023 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_024 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_025 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_026 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_027 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_028 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_029 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_030 | KHÔNG HỢP LỆ | Ngoài phạm vi — endpoint PUT /api/admin/orders/:id/status là chức năng quản trị chuyển trạng thái đơn hàng, thuộc FR-10 (Order State Machine), không phải FR-11 (chỉ xem lịch sử) đã chọn |
+| TC_FR11_031 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_032 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_033 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_034 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_035 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_036 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_037 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_038 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_039 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_040 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_041 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_042 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_043 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_044 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_045 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_046 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_047 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_048 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_049 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_050 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_051 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_052 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_053 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_054 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_055 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_056 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_057 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_058 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_EXT_001 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_EXT_002 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_EXT_003 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR11_EXT_004 | KHÔNG HỢP LỆ | Ngoài phạm vi — hành động hủy đơn là một kích hoạt chuyển trạng thái (trigger) thuộc máy trạng thái FR-10, không phải nghiệp vụ 'xem' của FR-11 |
+| TC_FR11_EXT_005 | HỢP LỆ | Phù hợp với mục đích kiểm thử cho chức năng |
+
+
+### Chi tiết 10 Test Cases mới bổ sung (049-058) — Đúng phạm vi FR-11 (chỉ GET)
+
+| Mã Trường Hợp Kiểm Tra | Chức Năng / API Endpoint | Loại Kiểm Tra | Mô Tả Trường Hợp Kiểm Tra | Phương Thức HTTP & Endpoint | Headers / Xác Thực | Dữ Liệu Đầu Vào / Tham Số Truy Vấn / Request Body | Mã Trạng Thái Dự Kiến | Phản Hồi Dự Kiến / Schema |
+|---|---|---|---|---|---|---|---|---|
+| TC_FR11_049 | FR-11: Đơn Hàng Của Tôi | Schema | Trạng thái đơn hàng trả về đúng bản dịch tiếng Việt theo yêu cầu giao diện | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không | 200 | Mỗi đơn hàng có trường trạng thái hiển thị tiếng Việt: "Chờ xác nhận", "Đã xác nhận", "Đang giao", "Đã giao", "Đã hủy" tương ứng với pending, confirmed, shipping, delivered, canceled |
+| TC_FR11_050 | FR-11: Đơn Hàng Của Tôi | Phân Vùng Phương Định | Kiểm tra phân trang lịch sử đơn hàng với tham số page và limit | GET /api/orders/my-orders?page=1&limit=2 | X-Student-Id: 23127459, Authorization: Bearer user_token | Query: page=1, limit=2 | 200 | Mảng JSON tối đa 2 đơn hàng hoặc toàn bộ nếu chưa hỗ trợ phân trang, không lỗi 500 |
+| TC_FR11_051 | FR-11: Đơn Hàng Của Tôi | Schema | Kiểm tra định dạng ngày đặt hàng (created_at) đúng chuẩn ngày tháng | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không | 200 | Mỗi đơn hàng có trường created_at hoặc ngày đặt dạng ISO 8601 hoặc dd/mm/yyyy, kiểu chuỗi, có thể phân tích thành ngày hợp lệ |
+| TC_FR11_052 | FR-11: Đơn Hàng Của Tôi | Bảo Mật (SEC-04) | Kiểm tra chuỗi độc hại lưu trữ trong shipping_address được hiển thị an toàn | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không (đơn hàng có shipping_address chứa chuỗi script) | 200 | Trường shipping_address trong phản hồi chứa chuỗi đã được mã hóa, không thực thi mã độc khi hiển thị |
+| TC_FR11_053 | FR-11: Đơn Hàng Của Tôi | Schema | Kiểm tra thời gian phản hồi cho danh sách nhiều đơn hàng | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không (tài khoản có 20 đơn hàng) | 200 | Phản hồi hoàn thành trong vòng 500ms, không suy giảm hiệu năng |
+| TC_FR11_054 | FR-11: Đơn Hàng Của Tôi | Schema | Kiểm tra header Cache-Control và ETag cho danh sách đơn hàng | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không | 200 | Header Cache-Control hoặc ETag tồn tại, giá trị hợp lệ, không lộ thông tin nhạy cảm |
+| TC_FR11_055 | FR-11: Đơn Hàng Của Tôi | Phân Vùng Phương Định | Kiểm tra sắp xếp ổn định khi nhiều đơn hàng cùng ngày đặt | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không (tạo 3 đơn hàng cùng ngày) | 200 | Danh sách trả về theo thứ tự ID giảm dần ổn định, không xáo trộn ngẫu nhiên |
+| TC_FR11_056 | FR-11: Đơn Hàng Của Tôi | Bảo Mật | Kiểm tra ký tự Unicode và emoji trong shipping_address hiển thị đúng | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không (đơn hàng có shipping_address chứa ký tự đặc biệt) | 200 | Trường shipping_address giữ nguyên ký tự Unicode và emoji, không bị lỗi mã hóa hay thay thế bằng ký tự lạ |
+| TC_FR11_057 | FR-11: Đơn Hàng Của Tôi | Schema | Kiểm tra trường tổng tiền (total_amount) định dạng tiền tệ đúng chuẩn | GET /api/orders/my-orders | X-Student-Id: 23127459, Authorization: Bearer user_token | Không | 200 | Mỗi đơn hàng có total_amount là số dương, khi hiển thị sẽ định dạng với phân cách nghìn và đơn vị ₫ |
+| TC_FR11_058 | FR-11: Chi Tiết Đơn Hàng | Schema | Kiểm tra chi tiết đơn hàng trả về header CORS cho phép truy cập | GET /api/orders/:id | X-Student-Id: 23127459, Authorization: Bearer user_token | Tham số đường dẫn: id=valid_order_id | 200 | Header Access-Control-Allow-Origin tồn tại trong phản hồi chi tiết đơn hàng |
+
+### Tổng Hợp Test Cases Sau Khi Chỉnh Sửa
+
+**Thống kê theo nhãn sau khi chỉnh sửa (trên tổng 58 Test Cases chính và 5 mở rộng):**
+
+| Nhãn | Số lượng (chính) | Tỷ lệ | Danh sách Test Case chính |
+|---|---|---|---|
+| HỢP LỆ | 36 | 62,1% | TC_FR11_001, 002, 003, 004, 005, 006, 007, 008, 009, 010, 011, 012, 013, 021, 031, 032, 033, 034, 035, 037, 039, 040, 041, 042, 043, 046, 047, 048, 049, 050, 051, 052, 053, 054, 055, 056, 057, 058 |
+| KHÔNG HỢP LỆ | 22 | 37,9% | TC_FR11_014, 015, 016, 017, 018, 019, 020, 022, 023, 024, 025, 026, 027, 028, 029, 030, 036, 038, 044, 045 và EXT_001, EXT_004 |
+| **Tổng chính** | **58** | **100%** | |
+
+> **Ghi chú:** 22 trường hợp KHÔNG HỢP LỆ đã được loại khỏi bộ chính thức do ngoài phạm vi FR-11 (thuộc FR-10), chỉ giữ lại làm bằng chứng kiểm tra. Sau khi bổ sung 10 trường hợp mới (049-058) đúng phạm vi chỉ xem (GET), số trường hợp HỢP LỆ đạt 36, vượt yêu cầu tối thiểu 35.
+
+**Chi tiết các trường hợp cần chỉnh sửa:**
+
+| Mã Test Case | Nhãn mới | Hành động đề xuất |
+|---|---|---|
+| TC_FR11_014-020, 036, 038, 044, 045, EXT_001, EXT_004 | KHÔNG HỢP LỆ | Loại khỏi bộ FR-11, chuyển sang FR-10 nếu cần kiểm tra hủy đơn |
+| TC_FR11_022-030 | KHÔNG HỢP LỆ | Loại khỏi bộ FR-11, thuộc chức năng quản trị FR-10 |
+| TC_FR11_049-058 | HỢP LỆ (mới) | Bổ sung 10 trường hợp mới đúng phạm vi chỉ xem để đạt 36 hợp lệ |
+
+**Kết quả sau khi chỉnh sửa:**
+- Từ 48 Test Cases chính ban đầu → 58 sau khi bổ sung 10 mới.
+- Sau khi loại 22 KHÔNG HỢP LỆ, còn **36 HỢP LỆ** chính thức, đạt yêu cầu ≥35.
 
 ### Trường Hợp Kiểm Tra Bổ Sung (5 trường hợp — AI thường bỏ sót)
 

@@ -87,19 +87,19 @@
 | TC_FR05_007 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_008 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_009 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_010 | VALID | Nên chuyển thành giá trị khác cho phân vùng tương đương nếu có xét, do BVA hiện đang thiếu cho trường hợp tối thiểu hợp lệ là 1 nên muốn chuyển trường hợp này sang dạng BVA thay vì EP |
-| TC_FR05_011 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_012 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_013 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_014 | VALID | Bỏ qua do không biết ngưỡng tối đa của ô tìm kiếm nên không thực hiện BVA |
-| TC_FR05_015 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_010 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_011 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_012 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_013 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_014 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_015 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
 | TC_FR05_016 | INCOMPLETE | Có thể gộp chung với TC_FR05_001 thay vì tách riêng |
 | TC_FR05_017 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_018 | VALID | Nên chỉnh sửa lại kết quả phản hồi dự kiến là nhận tất cả kết quả |
 | TC_FR05_019 | INVALID | Chỉ kiểm tra cho tìm kiếm và xem sản phẩm thì không thể kiểm tra sau khi chỉnh sửa, thuộc phạm vi FR khác |
 | TC_FR05_020 | INVALID | Chỉ kiểm tra cho tìm kiếm và xem sản phẩm thì không thể kiểm tra sau khi chỉnh sửa, thuộc phạm vi FR khác |
 | TC_FR05_021 | INVALID | Chỉ kiểm tra cho tìm kiếm và xem sản phẩm thì không thể kiểm tra sau khi chỉnh sửa, thuộc phạm vi FR khác |
-| TC_FR05_022 | INVALID | Chỉ kiểm tra cho tìm kiếm và xem sản phẩm thì không thể kiểm tra sau khi chỉnh sửa, thuộc phạm vi FR khác |
+| TC_FR05_022 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
 | TC_FR05_023 | INVALID | Chỉ kiểm tra cho tìm kiếm và xem sản phẩm thì không thể kiểm tra sau khi chỉnh sửa, thuộc phạm vi FR khác |
 | TC_FR05_024 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_025 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
@@ -107,7 +107,7 @@
 | TC_FR05_027 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_028 | INVALID | Trùng việc kiểm tra XSS tại endpoint /products? (tìm kiếm) của TC_FR05_027 |
 | TC_FR05_029 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_030 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_030 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
 | TC_FR05_031 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_032 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_033 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
@@ -116,31 +116,63 @@
 | TC_FR05_036 | INCOMPLETE | Nên gộp chung kiểm tra với TC_FR05_034 thay vì tách riêng |
 | TC_FR05_037 | INCOMPLETE | Nên gộp chung kiểm tra với TC_FR05_034 thay vì tách riêng |
 | TC_FR05_038 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_039 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
-| TC_FR05_040 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_039 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
+| TC_FR05_040 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06 (Xem chi tiết sản phẩm), không phải FR-05 (Liệt kê & Tìm kiếm) đã chọn |
 | TC_FR05_041 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_042 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
 | TC_FR05_043 | INCOMPLETE | Nên gộp chung với TC_FR05_041 thay vì tách riêng do đều kiểm tra trường nhạy cảm và lộ thông tin |
+| TC_FR05_044 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_045 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_046 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_047 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_048 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_049 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_050 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_051 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_052 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_053 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_054 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_055 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+| TC_FR05_056 | VALID | Phù hợp với mục đích kiểm thử cho chức năng |
+
+
+### Chi tiết 13 Test Cases mới bổ sung (044-056) — Đúng phạm vi FR-05 (chỉ GET /api/products và ?search=)
+
+| Mã Trường Hợp Kiểm Tra | Chức Năng / API Endpoint | Loại Kiểm Tra | Mô Tả Trường Hợp Kiểm Tra | Phương Thức HTTP & Endpoint | Headers / Xác Thực | Dữ Liệu Đầu Vào / Tham Số Truy Vấn / Request Body | Mã Trạng Thái Dự Kiến | Phản Hồi Dự Kiến / Schema |
+|---|---|---|---|---|---|---|---|---|
+| TC_FR05_044 | FR-05: Tìm Kiếm Sản Phẩm | Phân Vùng Phương Định | Tìm kiếm với khoảng trắng đầu và cuối được cắt bỏ (trim) trước khi truy vấn | GET `/api/products?search=%20iPhone%20` | `X-Student-Id: 23127459` | Query: `search= iPhone ` (có khoảng trắng đầu/cuối) | 200 | Mảng JSON chứa sản phẩm có tên chứa "iPhone" (khoảng trắng đã được trim, không trả về lỗi) |
+| TC_FR05_045 | FR-05: Tìm Kiếm Sản Phẩm | Bảo Mật (SEC-05) | Tìm kiếm với ký tự wildcard SQL phần trăm (%) được xử lý như chuỗi thường | GET `/api/products?search=%25` | `X-Student-Id: 23127459` | Query: `search=%` | 200 | Mảng rỗng hoặc chỉ sản phẩm chứa ký tự "%" theo nghĩa đen, không trả về toàn bộ bảng (không bị wildcard injection) |
+| TC_FR05_046 | FR-05: Tìm Kiếm Sản Phẩm | Bảo Mật (SEC-05) | Tìm kiếm với ký tự wildcard SQL gạch dưới (_) được xử lý như chuỗi thường | GET `/api/products?search=_` | `X-Student-Id: 23127459` | Query: `search=_` | 200 | Mảng rỗng hoặc chỉ sản phẩm chứa "_" theo nghĩa đen, không bị wildcard injection |
+| TC_FR05_047 | FR-05: Tìm Kiếm Sản Phẩm | Phân Vùng Phương Định | Tìm kiếm kết hợp lọc theo danh mục (category_id) cùng với từ khóa search | GET `/api/products?search=Pro&category_id=1` | `X-Student-Id: 23127459` | Query: `search=Pro`, `category_id=1` | 200 | Mảng JSON chỉ chứa sản phẩm thuộc danh mục 1 và có tên chứa "Pro" (nếu API không hỗ trợ thì bỏ qua tham số thừa và vẫn trả về 200) |
+| TC_FR05_048 | FR-05: Liệt Kê Sản Phẩm | Phân Vùng Phương Định | Tìm kiếm kết hợp phân trang page và limit | GET `/api/products?search=&page=1&limit=2` | `X-Student-Id: 23127459` | Query: `search=`, `page=1`, `limit=2` | 200 | Mảng JSON trả về tối đa 2 sản phẩm hoặc toàn bộ danh sách nếu API chưa hỗ trợ phân trang (không lỗi 500) |
+| TC_FR05_049 | FR-05: Liệt Kê Sản Phẩm | Phân Vùng Phương Định | Tìm kiếm kết hợp sắp xếp (sort) theo giá | GET `/api/products?search=&sort=price_asc` | `X-Student-Id: 23127459` | Query: `search=`, `sort=price_asc` | 200 | Mảng JSON trả về danh sách đã sắp xếp theo giá tăng dần hoặc bỏ qua tham số sort và vẫn trả về 200 nếu chưa hỗ trợ |
+| TC_FR05_050 | FR-05: Liệt Kê Sản Phẩm | Schema | Kiểm tra trường imageUrl có định dạng ảnh hợp lệ | GET `/api/products` | `X-Student-Id: 23127459` | Không có | 200 | Mỗi sản phẩm có `imageUrl` là chuỗi bắt đầu bằng `http` và kết thúc bằng `.jpg`, `.png`, `.webp` hoặc tương đương, không rỗng |
+| TC_FR05_051 | FR-05: Liệt Kê Sản Phẩm | Schema | Kiểm tra trường giá (price) đúng đơn vị và định dạng phân cách hàng nghìn | GET `/api/products` | `X-Student-Id: 23127459` | Không có | 200 | Mỗi sản phẩm có `price` là số dương (>0), kiểu number hoặc string số, không chứa ký tự lạ; khi hiển thị UI sẽ định dạng với `₫` và dấu phẩy phân cách nghìn |
+| TC_FR05_052 | FR-05: Liệt Kê Sản Phẩm | Schema | Kiểm tra header CORS cho endpoint công khai | GET `/api/products` | `X-Student-Id: 23127459` | Không có | 200 | Header `Access-Control-Allow-Origin` tồn tại (ví dụ: `*` hoặc `http://localhost:5173`), cho phép truy cập từ frontend |
+| TC_FR05_053 | FR-05: Liệt Kê Sản Phẩm | Schema | Kiểm tra header Cache-Control / ETag cho GET danh sách sản phẩm | GET `/api/products` | `X-Student-Id: 23127459` | Không có | 200 | Header `Cache-Control` hoặc `ETag` tồn tại, không lộ thông tin nhạy cảm |
+| TC_FR05_054 | FR-05: Liệt Kê Sản Phẩm | Bảo Mật | Kiểm tra giới hạn tần suất (rate limiting) khi gọi liên tiếp nhiều lần | GET `/api/products` | `X-Student-Id: 23127459` | Gửi 20 request liên tiếp trong 1 giây | 200 hoặc 429 | Tất cả request trả về 200 hoặc có 429 khi vượt ngưỡng, không bị crash, không lộ stack trace |
+| TC_FR05_055 | FR-05: Tìm Kiếm Sản Phẩm | Phân Vùng Phương Định | Tìm kiếm với từ khóa chứa ký tự đặc biệt đã mã hóa URL (ví dụ: cộng, gạch nối) | GET `/api/products?search=iPhone-Pro` | `X-Student-Id: 23127459` | Query: `search=iPhone-Pro` | 200 | Mảng JSON chứa sản phẩm có tên chứa "iPhone-Pro" hoặc xử lý như chuỗi thường, không lỗi 500 |
+| TC_FR05_056 | FR-05: Liệt Kê Sản Phẩm | Schema | Kiểm tra mỗi sản phẩm có alt text mô tả ảnh (thông qua trường imageUrl và name) | GET `/api/products` | `X-Student-Id: 23127459` | Không có | 200 | Mỗi sản phẩm có `name` không rỗng làm alt text, `imageUrl` không rỗng, đảm bảo spec FR-05 "Ảnh có alt text mô tả" có dữ liệu để UI hiển thị |
 
 ### Tổng hợp Test Cases sau khi chỉnh sửa
 
-**Thống kê theo nhãn sau khi chỉnh sửa (trên tổng 43 Test Cases chính):**
+**Thống kê theo nhãn sau khi chỉnh sửa (trên tổng 56 Test Cases chính, sau khi bổ sung 13 TC mới và loại 10 TC ngoài phạm vi FR-06):**
 
 | Nhãn | Số lượng | Tỷ lệ | Danh sách Test Case |
 |---|---|---|---|
-| VALID | 31 | 72,1% | TC_FR05_001, 002, 003, 004, 005, 006, 007, 008, 009, 010*, 011, 012, 013, 014*, 015, 017, 018*, 024, 025, 027, 029, 030, 031, 032, 033, 034, 038, 039, 040, 041, 042 |
-| INVALID | 7 | 16,3% | TC_FR05_019, 020, 021, 022, 023, 026, 028 |
-| INCOMPLETE | 5 | 11,6% | TC_FR05_016, 035, 036, 037, 043 |
-| **Tổng** | **43** | **100%** | |
+| VALID | 35 | 62,5% | TC_FR05_001, 002, 003, 004, 005, 006, 007, 008, 009, 017, 018*, 024, 025, 027, 029, 031, 032, 033, 034, 038, 041, 042, 044, 045, 046, 047, 048, 049, 050, 051, 052, 053, 054, 055, 056 |
+| INVALID | 16 | 28,6% | TC_FR05_010, 011, 012, 013, 014, 015, 019, 020, 021, 022, 023, 026, 028, 030, 039, 040 |
+| INCOMPLETE | 5 | 8,9% | TC_FR05_016, 035, 036, 037, 043 |
+| **Tổng** | **56** | **100%** | |
 
-> *Ghi chú: TC_FR05_010, TC_FR05_014, TC_FR05_018 vẫn giữ nhãn VALID nhưng có ghi chú cần chỉnh sửa (xem chi tiết bên dưới).
+> *Ghi chú: TC_FR05_018 vẫn giữ nhãn VALID nhưng có ghi chú cần chỉnh sửa kết quả dự kiến thành "nhận tất cả kết quả" (xem chi tiết bên dưới). Các TC 010, 011, 012, 013, 014, 015, 022, 030, 039, 040 đã chuyển sang INVALID do ngoài phạm vi FR-06.
 
 **Chi tiết các Test Case cần chỉnh sửa / gộp:**
 
 | Mã Test Case | Nhãn mới | Hành động đề xuất sau chỉnh sửa |
 |---|---|---|
-| TC_FR05_010 | VALID (cần chỉnh) | Đổi giá trị ID khác (ví dụ: `id=2` hoặc `id=abc123`) để thuộc phân vùng tương đương, do BVA hiện đã thiếu trường hợp tối thiểu hợp lệ là 1 nên chuyển trường hợp này sang dạng BVA thay vì EP như hiện tại |
-| TC_FR05_014 | VALID (cần xem xét) | Bỏ qua BVA với ID rất lớn do không biết ngưỡng tối đa của ô tìm kiếm, chỉ giữ lại kiểm tra biên dưới (0, -1) là đủ |
+| TC_FR05_010 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06, không thuộc FR-05 đã chọn (đã loại khỏi bộ chính thức) |
+| TC_FR05_014 | INVALID | Ngoài phạm vi — endpoint GET /api/products/:id thuộc FR-06, không thuộc FR-05 đã chọn (đã loại khỏi bộ chính thức) |
 | TC_FR05_016 | INCOMPLETE | Gộp chung vào TC_FR05_001 — kiểm tra kiểu dữ liệu có thể thực hiện chung trong cùng một lần gọi GET `/api/products` thay vì tách thành Test Case riêng |
 | TC_FR05_018 | VALID (cần chỉnh) | Sửa kết quả dự kiến từ `Mảng JSON (rỗng hoặc tất cả)` thành `Mảng JSON chứa tất cả sản phẩm` — khi `search` chỉ chứa khoảng trắng thì backend trim và trả về toàn bộ danh sách |
 | TC_FR05_035 | INCOMPLETE | Gộp chung vào TC_FR05_034 — kiểm tra `Content-Type` và kiểm tra `mảng JSON` có thể gộp thành một Test Case Schema duy nhất |
@@ -149,8 +181,9 @@
 | TC_FR05_043 | INCOMPLETE | Gộp chung vào TC_FR05_041 — đều kiểm tra lộ thông tin nhạy cảm, nên gộp thành một Test Case kiểm tra `không lộ trường nhạy cảm và không lộ header phiên bản` |
 
 **Kết quả sau khi gộp (dự kiến):**
-- Từ 43 Test Cases chính → còn **38 Test Cases** sau khi gộp (giảm 5 Test Cases INCOMPLETE do gộp).
-- 7 Test Cases INVALID sẽ bị loại bỏ khỏi bộ kiểm thử chính thức (do thuộc FR khác hoặc trùng lặp).
+- Từ 56 Test Cases chính → còn **51 Test Cases** sau khi gộp (giảm 5 Test Cases INCOMPLETE do gộp).
+- 16 Test Cases INVALID (10 ngoài phạm vi FR-06 + 6 thuộc FR khác/trùng lặp: 019,020,021,023,026,028) sẽ bị loại khỏi bộ kiểm thử chính thức, chỉ giữ lại làm bằng chứng audit.
+- Số Test Cases hợp lệ (VALID) còn lại: **35**, đạt yêu cầu tối thiểu ≥35 cho FR-05.
 
 ### Trường Hợp Kiểm Tra Bổ Sung (5 thêm — AI thường bỏ sót)
 
